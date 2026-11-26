@@ -600,7 +600,9 @@ async function thumbnail(abs, w, mode) {
       ok = await run('ffmpeg', ['-v', 'error', '-y', '-ss', '1.5', '-i', abs, '-frames:v', '1', '-vf', `scale=${w}:-2`, '-q:v', '4', tmp]);
       if (!ok) ok = await run('ffmpeg', ['-v', 'error', '-y', '-i', abs, '-frames:v', '1', '-vf', `scale=${w}:-2`, '-q:v', '4', tmp]);
     } else {
-      ok = await run('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '78', '--resampleWidth', String(w), abs, '--out', tmp]);
+      // sips is macOS-only; elsewhere (Windows/WSL, Linux), or if it fails, ffmpeg resizes the image
+      if (process.platform === 'darwin') ok = await run('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '78', '--resampleWidth', String(w), abs, '--out', tmp]);
+      if (!ok) ok = await run('ffmpeg', ['-v', 'error', '-y', '-i', abs, '-vf', `scale=${w}:-2`, '-q:v', '4', tmp]);
     }
     if (!ok || !exists(tmp)) { thumbJobs.delete(key); return null; }
     await fsp.rename(tmp, out);

@@ -64,6 +64,11 @@ section li{margin-bottom:6px}
 dl{margin:0}
 dt{font-weight:800;margin-top:12px}
 dd{margin:2px 0 0;color:var(--dim)}
+.os{display:inline-flex;background:var(--card);border-radius:999px;padding:4px;box-shadow:var(--shadow);margin:0 0 24px}
+.os button{border:0;background:none;font:inherit;font-weight:700;font-size:14px;padding:8px 18px;border-radius:999px;cursor:pointer;color:var(--ink)}
+.os button[aria-pressed=true]{background:var(--ink);color:#fff}
+.os-label{font-size:14px;font-weight:700;color:var(--dim);margin-right:10px}
+body.win .only-mac,body:not(.win) .only-win{display:none}
 footer{border-top:1px solid var(--line);color:var(--dim);font-size:13px;padding-block:24px 40px}
 footer a{font-weight:600}
 </style>
@@ -95,6 +100,7 @@ footer a{font-weight:600}
     <main>
       <h1>How to use <em>Studio</em></h1>
       <p class="lead">Studio is our in-house creative assistant. You tell it what you need in one sentence, it brings back finished Instagram content for the client, on brand, ready for you to review. No design or coding needed.</p>
+      <div><span class="os-label">I'm on</span><div class="os" role="group" aria-label="Your computer"><button type="button" data-os="mac" aria-pressed="true">Mac</button><button type="button" data-os="win" aria-pressed="false">Windows</button></div></div>
 
       <section id="what">
         <h2><span class="n">1</span>What Studio does</h2>
@@ -112,7 +118,7 @@ footer a{font-weight:600}
       <section id="setup">
         <h2><span class="n">2</span>Get set up (once)</h2>
         <p>This takes about 30 minutes, most of it waiting. If someone on the team can do it for you, even easier.</p>
-        <ol class="steps">
+        <ol class="steps only-mac">
           <li><b>Install Claude Code.</b> It's the app Studio runs in. Get it from <a href="https://claude.com/claude-code" rel="noopener">claude.com/claude-code</a> and sign in with your Claude account.</li>
           <li><b>Install Homebrew.</b> It's a free helper that installs the tools Studio needs. Follow the one step on <a href="https://brew.sh" rel="noopener">brew.sh</a>.</li>
           <li><b>Install Studio.</b> Open the <b>Terminal</b> app (press <b>⌘ Space</b>, type Terminal, press Enter), paste this line and press Enter. You don't need to understand it:
@@ -120,14 +126,26 @@ footer a{font-weight:600}
             <span class="note">It downloads everything (about 3 GB) and finishes with a check. If every line ends in "ok", you're ready.</span>
           </li>
         </ol>
-        <div class="callout">Planning to make reels from client video footage? After setup, open Studio and say <b>"set up footage reels"</b>. That adds about 1 GB more.</div>
+        <ol class="steps only-win">
+          <li><b>Turn on Linux for Windows (WSL).</b> It's a free part of Windows 10 and 11 that Studio runs inside. Click <b>Start</b>, type <b>PowerShell</b>, right-click it and choose <b>Run as administrator</b>. Paste this, press Enter, then restart your PC when it asks:
+            <div class="paste" id="w1">wsl --install<button class="copy" type="button" data-copy="w1">Copy</button></div>
+            <span class="note">After the restart an <b>Ubuntu</b> window opens. Pick a username and a password, and remember the password: setup asks for it once.</span>
+          </li>
+          <li><b>Install Studio.</b> In that Ubuntu window, paste this line and press Enter. You don't need to understand it. It also installs Claude Code, the app Studio runs in:
+            <div class="paste" id="w2">sudo apt-get update && sudo apt-get install -y git && git clone https://github.com/Ankush-Jha/studio.git ~/studio && git clone https://github.com/Ankush-Jha/studio-clients.git ~/studio/private && cd ~/studio && sh install-wsl.sh<button class="copy" type="button" data-copy="w2">Copy</button></div>
+            <span class="note">It downloads everything (about 3 GB) and finishes with a check. If every line ends in "ok", you're ready. The first time you open Studio, it asks you to sign in to your Claude account.</span>
+          </li>
+        </ol>
+        <div class="callout">Planning to make reels from client video footage? After setup, open Studio and say <b>"set up footage reels"</b>. That adds about 1 GB more.<span class="only-win"> (On Windows, footage reels aren't supported yet. Everything else works.)</span></div>
       </section>
 
       <section id="open">
         <h2><span class="n">3</span>Open Studio</h2>
-        <p>Every time you want to work: open <b>Terminal</b>, paste this, press Enter.</p>
+        <p class="only-mac">Every time you want to work: open <b>Terminal</b>, paste this, press Enter.</p>
+        <p class="only-win">Every time you want to work: open the <b>Ubuntu</b> app from the Start menu, paste this, press Enter.</p>
         <div class="paste" id="p2">cd ~/studio && claude<button class="copy" type="button" data-copy="p2">Copy</button></div>
-        <p class="note">Using the Claude desktop app instead? Open Claude Code there and choose the <b>studio</b> folder in your home folder.</p>
+        <p class="note only-mac">Using the Claude desktop app instead? Open Claude Code there and choose the <b>studio</b> folder in your home folder.</p>
+        <p class="note only-win">Tip: in Ubuntu, paste with <b>right-click</b> (or <b>Ctrl+Shift+V</b>).</p>
         <p>Studio is now listening. From here on you just type normal sentences. A good first one:</p>
         <span class="say">get the latest<small>Studio pulls in anything new your teammates added: new clients, lessons, finished work.</small></span>
       </section>
@@ -165,13 +183,13 @@ footer a{font-weight:600}
       <section id="files">
         <h2><span class="n">6</span>Find your files</h2>
         <p>When it's done, Studio tells you where everything is: the video or the numbered slides, the cover, the caption ready to paste, and subtitles for reels.</p>
-        <span class="say">where are my files?<small>Studio opens the folder for you.</small></span>
+        <span class="say">where are my files?<small>Studio opens the folder for you, in Finder on a Mac or File Explorer on Windows.</small></span>
         <p>You upload to Instagram yourself. Studio reminds you of anything to tick, such as the AI label when a synthetic voice was used.</p>
       </section>
 
       <section id="desk">
         <h2><span class="n">7</span>The Desk, if you prefer clicking</h2>
-        <p>The Desk is a visual control room in your web browser. It shows every piece in progress, lets you approve ideas and finished work with a click, previews reels in a phone frame, and lists every client.</p>
+        <p>The Desk is a visual control room in your web browser (Chrome, Safari, Edge…). It shows every piece in progress, lets you approve ideas and finished work with a click, previews reels in a phone frame, and lists every client.</p>
         <span class="say">/desk</span>
       </section>
 
@@ -230,6 +248,13 @@ footer a{font-weight:600}
   <footer>SuperKreatives Studio · <a href="./">Film Directory</a> · <a href="https://superkreatives.ca" rel="noopener">superkreatives.ca</a></footer>
 </div>
 <script>
+(function () {
+  let os = /Win/i.test(navigator.userAgent) ? 'win' : 'mac';
+  try { const v = localStorage.getItem('sk-guide-os'); if (v === 'mac' || v === 'win') os = v; } catch (e) {}
+  const set = v => { os = v; document.body.classList.toggle('win', v === 'win'); document.querySelectorAll('.os button').forEach(b => b.setAttribute('aria-pressed', b.dataset.os === v)); };
+  document.querySelectorAll('.os button').forEach(b => b.addEventListener('click', () => { set(b.dataset.os); try { localStorage.setItem('sk-guide-os', b.dataset.os); } catch (e) {} }));
+  set(os);
+})();
 document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
   const t = document.getElementById(b.dataset.copy).firstChild.textContent.trim();
   try { await navigator.clipboard.writeText(t); b.textContent = 'Copied'; } catch (e) { b.textContent = 'Select & copy'; }

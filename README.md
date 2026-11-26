@@ -45,6 +45,25 @@ sh setup.sh                          # Python + Node deps, engines, voice and mu
 
 Without `private/`, setup copies the example client into place and everything still works.
 
+### Windows
+
+Studio runs inside WSL (Windows Subsystem for Linux, free on Windows 10 and 11):
+
+```powershell
+wsl --install          # in PowerShell as administrator, then restart and create your Ubuntu user
+```
+
+Then in the Ubuntu app:
+
+```sh
+sudo apt-get update && sudo apt-get install -y git
+git clone https://github.com/Ankush-Jha/studio.git ~/studio
+git clone https://github.com/Ankush-Jha/studio-clients.git ~/studio/private
+cd ~/studio && sh install-wsl.sh     # system packages, Node, uv, Claude Code, browser libraries, then setup.sh
+```
+
+Open Studio with `cd ~/studio && claude` in Ubuntu. The Desk opens in your Windows browser at http://127.0.0.1:4747. Footage reels need whisper.cpp, which `install-wsl.sh` doesn't install yet. The Windows path hasn't been tested on a Windows PC yet; tell us what breaks.
+
 Setup finishes with `sh studio/tools/doctor.sh`, which checks this laptop against the pinned setup (Node and Python versions, Python packages, engines, client data, guard hook). Run it any time something seems off.
 
 Keys are optional; only `/radar` needs them. Copy `studio/.env.example` to `studio/.env` and follow `studio/radar/SETUP.md` for the YouTube Data API key and the Instagram Business Discovery token.
