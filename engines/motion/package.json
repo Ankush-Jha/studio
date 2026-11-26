@@ -1,0 +1,25 @@
+{
+  "name": "studio-motion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Studio Motion: template-driven Instagram reels and GIFs (kinetic type, animated data, 3D objects) rendered deterministically with headless Chromium + GSAP and encoded with ffmpeg. Shares tokens, fonts and maths with Studio Stills (engines/stills).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "render": "node render.mjs",
+    "demo": "./demo.sh",
+    "vendor": "esbuild tools/three-entry.mjs --bundle --format=iife --minify --legal-comments=inline --outfile=vendor/three.iife.js",
+    "setup": "playwright-core install chromium-headless-shell"
+  },
+  "dependencies": {
+    "gsap": "3.15.0",
+    "lottie-web": "5.13.0",
+    "playwright-core": "1.63.0",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

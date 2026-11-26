@@ -1,0 +1,151 @@
+/* Iso Blocks. A flat concrete ground, a matte clay model (page.js), live type in one family
+ * (Red Hat Display) and its mono (Red Hat Mono) for labels and leaders. The model lives in a
+ * designed .io-scene box; labels hang off it on hairlines. Accent = the one volume that matters. */
+.st-isometric { font-family: "Red Hat Display", sans-serif; color: var(--color-ink); background: var(--color-paper); }
+.st-isometric .bg canvas.io-gl { position: absolute; left: 0; top: 0; width: var(--W); height: var(--H); }
+.st-isometric svg.io-leaders { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; z-index: 1; }
+.st-isometric .stage { display: flex; flex-direction: column; z-index: 2; }
+
+.st-isometric .io-head { display: flex; justify-content: space-between; align-items: baseline; padding-top: 24px; font-family: "Red Hat Mono", monospace; font-size: 21px; font-weight: 500; }
+.st-isometric.fmt-story .io-head { padding-top: 0; }
+.st-isometric .io-kicker { font-family: "Red Hat Mono", monospace; font-size: 24px; font-weight: 600; line-height: 1.2; margin-top: 46px; color: var(--color-ink); }
+.st-isometric .io-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-bottom: 6px; }
+.st-isometric .compliance { font-family: "Red Hat Mono", monospace; font-size: 19px; font-weight: 500; color: var(--color-ink); letter-spacing: 0; }
+.st-isometric .compliance.c-block { flex-direction: column; align-items: flex-start; gap: 3px; }
+.st-isometric .io-cue { display: inline-flex; align-items: center; gap: 16px; font-family: "Red Hat Mono", monospace; font-size: 22px; font-weight: 600; white-space: nowrap; order: 2; }
+.st-isometric .io-cue i { position: relative; display: block; width: 64px; height: 2px; background: var(--color-ink); }
+.st-isometric .io-cue i::after { content: ''; position: absolute; right: 0; top: -7px; width: 14px; height: 14px; border-top: 2px solid var(--color-ink); border-right: 2px solid var(--color-ink); transform: rotate(45deg); transform-origin: 70% 30%; }
+.st-isometric [data-mark="accent"] { color: var(--color-accent-ink); }
+.st-isometric em { font-style: normal; color: var(--color-accent-ink); }
+
+/* The model's box. --scene-pad / --scene-align-* tell page.js how to fit the model. */
+.st-isometric .io-scene { position: relative; flex: 1 1 auto; min-height: 0; --scene-pad: 0.03; --scene-align-x: center; --scene-align-y: end; }
+.st-isometric .io-lab { position: absolute; left: 0; top: 0; white-space: nowrap; }
+.st-isometric .io-tag { font-family: "Red Hat Mono", monospace; font-size: 28px; font-weight: 600; color: var(--color-ink); }
+.st-isometric .io-tread { font-family: "Red Hat Mono", monospace; font-size: 26px; font-weight: 600; color: var(--color-accent-ink); }
+
+/* ---------- cover ---------- */
+.st-isometric .io-cover-text { flex: 0 0 auto; }
+.st-isometric .io-h1 { margin-top: 18px; font-size: 104px; line-height: 0.96; font-weight: 800; letter-spacing: -0.032em; max-width: 12.5ch; }
+.st-isometric .io-dek { font-size: 34px; line-height: 1.18; font-weight: 500; margin-top: 24px; max-width: 24ch; text-wrap: balance; }
+.st-isometric .io-fig { font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; color: var(--color-accent-ink); }
+.st-isometric .io-fig-cover { font-size: 150px; margin-top: 18px; }
+.st-isometric .io-fig-l { display: inline-block; font-size: 30px; font-weight: 600; letter-spacing: 0; color: var(--color-ink); vertical-align: baseline; max-width: 12ch; white-space: normal; line-height: 1.1; }
+.st-isometric .io-scene-cover { margin-top: 20px; margin-bottom: 26px; --scene-pad: 0.02; }
+.st-isometric.v-b .io-cover .io-scene-cover { order: 1; margin-top: 40px; margin-bottom: 10px; --scene-align-y: start; }
+.st-isometric.v-b .io-cover .io-head { order: 0; }
+.st-isometric.v-b .io-cover .io-cover-text { order: 2; }
+.st-isometric.v-b .io-cover .io-fig-cover { order: 3; }
+.st-isometric.v-b .io-cover .io-foot { order: 4; margin-top: 34px; }
+
+/* ---------- point ---------- */
+.st-isometric .io-fig-point { font-size: 180px; margin-top: 28px; }
+.st-isometric .io-statement { font-size: 62px; line-height: 1.02; font-weight: 760; letter-spacing: -0.022em; margin-top: 34px; max-width: 15ch; }
+.st-isometric .io-point:not(.has-fig) .io-statement { font-size: 82px; line-height: 0.98; max-width: 12ch; margin-top: 50px; }
+.st-isometric .io-note { font-size: 31px; line-height: 1.24; font-weight: 450; margin-top: 26px; max-width: 26ch; color: var(--color-ink-soft); text-wrap: pretty; }
+.st-isometric .io-scene-small { flex: 1 1 auto; min-height: 260px; margin: 20px 0 22px 40%; --scene-align-x: end; }
+.st-isometric.v-b .io-scene-small { margin-left: 0; margin-right: 40%; --scene-align-x: start; }
+
+/* ---------- number ---------- */
+.st-isometric .io-h2 { font-size: 64px; line-height: 1.0; font-weight: 800; letter-spacing: -0.026em; margin-top: 16px; max-width: 16ch; }
+.st-isometric .io-scene-chart { margin-top: 40px; margin-bottom: 18px; --scene-pad: 0.04; }
+.st-isometric .io-lab-col { display: flex; flex-direction: column; gap: 6px; }
+.st-isometric .io-lab-v { font-size: 46px; font-weight: 850; letter-spacing: -0.025em; line-height: 1; }
+.st-isometric .io-lab-k { font-family: "Red Hat Mono", monospace; font-size: 21px; font-weight: 500; line-height: 1.2; }
+.st-isometric .io-callout { display: flex; align-items: baseline; gap: 28px; margin-bottom: 26px; }
+.st-isometric .io-callout-v { font-size: 120px; line-height: 0.9; font-weight: 900; letter-spacing: -0.045em; color: var(--color-accent-ink); white-space: nowrap; }
+.st-isometric .io-callout-s { font-size: 31px; line-height: 1.18; font-weight: 550; max-width: 19ch; text-wrap: balance; }
+.st-isometric.io-soft-accent .io-fig, .st-isometric.io-soft-accent .io-callout-v, .st-isometric.io-soft-accent .io-side-r .io-side-v,
+.st-isometric.io-soft-accent .io-fact.is-em .io-fact-v, .st-isometric.io-soft-accent .io-kw, .st-isometric.io-soft-accent [data-mark="accent"] { color: var(--color-ink); }
+.st-isometric.io-soft-accent .io-callout-v, .st-isometric.io-soft-accent .io-side-r .io-side-v { text-decoration: underline; text-decoration-color: var(--color-accent); text-decoration-thickness: 0.09em; text-underline-offset: 0.1em; text-decoration-skip-ink: none; }
+.st-isometric.io-soft-accent .io-tread, .st-isometric.io-soft-accent .io-item-n { color: var(--color-ink); }
+.st-isometric .io-fine { font-family: "Red Hat Mono", monospace; font-size: 18.5px; line-height: 1.38; max-width: 74ch; margin-bottom: 26px; color: var(--color-ink); }
+.st-isometric.v-b .io-number .io-callout { order: 3; margin-top: 30px; margin-bottom: 0; }
+.st-isometric.v-b .io-number .io-scene-chart { order: 4; margin-top: 10px; }
+.st-isometric.v-b .io-number .io-fine { order: 5; }
+.st-isometric.v-b .io-number .io-foot { order: 6; }
+.st-isometric.v-b .io-number .io-h2 { order: 2; }
+.st-isometric.v-b .io-number .io-kicker { order: 1; }
+
+/* ---------- compare ---------- */
+.st-isometric .io-scene-compare { flex: 1 1 auto; min-height: 300px; margin-top: 30px; --scene-pad: 0.02; --scene-align-y: center; }
+.st-isometric .io-sides { display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; margin-top: 30px; margin-bottom: 34px; }
+.st-isometric .io-side { display: flex; flex-direction: column; }
+.st-isometric .io-lab-side { position: relative; left: auto; top: auto; }
+.st-isometric .io-side-v { font-size: 84px; line-height: 0.94; font-weight: 850; letter-spacing: -0.035em; margin-top: 20px; }
+.st-isometric .io-side-r .io-side-v { color: var(--color-accent-ink); }
+.st-isometric .io-side-n { font-size: 30px; line-height: 1.2; font-weight: 500; margin-top: 16px; text-wrap: pretty; }
+.st-isometric .io-verdict { margin-top: 0; margin-bottom: 26px; }
+.st-isometric.v-b .io-compare .io-sides { order: 3; margin-top: 40px; margin-bottom: 0; }
+.st-isometric.v-b .io-compare .io-lab-side { --leader: none; }
+.st-isometric.v-b .io-compare .io-scene-compare { order: 4; margin-top: 24px; margin-bottom: 20px; --scene-align-y: start; }
+.st-isometric.v-b .io-compare .io-verdict { order: 5; }
+.st-isometric.v-b .io-compare .io-foot { order: 6; }
+
+/* ---------- lists: a staircase, one tread per item ---------- */
+.st-isometric .io-list-body { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 58fr 42fr; column-gap: 24px; margin-top: 30px; margin-bottom: 24px; }
+.st-isometric .io-items { list-style: none; display: flex; flex-direction: column; justify-content: center; gap: 50px; }
+.st-isometric .io-item { position: relative; display: grid; grid-template-columns: auto 1fr; column-gap: 18px; align-items: start; font-size: 44px; line-height: 1.08; font-weight: 680; letter-spacing: -0.015em; text-wrap: pretty; }
+.st-isometric .is-recap .io-item { padding-left: 26px; border-left: 6px solid var(--color-stone-2); }
+.st-isometric .is-recap .io-item:last-child { border-left-color: var(--color-accent); }
+.st-isometric .io-item-n { font-family: "Red Hat Mono", monospace; font-size: 24px; font-weight: 600; color: var(--color-accent-ink); padding-top: 10px; }
+.st-isometric .is-recap .io-item { grid-template-columns: 1fr auto; }
+.st-isometric .is-recap .io-item-n { display: none; }
+.st-isometric .io-lab-item { position: relative; left: auto; top: auto; width: 2px; height: 1em; align-self: center; }
+.st-isometric .io-scene-stairs { --scene-pad: 0.02; --scene-align-y: center; }
+.st-isometric .is-steps .io-list-body { display: flex; flex-direction: column; gap: 10px; }
+.st-isometric .is-steps .io-items { flex: 0 0 auto; gap: 30px; }
+.st-isometric .is-steps .io-scene-stairs { flex: 1 1 auto; min-height: 300px; --scene-align-y: end; --scene-pad-top: 56px; }
+.st-isometric.v-b .is-steps .io-items { order: 2; }
+.st-isometric.v-b .is-steps .io-scene-stairs { order: 1; --scene-align-y: start; }
+.st-isometric .io-tag2 { font-style: normal; font-family: "Red Hat Mono", monospace; font-size: 24px; font-weight: 600; color: var(--color-accent-ink); white-space: nowrap; }
+.st-isometric.v-b .io-list-body { grid-template-columns: 42fr 58fr; }
+.st-isometric.v-b .io-items { order: 2; }
+.st-isometric.v-b .io-scene-stairs { order: 1; }
+
+/* ---------- myth / quote ---------- */
+.st-isometric .io-myth-t { font-size: 54px; line-height: 1.08; font-weight: 600; margin-top: 30px; max-width: 18ch; color: var(--color-ink-soft); }
+.st-isometric .io-fact-k { margin-top: 56px; }
+.st-isometric .io-q { font-size: 68px; line-height: 1.02; font-weight: 750; letter-spacing: -0.024em; margin-top: 60px; max-width: 15ch; }
+.st-isometric .io-by { font-family: "Red Hat Mono", monospace; font-size: 24px; margin-top: 26px; }
+
+/* ---------- stat ---------- */
+.st-isometric .io-stat .io-h2 { font-size: 58px; max-width: 17ch; }
+.st-isometric .io-stat-body { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; margin-top: 34px; }
+.st-isometric .io-facts { display: flex; flex-direction: column; gap: 22px; }
+.st-isometric .io-fig-stat { font-size: 150px; }
+.st-isometric .io-fact { border-top: 3px solid var(--color-ink); padding-top: 12px; }
+.st-isometric .io-fact.is-em { border-top-color: var(--color-accent); }
+.st-isometric .io-fact-l { font-family: "Red Hat Mono", monospace; font-size: 21px; font-weight: 600; }
+.st-isometric .io-fact-v { font-size: 52px; font-weight: 850; letter-spacing: -0.03em; line-height: 1; margin-top: 6px; }
+.st-isometric .io-fact.is-em .io-fact-v { color: var(--color-accent-ink); }
+.st-isometric .io-fact-n { font-family: "Red Hat Mono", monospace; font-size: 20px; margin-top: 4px; }
+.st-isometric .io-scene-stat { --scene-align-y: center; }
+
+/* ---------- cta ---------- */
+.st-isometric .io-scene-cta { flex: 1 1 auto; min-height: 360px; margin: 26px 12% 0 0; --scene-pad: 0.05; --scene-align-y: center; }
+.st-isometric .io-cta-h { font-size: 100px; line-height: 0.96; font-weight: 850; letter-spacing: -0.032em; max-width: 12ch; margin-top: 20px; }
+.st-isometric .io-cta-h { margin-bottom: 44px; }
+.st-isometric .io-cta .io-dek { margin-top: -20px; margin-bottom: 40px; }
+.st-isometric .io-kw { color: var(--color-accent-ink); }
+.st-isometric.v-b .io-cta .io-scene-cta { order: 3; margin-top: 10px; }
+.st-isometric.v-b .io-cta .io-cta-h { order: 1; margin-top: 70px; }
+.st-isometric.v-b .io-cta .io-dek { order: 2; margin-bottom: 0; }
+.st-isometric.v-b .io-cta .io-foot { order: 4; margin-top: 20px; }
+
+/* ---------- formats ---------- */
+.st-isometric.fmt-story .io-h1, .st-isometric.fmt-square .io-h1 { font-size: 86px; }
+.st-isometric.fmt-story .io-kicker, .st-isometric.fmt-square .io-kicker { margin-top: 28px; }
+.st-isometric.fmt-story .io-h2, .st-isometric.fmt-square .io-h2 { font-size: 54px; }
+.st-isometric.fmt-story .io-statement, .st-isometric.fmt-square .io-statement { font-size: 52px; }
+.st-isometric.fmt-story .io-cta-h, .st-isometric.fmt-square .io-cta-h { font-size: 84px; }
+.st-isometric.fmt-square .io-dek { font-size: 30px; margin-top: 14px; }
+.st-isometric.fmt-square .io-h1 { font-size: 72px; margin-top: 10px; }
+.st-isometric.fmt-square .io-scene-cover { margin-top: 10px; margin-bottom: 14px; --scene-pad-top: 52px; }
+
+/* Story cover: words in the safe band, the model below them running into the lower canvas
+ * (still inside the 3:4 profile-grid crop), labels kept inside the safe box. */
+.st-isometric.fmt-story .io-cover .io-foot { order: 3; margin-top: 30px; }
+.st-isometric.fmt-story .io-cover .io-scene-cover { order: 4; flex: 0 0 auto; height: 860px; margin: 26px -60px 0; --scene-pad: 0; --scene-align-y: start; --scene-pad-top: 70px; }
+.st-isometric.fmt-story.v-b .io-cover .io-scene-cover { order: 4; }
+.st-isometric.fmt-story.v-b .io-cover .io-cover-text { order: 1; }

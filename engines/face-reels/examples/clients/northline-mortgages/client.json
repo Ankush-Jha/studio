@@ -1,0 +1,42 @@
+{
+  "slug": "northline-mortgages",
+  "display_name": "Northline Mortgages",
+  "status": "example (fictional)",
+  "people": [
+    {
+      "name": "Sam Rivera",
+      "role": "Mortgage Agent Level 2",
+      "licence_no": "[AGENT LICENCE #]",
+      "pronouns_in_copy": "they/them",
+      "face_reference": "assets/people/sam-rivera.jpg (not included: fictional person)"
+    }
+  ],
+  "company": {
+    "legal_name": "[BROKERAGE NAME]",
+    "brokerage_licence_no": "[LICENCE #]",
+    "regulator": "FSRA (Ontario)",
+    "jurisdiction": "Ontario",
+    "office_address": "Toronto, ON",
+    "website": "",
+    "phone": "",
+    "email": ""
+  },
+  "social": {
+    "instagram": "",
+    "tiktok": "",
+    "youtube": "",
+    "facebook": "",
+    "linkedin": ""
+  },
+  "audience": "first-time buyers and renewers in Toronto",
+  "languages": [
+    "en"
+  ],
+  "platforms": [
+    "instagram-reels"
+  ],
+  "default_cta": "Send this to someone renewing this year",
+  "needs_confirmation": [
+    "Everything: this is a fictional example client. Replace the bracketed placeholders with real values from the licence record before any reel."
+  ]
+}

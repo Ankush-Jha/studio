@@ -1,0 +1,28 @@
+{
+  "slug": "bento",
+  "name": "Bento Ledger",
+  "group": 1,
+  "family": "Ledger",
+  "summary": "A ledger-dashboard of unequal square tiles on cool stone: one hero tile in the client colour, one ink tile, paper tiles, every tile one number with a micro-visual drawn on one shared scale.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "stat", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "Mona Sans", "file": "MonaSans[wdth,wght].ttf", "style": "normal", "weight": "200 900", "stretch": "75% 125%" }
+  ],
+  "palette": {
+    "paper": "#E3E5E0",
+    "tile": "#F9F9F6",
+    "ink": "#121513",
+    "ink-soft": "#4F5652",
+    "rule": "#C6CAC3",
+    "inktile": "#1A1D1B",
+    "accent": "#2D6A3E"
+  },
+  "accentGround": "tile",
+  "emphasis": "accent",
+  "hand": { "pen": "fine", "weight": 4, "wobble": 0.6 },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40
+}

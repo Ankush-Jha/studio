@@ -1,0 +1,206 @@
+/* Front Page. Newsprint ground, black ink, one spot colour (the client accent).
+ * Blackletter for the nameplate only; Libre Franklin for heads, labels and figures;
+ * Newsreader for body, decks and captions. Rules do the structural work: double rule under the
+ * nameplate, column rules between columns, a heavy rule over the imprint. */
+.st-broadsheet { font-family: "Newsreader", serif; font-optical-sizing: auto; color: var(--color-ink); background: var(--color-paper); }
+.st-broadsheet .bs-paper { position: absolute; inset: 0; background: var(--color-paper); }
+.st-broadsheet .bs-paper::after { content: ''; position: absolute; inset: 0; background-image: var(--grain-img); background-size: 300px; mix-blend-mode: multiply; opacity: 0.11; }
+.st-broadsheet .bs-mottle { position: absolute; inset: 0; mix-blend-mode: multiply; opacity: 0.07; }
+.st-broadsheet .bs-fold { position: absolute; left: 0; right: 0; top: 1330px; height: 2px; background: rgba(0,0,0,.12); box-shadow: 0 2px 0 rgba(255,255,255,.55); }
+.st-broadsheet .bs-fold::after { content: ''; position: absolute; left: 0; right: 0; top: 3px; height: 600px; background: rgba(40,32,20,.035); }
+.st-broadsheet .bs-cols-ghost { position: absolute; left: 65px; right: 65px; top: 1372px; bottom: 120px; border-top: 4px solid rgba(22,21,19,.18); }
+.st-broadsheet .bs-cols-ghost::after { content: ''; position: absolute; left: calc(50% - 1px); top: 24px; bottom: 0; width: 2px; background: rgba(22,21,19,.16); }
+
+.st-broadsheet .bs-stage { display: flex; flex-direction: column; }
+.st-broadsheet [data-mark="bs-em"] { font-weight: inherit; }
+.st-broadsheet [data-mark="bs-strike"] { text-decoration: line-through; text-decoration-thickness: 0.08em; text-decoration-color: var(--color-accent); }
+.st-broadsheet em { font-style: italic; }
+
+/* Front-page masthead */
+.st-broadsheet .bs-mast { display: grid; grid-template-columns: 176px 1fr 176px; align-items: center; column-gap: 22px; padding-top: 14px; padding-bottom: 14px; }
+.st-broadsheet .bs-ear { align-self: stretch; display: flex; flex-direction: column; justify-content: center; border: 2px solid var(--color-ink); padding: 9px 12px 10px; font-family: "Libre Franklin", sans-serif; font-size: 20px; line-height: 1.2; }
+.st-broadsheet .bs-ear b { display: block; font-weight: 750; font-size: 21px; }
+.st-broadsheet .bs-ear span { display: block; font-weight: 450; color: var(--color-ink-soft); }
+.st-broadsheet .bs-ear-r { text-align: right; }
+.st-broadsheet .bs-name-box { text-align: center; min-width: 0; }
+.st-broadsheet .bs-name { font-family: "UnifrakturMaguntia", serif; font-weight: 400; line-height: 1.05; color: var(--color-ink); letter-spacing: 0.005em; }
+.st-broadsheet .bs-dateline { display: flex; justify-content: space-between; gap: 16px; border-top: 6px double var(--color-ink); border-bottom: 2px solid var(--color-ink); padding: 9px 2px 8px; font-family: "Libre Franklin", sans-serif; font-weight: 600; font-size: 20px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* Front page: kicker, headline, below-the-headline grid */
+.st-broadsheet .bs-kicker { font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 25px; color: var(--color-accent-ink); margin-top: 26px; }
+.st-broadsheet .bs-head { flex: 1 1 auto; min-height: 0; font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 108px; line-height: 0.95; letter-spacing: -0.028em; margin-top: 8px; }
+.st-broadsheet .bs-dateline + .bs-head { margin-top: 30px; }
+.st-broadsheet .bs-below { flex: 0 0 auto; display: grid; grid-template-columns: 7fr 5fr; column-gap: 30px; margin-top: 30px; padding-top: 24px; border-top: 2px solid var(--color-ink); margin-bottom: 22px; }
+.st-broadsheet .bs-front:not(.has-art) .bs-below { grid-template-columns: 1fr; }
+.st-broadsheet .bs-col { border-left: 1px solid var(--color-ink); padding-left: 28px; min-width: 0; display: flex; flex-direction: column; }
+.st-broadsheet .bs-standfirst { font-style: italic; font-size: 46px; line-height: 1.14; font-weight: 400; letter-spacing: -0.005em; }
+.st-broadsheet .bs-col .bs-jump { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--color-ink); }
+.st-broadsheet .bs-below { align-items: stretch; }
+.st-broadsheet .bs-front .bs-art { align-self: start; }
+.st-broadsheet .bs-front:not(.has-art) .bs-col { border-left: 0; padding-left: 0; columns: 2; column-gap: 40px; column-rule: 1px solid var(--color-ink); }
+.st-broadsheet .bs-lead { font-size: 33px; line-height: 1.3; font-weight: 420; }
+.st-broadsheet .bs-lead::first-letter { float: left; font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 3.15em; line-height: 0.78; margin: 0.07em 0.08em 0 -0.02em; color: var(--color-ink); }
+
+/* Art boxes */
+.st-broadsheet .bs-art { min-width: 0; display: flex; flex-direction: column; }
+.st-broadsheet .bs-cap { font-size: 20px; line-height: 1.3; font-style: italic; color: var(--color-ink-soft); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--color-ink); }
+.st-broadsheet .bs-figbox .bs-fig-wrap { background: #DCD7C9; padding: 26px 26px 14px; border: 1px solid var(--color-ink); }
+.st-broadsheet .bs-fig { font-family: "Libre Franklin", sans-serif; font-weight: 900; line-height: 0.92; letter-spacing: -0.04em; color: var(--color-accent-ink); }
+.st-broadsheet .bs-fig-k { font-family: "Libre Franklin", sans-serif; font-weight: 600; font-size: 28px; line-height: 1.2; margin-top: 14px; }
+.st-broadsheet .bs-clip-paper { flex: 1 1 auto; background: #DCD7C9; border: 1px solid var(--color-ink); padding: 26px 26px 22px; font-family: "Libre Franklin", sans-serif; font-size: 23px; display: flex; flex-direction: column; justify-content: center; }
+.st-broadsheet .bs-clip-h { display: flex; justify-content: space-between; font-weight: 700; font-size: 22px; padding-bottom: 12px; border-bottom: 3px solid var(--color-ink); }
+.st-broadsheet .bs-clip-r { display: grid; grid-template-columns: 4.2em 1fr auto; gap: 10px; padding: 14px 0 12px; border-bottom: 1px solid var(--color-ink); font-variant-numeric: tabular-nums; color: var(--color-ink-soft); }
+.st-broadsheet .bs-clip-r.is-hi { color: var(--color-ink); font-weight: 800; font-size: 30px; box-shadow: inset 8px 0 0 var(--color-accent); padding-left: 18px; background: rgba(255,255,255,.35); }
+.st-broadsheet .num { text-align: right; }
+
+/* Chart (the "news photo") */
+.st-broadsheet .bs-chart .bs-art-h { font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 22px; padding-bottom: 10px; border-bottom: 3px solid var(--color-ink); }
+.st-broadsheet .bs-bars { position: relative; flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-evenly; gap: 22px; padding: 24px 0 40px; border-left: 2px solid var(--color-ink); }
+.st-broadsheet .bs-bar-k { font-family: "Libre Franklin", sans-serif; font-weight: 600; font-size: 22px; padding-left: 14px; margin-bottom: 8px; }
+.st-broadsheet .bs-bar-line { position: relative; height: var(--bh, 100px); margin-right: 160px; }
+.st-broadsheet .bs-fig-in, .st-broadsheet .bs-callout-in { width: 100%; }
+.st-broadsheet .bs-bar { display: block; width: 100%; height: 100%; }
+.st-broadsheet .bs-bar-v { position: absolute; top: 50%; transform: translateY(-50%); margin-left: 12px; font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 28px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.st-broadsheet .bs-bar-row.is-hi .bs-bar-v { color: var(--color-accent-ink); }
+.st-broadsheet .bs-zero { position: absolute; left: -2px; bottom: 6px; font-family: "Libre Franklin", sans-serif; font-size: 20px; padding-left: 12px; }
+
+/* Inner pages */
+.st-broadsheet .bs-phead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 16px; padding-bottom: 12px; border-bottom: 6px double var(--color-ink); font-family: "Libre Franklin", sans-serif; font-size: 20px; font-weight: 600; }
+.st-broadsheet .bs-pname { font-family: "UnifrakturMaguntia", serif; font-weight: 400; font-size: 38px; line-height: 1; }
+.st-broadsheet .bs-pdate { margin-left: auto; color: var(--color-ink-soft); font-weight: 500; }
+.st-broadsheet .bs-flag { align-self: flex-start; font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 23px; line-height: 1.2; color: var(--color-on-accent); background: var(--color-accent); padding: 7px 14px 8px; margin-top: 34px; }
+.st-broadsheet .bs-wood-h { flex: 1 1 auto; min-height: 0; font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 96px; line-height: 0.97; letter-spacing: -0.026em; margin-top: 26px; margin-bottom: 10px; }
+.st-broadsheet .bs-wood.has-fig .bs-wood-h { font-size: 72px; line-height: 1.0; letter-spacing: -0.018em; }
+.st-broadsheet .bs-pfig-box { margin-top: 18px; padding-bottom: 0.24em; border-bottom: 2px solid var(--color-ink); font-size: 1px; }
+.st-broadsheet .bs-pfig-box .bs-pfig { padding-bottom: 22px; }
+.st-broadsheet .bs-pfig { font-family: "Libre Franklin", sans-serif; font-weight: 900; line-height: 0.92; letter-spacing: -0.045em; color: var(--color-accent-ink); }
+.st-broadsheet .bs-deck { font-style: italic; font-size: 38px; line-height: 1.24; font-weight: 400; margin-top: 24px; max-width: 28ch; padding-top: 20px; border-top: 1px solid var(--color-ink); }
+.st-broadsheet .bs-wood .bs-deck { margin-bottom: 26px; }
+.st-broadsheet .bs-h2 { font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 68px; line-height: 1.0; letter-spacing: -0.022em; margin-top: 22px; }
+
+/* Graphic page */
+.st-broadsheet .bs-graphic-grid { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 8fr 4fr; column-gap: 28px; margin-top: 30px; }
+.st-broadsheet .bs-callout { border-left: 1px solid var(--color-ink); padding-left: 26px; padding-right: 10px; align-self: center; }
+.st-broadsheet .bs-callout-v { font-family: "Libre Franklin", sans-serif; font-weight: 900; font-size: 76px; line-height: 0.95; letter-spacing: -0.035em; color: var(--color-accent-ink); }
+.st-broadsheet .bs-callout-k { font-size: 29px; line-height: 1.25; margin-top: 14px; }
+.st-broadsheet .bs-source { font-size: 19px; line-height: 1.36; margin-top: 18px; margin-bottom: 14px; padding-top: 10px; border-top: 1px solid var(--color-ink); }
+.st-broadsheet .bs-source b { font-family: "Libre Franklin", sans-serif; font-weight: 700; }
+
+/* Point / counterpoint */
+.st-broadsheet .bs-sides { display: grid; grid-template-columns: 1fr 1fr; column-gap: 0; margin-top: 40px; border-top: 2px solid var(--color-ink); border-bottom: 2px solid var(--color-ink); }
+.st-broadsheet .bs-side { padding: 0 26px 30px; }
+.st-broadsheet .bs-side.is-l { padding-left: 0; }
+.st-broadsheet .bs-side.is-r { border-left: 1px solid var(--color-ink); padding-right: 0; }
+.st-broadsheet .bs-side-k { display: inline-block; font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 24px; color: var(--color-paper); background: var(--color-ink); padding: 8px 14px 9px; margin-top: 26px; }
+.st-broadsheet .bs-side.is-r .bs-side-k { background: var(--color-accent); color: var(--color-on-accent); }
+.st-broadsheet .bs-side-v { font-family: "Libre Franklin", sans-serif; font-weight: 900; font-size: 92px; line-height: 0.95; letter-spacing: -0.04em; margin-top: 22px; font-variant-numeric: tabular-nums lining-nums; }
+.st-broadsheet .bs-side.is-r .bs-side-v { color: var(--color-accent-ink); }
+.st-broadsheet .bs-side-n { font-size: 31px; line-height: 1.28; margin-top: 18px; }
+.st-broadsheet .bs-pcp .bs-sides { flex: 1 1 auto; min-height: 0; margin-bottom: 4px; }
+.st-broadsheet .bs-pcp .bs-side { display: flex; flex-direction: column; justify-content: center; }
+.st-broadsheet .bs-pcp .bs-side-k { align-self: flex-start; margin-top: 0; }
+.st-broadsheet .bs-side-vbox { width: 92%; }
+.st-broadsheet .bs-verdict { margin-bottom: 26px; }
+.st-broadsheet .bs-verdict { margin-top: 28px; border-top: 0; padding-top: 0; font-size: 30px; max-width: 34ch; }
+
+/* In brief / correction / notice boxes */
+.st-broadsheet .bs-briefbox, .st-broadsheet .bs-corrbox { margin-top: 40px; border: 3px solid var(--color-ink); padding: 0 34px 34px; }
+.st-broadsheet .bs-briefbox { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; margin-bottom: 26px; }
+.st-broadsheet .bs-briefbox .bs-ol { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: space-evenly; border-bottom: 1px solid var(--color-ink); }
+.st-broadsheet .bs-brief-h { font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 23px; color: var(--color-paper); background: var(--color-ink); margin: 0 -34px; padding: 10px 34px 11px; }
+.st-broadsheet .bs-briefbox .bs-h2 { font-size: 72px; margin-top: 26px; }
+.st-broadsheet .bs-ol { list-style: none; margin-top: 26px; }
+.st-broadsheet .bs-ol li { display: grid; grid-template-columns: 1.7em 1fr; align-items: baseline; line-height: 1.25; padding: 0.55em 0 0.5em; border-top: 1px solid var(--color-ink); }
+.st-broadsheet .bs-li-n { font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 0.9em; color: var(--color-accent-ink); }
+.st-broadsheet .is-recap .bs-li-n::before { content: ''; display: inline-block; width: 18px; height: 18px; background: var(--color-accent); }
+.st-broadsheet .bs-ol em { font-style: italic; color: var(--color-ink-soft); font-size: 28px; }
+.st-broadsheet .bs-corrbox { border-left: 12px solid var(--color-accent); }
+.st-broadsheet .bs-corr-myth { font-size: 36px; line-height: 1.3; margin-top: 28px; color: var(--color-ink-soft); }
+.st-broadsheet .bs-label-inline { font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 25px; color: var(--color-ink); }
+.st-broadsheet .bs-corr-fact { font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 62px; line-height: 1.02; letter-spacing: -0.02em; margin-top: 26px; }
+.st-broadsheet .bs-q { font-style: italic; font-size: 64px; line-height: 1.14; font-weight: 450; margin-top: auto; padding: 34px 0; border-top: 6px solid var(--color-ink); border-bottom: 1px solid var(--color-ink); text-indent: -0.4em; }
+.st-broadsheet .bs-q-by { font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 25px; margin-top: 20px; margin-bottom: auto; }
+.st-broadsheet .bs-noticebox { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; margin-top: 40px; margin-bottom: 30px; border: 10px double var(--color-ink); padding: 34px 40px 40px; }
+.st-broadsheet .bs-notice-h { flex: 1 1 auto; min-height: 0; }
+.st-broadsheet .bs-notice-k { font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 24px; color: var(--color-accent-ink); padding-bottom: 14px; border-bottom: 2px solid var(--color-ink); }
+.st-broadsheet .bs-notice-h { font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 96px; line-height: 0.97; letter-spacing: -0.026em; margin-top: 24px; }
+.st-broadsheet .bs-noticebox .bs-deck { border-top: 0; padding-top: 0; margin-top: 24px; font-size: 32px; }
+.st-broadsheet .bs-imprint-block { padding-top: 16px; border-top: 4px solid var(--color-ink); padding-bottom: 6px; }
+.st-broadsheet .bs-imprint-k { font-family: "Libre Franklin", sans-serif; font-weight: 700; font-size: 20px; margin-bottom: 6px; }
+.st-broadsheet .bs-facts { display: flex; flex-direction: column; }
+.st-broadsheet .bs-facts .bs-brief-h { margin: 0 0 6px; padding: 8px 12px; }
+.st-broadsheet .bs-fact { padding: 12px 0; border-bottom: 1px solid var(--color-ink); }
+.st-broadsheet .bs-fact dt { font-family: "Libre Franklin", sans-serif; font-weight: 600; font-size: 21px; color: var(--color-ink-soft); }
+.st-broadsheet .bs-fact dd { font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 40px; line-height: 1.05; }
+.st-broadsheet .bs-fact.is-hi dd { color: var(--color-accent-ink); }
+.st-broadsheet .bs-fact p { font-size: 21px; color: var(--color-ink-soft); }
+
+/* Footer: imprint (compliance) and the jump line */
+.st-broadsheet .bs-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; padding-top: 12px; border-top: 4px solid var(--color-ink); padding-bottom: 6px; }
+.st-broadsheet .compliance { font-family: "Libre Franklin", sans-serif; font-size: 19px; font-weight: 500; letter-spacing: 0.02em; color: var(--color-ink); }
+.st-broadsheet .compliance.c-block { flex-direction: column; align-items: flex-start; gap: 3px; font-size: 21px; }
+.st-broadsheet .bs-jump { display: inline-flex; align-items: center; gap: 10px; font-family: "Libre Franklin", sans-serif; font-style: italic; font-weight: 650; font-size: 21px; white-space: nowrap; }
+.st-broadsheet .bs-jump b { display: block; width: 0; height: 0; border-left: 13px solid var(--color-accent); border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.st-broadsheet .bs-kw { color: var(--color-accent-ink); }
+
+/* Variant b: photo-led front page, left-set nameplate, boxed inner headlines */
+.st-broadsheet.v-b .bs-mast { grid-template-columns: 1fr 176px; }
+.st-broadsheet.v-b .bs-ear-l { display: none; }
+.st-broadsheet.v-b .bs-name-box { text-align: left; }
+.st-broadsheet.v-b .bs-front .bs-below { display: contents; }
+.st-broadsheet.v-b .bs-front .bs-art { order: 3; margin-top: 26px; align-self: stretch; }
+.st-broadsheet.v-b .bs-front .bs-kicker { order: 4; }
+.st-broadsheet.v-b .bs-front .bs-head { order: 5; margin-top: 18px; }
+.st-broadsheet.v-b .bs-front .bs-col { order: 6; border-left: 0; padding-left: 0; border-top: 1px solid var(--color-ink); padding-top: 16px; margin-bottom: 22px; flex: 0 0 auto; }
+.st-broadsheet.v-b .bs-front .bs-standfirst { font-size: 38px; }
+.st-broadsheet.v-b .bs-front .bs-foot { order: 7; }
+.st-broadsheet.v-b .bs-front .bs-clip-paper { padding: 18px 26px 14px; }
+.st-broadsheet.v-b .bs-front .bs-clip-r { padding-top: 9px; padding-bottom: 8px; }
+.st-broadsheet.v-b .bs-wood .bs-wood-h { border-left: 12px solid var(--color-accent); padding-left: 26px; }
+.st-broadsheet.v-b .bs-wood .bs-flag { order: 4; margin-top: 30px; }
+.st-broadsheet.v-b .bs-wood .bs-deck { order: 3; margin-left: 38px; }
+.st-broadsheet.v-b .bs-wood .bs-foot { order: 5; }
+.st-broadsheet.v-b .bs-wood .bs-wood-h { order: 2; margin-top: 60px; }
+.st-broadsheet.v-b .bs-wood .bs-pfig-box { order: 1; margin-top: 40px; }
+.st-broadsheet.v-b .bs-graphic-grid { grid-template-columns: 1fr; grid-template-rows: auto 1fr; row-gap: 20px; }
+.st-broadsheet.v-b .bs-callout { order: -1; border-left: 0; padding-left: 0; display: flex; align-items: baseline; gap: 22px; }
+.st-broadsheet.v-b .bs-callout-k { margin-top: 0; }
+.st-broadsheet.v-b .bs-sides { grid-template-columns: 1fr; border-bottom: 0; }
+.st-broadsheet.v-b .bs-pcp .bs-side { flex: 1 1 0; padding: 0 0 24px; border-bottom: 1px solid var(--color-ink); display: grid; grid-template-columns: 6fr 6fr; column-gap: 26px; align-content: center; align-items: end; }
+.st-broadsheet.v-b .bs-pcp .bs-sides { display: flex; flex-direction: column; }
+.st-broadsheet.v-b .bs-side.is-r { border-left: 0; }
+.st-broadsheet.v-b .bs-side-k { grid-column: 1 / -1; justify-self: start; }
+.st-broadsheet.v-b .bs-side-n { margin-top: 0; }
+.st-broadsheet.v-b .bs-briefbox { border-width: 0 0 3px 0; padding: 0 0 26px; }
+.st-broadsheet.v-b .bs-briefbox .bs-brief-h { margin: 0; padding: 10px 16px; display: inline-block; background: var(--color-accent); color: var(--color-on-accent); }
+.st-broadsheet.v-b .bs-noticebox { border: 0; border-top: 14px solid var(--color-accent); padding: 26px 0 30px; }
+
+/* Story and square */
+.st-broadsheet.fmt-story .bs-mast, .st-broadsheet.fmt-square .bs-mast { grid-template-columns: 1fr; padding-top: 0; padding-bottom: 8px; }
+.st-broadsheet.fmt-story .bs-ear, .st-broadsheet.fmt-square .bs-ear { display: none; }
+.st-broadsheet.fmt-story .bs-dateline, .st-broadsheet.fmt-square .bs-dateline { font-size: 20px; }
+.st-broadsheet.fmt-story .bs-head, .st-broadsheet.fmt-square .bs-head { font-size: 84px; }
+.st-broadsheet.fmt-story .bs-kicker, .st-broadsheet.fmt-square .bs-kicker { margin-top: 18px; }
+.st-broadsheet.fmt-story .bs-below, .st-broadsheet.fmt-square .bs-below { margin-top: 20px; padding-top: 18px; }
+.st-broadsheet.fmt-story .bs-lead, .st-broadsheet.fmt-square .bs-lead { font-size: 30px; }
+.st-broadsheet.fmt-story .bs-clip-paper, .st-broadsheet.fmt-square .bs-clip-paper { padding: 14px 20px; font-size: 21px; }
+.st-broadsheet.fmt-story .bs-clip-r, .st-broadsheet.fmt-square .bs-clip-r { padding: 8px 0 7px; }
+.st-broadsheet.fmt-story .bs-clip-r.is-hi, .st-broadsheet.fmt-square .bs-clip-r.is-hi { font-size: 26px; padding-left: 16px; }
+.st-broadsheet.fmt-story .bs-phead, .st-broadsheet.fmt-square .bs-phead { padding-top: 0; }
+.st-broadsheet.fmt-story .bs-wood-h, .st-broadsheet.fmt-square .bs-wood-h { font-size: 78px; }
+.st-broadsheet.fmt-story .bs-h2, .st-broadsheet.fmt-square .bs-h2 { font-size: 56px; }
+.st-broadsheet.fmt-story .bs-chart, .st-broadsheet.fmt-square .bs-chart { --bh: 76px !important; }
+.st-broadsheet.fmt-story .bs-notice-h, .st-broadsheet.fmt-square .bs-notice-h { font-size: 78px; }
+/* Variant b, round 2: reverse-type blocks (white on ink) carry the page, so two clients on the
+ * same post never set the same page twice. */
+.st-broadsheet.v-b .bs-wood:not(.has-fig) .bs-wood-h { background: var(--color-ink); color: var(--color-paper); border-left: 0; padding: 30px 34px 36px; margin-top: 40px; }
+.st-broadsheet.v-b .bs-wood:not(.has-fig) .bs-deck { margin-left: 0; }
+.st-broadsheet.v-b .bs-briefbox { background: var(--color-ink); color: var(--color-paper); padding: 30px 32px 34px; border: 0; }
+.st-broadsheet.v-b .bs-briefbox .bs-h2, .st-broadsheet.v-b .bs-briefbox .bs-ol, .st-broadsheet.v-b .bs-briefbox li { color: var(--color-paper); }
+.st-broadsheet.v-b .bs-noticebox { background: var(--color-ink); color: var(--color-paper); padding: 34px 34px 38px; border-top: 0; }
+.st-broadsheet.v-b .bs-noticebox .bs-notice-h, .st-broadsheet.v-b .bs-noticebox .bs-deck, .st-broadsheet.v-b .bs-noticebox .bs-notice-k { color: var(--color-paper); }
+/* Seed-picked notice treatment: no panel; the notice set big on the page in the client colour
+ * behind a heavy left rule, so two accounts never close on the same page shape. */
+.st-broadsheet.notice-field .bs-noticebox { background: none; border: 0; border-left: 26px solid var(--color-accent); padding: 10px 0 10px 34px; margin-top: 60px; }
+.st-broadsheet.notice-field .bs-noticebox .bs-notice-h { color: var(--color-accent-ink); }
+.st-broadsheet.notice-field .bs-noticebox .bs-deck, .st-broadsheet.notice-field .bs-noticebox .bs-notice-k { color: var(--color-ink); }

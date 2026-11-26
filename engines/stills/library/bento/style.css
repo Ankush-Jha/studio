@@ -1,0 +1,176 @@
+/* Bento Ledger. Mona Sans across its width axis: expanded for figures, condensed for labels.
+ * Square tiles on cool stone, 12px gutters, no shadows, no radius, no gradients.
+ * Tones: paper (most tiles), ink (one per slide), accent (the hero, client colour). */
+.st-bento { font-family: "Mona Sans", sans-serif; font-weight: 500; font-stretch: 100%; color: var(--color-ink); background: var(--color-paper); }
+.st-bento .stage { display: flex; flex-direction: column; }
+
+.st-bento .bn-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding-top: 20px; }
+.st-bento.fmt-story .bn-head { padding-top: 0; }
+.st-bento .bn-kicker { font-size: 24px; font-weight: 680; font-stretch: 92%; letter-spacing: 0; }
+.st-bento .bn-folio { font-size: 22px; font-weight: 640; font-stretch: 90%; }
+.st-bento .bn-h1 { margin-top: 22px; font-size: 70px; line-height: 1.0; font-weight: 790; font-stretch: 106%; letter-spacing: -0.032em; max-width: 19ch; }
+.st-bento .bn-h2 { margin-top: 18px; font-size: 56px; line-height: 1.02; font-weight: 780; font-stretch: 104%; letter-spacing: -0.028em; max-width: 20ch; }
+.st-bento [data-mark="accent"] { color: var(--color-accent-ink); }
+.st-bento em { font-style: normal; }
+
+/* Grid and tiles */
+.st-bento .bn-grid { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; margin-top: 30px; }
+.st-bento .bn-tile { position: relative; min-width: 0; min-height: 0; display: flex; flex-direction: column; padding: 24px 26px 26px; overflow: hidden; font-size: 36px; }
+.st-bento .bn-tile.is-paper { background: var(--color-tile); color: var(--color-ink); }
+.st-bento .bn-tile.is-ink { background: var(--color-inktile); color: var(--color-tile); }
+.st-bento .bn-tile.is-accent { background: var(--color-accent); color: var(--color-on-accent); }
+.st-bento .bn-empty { background: transparent !important; }
+.st-bento .bn-tile > * { flex-shrink: 0; }
+.st-bento .bn-ghost { position: absolute; left: var(--safe-x0); right: var(--safe-r); top: 1290px; bottom: 0; background: var(--color-accent); overflow: hidden; }
+.st-bento .bn-ghost span { position: absolute; left: 26px; top: -40px; font-weight: 880; font-stretch: 125%; font-size: 460px; line-height: 1; letter-spacing: -0.055em; color: var(--color-on-accent); opacity: 0.16; white-space: nowrap; }
+
+.st-bento .bn-k { font-size: 23px; line-height: 1.18; font-weight: 640; font-stretch: 88%; letter-spacing: 0.002em; }
+.st-bento .is-paper .bn-k { color: var(--color-ink-soft); }
+.st-bento .bn-v { margin-top: auto; font-size: 64px; line-height: 0.95; font-weight: 820; font-stretch: 118%; letter-spacing: -0.04em; white-space: nowrap; }
+.st-bento .bn-v-s { font-size: 46px; font-stretch: 108%; }
+.st-bento .bn-v small { font-size: 22px; font-weight: 640; font-stretch: 90%; letter-spacing: 0; margin-left: 0.3em; }
+.st-bento .bn-n { font-size: 28px; line-height: 1.16; font-weight: 520; font-stretch: 92%; margin-top: 12px; }
+.st-bento .is-paper .bn-n { color: var(--color-ink-soft); }
+
+/* Hero tile */
+.st-bento .bn-hero { justify-content: flex-end; }
+.st-bento .bn-fig-box { min-width: 0; line-height: 0.8; margin-top: auto; display: flex; align-items: flex-end; }
+.st-bento .bn-fig { word-spacing: 0.06em; display: inline-block; font-weight: 880; font-stretch: 125%; letter-spacing: -0.055em; line-height: 0.8; white-space: nowrap; }
+.st-bento .bn-hero-k { font-size: 31px; line-height: 1.12; font-weight: 640; font-stretch: 96%; margin-top: 22px; max-width: 16ch; }
+
+/* Micro-visuals: bars share one scale per slide. */
+.st-bento .bn-bar { position: relative; height: 16px; margin-top: 16px; background: var(--color-rule); }
+.st-bento .bn-bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--color-ink); }
+.st-bento .bn-bar b { position: absolute; top: -5px; bottom: -5px; min-width: 6px; background: var(--color-accent); }
+.st-bento .is-ink .bn-bar { background: #3A3F3C; }
+.st-bento .is-ink .bn-bar i { background: var(--color-tile); }
+.st-bento .is-ink .bn-bar b { background: var(--color-accent-tint); }
+.st-bento .is-accent .bn-bar { background: color-mix(in srgb, var(--color-on-accent) 28%, var(--color-accent)); }
+.st-bento .is-accent .bn-bar i { background: var(--color-on-accent); }
+.st-bento .bn-ring-box { margin-top: auto; display: flex; align-items: center; gap: 16px; }
+.st-bento .bn-ring-box + .bn-v { margin-top: 16px; }
+.st-bento .bn-ring { flex: 0 0 auto; width: 96px; height: 96px; }
+.st-bento .bn-ring-k { font-size: 21px; line-height: 1.2; font-weight: 600; font-stretch: 86%; color: var(--color-ink-soft); max-width: 9ch; }
+.st-bento .bn-ring .on { stroke: var(--color-ink); }
+.st-bento .bn-ring .off { stroke: var(--color-rule); }
+.st-bento .is-ink .bn-ring .on { stroke: var(--color-tile); }
+.st-bento .is-ink .bn-ring .off { stroke: #3A3F3C; }
+.st-bento .bn-stop { display: flex; align-items: center; gap: 5px; margin-top: 16px; height: 16px; }
+.st-bento .bn-stop i { flex: 1; height: 16px; background: var(--color-rule); }
+.st-bento .bn-stop b { width: 8px; height: 34px; background: var(--color-accent); margin-left: 4px; }
+.st-bento .is-ink .bn-stop i { background: #3A3F3C; }
+
+/* Cover */
+.st-bento .bn-cover .bn-h1 { font-size: 78px; }
+.st-bento .bn-dek-tile { justify-content: center; }
+.st-bento .bn-dek { font-size: 32px; line-height: 1.18; font-weight: 560; font-stretch: 96%; max-width: 34ch; }
+.st-bento .bn-foot { margin-top: 24px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-bottom: 6px; }
+.st-bento .compliance { font-size: 19px; font-weight: 560; font-stretch: 92%; color: var(--color-ink); letter-spacing: 0.01em; }
+.st-bento .compliance.c-block { flex-direction: column; align-items: flex-start; gap: 3px; font-size: 20px; }
+.st-bento .bn-cue { font-size: 22px; font-weight: 700; font-stretch: 92%; white-space: nowrap; }
+.st-bento .bn-cue b { font-weight: 700; margin-left: 6px; }
+
+/* Point: figure tile with its own micro-visual */
+.st-bento .bn-figtile { justify-content: space-between; }
+.st-bento .bn-figtile .bn-fig-box { margin-top: 24px; }
+/* Tight-leaded figures: the font's content box runs ~0.3em past the line box; give it room
+   inside the tile so nothing reads as clipped (and contrast samples stay inside the tile). */
+.st-bento .bn-figtile { padding-bottom: 0; }
+.st-bento .bn-figtile .bn-fig { padding-bottom: 0.31em; }
+.st-bento .bn-ratio { display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 10px; }
+.st-bento .bn-ratio i { aspect-ratio: 1; border: 4px solid currentColor; }
+.st-bento .bn-ratio i.on { background: currentColor; }
+.st-bento .bn-cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; max-width: 330px; }
+.st-bento .bn-cal i { aspect-ratio: 1; border: 2px solid currentColor; opacity: 0.55; }
+.st-bento .bn-cal i.past { background: currentColor; opacity: 0.3; border-color: transparent; }
+.st-bento .bn-cal i.pad { border-color: transparent; }
+.st-bento .bn-cal i.on { opacity: 1; background: currentColor; outline: 4px solid currentColor; outline-offset: 3px; }
+.st-bento .bn-field { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; max-width: 300px; }
+.st-bento.v-b .bn-field, .st-bento.v-b .bn-cal, .st-bento.fmt-story .bn-field, .st-bento.fmt-square .bn-field { max-width: 190px; }
+.st-bento .bn-field i { aspect-ratio: 1; border: 2px solid currentColor; opacity: 0.45; }
+.st-bento .bn-field i.on { background: currentColor; opacity: 1; }
+.st-bento .bn-text { justify-content: flex-end; }
+.st-bento .bn-statement { margin-top: auto; font-size: 50px; max-width: 20ch; line-height: 1.06; font-weight: 740; font-stretch: 100%; letter-spacing: -0.024em; }
+.st-bento .bn-note-tile { justify-content: center; }
+.st-bento .bn-note { font-size: 29px; line-height: 1.24; font-weight: 520; font-stretch: 94%; color: var(--color-ink-soft); }
+
+/* Number */
+.st-bento .bn-chart { padding: 26px 30px 0; }
+.st-bento .bn-cols { position: relative; flex: 1 1 auto; display: grid; grid-template-columns: repeat(var(--n), 1fr); column-gap: 26px; align-items: end; border-bottom: 4px solid var(--color-ink); margin-bottom: 56px; }
+.st-bento .bn-col { position: relative; background: var(--color-ink-soft); }
+.st-bento .bn-col.is-hi { background: var(--color-ink); }
+.st-bento .bn-col.is-next { background: transparent; border: 3px dashed var(--color-ink-soft); border-bottom: 0; }
+.st-bento .bn-col b { position: absolute; left: 0; right: 0; top: 0; background: var(--color-accent); min-height: 8px; }
+.st-bento .bn-col-k { position: absolute; left: 16px; top: 14px; font-size: 26px; font-weight: 760; font-stretch: 90%; color: var(--color-tile); }
+.st-bento .bn-col.is-hi b + .bn-col-k { top: 22px; }
+.st-bento .bn-col.is-next .bn-col-k { color: var(--color-ink); }
+.st-bento .bn-zero { position: absolute; left: 30px; bottom: 16px; font-size: 22px; font-weight: 620; font-stretch: 88%; color: var(--color-ink-soft); }
+.st-bento .bn-val { justify-content: flex-start; }
+.st-bento .bn-key { display: inline-block; min-width: 1.3em; font-weight: 800; }
+.st-bento .bn-callout { padding: 22px 26px; }
+.st-bento .bn-call { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 22px; }
+.st-bento .bn-call-v { font-size: 64px; line-height: 1; font-weight: 840; font-stretch: 118%; letter-spacing: -0.04em; }
+.st-bento .bn-call-s { font-size: 30px; line-height: 1.15; font-weight: 560; font-stretch: 94%; }
+.st-bento .bn-fine { font-size: 19px; line-height: 1.32; font-weight: 500; font-stretch: 90%; color: var(--color-ink); margin-top: 18px; max-width: 66ch; }
+.st-bento .bn-number .bn-foot { margin-top: 14px; }
+
+/* Compare */
+.st-bento .bn-side { justify-content: space-between; }
+.st-bento .bn-cmp-v { margin-top: auto; font-size: 96px; line-height: 0.92; font-weight: 840; font-stretch: 112%; letter-spacing: -0.045em; }
+.st-bento .bn-cmp-n { font-size: 30px; line-height: 1.2; font-weight: 560; font-stretch: 94%; margin-top: 18px; }
+.st-bento .is-paper .bn-cmp-n { color: var(--color-ink-soft); }
+.st-bento .bn-verdict { font-size: 28px; line-height: 1.25; font-weight: 520; font-stretch: 94%; margin-top: 22px; color: var(--color-ink-soft); max-width: 46ch; }
+.st-bento .is-stacked .bn-side { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; column-gap: 26px; }
+.st-bento .is-stacked .bn-side .bn-k { grid-column: 1 / -1; }
+.st-bento .is-stacked .bn-cmp-v { align-self: end; }
+.st-bento .is-stacked .bn-cmp-n { align-self: end; margin-top: 0; }
+
+/* Lists */
+.st-bento .bn-li { justify-content: space-between; }
+.st-bento .bn-num { font-size: 40px; line-height: 1; font-weight: 860; font-stretch: 120%; }
+.st-bento .is-paper .bn-num { color: var(--color-accent-ink); }
+.st-bento .bn-item { margin-top: auto; font-size: 36px; line-height: 1.12; font-weight: 680; font-stretch: 98%; letter-spacing: -0.015em; }
+.st-bento .bn-li.is-first .bn-item { font-size: 46px; }
+.st-bento .bn-li.is-first .bn-num { font-size: 72px; }
+.st-bento .bn-tag { font-size: 24px; font-weight: 600; opacity: 1; }
+
+/* Myth, quote */
+.st-bento .bn-myth-t { margin-top: auto; font-size: 42px; line-height: 1.12; font-weight: 620; color: var(--color-ink-soft); }
+.st-bento .bn-struck { text-decoration: line-through; text-decoration-color: var(--color-accent); text-decoration-thickness: 0.1em; }
+.st-bento .bn-q { font-size: 60px; line-height: 1.06; font-weight: 740; letter-spacing: -0.025em; text-indent: -0.4em; padding-left: 0.4em; }
+
+/* Stat (the single static) */
+.st-bento .bn-stat-h { font-size: 64px; max-width: 21ch; }
+.st-bento .bn-fact.is-narrow .bn-v { font-size: 46px; font-stretch: 104%; }
+.st-bento .bn-stat .bn-verdict { margin-top: 18px; font-size: 28px; max-width: none; }
+.st-bento .bn-stat .bn-foot { margin-top: 16px; }
+
+/* CTA */
+.st-bento .bn-cta-h { margin-top: auto; font-size: 92px; line-height: 0.98; font-weight: 820; font-stretch: 104%; letter-spacing: -0.035em; }
+.st-bento .bn-kw { text-decoration: underline; text-decoration-thickness: 0.08em; text-underline-offset: 0.1em; }
+
+/* Formats */
+.st-bento.fmt-story .bn-h1, .st-bento.fmt-square .bn-h1 { font-size: 58px; margin-top: 16px; }
+.st-bento.fmt-story .bn-cover .bn-h1, .st-bento.fmt-square .bn-cover .bn-h1 { font-size: 62px; }
+.st-bento.fmt-story .bn-stat-h, .st-bento.fmt-square .bn-stat-h { font-size: 50px; }
+.st-bento.fmt-story .bn-grid, .st-bento.fmt-square .bn-grid { margin-top: 20px; gap: 10px; }
+.st-bento.fmt-story .bn-tile, .st-bento.fmt-square .bn-tile { padding: 18px 20px 20px; }
+.st-bento.fmt-story .bn-v, .st-bento.fmt-square .bn-v { font-size: 50px; }
+.st-bento.fmt-story .bn-v-s, .st-bento.fmt-square .bn-v-s, .st-bento.fmt-story .bn-fact.is-narrow .bn-v, .st-bento.fmt-square .bn-fact.is-narrow .bn-v { font-size: 38px; }
+.st-bento.fmt-story .bn-n, .st-bento.fmt-square .bn-n { margin-top: 8px; }
+.st-bento.fmt-story .bn-ring, .st-bento.fmt-square .bn-ring { width: 64px; height: 64px; }
+.st-bento.fmt-story .bn-hero-k, .st-bento.fmt-square .bn-hero-k { font-size: 28px; margin-top: 14px; }
+.st-bento.fmt-story .bn-statement, .st-bento.fmt-square .bn-statement { font-size: 42px; }
+.st-bento.fmt-story .bn-cta-h, .st-bento.fmt-square .bn-cta-h { font-size: 74px; }
+
+/* A statement tile that spans the full width sets bigger. */
+.st-bento .bn-point .bn-grid[style*="'t t t t t t t t t t t t'"] .bn-statement { font-size: 66px; line-height: 1.03; }
+
+/* Myth, quote and the first list tile carry the slide: set them large. */
+.st-bento .bn-myth .bn-statement { font-size: 66px; max-width: 18ch; }
+.st-bento .bn-myth-t { font-size: 48px; }
+.st-bento .bn-q { font-size: 72px; }
+.st-bento .bn-li.is-first .bn-item { font-size: 54px; line-height: 1.06; }
+.st-bento.fmt-story .bn-myth .bn-statement, .st-bento.fmt-square .bn-myth .bn-statement { font-size: 52px; }
+.st-bento.fmt-story .bn-q, .st-bento.fmt-square .bn-q { font-size: 56px; }
+.st-bento.fmt-story .bn-li.is-first .bn-item, .st-bento.fmt-square .bn-li.is-first .bn-item { font-size: 42px; }

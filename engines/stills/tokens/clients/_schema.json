@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "studio-stills/client-tokens",
+  "title": "Studio Stills client token file (tokens/clients/<id>.json)",
+  "description": "One file per client. Leaves under color/font use W3C Design Tokens (DTCG): { \"$type\": \"color\", \"$value\": \"#RRGGBB\" }. Merge order for the style library: library/<style>/style.json palette <- color <- byStyle[<style>].color. Merge order for the legacy families: tokens/group-N.json <- color/font <- byGroup[\"N\"]. Compliance values come only from the brokerage's licence record; empty or bracketed values ([BROKERAGE NAME]) render as visible placeholders and make --strict refuse.",
+  "type": "object",
+  "required": ["meta", "color", "compliance"],
+  "properties": {
+    "$description": { "type": "string" },
+    "meta": {
+      "type": "object",
+      "required": ["id", "name", "initials", "seed"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$", "description": "Same as the file name and the roster key" },
+        "name": { "type": "string", "description": "Display name (never printed as a logo or signature)" },
+        "initials": { "type": "string", "maxLength": 3, "description": "Logo mark in the legacy families" },
+        "province": { "type": "string", "pattern": "^[A-Z]{2}$" },
+        "city": { "type": "string", "description": "Used for datelines and the roster same-city rule" },
+        "group": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "seed": { "type": "integer", "description": "Seeds hand-drawn marks and textures, so two clients never get identical strokes" },
+        "layoutVariant": { "enum": ["a", "b"] }
+      }
+    },
+    "color": {
+      "type": "object",
+      "properties": { "accent": { "$ref": "#/$defs/colorToken" } },
+      "additionalProperties": { "$ref": "#/$defs/colorToken" }
+    },
+    "font": { "type": "object", "description": "Optional font overrides (legacy families), DTCG fontFamily leaves" },
+    "compliance": {
+      "type": "object",
+      "required": ["agentName", "title", "brokerage", "licence", "province"],
+      "properties": {
+        "agentName": { "type": "string", "description": "Licensed name of the agent" },
+        "title": { "type": "string", "description": "Approved licensed title" },
+        "brokerage": { "type": "string", "description": "Brokerage's authorized name (Ontario: O. Reg. 188/08 s.6)" },
+        "licence": { "type": "string", "description": "Brokerage licence number without the leading #; the renderer prints LIC. #<value>" },
+        "province": { "type": "string" }
+      }
+    },
+    "photos": {
+      "type": "object",
+      "description": "Slot name -> file name inside assets/clients/<id>/ (the client's own photo; never stock or AI). Styles that use photos: magazine, annotated (cover slots). Use photos with a short side of at least 600 px.",
+      "additionalProperties": { "type": "string" }
+    },
+    "byStyle": {
+      "type": "object",
+      "description": "Per-style overrides, e.g. { \"isometric\": { \"color\": { \"paper\": {...} } }, \"swiss\": { \"variant\": \"b\" } }"
+    },
+    "byGroup": {
+      "type": "object",
+      "description": "Per-family overrides for the legacy group families, keyed \"1\"..\"4\""
+    }
+  },
+  "$defs": {
+    "colorToken": {
+      "type": "object",
+      "required": ["$type", "$value"],
+      "properties": {
+        "$type": { "const": "color" },
+        "$value": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "$description": { "type": "string" }
+      }
+    }
+  }
+}

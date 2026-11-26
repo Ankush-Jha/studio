@@ -1,0 +1,29 @@
+{
+  "slug": "magazine",
+  "name": "Editorial Cover",
+  "group": 2,
+  "family": "Kitchen Table",
+  "summary": "A consumer-magazine issue: the cover is a saturated accent field with a didone masthead, cover lines that point to the slides inside, and one hero; inner slides are editorial spreads.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "stat", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "Bodoni Moda", "file": "BodoniModa[opsz,wght].ttf", "style": "normal", "weight": "400 900" },
+    { "family": "Bodoni Moda", "file": "BodoniModa-Italic[opsz,wght].ttf", "style": "italic", "weight": "400 900" },
+    { "family": "Schibsted Grotesk", "file": "SchibstedGrotesk[wght].ttf", "style": "normal", "weight": "400 900" }
+  ],
+  "palette": {
+    "paper": "#F4F5F2",
+    "ink": "#16171B",
+    "ink-soft": "#474A51",
+    "rule": "#16171B",
+    "accent": "#C23B22",
+    "photo-frame": "#FFFFFF"
+  },
+  "accentGround": "paper",
+  "emphasis": "italic-accent",
+  "hand": { "pen": "fine", "weight": 4, "wobble": 0.6 },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40
+}

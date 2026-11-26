@@ -1,0 +1,36 @@
+{
+  "slug": "paper-trail",
+  "name": "Paper Trail",
+  "group": 4,
+  "family": "Dossier",
+  "summary": "Document realism: a rendered, clearly illustrative document on a flat desk, typed in Courier, stamped ILLUSTRATIVE and marked in red pencil, with the point set large on the desk.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "stat", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "Courier Prime", "file": "CourierPrime-Regular.ttf", "style": "normal", "weight": "400" },
+    { "family": "Courier Prime", "file": "CourierPrime-Bold.ttf", "style": "normal", "weight": "700" },
+    { "family": "Courier Prime", "file": "CourierPrime-Italic.ttf", "style": "italic", "weight": "400" },
+    { "family": "IBM Plex Sans Condensed", "file": "IBMPlexSansCondensed-Regular.ttf", "style": "normal", "weight": "400" },
+    { "family": "IBM Plex Sans Condensed", "file": "IBMPlexSansCondensed-SemiBold.ttf", "style": "normal", "weight": "600" }
+  ],
+  "palette": {
+    "paper": "#F6F3EB",
+    "ink": "#1C1B19",
+    "ink-soft": "#55514A",
+    "rule": "#B9B3A6",
+    "desk-ink": "#F4F1E9",
+    "desk-soft": "#D3D0C7",
+    "grease": "#F2C94C",
+    "stamp": "#B02A20",
+    "manila": "#DCC28C",
+    "mark": "#B8322A",
+    "accent": "#1C3F94"
+  },
+  "accentGround": "paper",
+  "emphasis": "underline",
+  "hand": { "pen": "pencil", "weight": 5.2, "wobble": 1.0 },
+  "illustrative": true,
+  "allow": {},
+  "maxWords": 40
+}

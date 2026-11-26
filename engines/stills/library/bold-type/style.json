@@ -1,0 +1,25 @@
+{
+  "slug": "bold-type",
+  "name": "Poster Type",
+  "group": 3,
+  "family": "Riso",
+  "summary": "Words set edge to edge in one condensed gothic, stacked flush left, each line scaled to the full measure; colour fields flip slide to slide; every line is a layer so the post can animate.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "stat", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "Big Shoulders", "file": "BigShoulders[opsz,wght].ttf", "style": "normal", "weight": "100 900" }
+  ],
+  "palette": {
+    "paper": "#EDEDE7",
+    "ink": "#141414",
+    "ink-soft": "#3B3B39",
+    "accent": "#FF4B1F"
+  },
+  "accentGround": "paper",
+  "emphasis": "band",
+  "hand": { "pen": "marker", "weight": 7, "wobble": 0.8 },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40
+}

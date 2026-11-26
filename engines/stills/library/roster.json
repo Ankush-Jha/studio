@@ -1,0 +1,193 @@
+{
+ "$description": "Which styles each group owns and which style each client uses. Styles never cross groups, so two clients in different groups never share a style. Inside a group, clients in the same city never share a primary or secondary style; clients in the same metro (e.g. the GTA) may share one only on different variants. tools/qa-gate.mjs checks these rules. EXAMPLE ROSTER: 'northline-mortgages' is the one fully set-up fictional client (it has tokens/clients/northline-mortgages.json); the 'example-*' entries are placeholders that show the city/metro rules. Replace them with your own clients and give each one a token file.",
+ "updated": "2026-11-26",
+ "groups": {
+  "1": {
+   "family": "Ledger",
+   "character": "precise, numeric, Swiss",
+   "styles": [
+    "swiss",
+    "terminal",
+    "bento"
+   ]
+  },
+  "2": {
+   "family": "Kitchen Table",
+   "character": "warm, human, hand-marked",
+   "styles": [
+    "magazine",
+    "annotated",
+    "cutout"
+   ]
+  },
+  "3": {
+   "family": "Riso",
+   "character": "loud print, energetic",
+   "styles": [
+    "riso",
+    "bold-type",
+    "isometric"
+   ]
+  },
+  "4": {
+   "family": "Dossier",
+   "character": "evidence, documents, local record",
+   "styles": [
+    "paper-trail",
+    "broadsheet"
+   ],
+   "planned": [
+    "mapcard"
+   ]
+  }
+ },
+ "rules": {
+  "sameCity": "never the same style",
+  "sameMetro": "same style only on a different variant, and not in the same week",
+  "rotation": "alternate primary and secondary week to week; never post the same style twice in a row on one account"
+ },
+ "clients": {
+  "northline-mortgages": {
+   "name": "Northline Mortgages (Sam Rivera)",
+   "group": 1,
+   "city": "Toronto",
+   "metro": "GTA",
+   "province": "ON",
+   "languages": [
+    "en"
+   ],
+   "primary": "swiss",
+   "secondary": "terminal",
+   "variant": "a"
+  },
+  "example-calgary": {
+   "name": "Example client (Calgary)",
+   "group": 1,
+   "city": "Calgary",
+   "metro": "Calgary",
+   "province": "AB",
+   "languages": [
+    "en"
+   ],
+   "primary": "terminal",
+   "secondary": "bento",
+   "variant": "a",
+   "flags": [
+    "Placeholder: no token file"
+   ]
+  },
+  "example-mississauga": {
+   "name": "Example client (Mississauga)",
+   "group": 1,
+   "city": "Mississauga",
+   "metro": "GTA",
+   "province": "ON",
+   "languages": [
+    "en"
+   ],
+   "primary": "bento",
+   "secondary": "swiss",
+   "variant": "b",
+   "flags": [
+    "Placeholder: same metro as Northline, so a shared style must be on the other variant"
+   ]
+  },
+  "example-toronto-2": {
+   "name": "Example client 2 (Toronto)",
+   "group": 2,
+   "city": "Toronto",
+   "metro": "GTA",
+   "province": "ON",
+   "languages": [
+    "en"
+   ],
+   "primary": "magazine",
+   "secondary": "cutout",
+   "variant": "a",
+   "flags": [
+    "Placeholder: a second Toronto client goes in another group"
+   ]
+  },
+  "example-vancouver": {
+   "name": "Example client (Vancouver)",
+   "group": 2,
+   "city": "Vancouver",
+   "metro": "Metro Vancouver",
+   "province": "BC",
+   "languages": [
+    "en"
+   ],
+   "primary": "annotated",
+   "secondary": "magazine",
+   "variant": "b",
+   "flags": [
+    "Placeholder"
+   ]
+  },
+  "example-ottawa": {
+   "name": "Example client (Ottawa)",
+   "group": 3,
+   "city": "Ottawa",
+   "metro": "Ottawa",
+   "province": "ON",
+   "languages": [
+    "en"
+   ],
+   "primary": "riso",
+   "secondary": "bold-type",
+   "variant": "a",
+   "flags": [
+    "Placeholder"
+   ]
+  },
+  "example-halifax": {
+   "name": "Example client (Halifax)",
+   "group": 3,
+   "city": "Halifax",
+   "metro": "Halifax",
+   "province": "NS",
+   "languages": [
+    "en"
+   ],
+   "primary": "isometric",
+   "secondary": "riso",
+   "variant": "b",
+   "flags": [
+    "Placeholder"
+   ]
+  },
+  "example-montreal": {
+   "name": "Example client (Montreal)",
+   "group": 4,
+   "city": "Montreal",
+   "metro": "Montreal",
+   "province": "QC",
+   "languages": [
+    "fr",
+    "en"
+   ],
+   "primary": "broadsheet",
+   "secondary": "paper-trail",
+   "variant": "a",
+   "flags": [
+    "Placeholder: French copy and glyph check before posting"
+   ]
+  },
+  "example-winnipeg": {
+   "name": "Example client (Winnipeg)",
+   "group": 4,
+   "city": "Winnipeg",
+   "metro": "Winnipeg",
+   "province": "MB",
+   "languages": [
+    "en"
+   ],
+   "primary": "paper-trail",
+   "secondary": "broadsheet",
+   "variant": "b",
+   "flags": [
+    "Placeholder"
+   ]
+  }
+ }
+}

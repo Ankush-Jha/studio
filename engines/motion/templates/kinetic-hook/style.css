@@ -1,0 +1,31 @@
+/* kinetic-hook */
+.tpl-kinetic-hook .card{position:absolute;inset:0}
+.tpl-kinetic-hook .blk{position:absolute;z-index:2}
+.tpl-kinetic-hook .k-label{font-family:var(--font-label);font-size:24px;text-transform:uppercase;letter-spacing:var(--l-tracking);font-weight:var(--l-weight);
+  color:var(--color-ink-soft-safe);margin-bottom:26px}
+.tpl-kinetic-hook .k-old{color:var(--color-ink-soft-safe);margin-bottom:6px}
+.tpl-kinetic-hook .k-big{font-family:var(--font-display);font-weight:var(--d-weight);font-stretch:var(--d-stretch);letter-spacing:-.03em;
+  line-height:.84;color:var(--color-accent-ink);white-space:nowrap}
+.fam-kitchen.tpl-kinetic-hook .k-big{font-variation-settings:var(--fv-display)}
+.tpl-kinetic-hook .k-cap{font-family:var(--font-body);font-weight:var(--b-weight,500);font-stretch:100%;letter-spacing:-.005em;line-height:1.16;margin-top:30px;color:var(--color-ink)}
+.fam-riso.tpl-kinetic-hook .k-cap{text-transform:none}
+
+/* devices */
+.tpl-kinetic-hook .rule{position:absolute;z-index:2;height:6px;background:var(--color-ink);transform-origin:0 50%}
+.tpl-kinetic-hook .margin-num{position:absolute;z-index:2;width:130px;height:150px;overflow:hidden;font:italic 400 150px/1 var(--font-display);
+  font-variation-settings:var(--fv-italic);color:var(--color-accent-ink);text-align:right}
+.tpl-kinetic-hook .margin-num .mcol{display:block}
+.tpl-kinetic-hook .margin-num .mn{display:block;height:150px}
+.tpl-kinetic-hook .mrule{position:absolute;z-index:1;width:2px;background:var(--color-rule)}
+
+
+/* ground: family-styled shape below the safe zone (never text) */
+.tpl-kinetic-hook .ground{position:absolute;left:0;top:0;width:100%;z-index:1;pointer-events:none}
+.tpl-kinetic-hook .ground .g-edge{display:block;width:100%;height:60px;overflow:visible}
+.tpl-kinetic-hook .ground::after{content:'';position:absolute;left:0;right:0;top:59px;bottom:0;background:var(--g-fill)}
+.tpl-kinetic-hook .ground .g-fill{fill:var(--g-fill)}
+.tpl-kinetic-hook .ground .g-rule{fill:var(--color-ink)}
+.tpl-kinetic-hook .g-ledger{--g-fill:var(--color-accent)}
+.tpl-kinetic-hook .g-kitchen{--g-fill:var(--color-accent-tint)}
+.tpl-kinetic-hook .g-riso{--g-fill:var(--color-accent)}
+.tpl-kinetic-hook .g-dossier{--g-fill:var(--color-rule)}

@@ -49,3 +49,12 @@ engines/face-reels/tools/models/
 !/.claude/skills/stills/
 !/.claude/skills/face-reels/
 !/.claude/skills/motion/
+# engines/stills, engines/motion, engines/face-reels: renders, client data and fetched tools
+engines/stills/out/
+engines/stills/assets/clients/
+engines/motion/out/
+engines/motion/.work/
+engines/motion/tokens/clients/
+engines/face-reels/clients/
+engines/face-reels/.venv-media/
+engines/face-reels/.claude/skills/

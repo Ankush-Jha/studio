@@ -1,0 +1,221 @@
+{
+  "engine": "library",
+  "id": "dec9-variable",
+  "title": "Dec 9 rate call: one variable mortgage, hike or hold",
+  "group": 1,
+  "series": "Dec 9 countdown",
+  "date": "2026-11-16",
+  "reviewBy": "2026-12-09",
+  "caption": "Variable rate mortgage, Dec 9: what a Bank of Canada hike adds to the payment, and what a hold changes (nothing). Illustrative, not an offer.",
+  "sources": [
+    {
+      "fact": "3.65% advertised 5-year variable (Ratehub, Nov 13, 2026)",
+      "url": "https://www.ratehub.ca/"
+    },
+    {
+      "fact": "Policy rate 2.50% after the Oct 28 hike; prime 4.70% since Oct 29; decision Dec 9 at 9:45 a.m. ET",
+      "url": "https://www.bankofcanada.ca/2026/10/fad-press-release-2026-10-28/"
+    },
+    {
+      "fact": "Prime 4.45% -> 4.70% on Oct 29",
+      "url": "https://www.mpamag.com/ca/mortgage-industry/market-updates/prime-rate-hits-470-today-as-big-banks-act-on-boc-hike/595513"
+    },
+    {
+      "fact": "Dec 9 hike odds about 63-66% on Nov 13 (BlueGamma OIS; Reuters)",
+      "url": "https://www.bluegamma.io/central-banks/central-bank-interest-rate-forecasts/the-bank-of-canada-interest-rate-forecast"
+    },
+    {
+      "fact": "Governor Macklem speaks in Toronto Nov 24 (Economic Club of Canada)",
+      "url": "https://www.bankofcanada.ca/press/upcoming-events/"
+    }
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "calc": {
+        "kind": "payment-compare",
+        "principal": 400000,
+        "amortYears": 25,
+        "compounding": "semi-annual",
+        "rates": [
+          3.65,
+          3.9
+        ]
+      },
+      "kicker": "Dec 9 rate call",
+      "headline": "A {principalK} variable, hike or hold.",
+      "figure": "+{deltaAbout}",
+      "figureLabel": "a month if the Bank hikes 0.25%",
+      "dek": "If it holds, the payment doesn’t move.",
+      "byClient": {
+        "northline-mortgages": {
+          "calc": {
+            "kind": "payment-compare",
+            "principal": 600000,
+            "amortYears": 25,
+            "compounding": "semi-annual",
+            "rates": [
+              3.65,
+              3.9
+            ]
+          },
+          "kicker": "Toronto · Dec 9",
+          "headline": "One number on a {principalK} variable."
+        }
+      }
+    },
+    {
+      "type": "number",
+      "calc": {
+        "kind": "payment-compare",
+        "principal": 400000,
+        "amortYears": 25,
+        "compounding": "semi-annual",
+        "rates": [
+          3.65,
+          3.9
+        ]
+      },
+      "label": "Monthly payment",
+      "title": "A 0.25% hike takes {aCents} to {bCents}.",
+      "callout": "+{deltaCents}",
+      "calloutSub": "a month, about {yearlyAbout} a year",
+      "rowLabels": [
+        "Today, 3.65%",
+        "After a hike, 3.90%"
+      ],
+      "assumptions": "Illustrative, not an offer. {principal} balance, 3.65% advertised 5-year variable (Ratehub, Nov 13) vs 3.90%, adjustable payments, 25-year amortization, semi-annual compounding. APR [brokerage to confirm].",
+      "byClient": {
+        "northline-mortgages": {
+          "calc": {
+            "kind": "payment-compare",
+            "principal": 600000,
+            "amortYears": 25,
+            "compounding": "semi-annual",
+            "rates": [
+              3.65,
+              3.9
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "compare",
+      "calc": {
+        "kind": "payment-compare",
+        "principal": 400000,
+        "amortYears": 25,
+        "compounding": "semi-annual",
+        "rates": [
+          3.65,
+          3.9
+        ]
+      },
+      "label": "Two endings",
+      "title": "Same mortgage, two Dec 9 outcomes.",
+      "left": {
+        "label": "Hold",
+        "value": "{a}",
+        "note": "+$0 a month"
+      },
+      "right": {
+        "label": "Hike 0.25%",
+        "value": "{b}",
+        "note": "+{deltaCents} a month"
+      },
+      "verdict": "Rounded to the dollar. Exact: {aCents} and {bCents}.",
+      "byClient": {
+        "northline-mortgages": {
+          "calc": {
+            "kind": "payment-compare",
+            "principal": 600000,
+            "amortYears": 25,
+            "compounding": "semi-annual",
+            "rates": [
+              3.65,
+              3.9
+            ]
+          }
+        }
+      },
+      "byStyle": {
+        "bold-type": {
+          "verdict": ""
+        }
+      }
+    },
+    {
+      "type": "point",
+      "eyebrow": "The odds",
+      "figure": "2 in 3",
+      "text": "Markets priced about a two-in-three chance of a hike.",
+      "note": "63–66%, market pricing on Nov 13 (BlueGamma, Reuters). The odds move daily."
+    },
+    {
+      "type": "point",
+      "eyebrow": "Mark the date",
+      "figure": "Nov 24",
+      "text": "Governor Macklem gives his last big remarks before the Dec 9 decision.",
+      "note": "Listen for any talk of more hikes. The decision lands Dec 9 at 9:45 a.m. ET.",
+      "byClient": {
+        "northline-mortgages": {
+          "text": "Governor Macklem speaks in Toronto, his last big remarks before Dec 9."
+        }
+      }
+    },
+    {
+      "type": "recap",
+      "calc": {
+        "kind": "payment-compare",
+        "principal": 400000,
+        "amortYears": 25,
+        "compounding": "semi-annual",
+        "rates": [
+          3.65,
+          3.9
+        ]
+      },
+      "label": "The plan",
+      "title": "Budget for the hike now.",
+      "items": [
+        {
+          "text": "Set aside {deltaAbout} a month from today."
+        },
+        {
+          "text": "If the Bank hikes, the money is already there."
+        },
+        {
+          "text": "If it holds, send the {deltaAbout} to your principal."
+        }
+      ],
+      "note": "Check your prepayment terms first.",
+      "byClient": {
+        "northline-mortgages": {
+          "calc": {
+            "kind": "payment-compare",
+            "principal": 600000,
+            "amortYears": 25,
+            "compounding": "semi-annual",
+            "rates": [
+              3.65,
+              3.9
+            ]
+          }
+        }
+      }
+    },
+    {
+      "type": "cta",
+      "action": "send",
+      "headline": "Send this to someone with a variable rate.",
+      "sub": "Both endings, one plan.",
+      "byClient": {
+        "northline-mortgages": {
+          "headline": "Send this to a friend in Toronto with a variable rate."
+        }
+      }
+    }
+  ],
+  "example": "Example spec for the fictional client Northline Mortgages (Toronto). Copy it as a model. Its rate premise expires on reviewBy (2026-12-09): after that date the QA gate fails it on purpose; change the facts and dates before reusing it."
+}

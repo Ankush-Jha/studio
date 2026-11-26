@@ -1,0 +1,63 @@
+{
+  "slug": "isometric",
+  "name": "Iso Blocks",
+  "group": 3,
+  "family": "Riso",
+  "summary": "A clay model of the money on a loud colour field: a three.js isometric scene in matte clay, volumes sized exactly from the numbers, labelled by hairline leaders in a mono face.",
+  "formats": [
+    "feed",
+    "story",
+    "square"
+  ],
+  "types": [
+    "cover",
+    "point",
+    "number",
+    "compare",
+    "steps",
+    "recap",
+    "myth",
+    "quote",
+    "stat",
+    "cta"
+  ],
+  "variants": [
+    "a",
+    "b"
+  ],
+  "fonts": [
+    {
+      "family": "Red Hat Display",
+      "file": "RedHatDisplay[wght].ttf",
+      "style": "normal",
+      "weight": "300 900"
+    },
+    {
+      "family": "Red Hat Mono",
+      "file": "RedHatMono[wght].ttf",
+      "style": "normal",
+      "weight": "300 700"
+    }
+  ],
+  "palette": {
+    "paper": "#F6B93B",
+    "ink": "#1D2630",
+    "ink-soft": "#3F4A55",
+    "stone": "#F3F1EB",
+    "stone-2": "#B9C0B6",
+    "slate": "#2C3540",
+    "accent": "#1E40AF"
+  },
+  "accentGround": "paper",
+  "emphasis": "accent",
+  "hand": {
+    "pen": "fine",
+    "weight": 4,
+    "wobble": 0.6,
+    "color": "ink"
+  },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40,
+  "needsGL": true
+}

@@ -1,0 +1,41 @@
+/* object-3d: night scene, cream type, saffron numbers. Colours that flip during the
+   pattern interrupt are CSS variables tweened on #stage (--o3d-*). */
+.tpl-object-3d#stage{background:var(--o3d-bg,#0E1F18);color:var(--o3d-fg,#F3EADB)}
+.tpl-object-3d .paper{display:none}
+.tpl-object-3d .gl{position:absolute;left:0;top:0;width:1080px;height:1920px;z-index:2;display:block}
+.tpl-object-3d .vignette{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(120% 75% at 50% 48%, rgba(0,0,0,0) 55%, rgba(0,0,0,.42) 100%),
+             linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 16%, rgba(0,0,0,0) 78%, rgba(0,0,0,.38) 100%)}
+.tpl-object-3d .grain{opacity:.07}
+
+/* captions: bold punchy sans, numbers in the hot accent, serif only as an accent */
+.tpl-object-3d .cap{position:absolute;z-index:6}
+.tpl-object-3d .cap{font-family:var(--font-body);font-weight:700;font-stretch:86%;letter-spacing:-.025em;line-height:1;color:var(--o3d-fg,#F3EADB)}
+.tpl-object-3d .cap .cl{display:block;white-space:nowrap;margin-bottom:.06em}
+.tpl-object-3d .cap .w{display:inline-block}
+.tpl-object-3d .cap .wi{display:inline-block}
+.tpl-object-3d .cap .em .wi,.tpl-object-3d .cap .hot .wi{color:var(--o3d-hot,#FF7A3D);font-size:var(--em-scale,1.9em);letter-spacing:-.035em;font-variant-numeric:tabular-nums lining-nums}
+.tpl-object-3d .cap .it .wi{font-family:var(--font-display);font-style:italic;font-weight:500;font-variation-settings:var(--fv-italic)}
+.tpl-object-3d .cap .wi{text-shadow:0 6px 24px rgba(0,0,0,.35)}
+
+/* readout pill (live counters) */
+.tpl-object-3d .ro{position:absolute;z-index:6;display:flex;align-items:center;gap:18px;padding:14px 22px 12px 18px;
+  background:var(--o3d-pill,#F3EADB);color:#0E1F18;border-radius:999px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.tpl-object-3d .ro .ro-k{font:700 24px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:#3A2A1A}
+.tpl-object-3d .ro .ro-v{font:700 64px/1 var(--font-body);font-stretch:86%;letter-spacing:-.02em;color:#0E1F18;font-variant-numeric:tabular-nums lining-nums}
+.tpl-object-3d .chip{position:absolute;z-index:7;padding:12px 18px 10px;background:var(--o3d-hot,#FF7A3D);color:var(--o3d-on-hot,#0E1F18);
+  font:700 58px/1 var(--font-body);font-stretch:86%;letter-spacing:-.01em;border-radius:16px;box-shadow:0 14px 30px rgba(0,0,0,.35)}
+
+/* chrome restyled for a dark field */
+.tpl-object-3d .chrome{color:var(--o3d-fg2,#D9D2C4)}
+.tpl-object-3d .chrome .series{color:var(--o3d-fg,#F3EADB)}
+.tpl-object-3d .chrome .badge{background:var(--o3d-hot,#FF7A3D);color:var(--o3d-on-hot,#0E1F18);border-radius:50%;font:italic 600 22px/1 var(--font-display);font-variation-settings:var(--fv-italic)}
+.tpl-object-3d .chrome .tag{color:var(--o3d-fg2,#D9D2C4);border-color:currentColor}
+/* Fine print + compliance: a slim, quiet strip under the label row, never over the hero object. */
+.tpl-object-3d .foot{top:calc(var(--sy0) + 78px);bottom:auto;gap:4px;padding:10px 0 0;border-top:1px solid color-mix(in srgb, var(--o3d-fg2,#B9B2A4) 35%, transparent)}
+.tpl-object-3d .fine{font-size:18px;line-height:1.25;color:var(--o3d-fg2,#B9B2A4)}
+.tpl-object-3d .compliance{font-size:18px;color:var(--o3d-fg2,#B9B2A4)}
+.tpl-object-3d .ph{color:var(--o3d-ph,#FF9A8A)}
+
+.tpl-object-3d .stamp{position:absolute;z-index:7;padding:10px 16px 8px;border:5px solid var(--o3d-fg,#F3EADB);color:var(--o3d-fg,#F3EADB);
+  font:800 40px/1 var(--font-body);font-stretch:86%;letter-spacing:.04em;text-transform:uppercase;border-radius:8px;transform-origin:50% 50%}

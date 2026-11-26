@@ -1,0 +1,35 @@
+{
+  "$description": "Group 1 family: LEDGER. Swiss/International-style modernism: strict 6-column grid, one condensed grotesk in several widths, hairline and 3px rules, hanging numerals, one signal colour. Annotations are quick, fine red-pen marks: tight circles, ticks, single strikes.",
+  "meta": { "group": 1, "family": "ledger", "name": "Ledger", "grid": "6 columns, 80px margins, 24px gutters, 3px rule under the masthead" },
+  "color": {
+    "paper":    { "$type": "color", "$value": "#F0EDE6", "$description": "warm uncoated white" },
+    "ink":      { "$type": "color", "$value": "#151515" },
+    "ink-soft": { "$type": "color", "$value": "#55524C" },
+    "rule":     { "$type": "color", "$value": "{color.ink}" },
+    "accent":   { "$type": "color", "$value": "#D6421F", "$description": "signal vermilion; client accent replaces it" },
+    "mark":     { "$type": "color", "$value": "{color.accent}", "$description": "red-pen annotations follow the accent" }
+  },
+  "font": {
+    "display": { "$type": "fontFamily", "$value": ["Archivo", "Arial Narrow", "sans-serif"] },
+    "body":    { "$type": "fontFamily", "$value": ["Archivo", "Arial", "sans-serif"] },
+    "label":   { "$type": "fontFamily", "$value": ["Archivo", "Arial", "sans-serif"] }
+  },
+  "size": {
+    "display-xl": { "$type": "dimension", "$value": "134px" },
+    "display-l":  { "$type": "dimension", "$value": "84px" },
+    "display-m":  { "$type": "dimension", "$value": "68px" },
+    "body-l":     { "$type": "dimension", "$value": "42px" },
+    "body":       { "$type": "dimension", "$value": "34px" },
+    "label":      { "$type": "dimension", "$value": "21px" },
+    "fine":       { "$type": "dimension", "$value": "19px" }
+  },
+  "space": {
+    "margin-x":      { "$type": "dimension", "$value": "80px" },
+    "margin-top":    { "$type": "dimension", "$value": "72px" },
+    "margin-bottom": { "$type": "dimension", "$value": "60px" },
+    "gutter":        { "$type": "dimension", "$value": "24px" }
+  },
+  "fontVariation": { "display": "normal" },
+  "annotation": { "pen": "fine", "emphasis": "underline", "strike": "single", "weight": 4.6, "wobble": 0.8, "highlightMix": 0.62 },
+  "texture": { "grain": 0.07, "grainFreq": 0.9, "paper": "plain" }
+}

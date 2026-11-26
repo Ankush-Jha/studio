@@ -1,0 +1,151 @@
+{
+  "engine": "library",
+  "id": "heloc-paul",
+  "title": "Paul's HELOC: $7,800 paid, still owes $150,000",
+  "group": 1,
+  "series": "Money stories",
+  "date": "2026-11-16",
+  "reviewBy": "2026-12-09",
+  "caption": "HELOC payment: Paul paid $7,800 in a year and still owes $150,000. Illustrative composite, not a real client.",
+  "sources": [
+    {
+      "fact": "Prime 4.45% -> 4.70% on Oct 29 after the Oct 28 hike",
+      "url": "https://www.mpamag.com/ca/mortgage-industry/market-updates/prime-rate-hits-470-today-as-big-banks-act-on-boc-hike/595513"
+    },
+    {
+      "fact": "Interest-only HELOC: +0.25% = about $21 a month per $100K ($100,000 x 0.25% / 12)",
+      "url": "calc: lib/calc.mjs heloc"
+    },
+    {
+      "fact": "Dec 9 hike odds about 63-66% on Nov 13",
+      "url": "https://www.bluegamma.io/central-banks/central-bank-interest-rate-forecasts/the-bank-of-canada-interest-rate-forecast"
+    }
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "kicker": "An illustrative story",
+      "headline": "Paul pays $650 a month. A year later he still owes $150,000.",
+      "dek": "Interest-only HELOC, kitchen reno.",
+      "photo": "story-object",
+      "photoLabel": "Optional: the client's own kitchen or HELOC statement, no faces",
+      "byClient": {
+        "northline-mortgages": {
+          "headline": "$7,800 in HELOC payments. The balance never moved.",
+          "dek": "One kitchen reno, one interest-only line."
+        }
+      },
+      "byStyle": {
+        "magazine": {
+          "photo": null,
+          "figure": "$7,800"
+        }
+      }
+    },
+    {
+      "type": "point",
+      "eyebrow": "The set-up",
+      "figure": "$150,000",
+      "text": "Paul used his HELOC for the kitchen. The minimum payment is interest only.",
+      "note": "Prime + 0.50%, variable, no fixed term."
+    },
+    {
+      "type": "number",
+      "calc": {
+        "kind": "heloc",
+        "balance": 150000,
+        "rates": [
+          4.95,
+          5.2,
+          5.45
+        ],
+        "paydown": {
+          "payment": 850,
+          "months": 12,
+          "rateIndex": 1
+        }
+      },
+      "label": "His minimum, month by month",
+      "title": "Prime rose on Oct 29. {pay0} became {pay1}.",
+      "rowLabels": [
+        "Before Oct 29",
+        "Today",
+        "If Dec 9 hikes"
+      ],
+      "callout": "+{delta01}",
+      "calloutSub": "a month per 0.25% on {balance}",
+      "assumptions": "Illustrative composite, not a real client. {balance} HELOC at prime + 0.50%: {rate0} before Oct 29, {rate1} today, {rate2} if prime rises 0.25% on Dec 9. Variable, no fixed term, APR [brokerage to confirm]. Interest-only minimum."
+    },
+    {
+      "type": "point",
+      "calc": {
+        "kind": "heloc",
+        "balance": 150000,
+        "rates": [
+          5.2
+        ]
+      },
+      "eyebrow": "Twelve payments later",
+      "figure": "{year0}",
+      "text": "Every dollar went to interest. The balance is still {balance}.",
+      "note": "{pay0} x 12 at {rate0}."
+    },
+    {
+      "type": "compare",
+      "calc": {
+        "kind": "heloc",
+        "balance": 150000,
+        "rates": [
+          4.95,
+          5.2
+        ],
+        "paydown": {
+          "payment": 850,
+          "months": 12,
+          "rateIndex": 1
+        }
+      },
+      "label": "One change",
+      "title": "Paul set his own payment.",
+      "left": {
+        "label": "Minimum, {pay1}",
+        "value": "{balance}",
+        "note": "owed after a year"
+      },
+      "right": {
+        "label": "Paying {paydownPayment}",
+        "value": "{paydownBalance}",
+        "note": "owed after a year: {paydownPrincipal} paid off"
+      },
+      "verdict": "Rate held at {rate1} for the year. Illustrative."
+    },
+    {
+      "type": "point",
+      "calc": {
+        "kind": "heloc",
+        "balance": 150000,
+        "rates": [
+          5.2,
+          5.45
+        ]
+      },
+      "eyebrow": "If Dec 9 brings another hike",
+      "figure": "{pay1}",
+      "text": "That’s the new interest-only minimum, about {delta01} more a month.",
+      "note": "Markets priced a hike at about 63–66% on Nov 13. The odds move daily."
+    },
+    {
+      "type": "cta",
+      "action": "send",
+      "headline": "Interest-only HELOC? Pick your own paydown number.",
+      "sub": "Send this to someone who renovated with a HELOC.",
+      "byClient": {
+        "northline-mortgages": {
+          "headline": "Send this to a friend in Toronto who renovated on a HELOC.",
+          "sub": "Their minimum may be interest only."
+        }
+      }
+    }
+  ],
+  "example": "Example spec for the fictional client Northline Mortgages (Toronto). 'Paul' is an illustrative composite, not a real person. Rate premise expires on reviewBy (2026-12-09)."
+}

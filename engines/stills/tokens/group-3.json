@@ -1,0 +1,35 @@
+{
+  "$description": "Group 3 family: RISO. Two-ink risograph poster: heavy condensed grotesk that bleeds off the edges, a flat second-ink field with halftone dots and slight misregistration, newsprint paper. Annotations are fat dry-brush swashes, scribbles and asterisks.",
+  "meta": { "group": 3, "family": "riso", "name": "Riso", "grid": "poster: 4 columns, type allowed to bleed off the trim; colour field occupies the lower 40-55%" },
+  "color": {
+    "paper":    { "$type": "color", "$value": "#F4F0E6", "$description": "newsprint" },
+    "ink":      { "$type": "color", "$value": "#24388A", "$description": "riso medium blue, all type" },
+    "ink-soft": { "$type": "color", "$value": "#3F4F92" },
+    "rule":     { "$type": "color", "$value": "{color.ink}" },
+    "accent":   { "$type": "color", "$value": "#F2A81D", "$description": "second ink: sunflower; client accent replaces it" },
+    "mark":     { "$type": "color", "$value": "{color.ink}" }
+  },
+  "font": {
+    "display": { "$type": "fontFamily", "$value": ["Bricolage Grotesque", "Impact", "sans-serif"] },
+    "body":    { "$type": "fontFamily", "$value": ["Bricolage Grotesque", "Helvetica", "sans-serif"] },
+    "label":   { "$type": "fontFamily", "$value": ["Bricolage Grotesque", "Helvetica", "sans-serif"] }
+  },
+  "size": {
+    "display-xl": { "$type": "dimension", "$value": "158px" },
+    "display-l":  { "$type": "dimension", "$value": "92px" },
+    "display-m":  { "$type": "dimension", "$value": "76px" },
+    "body-l":     { "$type": "dimension", "$value": "44px" },
+    "body":       { "$type": "dimension", "$value": "35px" },
+    "label":      { "$type": "dimension", "$value": "23px" },
+    "fine":       { "$type": "dimension", "$value": "19px" }
+  },
+  "space": {
+    "margin-x":      { "$type": "dimension", "$value": "72px" },
+    "margin-top":    { "$type": "dimension", "$value": "64px" },
+    "margin-bottom": { "$type": "dimension", "$value": "56px" },
+    "gutter":        { "$type": "dimension", "$value": "24px" }
+  },
+  "fontVariation": { "display": "normal" },
+  "annotation": { "pen": "brush", "emphasis": "swash", "strike": "scribble", "weight": 13, "wobble": 1.6, "highlightMix": 0.45 },
+  "texture": { "grain": 0.13, "grainFreq": 0.65, "paper": "halftone", "misregister": "3px 2px" }
+}

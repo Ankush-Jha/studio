@@ -1,0 +1,72 @@
+/* base.css: structure shared by every family. Families restyle type, colour,
+   decoration and composition on top of this. Canvas is 1080x1350 CSS px (4:5). */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden;background:var(--color-paper)}
+body{-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;font-kerning:normal;font-synthesis:none}
+ol,ul{list-style:none}
+em{font-style:italic}
+
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;background:var(--color-paper);color:var(--color-ink);
+  font-family:var(--font-body);font-size:var(--size-body);line-height:1.3;font-variant-numeric:lining-nums}
+.paper{position:absolute;inset:0;z-index:0;pointer-events:none}
+.marks{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.marks.under{z-index:1}
+.marks.over{z-index:6}
+.frame{position:absolute;z-index:3;left:var(--space-margin-x);right:var(--space-margin-x);top:var(--space-margin-top);bottom:var(--space-margin-bottom);display:flex;flex-direction:column}
+.grain{position:absolute;inset:0;z-index:20;pointer-events:none;background-image:var(--grain-img);background-size:540px 540px;mix-blend-mode:multiply;opacity:var(--grain)}
+
+/* masthead */
+.mast{flex:none;display:flex;align-items:center;gap:22px;font-family:var(--font-label);font-size:var(--size-label);line-height:1;position:relative}
+.mast .series{text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+.mast .folio{margin-left:auto;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.mast .folio i{font-style:normal;opacity:.55;margin:0 .25em}
+.logo{flex:none;display:inline-grid;place-items:center}
+
+/* main */
+.main{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+.mk{position:relative}
+
+/* footer + compliance */
+.foot{flex:none;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;position:relative;min-height:28px}
+.compliance{font-family:var(--font-label);font-size:var(--size-fine);line-height:1.25;letter-spacing:.05em;color:var(--color-ink-soft);display:flex;flex-wrap:wrap;align-items:center;gap:6px 0}
+.compliance .is-ph{color:var(--color-ink-soft)}
+.compliance.c-block{font-size:23px;color:var(--color-ink);flex-direction:column;align-items:flex-start;gap:6px}
+.compliance.c-block .c-agent{font-weight:600}
+.ph-tag{display:inline-block;margin-left:12px;padding:4px 8px 3px;background:#C62020;color:#FFFFFF;font:600 18px/1 "IBM Plex Mono",monospace;letter-spacing:.06em;text-transform:lowercase;border-radius:2px}
+.compliance.c-block .ph-tag{margin-left:0;margin-top:4px}
+.cue{font-family:var(--font-label);font-size:var(--size-label);text-transform:uppercase;letter-spacing:.14em;font-weight:600;margin-right:130px;line-height:1}
+
+/* shared template defaults */
+.kicker,.eyebrow{font-family:var(--font-label);font-size:var(--size-label);text-transform:uppercase;letter-spacing:.14em;font-weight:600;line-height:1.2}
+.headline{font-family:var(--font-display);font-size:var(--size-display-xl);line-height:.95;text-wrap:balance}
+.title{font-family:var(--font-display);font-size:var(--size-display-l);line-height:1;text-wrap:balance}
+.cta-head{font-family:var(--font-display);font-size:var(--size-display-l);line-height:1;text-wrap:balance}
+.statement{font-family:var(--font-display);font-size:var(--size-display-m);line-height:1.08;text-wrap:pretty}
+.dek,.note,.support,.takeaway,.cta-sub{font-size:var(--size-body);line-height:1.3;text-wrap:pretty}
+.assumptions{font-family:var(--font-label);font-size:var(--size-fine);line-height:1.35;color:var(--color-ink-soft);letter-spacing:.01em}
+.figure{position:absolute;pointer-events:none;line-height:.8;font-family:var(--font-display)}
+
+/* chart defaults */
+.chart{display:block;overflow:visible}
+.chart text{fill:currentColor}
+.chart .grid{stroke:currentColor;stroke-opacity:.16;stroke-width:1.5}
+.chart .axis{stroke:currentColor;stroke-width:3}
+.chart .tick{font-family:var(--font-label);font-size:21px;letter-spacing:.03em}
+.chart .cat{font-family:var(--font-label);font-size:28px;font-weight:600;letter-spacing:.02em}
+.chart .val{font-family:var(--font-display);font-size:50px;font-weight:700}
+.chart .bar-a{fill:var(--color-ink-soft)}
+.chart .bar-b{fill:var(--color-ink)}
+.chart .bar-delta{fill:var(--color-accent)}
+.chart .ghost{stroke:currentColor;stroke-dasharray:6 8;stroke-width:2;opacity:.6}
+.chart-wrap{position:relative}
+.callout{position:absolute;display:flex;flex-direction:column;line-height:1}
+.callout-big{font-family:var(--font-display);font-weight:800;font-size:120px;letter-spacing:-.02em}
+.callout-sub{font-size:30px;margin-top:10px;line-height:1.2}
+
+/* checklist + list defaults */
+.items .item,.rows .row{position:relative}
+.rows .box{display:inline-block;width:46px;height:46px;flex:none;position:relative}
+.rows .box .mk{position:absolute;inset:0;display:block;font-size:46px;line-height:46px}
+
+.edge-tab{display:none}
+.foot-note{font-family:var(--font-label);font-size:var(--size-fine);line-height:1.3;color:var(--color-ink-soft);max-width:440px;margin-right:auto;align-self:flex-end}

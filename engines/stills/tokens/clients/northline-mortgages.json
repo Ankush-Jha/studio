@@ -1,0 +1,30 @@
+{
+  "$description": "EXAMPLE CLIENT (fictional). Northline Mortgages, agent Sam Rivera, Toronto ON, group 1. Brand layer for the style library and the legacy families. Copy this file to add a real client. The brokerage name and licence number are bracketed placeholders on purpose: they print as visible placeholders with a red tag, QA lists them as TODO, and --strict refuses to export until you fill them from the brokerage's licence record. Never invent them.",
+  "meta": {
+    "id": "northline-mortgages",
+    "name": "Northline Mortgages",
+    "initials": "NM",
+    "province": "ON",
+    "city": "Toronto",
+    "group": 1,
+    "seed": 307,
+    "layoutVariant": "a"
+  },
+  "color": {
+    "accent": {
+      "$type": "color",
+      "$value": "#1E6B52",
+      "$description": "spruce green (fictional brand colour)"
+    }
+  },
+  "compliance": {
+    "agentName": "Sam Rivera",
+    "title": "Mortgage Agent Level 2",
+    "brokerage": "[BROKERAGE NAME]",
+    "licence": "[LICENCE #]",
+    "province": "ON"
+  },
+  "photos": {},
+  "byStyle": {},
+  "byGroup": {}
+}

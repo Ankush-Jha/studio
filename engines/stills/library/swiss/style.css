@@ -1,0 +1,140 @@
+/* Swiss Data Poster, poster-loud. One family (Archivo) in three widths; 12-column grid on the
+ * safe box; flush-left ragged-right; full-bleed fields that change every slide (signal colour,
+ * black, paper). Colours come per slide from --gnd/--fg/--fg2/--sig/--sig-fill/--rule. */
+.st-swiss { --colw: calc(var(--safe-w) / 12); font-family: "Archivo", sans-serif; font-stretch: 100%; background: var(--color-paper); }
+.st-swiss .stage { color: var(--fg); }
+
+/* Field, geometry, furniture. */
+.st-swiss .sw-field { position: absolute; inset: 0; background: var(--gnd); }
+.st-swiss .bg { --tick: currentColor; }
+.st-swiss .sw-disc { position: absolute; left: 0; top: 0; }
+.st-swiss .sw-ticks { position: absolute; left: var(--safe-x0); width: var(--safe-w); top: 0; height: 100%; }
+.st-swiss .sw-ticks i { position: absolute; left: calc(var(--colw) * var(--i)); width: 2px; margin-left: -1px; height: 22px; bottom: 0; background: currentColor; opacity: 0.55; }
+.st-swiss .sw-bar { position: absolute; top: 0; height: 18px; left: calc(var(--safe-x0) + var(--colw) * var(--c0)); width: calc(var(--colw) * var(--span)); background: #000; }
+.st-swiss.fmt-story .sw-bar { top: 180px; }
+.st-swiss .sw-grain { position: absolute; inset: 0; background-image: var(--grain-img); background-size: 540px; mix-blend-mode: multiply; opacity: 0.07; }
+
+/* Stage */
+.st-swiss .stage { display: flex; flex-direction: column; }
+.st-swiss .sw-head { display: flex; justify-content: space-between; align-items: baseline; padding-top: 30px; font-size: 22px; font-weight: 600; }
+.st-swiss.fmt-story .sw-head { padding-top: 0; }
+.st-swiss .sw-kicker { font-size: 30px; font-weight: 700; line-height: 1.15; margin-top: 40px; }
+.st-swiss .sw-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-bottom: 6px; }
+.st-swiss .compliance { font-size: 19px; font-weight: 600; color: var(--fg); }
+.st-swiss .compliance.c-block { flex-direction: column; align-items: flex-start; gap: 4px; font-size: 20px; }
+.st-swiss .compliance .ph-tag { background: #000; color: #fff; outline: 2px solid #B42318; }
+.st-swiss .sw-cue { display: inline-flex; align-items: center; gap: 14px; font-size: 24px; font-weight: 700; white-space: nowrap; order: 2; }
+.st-swiss .sw-cue b { display: block; width: 84px; height: 7px; background: var(--fg); position: relative; }
+.st-swiss .sw-cue b::after { content: ''; position: absolute; right: -2px; top: -9px; border-left: 22px solid var(--fg); border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.st-swiss [data-mark="accent"] { text-decoration: underline; text-decoration-color: var(--sig-fill); text-decoration-thickness: 0.1em; text-underline-offset: 0.12em; text-decoration-skip-ink: none; }
+.st-swiss .g-accent [data-mark="accent"] { text-decoration-color: var(--fg); }
+
+/* Cover: headline top, giant figure bottom, disc (data) behind on the right. */
+.st-swiss .sw-cover-top { display: flex; flex-direction: column; }
+.st-swiss .sw-h1 { margin-top: 18px; font-size: 136px; line-height: 0.9; font-weight: 850; font-stretch: 86%; letter-spacing: -0.03em; max-width: 12.6ch; }
+.st-swiss .sw-fig-row { display: flex; flex-direction: column; margin-top: auto; }
+.st-swiss .sw-fig-box { min-width: 0; line-height: 0.8; width: 100%; }
+.st-swiss .sw-fig { font-weight: 900; font-stretch: 115%; letter-spacing: -0.05em; line-height: 0.8; color: var(--sig); display: inline-block; padding-top: 0.05em; }
+.st-swiss .sw-fig-label { font-size: 36px; line-height: 1.1; font-weight: 700; margin-top: 18px; max-width: 18ch; }
+.st-swiss .sw-dek { font-size: 34px; line-height: 1.16; font-weight: 500; margin-top: 18px; margin-bottom: 26px; max-width: 24ch; }
+.st-swiss .sw-cover.has-disc .sw-fig { color: #fff; }
+.st-swiss .sw-cover.has-disc.g-ink .sw-fig { color: var(--fg); }
+.st-swiss .sw-cover.has-disc .sw-fig-box { width: 78%; }
+.st-swiss.v-b .sw-cover .sw-fig-box { width: 100%; }
+
+/* Point */
+.st-swiss .sw-fig-point { margin-top: 26px; }
+.st-swiss .sw-statement { font-size: 70px; line-height: 1.0; font-weight: 800; font-stretch: 90%; letter-spacing: -0.022em; margin-top: 34px; max-width: 14.5ch; }
+.st-swiss .sw-statement.no-fig { font-size: 104px; line-height: 0.95; max-width: 12ch; margin-top: auto; }
+.st-swiss .sw-note { font-size: 32px; line-height: 1.22; font-weight: 500; margin-top: 26px; max-width: 26ch; color: var(--fg2); }
+.st-swiss .sw-point .sw-note { margin-bottom: 30px; }
+.st-swiss.v-b .sw-point .sw-fig-point { order: 5; margin-top: auto; margin-bottom: 20px; }
+.st-swiss.v-b .sw-point .sw-foot { order: 6; margin-top: 0; }
+
+/* Number: callout top, slabs fill the rest. */
+.st-swiss .sw-h2 { font-size: 66px; line-height: 0.98; font-weight: 820; font-stretch: 88%; letter-spacing: -0.024em; margin-top: 14px; max-width: 15ch; }
+.st-swiss .sw-h2-xl { font-size: 92px; line-height: 0.93; max-width: 12ch; }
+.st-swiss .sw-chart { flex: 1 1 auto; min-height: 0; display: grid; grid-template-rows: auto 1fr; row-gap: 28px; margin-top: 30px; margin-bottom: 64px; }
+.st-swiss .sw-callout { display: flex; align-items: baseline; gap: 26px; flex-wrap: wrap; }
+.st-swiss .sw-callout-v { font-size: 150px; line-height: 0.85; font-weight: 900; font-stretch: 108%; letter-spacing: -0.045em; color: var(--sig); }
+.st-swiss .sw-callout-s { font-size: 32px; line-height: 1.15; font-weight: 650; max-width: 12ch; }
+.st-swiss .sw-slabs { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; column-gap: calc(var(--colw) * 0.5); align-items: end; border-bottom: 6px solid var(--rule); min-height: 0; }
+.st-swiss .sw-slab { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+.st-swiss .sw-slab-body { position: relative; height: calc((100% - 80px) * var(--h) / 100); background: var(--fg2); }
+.st-swiss .sw-slab.is-hi .sw-slab-body { background: var(--fg); }
+.st-swiss .sw-sliver { position: absolute; left: 0; right: 0; top: 0; height: calc(100% * var(--up) / var(--h)); min-height: 10px; background: var(--sig-fill); }
+.st-swiss .sw-ghost { position: absolute; left: 0; right: 0; bottom: 100%; height: calc(100% * var(--ghost) / var(--h)); border: 4px dashed var(--fg2); border-bottom: 0; }
+.st-swiss .sw-slab-v { font-size: 52px; font-weight: 850; line-height: 1; margin-bottom: 14px; letter-spacing: -0.02em; }
+.st-swiss .sw-slab-k { position: absolute; left: 0; top: calc(100% + 12px); font-size: 22px; font-weight: 600; white-space: nowrap; }
+.st-swiss .sw-fine { font-size: 19px; line-height: 1.3; max-width: 66ch; margin-bottom: 16px; color: var(--fg); }
+.st-swiss.v-b .sw-slabs { grid-auto-flow: row; grid-auto-rows: 1fr; row-gap: 18px; align-items: stretch; border-bottom: 0; border-left: 6px solid var(--rule); }
+.st-swiss.v-b .sw-slab { flex-direction: row; align-items: center; height: auto; }
+.st-swiss.v-b .sw-slab-body { height: 70%; width: calc((100% - 260px) * var(--h) / 100); order: 1; }
+.st-swiss.v-b .sw-slab-v { order: 2; margin: 0 0 0 18px; font-size: 44px; }
+.st-swiss.v-b .sw-slab-k { top: 0; left: 14px; color: var(--gnd); z-index: 1; }
+.st-swiss.v-b .sw-sliver { left: auto; right: 0; top: 0; bottom: 0; height: auto; width: calc(100% * var(--up) / var(--h)); min-width: 10px; }
+
+/* Compare: two giant values, the right one on a signal block. */
+.st-swiss .sw-sides { display: grid; grid-template-columns: 1fr; row-gap: 26px; margin-top: auto; margin-bottom: 26px; }
+.st-swiss .sw-side { border-top: 14px solid var(--rule); padding-top: 18px; }
+.st-swiss .sw-side.is-r { border-top: 0; background: var(--sig-fill); color: var(--gnd); padding: 22px 26px 26px; margin: 0 -26px; }
+.st-swiss .sw-side-k { font-size: 32px; font-weight: 750; }
+.st-swiss .sw-side-vbox { width: 92%; line-height: 0.82; }
+.st-swiss .sw-side-v { font-weight: 900; font-stretch: 105%; letter-spacing: -0.045em; line-height: 0.85; display: inline-block; margin-top: 10px; }
+.st-swiss .sw-side-n { font-size: 30px; line-height: 1.2; font-weight: 600; margin-top: 12px; }
+.st-swiss .sw-verdict { margin-top: 0; margin-bottom: 26px; font-size: 28px; }
+.st-swiss .g-accent .sw-side.is-r { background: #000; color: #fff; }
+
+/* Lists */
+.st-swiss .sw-items { list-style: none; margin-top: auto; margin-bottom: 30px; display: flex; flex-direction: column; gap: 28px; }
+.st-swiss .sw-item { display: grid; grid-template-columns: calc(var(--colw) * 1.7) 1fr; align-items: start; font-size: 46px; line-height: 1.06; font-weight: 720; letter-spacing: -0.014em; padding-top: 22px; border-top: 4px solid var(--rule); }
+.st-swiss .sw-item-n { font-size: 88px; line-height: 0.8; font-weight: 900; color: var(--sig); }
+.st-swiss .sw-tag { font-style: normal; font-size: 28px; font-weight: 550; color: var(--fg2); white-space: nowrap; }
+.st-swiss .sw-list .sw-note { margin-top: 0; margin-bottom: 26px; }
+
+/* Myth */
+.st-swiss .sw-myth-t { font-size: 58px; line-height: 1.05; font-weight: 650; margin-top: 40px; max-width: 17ch; color: var(--fg2); }
+.st-swiss .sw-struck { text-decoration: line-through; text-decoration-color: var(--sig-fill); text-decoration-thickness: 0.14em; }
+.st-swiss .sw-fact-t { font-size: 84px; line-height: 0.95; font-weight: 850; letter-spacing: -0.025em; margin-top: auto; margin-bottom: 30px; max-width: 13ch; }
+
+/* Quote */
+.st-swiss .sw-qmark { font-size: 360px; line-height: 0.7; font-weight: 900; color: var(--sig); margin-top: 40px; height: 220px; }
+.st-swiss .sw-q { font-size: 80px; line-height: 0.98; font-weight: 800; letter-spacing: -0.022em; max-width: 14ch; }
+.st-swiss .sw-by { font-size: 28px; font-weight: 650; margin-top: 30px; margin-bottom: auto; }
+
+/* Stat */
+.st-swiss .sw-facts { list-style: none; margin-top: 30px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--colw); row-gap: 18px; }
+.st-swiss .sw-fact { border-top: 5px solid var(--rule); padding-top: 10px; display: flex; flex-direction: column; }
+.st-swiss .sw-fact-k { font-size: 22px; font-weight: 650; }
+.st-swiss .sw-fact-v { font-size: 50px; font-weight: 900; line-height: 1; margin-top: 6px; }
+.st-swiss .sw-fact-n { font-size: 22px; font-weight: 500; margin-top: 4px; }
+.st-swiss .sw-stat .sw-fig-row { margin-top: 24px; }
+
+/* CTA: giant action word bleeding off the top, headline at poster scale. */
+.st-swiss .sw-verb { position: absolute; left: -8px; top: 60px; font-size: 300px; line-height: 0.8; font-weight: 900; font-stretch: 112%; letter-spacing: -0.05em; color: #000; opacity: 0.16; white-space: nowrap; }
+.st-swiss .sw-cta-h { margin-top: auto; font-size: 128px; line-height: 0.92; font-weight: 880; font-stretch: 86%; letter-spacing: -0.03em; max-width: 12.5ch; }
+.st-swiss .sw-cta .sw-dek { margin-bottom: 40px; }
+.st-swiss .sw-kw { text-decoration: underline; text-decoration-thickness: 0.08em; }
+
+/* Format tuning */
+.st-swiss.fmt-story .sw-h1, .st-swiss.fmt-square .sw-h1 { font-size: 104px; }
+.st-swiss.fmt-story .sw-kicker, .st-swiss.fmt-square .sw-kicker { margin-top: 24px; }
+.st-swiss.fmt-story .sw-statement, .st-swiss.fmt-square .sw-statement { font-size: 56px; }
+.st-swiss.fmt-story .sw-h2, .st-swiss.fmt-square .sw-h2 { font-size: 56px; }
+.st-swiss.fmt-story .sw-cta-h, .st-swiss.fmt-square .sw-cta-h { font-size: 100px; }
+.st-swiss.fmt-story .sw-callout-v, .st-swiss.fmt-square .sw-callout-v { font-size: 110px; }
+.st-swiss.fmt-story .sw-item, .st-swiss.fmt-square .sw-item { font-size: 38px; }
+.st-swiss.fmt-story .sw-dek, .st-swiss.fmt-square .sw-dek { font-size: 30px; margin-bottom: 10px; }
+/* Stat (single static) sizing: headline, figure and fact grid share one poster. */
+.st-swiss .sw-stat .sw-h2-xl { font-size: 70px; line-height: 0.96; max-width: 15ch; }
+.st-swiss .sw-stat .sw-fig-row { flex-direction: row; align-items: flex-end; gap: 26px; margin-top: 18px; }
+.st-swiss .sw-stat .sw-fig-box { width: auto; }
+.st-swiss .sw-stat .sw-fig { font-size: 230px; }
+.st-swiss .sw-stat .sw-fig-label { margin: 0 0 14px; font-size: 34px; }
+.st-swiss .sw-stat .sw-facts { row-gap: 14px; margin-top: 22px; margin-bottom: 14px; }
+.st-swiss .sw-stat .sw-fact-k { font-size: 21px; }
+.st-swiss .sw-stat .sw-fact-v { font-size: 48px; }
+.st-swiss .sw-stat .sw-fact-n { font-size: 28px; line-height: 1.1; }
+.st-swiss .sw-stat .sw-fact.is-em { background: var(--fg); color: var(--gnd); padding: 10px 14px 12px; border-top: 0; }
+.st-swiss .sw-stat .sw-note { font-size: 28px; margin-top: 0; margin-bottom: 14px; }
+.st-swiss .sw-stat .sw-foot { margin-top: 0; }

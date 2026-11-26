@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+  Studio face reels: starter overlay (transparent graphics layer, 1080x1920).
+  Copy to clients/<slug>/reels/<reel>/build/overlay.html and edit the BEATS list. tools/render_overlay.py replaces
+  __PLAN__ __CLIENT__ __BRAND__ __COMPLIANCE__ with build/plan.json, client.json, brand/brand.json, compliance.json.
+  Contract: window.seek(t) draws the frame at t seconds as a pure function of t (any order, any worker).
+  What it shows: word-pop captions under the chin, one paper card per BEAT with a marker underline drawn on, and the
+  end card (person, role, every require_all_strings line, the disclaimer) from speech_end to total.
+  Rules (references/design-quality.md): on-screen text only restates the transcript; nothing on the face; one accent;
+  arrivals decelerate from oversize, no fades between beats, no bounce.
+-->
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:'Inter';src:url('../../../../../library/fonts/inter-latin.woff2');font-weight:100 900}
+  @font-face{font-family:'PF';src:url('../../../../../library/fonts/playfair-display-latin.woff2');font-weight:400 900}
+  @font-face{font-family:'PF';src:url('../../../../../library/fonts/playfair-display-italic-latin.woff2');font-weight:400 900;font-style:italic}
+  @font-face{font-family:'Caveat';src:url('../../../../../library/fonts/caveat-latin.woff2');font-weight:400 700}
+  :root{--tex-paper:url('../../../../../library/textures/Paper001/Paper001_1K-JPG_Color.jpg');--tex-kraft:url('../../../../../library/textures/Cardboard002/Cardboard002_1K-JPG_Color.jpg')}
+  *{box-sizing:border-box}
+  html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden;font-family:'Inter',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  .abs{position:absolute}
+  .lift{filter:drop-shadow(1px 2px 1.5px rgba(10,10,20,.5)) drop-shadow(9px 16px 15px rgba(10,10,20,.35))}
+  .paper{background-color:#F5F2E9;background-image:var(--tex-paper);background-size:cover;background-blend-mode:multiply}
+  .tape{position:absolute;width:150px;height:46px;background:rgba(245,242,233,.62);box-shadow:0 1px 3px rgba(10,10,20,.25);
+    clip-path:polygon(0 8%,3% 0,6% 10%,9% 0,12% 9%,100% 0,97% 12%,100% 25%,96% 38%,100% 52%,97% 66%,100% 80%,96% 92%,100% 100%,0 92%,3% 80%,0 66%,4% 52%,0 38%,3% 25%)}
+  .pf{font-family:'PF',Georgia,serif}
+  .cap{position:absolute;left:70px;right:70px;text-align:center;font:800 68px/1.1 Inter;letter-spacing:-.015em;color:#fff;
+       text-shadow:0 3px 26px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.8)}
+  .cap span{display:inline-block;margin:0 .22em}
+  .card{width:620px;padding:44px 48px 52px;color:#141414}
+  .card .k{font:600 30px/1.2 Inter;letter-spacing:.01em;opacity:.75}
+  .card .h{font:700 76px/1.02 'PF',Georgia,serif;margin-top:12px}
+  #end{left:90px;right:90px;padding:56px 60px 60px;color:#141414}
+  #end .who{font:700 64px/1.05 'PF',Georgia,serif}
+  #end .role{font:500 34px/1.25 Inter;margin-top:10px}
+  #end .req{font:600 30px/1.3 Inter;margin-top:26px}
+  #end .disc{font:400 26px/1.35 Inter;margin-top:22px;opacity:.85}
+  svg{display:block;overflow:visible}
+</style></head>
+<body>
+<div id="stage"></div>
+<script src="../../../../../library/js/rough.js"></script>
+<script>
+const PLAN=__PLAN__, CLIENT=__CLIENT__, BRAND=__BRAND__, COMPL=__COMPLIANCE__;
+
+// One entry per graphic beat. `from`/`to` are word indexes in PLAN.words (the card lands on the spoken word);
+// `text` must restate what the speaker said there. `mark` is the word(s) in `text` the marker underlines.
+const BEATS = [
+  // { from: 6, to: 14, kicker: 'The rule', text: 'Your payment can stay the same', mark: 'same', side: 'left' },
+];
+
+const W = PLAN.words || [];
+const C = BRAND.colors || {};
+const ACCENT = C.accent || '#D9480F';
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), prog=(t,a,d)=>clamp((t-a)/d);
+const out4 = x => 1 - Math.pow(1 - clamp(x), 4);                 // decelerating arrival, long tail, no bounce
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const stage = document.getElementById('stage');
+const el = (html) => { const d = document.createElement('div'); d.innerHTML = html.trim(); const n = d.firstChild; stage.appendChild(n); return n; };
+
+// Face-safe band: captions sit below the chin (or at the bottom safe line if the chin is low).
+const face = PLAN.face || { cx: 540, top: 420, chin: 980 };
+const capTop = Math.min(Math.max(face.chin + 140, 1180), 1420);
+
+// --- captions: groups of up to 4 words, split at pauses; current word in the accent colour
+const groups = [];
+for (let i = 0, g = []; i < W.length; i++) {
+  g.push(i);
+  const gap = i + 1 < W.length ? W[i + 1].s - W[i].e : 9;
+  if (g.length === 4 || gap > 0.35 || /[.?!,]$/.test(W[i].w)) { groups.push(g); g = []; }
+}
+const cap = el(`<div class="cap" style="top:${capTop}px"></div>`);
+
+// --- beat cards (paper, tape, marker underline drawn with a seeded rough.js stroke)
+const cards = BEATS.map((b, k) => {
+  const left = b.side === 'right' ? 1080 - 620 - 70 : 70;
+  const n = el(`<div class="abs card paper lift" style="left:${left}px;top:${Math.max(220, face.top - 120)}px;visibility:hidden">
+    <div class="tape" style="left:235px;top:-22px;transform:rotate(-3deg)"></div>
+    ${b.kicker ? `<div class="k">${esc(b.kicker)}</div>` : ''}<div class="h">${esc(b.text)}</div></div>`);
+  if (b.mark) {
+    const h = n.querySelector('.h');
+    h.innerHTML = esc(b.text).replace(esc(b.mark), `<span class="m">${esc(b.mark)}</span>`);
+  }
+  return { b, n, rot: (k % 2 ? 2.2 : -1.8) };
+});
+
+function drawMarks() {               // after fonts load: measure each marked word once, build its stroke
+  for (const c of cards) {
+    const m = c.n.querySelector('.m'); if (!m) continue;
+    const r = m.getBoundingClientRect(), pr = c.n.getBoundingClientRect();
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', pr.width); svg.setAttribute('height', pr.height);
+    svg.style.cssText = 'position:absolute;left:0;top:0;pointer-events:none';
+    const rc = rough.svg(svg);
+    const y = r.bottom - pr.top + 4;
+    const g = rc.line(r.left - pr.left - 6, y, r.right - pr.left + 8, y - 6, { stroke: ACCENT, strokeWidth: 7, roughness: 1.6, bowing: 1.2, seed: 7 });
+    svg.appendChild(g); c.n.appendChild(svg);
+    c.paths = [...g.querySelectorAll('path')].map(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeLinecap = 'round'; return { p, L }; });
+  }
+}
+
+// --- end card
+const req = (COMPL.require_all_strings || []).filter(s => !/exact text that MUST/.test(s));
+const person = (CLIENT.people || [])[0] || {};
+const end = el(`<div id="end" class="abs paper lift" style="top:${Math.max(face.chin + 60, 1060)}px;visibility:hidden">
+  <div class="tape" style="left:40%;top:-22px;transform:rotate(2deg)"></div>
+  <div class="who">${esc(person.name || CLIENT.display_name || '')}</div>
+  <div class="role">${esc([person.role, CLIENT.display_name].filter(Boolean).join(' · '))}</div>
+  ${req.map(s => `<div class="req">${esc(s)}</div>`).join('')}
+  ${COMPL.require_disclaimer ? `<div class="disc">${esc(COMPL.require_disclaimer)}</div>` : ''}
+</div>`);
+const endAt = PLAN.speech_end ?? Math.max(0, (PLAN.total || 0) - (COMPL.min_end_card_seconds || 3));
+
+window.seek = function (t) {
+  // captions (hidden during the end card)
+  let html = '';
+  if (t < endAt) {
+    const g = groups.find(g => t >= W[g[0]].s - 0.05 && t < W[g[g.length - 1]].e + 0.25);
+    if (g) html = g.map(i => `<span style="color:${t >= W[i].s ? (t < W[i].e + 0.15 ? ACCENT : '#fff') : 'rgba(255,255,255,.55)'}">${esc(W[i].w)}</span>`).join('');
+  }
+  cap.innerHTML = html;
+  // cards: arrive oversize and settle on the spoken word; leave by sliding off (no fade)
+  for (const c of cards) {
+    const a = W[c.b.from]?.s ?? 0, z = W[c.b.to]?.e ?? a + 2;
+    const on = t >= a - 0.1 && t < z + 0.4;
+    c.n.style.visibility = on ? 'visible' : 'hidden';
+    if (!on) continue;
+    const pin = out4(prog(t, a - 0.1, 0.45)), off = out4(prog(t, z, 0.4));
+    const s = 1.18 - 0.18 * pin;
+    const dx = (c.b.side === 'right' ? 1 : -1) * 900 * off;
+    c.n.style.transform = `translate(${dx}px,${(1 - pin) * -40}px) rotate(${c.rot * pin}deg) scale(${s})`;
+    for (const { p, L } of c.paths || []) p.style.strokeDashoffset = L * (1 - out4(prog(t, a + 0.5, 0.5)));
+  }
+  // end card
+  const e = t >= endAt;
+  end.style.visibility = e ? 'visible' : 'hidden';
+  if (e) { const pin = out4(prog(t, endAt, 0.5)); end.style.transform = `translateY(${(1 - pin) * 160}px) scale(${1.08 - 0.08 * pin})`; }
+};
+document.fonts.ready.then(() => { drawMarks(); window.seek(0); });
+</script>
+</body></html>

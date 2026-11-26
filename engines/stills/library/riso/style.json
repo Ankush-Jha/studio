@@ -1,0 +1,49 @@
+{
+  "slug": "riso",
+  "name": "Riso Two-Ink",
+  "group": 3,
+  "family": "Riso",
+  "summary": "A stencil-duplicator print: two translucent spot inks overprinted on warm paper, halftone ramps on rotated screens, plates that never quite line up, and type printed in the dark ink.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "stat", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "Bricolage Grotesque", "file": "BricolageGrotesque[opsz,wdth,wght].ttf", "style": "normal", "weight": "200 800", "stretch": "75% 100%" },
+    { "family": "Space Mono", "file": "SpaceMono-Regular.ttf", "style": "normal", "weight": "400" },
+    { "family": "Space Mono", "file": "SpaceMono-Bold.ttf", "style": "normal", "weight": "700" }
+  ],
+  "palette": {
+    "paper": "#F3EEE3",
+    "ink": "#3D5588",
+    "ink-soft": "#3D5588",
+    "accent": "#F15060"
+  },
+  "pinAccent": true,
+  "emphasis": "riso",
+  "hand": { "pen": "marker", "weight": 7, "wobble": 1, "color": "ink" },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40,
+  "inks": {
+    "federal-blue": "#3D5588",
+    "medium-blue": "#3255A4",
+    "blue": "#0078BF",
+    "teal": "#00838A",
+    "green": "#00A95C",
+    "hunter-green": "#407060",
+    "black": "#1C1C1C",
+    "burgundy": "#914E72",
+    "bright-red": "#F15060",
+    "scarlet": "#F65058",
+    "crimson": "#E45D50",
+    "marine-red": "#D2515E",
+    "fluorescent-pink": "#FF48B0",
+    "orange": "#FF6C2F",
+    "fluorescent-orange": "#FF7477",
+    "sunflower": "#FFB511",
+    "yellow": "#FFE800",
+    "aqua": "#5EC8E5"
+  },
+  "textInks": ["federal-blue", "medium-blue", "hunter-green", "black", "burgundy"],
+  "fieldInks": ["bright-red", "scarlet", "crimson", "marine-red", "fluorescent-pink", "orange", "fluorescent-orange", "sunflower", "yellow", "aqua", "teal", "green", "blue"]
+}

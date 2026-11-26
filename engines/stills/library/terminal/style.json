@@ -1,0 +1,29 @@
+{
+  "slug": "terminal",
+  "name": "Terminal Card",
+  "group": 1,
+  "family": "Ledger",
+  "summary": "A generic market-terminal panel: one wide-to-narrow monospace, a command-line headline, dated data tables, zero-based charts with a crosshair, and the client accent as the one reverse-video alert.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "stat", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "Martian Mono", "file": "MartianMono[wdth,wght].ttf", "style": "normal", "weight": "100 800", "stretch": "75% 112.5%" }
+  ],
+  "palette": {
+    "paper": "#15130F",
+    "panel": "#1D1A15",
+    "ink": "#EFE8D9",
+    "ink-soft": "#ABA290",
+    "rule": "#3D372E",
+    "dim": "#5E574A",
+    "amber": "#F4B53F",
+    "accent": "#E0603A"
+  },
+  "accentGround": "paper",
+  "emphasis": "amber",
+  "hand": { "pen": "fine", "weight": 4, "wobble": 0.5 },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40
+}

@@ -1,0 +1,42 @@
+{
+  "name": "Northline Mortgages",
+  "source_of_truth": "fictional example brand (not a real company)",
+  "colors": {
+    "primary": "#1E6B52",
+    "primary_light": "#3E8F73",
+    "primary_dark": "#124434",
+    "accent": "#E8A33D",
+    "background_dark": "#0F1F1A",
+    "background_light": "#F5F2E9",
+    "text_on_dark": "#FFFFFF",
+    "text_on_light": "#141414",
+    "positive": "#22B573",
+    "caution": "#E5484D"
+  },
+  "fonts": {
+    "heading": "Playfair Display (library/fonts)",
+    "body": "Inter (library/fonts)",
+    "caption": "Inter 800",
+    "licence_note": "SIL OFL 1.1, see library/fonts/LICENSE-*.txt"
+  },
+  "logo": {
+    "full_on_light": "",
+    "full_on_dark": "",
+    "mark_only": "",
+    "clear_space": "",
+    "never": [
+      "stretch",
+      "recolour outside approved variants"
+    ]
+  },
+  "motif": "A spruce-green north-pointing chevron, reusable as a bullet or loader (fictional).",
+  "motion": {
+    "easing": "decelerating arrivals from oversize, no bounce",
+    "pace": "calm",
+    "sound": "soft paper and marker foley"
+  },
+  "style_recipes": [
+    "paper-collage (templates/overlay-starter.html)"
+  ],
+  "notes": "Example only."
+}

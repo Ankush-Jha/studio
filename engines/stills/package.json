@@ -1,0 +1,23 @@
+{
+  "name": "studio-stills",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Studio Stills: code-rendered Instagram statics, carousels and covers (1080x1350, 1080x1920, 1080x1080) in eleven house styles. HTML/CSS/SVG/three.js through headless Chromium. No AI imagery, no stock.",
+  "type": "module",
+  "scripts": {
+    "setup": "playwright-core install chromium-headless-shell",
+    "render": "node render.mjs",
+    "example": "node render.mjs specs/library/dec9-variable.json --client northline-mortgages",
+    "proofs": "./build-library.sh",
+    "gate": "node tools/qa-gate.mjs",
+    "neardup": "${STATICS_PYTHON:-.venv/bin/python} tools/neardup.py",
+    "overview": "node tools/library-overview.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "playwright-core": "1.63.0",
+    "sharp": "0.35.5"
+  }
+}

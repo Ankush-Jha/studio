@@ -1,0 +1,247 @@
+{
+  "id": "heloc-paul",
+  "title": "Interest-only HELOC: the payment moves, the balance doesn't",
+  "ideaTitle": "Paul's HELOC: $7,800 paid, still owes $150,000",
+  "asOf": "2026-11-16",
+  "group": 2,
+  "series": "HELOC",
+  "tag": "Illustrative story",
+  "sources": [
+    {
+      "fact": "Big-bank prime went from 4.45% to 4.70% on Oct 29, 2026, after the Bank of Canada raised its rate to 2.50% on Oct 28",
+      "url": "https://www.bankofcanada.ca/2026/10/fad-press-release-2026-10-28/"
+    },
+    {
+      "fact": "On an interest-only HELOC each 0.25% adds about $21 a month per $100K ($100,000 x 0.25% / 12)",
+      "url": "calc: lib/calc.mjs heloc-interest-only"
+    }
+  ],
+  "calc": {
+    "kind": "heloc-interest-only",
+    "inputs": {
+      "principal": 150000,
+      "primeNow": 4.7,
+      "primeBefore": 4.45,
+      "spread": 0.5,
+      "nextChange": 0.25,
+      "customPayment": 850,
+      "months": 12
+    }
+  },
+  "expect": [
+    {
+      "key": "paymentBefore",
+      "shown": 619,
+      "claim": "About $619 a month before Oct 29 ($618.75)"
+    },
+    {
+      "key": "paymentNow",
+      "shown": 650,
+      "claim": "$650 a month now"
+    },
+    {
+      "key": "deltaBefore",
+      "shown": 31,
+      "claim": "+$31 after the Oct 29 prime change"
+    },
+    {
+      "key": "paidIO",
+      "shown": 7800,
+      "claim": "12 payments: $7,800"
+    },
+    {
+      "key": "balanceIO",
+      "shown": 150000,
+      "claim": "Balance unchanged at $150,000"
+    },
+    {
+      "key": "paymentNext",
+      "shown": 681,
+      "claim": "About $681 if Dec 9 brings another 0.25%"
+    },
+    {
+      "key": "principalCustom",
+      "shown": 2458,
+      "claim": "Paying $850 takes about $2,450 off in year one ($2,458.03)"
+    },
+    {
+      "key": "balanceCustom",
+      "shown": 147542,
+      "claim": "Balance about $147,542 after a year at $850"
+    }
+  ],
+  "assumptions": "Illustrative composite, not a real client. HELOC at prime + {spread} = {rateNow}, variable, no fixed term, interest-only minimum, {apr}. Big-bank prime {primeNow} since Oct 29, 2026. Rates as of Nov 16, 2026.",
+  "apr": null,
+  "kinetic": {
+    "cards": [
+      {
+        "text": "$7,800 paid.|Still owes ==$150,000==."
+      },
+      {
+        "kind": "number",
+        "label": "Interest only",
+        "from": "@paymentBefore",
+        "to": "@paymentNow",
+        "strike": true,
+        "caption": "a month"
+      },
+      {
+        "text": "Pay ==$850==:|{principalCustom} off in a year."
+      }
+    ]
+  },
+  "byClient": {
+    "northline-mortgages": {
+      "series": "HELOC · Toronto",
+      "tag": "Illustrative",
+      "calc": {
+        "kind": "heloc-interest-only",
+        "inputs": {
+          "principal": 120000,
+          "primeNow": 4.7,
+          "primeBefore": 4.45,
+          "spread": 0.5,
+          "nextChange": 0.25,
+          "customPayment": 700,
+          "months": 12,
+          "ladder": [
+            100000,
+            200000,
+            300000
+          ]
+        }
+      },
+      "expect": [
+        {
+          "key": "per100k",
+          "shown": 21,
+          "claim": "+0.25% is about $21 a month per $100K on an interest-only HELOC (playbook maths rule)"
+        },
+        {
+          "key": "paymentBefore",
+          "shown": 495,
+          "claim": "$120,000 x 4.95% / 12 = $495.00"
+        },
+        {
+          "key": "paymentNow",
+          "shown": 520,
+          "claim": "$120,000 x 5.20% / 12 = $520.00"
+        },
+        {
+          "key": "deltaBefore",
+          "shown": 25,
+          "claim": "+$25 a month since Oct 29"
+        },
+        {
+          "key": "paidIO",
+          "shown": 6240,
+          "claim": "12 payments: $6,240"
+        },
+        {
+          "key": "principalCustom",
+          "shown": 2212,
+          "claim": "$700 a month takes $2,212.23 off in a year"
+        },
+        {
+          "key": "balanceCustom",
+          "shown": 117788,
+          "claim": "Balance $117,787.77 after a year at $700"
+        }
+      ],
+      "assumptions": "Illustrative. HELOC at prime + {spread} = {rateNow}, variable, no fixed term, interest-only minimum, {apr}. Each 0.25% adds $20.83 a month per $100K. Big-bank prime {primeNow} since Oct 29, 2026. Rates as of Nov 16, 2026.",
+      "kinetic": {
+        "cards": [
+          {
+            "text": "==+$21== a month|per $100K of HELOC."
+          },
+          {
+            "kind": "number",
+            "label": "$120K HELOC",
+            "from": "@paymentBefore",
+            "to": "@paymentNow",
+            "strike": true,
+            "caption": "a month, interest only"
+          },
+          {
+            "text": "12 payments: {paidIO}.|Balance: ==$120,000==."
+          }
+        ]
+      },
+      "story": {
+        "hook": {
+          "sticker": "{paidIO} in payments.",
+          "label": "Balance owing",
+          "paid": "@paidIO",
+          "balance": "@balanceIO",
+          "caption": "{paidIO} paid.|Balance: ==$120,000==."
+        },
+        "beats": [
+          {
+            "id": "rise",
+            "label": "Prime +0.25%",
+            "caption": "Interest only:|==$520== a month.",
+            "from": "@paymentBefore",
+            "to": "@paymentNow",
+            "delta": "{deltaBefore}",
+            "note": "{paymentBefore} before Oct 29"
+          },
+          {
+            "id": "stack",
+            "n": 12,
+            "unit": "@paymentNow",
+            "total": "@paidIO",
+            "balance": "@balanceIO",
+            "stamp": "Didn't move"
+          },
+          {
+            "id": "fix",
+            "label": "Set it to",
+            "pay": "@customPayment",
+            "extra": "@extraCustom",
+            "off": "@principalCustom",
+            "balanceEnd": "@balanceCustom",
+            "interest": "@interestCustom"
+          }
+        ]
+      }
+    }
+  },
+  "story": {
+    "$comment": "One script, three directions (pop-hook, phone-pov, object-3d). Captions pop word by word; ==x== marks the key number. Every number is a calc reference.",
+    "hook": {
+      "caption": "$7,800 paid.|Still owes ==$150,000==.",
+      "kicker": "Paul's HELOC",
+      "paid": "@paidIO",
+      "balance": "@balanceIO"
+    },
+    "beats": [
+      {
+        "id": "rise",
+        "caption": "Interest only:|==$650== a month.",
+        "from": "@paymentBefore",
+        "to": "@paymentNow",
+        "delta": "{deltaBefore}",
+        "note": "{paymentBefore} before Oct 29"
+      },
+      {
+        "id": "stack",
+        "caption": "12 payments.|Balance: ==$150,000==.",
+        "n": 12,
+        "unit": "@paymentNow",
+        "total": "@paidIO",
+        "balance": "@balanceIO"
+      },
+      {
+        "id": "fix",
+        "caption": "Pay ==$850== instead:|==$2,458== off in a year.",
+        "pay": "@customPayment",
+        "extra": "@extraCustom",
+        "off": "@principalCustom",
+        "balanceEnd": "@balanceCustom",
+        "interest": "@interestCustom"
+      }
+    ],
+    "cta": "Comment HELOC for the paydown worksheet"
+  },
+  "example": "Example motion data for the fictional client Northline Mortgages (Toronto). 'Paul' is an illustrative composite, not a real person. Rates as of Nov 16, 2026: update facts, dates and expect lines before reusing."
+}

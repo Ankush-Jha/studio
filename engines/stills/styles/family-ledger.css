@@ -1,0 +1,149 @@
+/* LEDGER (Group 1): Swiss/International modernism. One grotesk (Archivo) used across
+   its width axis: condensed 800 for display, normal width for text. 3px rules,
+   hanging numerals, one signal colour. Annotations: quick fine red-pen marks. */
+.fam-ledger .headline,.fam-ledger .title,.fam-ledger .statement,.fam-ledger .cta-head{font-weight:800;font-stretch:72%;letter-spacing:-.016em;word-spacing:.07em;color:var(--color-ink)}
+.fam-ledger .paper{background:
+  linear-gradient(var(--color-ink),var(--color-ink)) 80px 1290px / 14px 1.5px no-repeat,
+  linear-gradient(var(--color-ink),var(--color-ink)) 86px 1284px / 1.5px 14px no-repeat,
+  linear-gradient(var(--color-ink),var(--color-ink)) 986px 1290px / 14px 1.5px no-repeat,
+  linear-gradient(var(--color-ink),var(--color-ink)) 992px 1284px / 1.5px 14px no-repeat;opacity:.0}
+
+/* masthead */
+.fam-ledger .mast{padding-bottom:22px;border-bottom:3px solid var(--color-ink);gap:20px}
+.fam-ledger .logo{width:58px;height:58px;background:var(--color-accent);color:var(--color-on-accent);font:700 22px/1 var(--font-label);letter-spacing:.02em}
+.fam-ledger .mast .series{font-weight:700;letter-spacing:.12em}
+.fam-ledger .mast .folio{font-weight:700;font-size:22px}
+
+.fam-ledger .main{padding-top:56px}
+.fam-ledger .kicker,.fam-ledger .eyebrow{font-weight:700;letter-spacing:.14em;color:var(--color-accent-ink);display:flex;align-items:center}
+.fam-ledger .kicker::before,.fam-ledger .eyebrow::before{content:"";width:42px;height:3px;background:var(--color-accent);margin-right:16px;flex:none}
+
+/* cover */
+.fam-ledger.t-cover .main{padding-top:52px}
+.fam-ledger .headline{font-size:var(--size-display-xl);line-height:.9;margin-top:34px;max-width:900px;letter-spacing:-.02em;position:relative;z-index:2}
+.fam-ledger.t-cover .figure{right:-96px;bottom:-34px;font:800 980px/.74 var(--font-display);font-stretch:62%;color:var(--color-accent);letter-spacing:-.05em;z-index:0}
+.fam-ledger .dek{position:absolute;left:0;bottom:30px;width:480px;font-size:36px;font-weight:500;line-height:1.24;padding-top:22px;border-top:3px solid var(--color-ink);z-index:2}
+
+/* content */
+.fam-ledger .statement{font-size:80px;font-weight:700;font-stretch:80%;line-height:1.02;margin-top:36px;max-width:900px}
+.fam-ledger .note{margin-top:auto;margin-bottom:34px;padding-top:22px;border-top:3px solid var(--color-ink);font-size:34px;width:72%}
+
+/* list */
+.fam-ledger .title{font-size:var(--size-display-l);line-height:.94;margin-top:30px}
+.fam-ledger .items{margin-top:54px}
+.fam-ledger .item{display:grid;grid-template-columns:132px 1fr;border-top:2px solid var(--color-ink);padding:24px 0 28px}
+.fam-ledger .item .num{grid-row:1 / span 2;font:800 72px/.86 var(--font-display);font-stretch:62%;color:var(--color-accent-ink);letter-spacing:-.02em}
+.fam-ledger .item .q{font:650 46px/1.08 var(--font-body);font-stretch:86%;letter-spacing:-.01em}
+.fam-ledger .item .tag{margin-top:10px;font:700 20px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--color-ink-soft)}
+
+/* data */
+.fam-ledger.t-data .main{display:flex;flex-direction:column}
+.fam-ledger.t-data .title{font-size:80px}
+.fam-ledger .chart-wrap{margin-top:46px;color:var(--color-ink)}
+.fam-ledger .chart .bar-a{fill:#BDB8AE}
+.fam-ledger .chart .val{font-family:var(--font-display);font-weight:800;font-stretch:72%;font-size:54px}
+.fam-ledger .chart .cat{font-weight:700}
+/* Ledger's number slide: hero numeral first, thin horizontal ledger bars beneath */
+.fam-ledger .chart-wrap{display:flex;flex-direction:column;margin-top:64px}
+.fam-ledger .callout{position:static;order:-1;flex-direction:row;align-items:flex-end;gap:30px;margin-bottom:40px;padding-bottom:30px;border-bottom:2px solid var(--color-ink)}
+.fam-ledger .callout-big{font-weight:800;font-stretch:62%;font-size:300px;line-height:.74;color:var(--color-accent-ink);letter-spacing:-.035em}
+.fam-ledger .callout-sub{font-weight:500;font-size:36px;width:330px;margin:0 0 4px}
+.fam-ledger .chart.is-h .val{font-size:48px}
+.fam-ledger .assumptions{margin-top:auto;padding-top:18px;border-top:2px solid var(--color-ink)}
+
+/* myth / fact */
+.fam-ledger.t-myth .main{display:flex;flex-direction:column}
+.fam-ledger .mf-label{font:700 22px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase;color:var(--color-ink-soft)}
+.fam-ledger .myth{margin-top:44px}
+.fam-ledger .myth-text{font:700 76px/1.0 var(--font-display);font-stretch:76%;color:var(--color-ink-soft);margin-top:24px;letter-spacing:-.02em}
+.fam-ledger .fact{margin-top:auto;padding-top:30px;border-top:3px solid var(--color-ink);margin-bottom:30px}
+.fam-ledger .fact .mf-label{color:var(--color-accent-ink)}
+.fam-ledger .fact-text{font:600 50px/1.12 var(--font-body);font-stretch:90%;margin-top:22px}
+.fam-ledger .status{margin-top:30px;font:700 21px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase}
+
+/* checklist */
+.fam-ledger .rows{margin-top:50px;border-top:3px solid var(--color-ink)}
+.fam-ledger .row{display:grid;grid-template-columns:70px 1fr auto;column-gap:22px;align-items:start;padding:26px 0;border-bottom:1.5px solid var(--color-ink)}
+.fam-ledger .row .box{width:44px;height:44px;border:3px solid var(--color-ink);margin-top:2px}
+.fam-ledger .row .r-q{font:650 44px/1.08 var(--font-body);font-stretch:86%}
+.fam-ledger .row .r-a{grid-column:2;font-size:30px;color:var(--color-ink-soft);margin-top:8px}
+.fam-ledger .row .r-s{font:700 21px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase;padding-top:12px}
+
+/* CTA */
+.fam-ledger.t-cta .main{padding-top:80px}
+.fam-ledger .cta-head{font-size:124px;line-height:.9;margin-top:30px;letter-spacing:-.026em}
+.fam-ledger .cta-sub{margin-top:40px;width:640px;font-size:36px;font-weight:500}
+.fam-ledger.t-cta .foot,.fam-ledger.t-tip .foot,.fam-ledger.t-rateday .foot{justify-content:flex-end}
+.fam-ledger .compliance.c-block{align-items:flex-end;text-align:right;padding-top:16px;border-top:3px solid var(--color-ink);min-width:420px}
+.fam-ledger .kw{color:var(--color-accent-ink)}
+
+/* tip (single static) */
+.fam-ledger.t-tip .main{display:flex;flex-direction:column;padding-top:50px}
+.fam-ledger.t-tip .figure{position:relative;display:flex;align-items:flex-end;gap:18px;margin:26px 0 0 -12px;font:800 600px/.74 var(--font-display);font-stretch:62%;color:var(--color-accent);letter-spacing:-.045em}
+.fam-ledger.t-tip .figure em{font:800 64px/1 var(--font-display);font-stretch:72%;font-style:normal;color:var(--color-ink);letter-spacing:-.01em;margin-bottom:6px}
+.fam-ledger.t-tip .headline{font-size:88px;line-height:.94;margin-top:48px;padding-top:30px;border-top:3px solid var(--color-ink)}
+.fam-ledger .support{margin-top:28px;max-width:760px;font-size:36px;font-weight:450;line-height:1.28}
+
+/* rate day */
+.fam-ledger.t-rateday .main{display:flex;flex-direction:column}
+.fam-ledger.t-rateday .headline{font-size:96px;margin-top:28px}
+.fam-ledger .rate-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:24px;margin-top:40px;border-top:3px solid var(--color-ink)}
+.fam-ledger .rate{padding-top:20px}
+.fam-ledger .r-k{font:700 21px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase}
+.fam-ledger .r-v{font:800 210px/.86 var(--font-display);font-stretch:62%;letter-spacing:-.03em;margin-top:14px}
+.fam-ledger .rate-policy .r-v{color:var(--color-accent-ink)}
+.fam-ledger .r-v span{font-size:.45em}
+.fam-ledger .r-d{font-size:28px;color:var(--color-ink-soft);margin-top:10px}
+.fam-ledger .next{margin-top:auto;margin-bottom:20px;font:800 56px/1 var(--font-display);font-stretch:72%}
+.fam-ledger .next-k{display:block;font:700 21px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.fam-ledger .chart-step{margin-top:20px}
+.fam-ledger .chart-step .step{fill:none;stroke:var(--color-ink);stroke-width:6}
+.fam-ledger .chart-step .step-next{fill:none;stroke:var(--color-ink);stroke-width:3;stroke-dasharray:3 9}
+.fam-ledger .chart-step .dot{fill:var(--color-accent)}
+.fam-ledger .chart-step .lvl{font:800 40px/1 var(--font-display);font-stretch:72%}
+.fam-ledger .chart-step .q{font:800 64px/1 var(--font-display);fill:var(--color-accent-ink)}
+
+/* long cover figure (e.g. "$77,411"): live type in the flow, above the dek */
+.fam-ledger.t-cover .figure.fig-long{position:relative;right:auto;bottom:auto;margin-top:auto;margin-bottom:226px;margin-left:-10px;font:800 396px/.78 var(--font-display);font-stretch:62%;color:var(--color-accent);letter-spacing:-.035em;white-space:nowrap;z-index:1}
+
+/* tip card with a chart: figure in the left two columns, headline in the right four, chart below */
+.fam-ledger.t-tip .tip-top{display:grid;grid-template-columns:314px 1fr;column-gap:24px;align-items:end;margin-top:52px}
+.fam-ledger.t-tip .tip-top .figure{margin:0 0 0 14px;font-size:372px;line-height:.74}
+.fam-ledger.t-tip .tip-top .headline{margin:0;padding:0;border:0;font-size:84px;line-height:.92}
+.fam-ledger.v-b.t-tip .tip-top{grid-template-columns:1fr 314px}
+.fam-ledger.v-b.t-tip .tip-top .figure{order:2;margin:0 14px 0 0;justify-content:flex-end}
+.fam-ledger.t-tip .chart-wrap{margin-top:64px;padding-top:48px;border-top:3px solid var(--color-ink)}
+.fam-ledger.t-tip .chart-wrap + .support{margin-top:40px}
+.fam-ledger.t-tip .foot-note{max-width:400px}
+
+/* shared by the new bar charts */
+.fam-ledger .chart-fhsa .cat,.fam-ledger .chart-dp .cat{font:700 24px/1 var(--font-label);letter-spacing:.12em;text-transform:uppercase}
+.fam-ledger .chart-fhsa .ghost{stroke:var(--color-ink);stroke-dasharray:4 8;stroke-width:2;opacity:.7}
+
+/* down payment: compare view (thick bars, gap as a dashed ghost) */
+.fam-ledger .chart-down-payment.view-compare{margin-top:84px}
+.fam-ledger .chart-dp .val{font-size:58px}
+.fam-ledger .chart-dp .bar-ghost{fill:none;stroke:var(--color-ink);stroke-width:3;stroke-dasharray:10 9}
+.fam-ledger .chart-dp .gap-label{font:800 44px/1 var(--font-display);font-stretch:72%;fill:var(--color-accent-ink)}
+
+/* down payment: sum view (a ledger column that adds up) */
+.fam-ledger .chart-down-payment.view-sum{margin-top:80px}
+.fam-ledger .dp-sum{border-top:3px solid var(--color-ink)}
+.fam-ledger .dp-row{display:grid;grid-template-columns:1fr auto;align-items:baseline;column-gap:24px;padding:46px 0 40px;border-bottom:1.5px solid var(--color-ink)}
+.fam-ledger .dp-k{font:600 44px/1.1 var(--font-body);font-stretch:88%}
+.fam-ledger .dp-v{font:800 108px/.9 var(--font-display);font-stretch:66%;letter-spacing:-.01em;text-align:right;white-space:nowrap}
+.fam-ledger .dp-v i{font-style:normal;color:var(--color-ink-soft);margin-right:.14em}
+.fam-ledger .dp-total{border-bottom:0;border-top:3px solid var(--color-ink);margin-top:12px;padding-top:56px}
+.fam-ledger .dp-total .dp-k{font:700 26px/1 var(--font-label);letter-spacing:.14em;text-transform:uppercase;align-self:center}
+.fam-ledger .dp-total .dp-v{font-size:224px;line-height:.78;color:var(--color-accent-ink);letter-spacing:-.03em}
+
+/* checklist rows without answers (a one-line recap): larger rows that fill the page */
+.fam-ledger .rows:not(:has(.r-a)) .row{padding:38px 0;align-items:center}
+.fam-ledger .rows:not(:has(.r-a)) .row .r-q{font-size:54px}
+.fam-ledger .rows:not(:has(.r-a)) .row .box{width:50px;height:50px;margin-top:0}
+
+/* content statements scale with length, so a short idea fills the page instead of floating */
+.fam-ledger .statement.len-s{font-size:124px;line-height:.96;letter-spacing:-.02em}
+.fam-ledger .statement.len-m{font-size:104px;line-height:.98;letter-spacing:-.018em}
+.fam-ledger .statement.len-l{font-size:92px;line-height:1}
+.fam-ledger .chart-down-payment.view-compare{margin-top:auto;margin-bottom:auto;padding-top:40px}

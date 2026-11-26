@@ -1,0 +1,62 @@
+{
+  "slug": "cutout",
+  "name": "Paper Cut-out",
+  "group": 2,
+  "family": "Kitchen Table",
+  "summary": "Layered construction paper built in SVG: deckled torn edges with a white fibre core, tight neutral shadows, three papers plus the client accent; headlines are set on torn strips pasted onto the board.",
+  "formats": [
+    "feed",
+    "story",
+    "square"
+  ],
+  "types": [
+    "cover",
+    "point",
+    "number",
+    "compare",
+    "steps",
+    "recap",
+    "myth",
+    "quote",
+    "stat",
+    "cta"
+  ],
+  "variants": [
+    "a",
+    "b"
+  ],
+  "fonts": [
+    {
+      "family": "Young Serif",
+      "file": "YoungSerif-Regular.ttf",
+      "style": "normal",
+      "weight": "400"
+    },
+    {
+      "family": "Rethink Sans",
+      "file": "RethinkSans[wght].ttf",
+      "style": "normal",
+      "weight": "400 800"
+    }
+  ],
+  "palette": {
+    "paper": "#E8A33D",
+    "card": "#F7F4ED",
+    "ink": "#1E2420",
+    "ink-soft": "#3E4540",
+    "deep": "#2B312D",
+    "kraft": "#C49B66",
+    "accent": "#B4232A",
+    "ground2": "#86B9DC"
+  },
+  "accentGround": "card",
+  "emphasis": "patch",
+  "hand": {
+    "pen": "marker",
+    "weight": 6,
+    "wobble": 0.9
+  },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40
+}

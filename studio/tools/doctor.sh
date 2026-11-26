@@ -31,7 +31,9 @@ command -v claude >/dev/null && ok "claude CLI" || warn "Claude Code CLI missing
 [ -d engines/stills/lib ] && ok "engine: stills" || bad "engines/stills missing"
 [ -d engines/stills/node_modules ] && ok "stills node_modules" || warn "stills deps missing (cd engines/stills && npm ci)"
 [ -d engines/motion/lib ] && ok "engine: motion" || bad "engines/motion missing"
-[ -d engines/face-reels ] && ok "engine: face-reels" || warn "engines/face-reels missing"
+[ -f engines/face-reels/setup.sh ] && ok "engine: face-reels" || warn "engines/face-reels missing"
+[ -d engines/face-reels/vendor ] && ok "face-reels vendor engines" || warn "face-reels engines not installed yet (bash engines/face-reels/setup.sh, ~1 GB): footage reels unavailable until then"
+[ -x engines/stills/.venv/bin/python ] && ok "stills .venv" || warn "stills .venv missing (sh setup.sh)"
 [ -d studio/lib/node_modules ] && ok "studio/lib node_modules" || bad "studio/lib deps missing (cd studio/lib && npm ci)"
 # guard + tools
 printf '%s' "{\"tool_name\":\"Write\",\"tool_input\":{\"file_path\":\"$R/engines/films/AGENTS.md\"},\"cwd\":\"$R\"}" | node .claude/hooks/guard.mjs | grep -q deny && ok "guard hook blocks writes to engines/" || bad "guard hook not working"

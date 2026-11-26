@@ -1,0 +1,26 @@
+{
+  "slug": "swiss",
+  "name": "Swiss Data Poster",
+  "group": 1,
+  "family": "Ledger",
+  "summary": "International Typographic Style: one grotesk, a visible 12-column grid, flush-left type and data drawn as exact geometry in one signal colour.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "Archivo", "file": "Archivo[wdth,wght].ttf", "style": "normal", "weight": "100 900", "stretch": "62% 125%" },
+    { "family": "Archivo", "file": "Archivo-Italic[wdth,wght].ttf", "style": "italic", "weight": "100 900", "stretch": "62% 125%" }
+  ],
+  "palette": {
+    "paper": "#F4F3EF",
+    "ink": "#000000",
+    "ink-soft": "#4A4A47",
+    "rule": "#000000",
+    "accent": "#E03C1F"
+  },
+  "emphasis": "accent",
+  "hand": { "pen": "fine", "weight": 4.4, "wobble": 0.7 },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40
+}

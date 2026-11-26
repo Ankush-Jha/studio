@@ -1,0 +1,39 @@
+/* pop-hook: Bold Pop. Fields and text colours are computed per client in timeline.js
+   (--on-acc-big, --on-acc-small, --acc-on-ink...) so any accent keeps contrast. */
+.tpl-pop-hook{--pop-font:var(--font-body);--pop-w:700;--pop-s:82%;--serif:var(--font-display)}
+.fam-ledger.tpl-pop-hook{--pop-font:var(--font-display);--pop-w:860;--pop-s:76%}
+.fam-riso.tpl-pop-hook{--pop-font:var(--font-display);--pop-w:800;--pop-s:76%}
+.fam-dossier.tpl-pop-hook{--pop-font:var(--font-body);--pop-w:700;--pop-s:92%}
+.tpl-pop-hook .paper{display:none}
+.tpl-pop-hook .field{position:absolute;inset:0;z-index:0}
+.tpl-pop-hook .blob{position:absolute;z-index:1;border-radius:50%;width:1150px;height:1150px;left:330px;top:1290px;box-shadow:0 -30px 80px rgba(0,0,0,.18)}
+.tpl-pop-hook .blob2{position:absolute;z-index:1;border-radius:50%;width:420px;height:420px;left:-170px;top:1480px}
+.tpl-pop-hook .scene{position:absolute;inset:0;z-index:5;transform-origin:540px 700px}
+.tpl-pop-hook .pop{font-family:var(--pop-font);font-weight:var(--pop-w);font-stretch:var(--pop-s);letter-spacing:-.035em;line-height:.86;white-space:nowrap}
+.tpl-pop-hook .cap{font-family:var(--pop-font);font-weight:var(--pop-w);font-stretch:100%;letter-spacing:-.01em;line-height:1.08}
+.tpl-pop-hook .lab{font-family:var(--pop-font);font-weight:var(--pop-w);font-stretch:100%;text-transform:uppercase;letter-spacing:.06em;line-height:1}
+.tpl-pop-hook .abs{position:absolute}
+.tpl-pop-hook .num{font-variant-numeric:tabular-nums lining-nums}
+.tpl-pop-hook .rich{font-family:var(--pop-font);font-weight:var(--pop-w);font-stretch:100%;letter-spacing:-.012em;line-height:1.04;color:inherit}
+.tpl-pop-hook .rich .em .wi{color:var(--hi)}
+.fam-kitchen.tpl-pop-hook .rich .it .wi{font-family:var(--serif);font-style:italic;font-variation-settings:var(--fv-italic);font-weight:500}
+
+/* sticker / pills */
+.tpl-pop-hook .sticker{padding:18px 28px 16px;border-radius:14px;box-shadow:0 14px 0 rgba(0,0,0,.18),0 24px 40px rgba(0,0,0,.18);transform-origin:20% 60%}
+.tpl-pop-hook .pill{display:inline-block;padding:12px 20px 10px;border-radius:999px}
+/* progress bar */
+.tpl-pop-hook .bar{position:absolute;height:34px;border-radius:999px;overflow:hidden}
+.tpl-pop-hook .bar i{position:absolute;left:0;top:0;bottom:0;width:100%;transform-origin:0 50%;border-radius:999px}
+/* slips */
+.tpl-pop-hook .slip{position:absolute;width:196px;height:118px;border-radius:16px;display:grid;place-items:center;box-shadow:0 10px 0 rgba(0,0,0,.16),0 18px 30px rgba(0,0,0,.16)}
+.tpl-pop-hook .slip span{font-family:var(--pop-font);font-weight:var(--pop-w);font-size:44px;letter-spacing:-.01em}
+.tpl-pop-hook .stamp{position:absolute;padding:14px 24px 10px;border:7px solid currentColor;border-radius:12px;transform-origin:50% 50%}
+/* slider */
+.tpl-pop-hook .track{position:absolute;height:18px;border-radius:999px}
+.tpl-pop-hook .knob{position:absolute;width:76px;height:76px;border-radius:50%;box-shadow:0 10px 0 rgba(0,0,0,.18),0 16px 26px rgba(0,0,0,.2)}
+/* foot: a ticket panel so the fine print reads on every field */
+.tpl-pop-hook .foot{padding:16px 20px 14px;background:var(--color-paper);border-radius:14px;box-shadow:0 8px 0 rgba(0,0,0,.12)}
+.tpl-pop-hook .foot .fine,.tpl-pop-hook .foot .compliance{color:var(--color-ink)}
+.tpl-pop-hook .chrome .series,.tpl-pop-hook .chrome .tag,.tpl-pop-hook .chrome .folio{color:var(--chrome-ink)}
+.tpl-pop-hook .chrome .badge{background:var(--chrome-ink);color:var(--badge-fg);border-radius:10px}
+.fam-kitchen.tpl-pop-hook .chrome .badge{border-radius:50%}

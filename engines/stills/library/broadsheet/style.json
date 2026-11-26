@@ -1,0 +1,30 @@
+{
+  "slug": "broadsheet",
+  "name": "Front Page",
+  "group": 4,
+  "family": "Dossier",
+  "summary": "A newspaper front page for one post: a fictional nameplate made from the series, an honest dateline, a Libre Franklin headline, Newsreader columns, and the chart standing in for the news photo.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "stat", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "UnifrakturMaguntia", "file": "UnifrakturMaguntia-Book.ttf", "style": "normal", "weight": "400" },
+    { "family": "Libre Franklin", "file": "LibreFranklin[wght].ttf", "style": "normal", "weight": "100 900" },
+    { "family": "Libre Franklin", "file": "LibreFranklin-Italic[wght].ttf", "style": "italic", "weight": "100 900" },
+    { "family": "Newsreader", "file": "Newsreader[opsz,wght].ttf", "style": "normal", "weight": "200 800" },
+    { "family": "Newsreader", "file": "Newsreader-Italic[opsz,wght].ttf", "style": "italic", "weight": "200 800" }
+  ],
+  "palette": {
+    "paper": "#ECE8DD",
+    "ink": "#161513",
+    "ink-soft": "#47443D",
+    "rule": "#161513",
+    "accent": "#2E6B30"
+  },
+  "accentGround": "paper",
+  "emphasis": "plain",
+  "hand": { "pen": "pencil", "weight": 4.6, "wobble": 0.9 },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40
+}

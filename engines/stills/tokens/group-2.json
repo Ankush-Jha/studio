@@ -1,0 +1,36 @@
+{
+  "$description": "Group 2 family: KITCHEN TABLE. Warm editorial: a soft, slightly wonky display serif with a plain grotesk, wide margin column for notes and numerals, oat paper and pine ink. Annotations are felt-marker circles and arrows plus a highlighter swipe behind key words.",
+  "meta": { "group": 2, "family": "kitchen", "name": "Kitchen Table", "grid": "asymmetric: 216px margin column + 688px text column; variant b mirrors the margin to the right" },
+  "color": {
+    "paper":    { "$type": "color", "$value": "#F3EADB", "$description": "oat paper" },
+    "ink":      { "$type": "color", "$value": "#1E3A2F", "$description": "pine" },
+    "ink-soft": { "$type": "color", "$value": "#4E6158" },
+    "rule":     { "$type": "color", "$value": "#C9BCA5" },
+    "accent":   { "$type": "color", "$value": "#E3A72F", "$description": "marigold highlighter; client accent replaces it" },
+    "mark":     { "$type": "color", "$value": "{color.ink}", "$description": "marker annotations in pine ink" }
+  },
+  "font": {
+    "display": { "$type": "fontFamily", "$value": ["Fraunces", "Georgia", "serif"] },
+    "body":    { "$type": "fontFamily", "$value": ["Instrument Sans", "Helvetica", "sans-serif"] },
+    "label":   { "$type": "fontFamily", "$value": ["Instrument Sans", "Helvetica", "sans-serif"] }
+  },
+  "size": {
+    "display-xl": { "$type": "dimension", "$value": "120px" },
+    "display-l":  { "$type": "dimension", "$value": "78px" },
+    "display-m":  { "$type": "dimension", "$value": "66px" },
+    "body-l":     { "$type": "dimension", "$value": "44px" },
+    "body":       { "$type": "dimension", "$value": "34px" },
+    "label":      { "$type": "dimension", "$value": "21px" },
+    "fine":       { "$type": "dimension", "$value": "19px" }
+  },
+  "space": {
+    "margin-x":      { "$type": "dimension", "$value": "76px" },
+    "margin-top":    { "$type": "dimension", "$value": "70px" },
+    "margin-bottom": { "$type": "dimension", "$value": "58px" },
+    "gutter":        { "$type": "dimension", "$value": "32px" },
+    "margin-col":    { "$type": "dimension", "$value": "216px" }
+  },
+  "fontVariation": { "display": "'SOFT' 100, 'WONK' 1", "italic": "'SOFT' 100, 'WONK' 1" },
+  "annotation": { "pen": "marker", "emphasis": "highlight", "strike": "double", "weight": 6.4, "wobble": 1.25, "highlightMix": 0.5, "highlightCover": 0.62 },
+  "texture": { "grain": 0.1, "grainFreq": 0.75, "paper": "fibre" }
+}

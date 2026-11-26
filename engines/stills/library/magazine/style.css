@@ -1,0 +1,229 @@
+/* Editorial Cover. Bodoni Moda (display, optical sizes) + Schibsted Grotesk (cover lines, body).
+ * Cover and back cover: full-bleed accent field. Inside: bright cool paper, editorial spreads. */
+.st-magazine { font-family: "Schibsted Grotesk", sans-serif; color: var(--color-ink); background: var(--color-paper); font-optical-sizing: auto; }
+.st-magazine .mg-grain { position: absolute; inset: 0; background-image: var(--grain-img); background-size: 540px; mix-blend-mode: multiply; opacity: 0.06; }
+.st-magazine .mg-field { position: absolute; inset: 0; background: var(--color-accent); }
+.st-magazine.is-cover { color: var(--color-on-accent); }
+.st-magazine .stage { display: flex; flex-direction: column; }
+.st-magazine [data-mark="italic-accent"] { font-style: italic; }
+.st-magazine .tnum { font-variant-numeric: lining-nums tabular-nums; }
+.st-magazine .mg-fig, .st-magazine .mg-side-v, .st-magazine .mg-pull-v, .st-magazine .mg-row-v, .st-magazine .mg-hero-n, .st-magazine .mg-fact-v, .st-magazine .mg-h1, .st-magazine .mg-h2, .st-magazine .mg-stand { font-variant-numeric: lining-nums proportional-nums; }
+/* Optical sizes chosen for a phone screen: only the masthead keeps the hairline extreme. */
+.st-magazine .mg-mast { font-variation-settings: "opsz" 40; } /* opsz 96 hairlines vanished at phone size: "M" read as "Vl" */
+.st-magazine .mg-h1, .st-magazine .mg-back-h { font-variation-settings: "opsz" 48; }
+.st-magazine .mg-h2, .st-magazine .mg-q { font-variation-settings: "opsz" 34; }
+/* Standfirsts carry commas and apostrophes: a low optical size keeps their tails visible. */
+.st-magazine .mg-stand, .st-magazine .mg-myth-t { font-variation-settings: "opsz" 20; }
+.st-magazine .mg-fig, .st-magazine .mg-side-v, .st-magazine .mg-pull-v, .st-magazine .mg-row-v, .st-magazine .mg-hero-n, .st-magazine .mg-fact-v { font-variation-settings: "opsz" 28; }
+.st-magazine .mg-line, .st-magazine .mg-pg, .st-magazine .mg-caption, .st-magazine .mg-item-n { font-variation-settings: "opsz" 22; }
+.st-magazine .mg-sign { font-family: "Schibsted Grotesk", sans-serif; font-weight: 500; font-size: 0.7em; vertical-align: 0.14em; margin-right: 0.04em; }
+
+/* ---------- Cover ---------- */
+.st-magazine .mg-mast-box { line-height: 0; margin-right: 10px; white-space: nowrap; }
+.st-magazine .mg-mast { font-family: "Bodoni Moda", serif; font-weight: 800; letter-spacing: -0.035em; line-height: normal; }
+/* Bodoni Moda's line box is 1.525em (ascent 1.125, descent 0.4); QA measures that box, so it
+ * stays inside the safe area and only the empty descender room is pulled back. */
+.st-magazine .mg-mast-box.no-desc .mg-mast { margin-bottom: -0.34em; }
+.st-magazine .mg-mast-box.has-desc .mg-mast { margin-bottom: -0.12em; }
+.st-magazine .mg-dateline { display: flex; justify-content: space-between; margin-top: 18px; padding: 9px 0 10px; border-top: 3px solid currentColor; border-bottom: 1.5px solid currentColor; font-size: 24px; font-weight: 640; letter-spacing: 0.02em; }
+.st-magazine .mg-cover-mid { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: 5fr 7fr; column-gap: 34px; margin-top: 34px; }
+.st-magazine.no-hero .mg-cover-mid { grid-template-columns: 1fr; flex: 0 0 auto; }
+.st-magazine .mg-cover-side { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.st-magazine .mg-kicker { font-size: 26px; font-weight: 760; letter-spacing: 0.01em; line-height: 1.15; padding-bottom: 14px; border-bottom: 1.5px solid currentColor; }
+.st-magazine .mg-lines { list-style: none; display: flex; flex-direction: column; gap: 26px; margin-top: 22px; padding-bottom: 4px; }
+.st-magazine .mg-lines li + li { border-top: 1.5px solid currentColor; padding-top: 20px; }
+.st-magazine .mg-lines li { display: grid; grid-template-columns: 62px 1fr; align-items: baseline; }
+.st-magazine .mg-pg { font-family: "Bodoni Moda", serif; font-style: italic; font-weight: 600; font-size: 26px; }
+.st-magazine .mg-line { font-family: "Bodoni Moda", serif; font-size: 38px; line-height: 1.06; font-weight: 520; letter-spacing: -0.005em; }
+.st-magazine .mg-photo { position: relative; min-height: 0; height: 100%; border: 10px solid var(--color-photo-frame); background: var(--color-photo-frame); }
+.st-magazine .mg-photo .photo-ph-in { left: 26px; right: 26px; bottom: 26px; font-size: 22px; }
+.st-magazine .mg-hero-fig { align-self: end; min-width: 0; line-height: 0; text-align: right; }
+.st-magazine .mg-hero-n { font-family: "Bodoni Moda", serif; font-weight: 800; letter-spacing: -0.035em; line-height: normal; display: inline-block; margin-bottom: -0.22em; }
+.st-magazine .mg-hero-l { font-size: 28px; font-weight: 600; line-height: 1.15; margin-top: 16px; }
+.st-magazine .mg-cover-story { margin-top: 34px; }
+.st-magazine .mg-h1 { font-family: "Bodoni Moda", serif; font-weight: 600; font-size: 94px; line-height: 0.98; letter-spacing: -0.018em; max-width: none; }
+.st-magazine.no-hero .mg-h1 { font-size: 118px; max-width: 13ch; }
+.st-magazine .mg-dek { font-size: 31px; line-height: 1.22; font-weight: 520; margin-top: 18px; max-width: 30ch; }
+.st-magazine .mg-cover-foot { margin-top: auto; padding-top: 24px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.st-magazine .mg-cue { display: inline-flex; align-items: center; gap: 12px; font-size: 24px; font-weight: 700; white-space: nowrap; }
+.st-magazine .mg-cue i { display: block; width: 58px; height: 3px; background: currentColor; position: relative; }
+.st-magazine .mg-cue i::after { content: ''; position: absolute; right: -1px; top: -7px; width: 14px; height: 14px; border-top: 3px solid currentColor; border-right: 3px solid currentColor; transform: rotate(45deg); }
+.st-magazine .mg-label { background: var(--color-paper); color: var(--color-ink); padding: 12px 16px 12px; }
+.st-magazine .mg-label .compliance { font-size: 19px; font-weight: 560; letter-spacing: 0.02em; }
+.st-magazine .mg-label .compliance.c-block { flex-direction: column; align-items: flex-start; gap: 4px; font-size: 20px; }
+
+/* Cover variant b: an accent band holds the masthead; the photo runs full width; the story
+ * and a row of cover lines sit on paper underneath. Children of the mid block join the stage
+ * flow (display: contents) so they can be re-ordered. */
+.st-magazine.is-cover.v-b:not(.is-back):not(.is-stat) { color: var(--color-ink); }
+.st-magazine.is-cover.v-b:not(.is-back):not(.is-stat) .mg-field { bottom: auto; height: calc(var(--safe-y0) + 312px); }
+.st-magazine.v-b .mg-front .mg-mast-box,
+.st-magazine.v-b .mg-front .mg-dateline { color: var(--color-on-accent); }
+.st-magazine.v-b .mg-front .mg-dateline { border-bottom: 0; }
+.st-magazine.v-b .mg-front .mg-cover-mid, .st-magazine.v-b .mg-front .mg-cover-side { display: contents; }
+.st-magazine.v-b .mg-front .mg-mast-box { order: 0; }
+.st-magazine.v-b .mg-front .mg-dateline { order: 1; }
+.st-magazine.v-b .mg-front .mg-photo { order: 2; flex: 1 1 auto; height: auto; min-height: 0; margin-top: 60px; border-width: 0; }
+.st-magazine.v-b .mg-front .mg-hero-fig { order: 2; flex: 1 1 auto; margin-top: 30px; text-align: left; }
+.st-magazine.v-b .mg-front .mg-kicker { order: 3; margin-top: 30px; border-bottom: 0; padding-bottom: 0; color: var(--color-accent-ink); }
+.st-magazine.v-b .mg-front .mg-cover-story { order: 4; margin-top: 10px; }
+.st-magazine.v-b .mg-front .mg-h1 { max-width: none; font-size: 84px; }
+.st-magazine.v-b .mg-front .mg-lines { order: 5; flex-direction: row; gap: 28px; margin-top: 28px; }
+.st-magazine.v-b .mg-front .mg-lines li { flex: 1 1 0; grid-template-columns: 1fr; border-top: 3px solid var(--color-ink); padding-top: 10px; }
+.st-magazine.v-b .mg-front .mg-lines li + li { border-top-width: 3px; padding-top: 10px; }
+.st-magazine.v-b .mg-front .mg-line { font-size: 29px; }
+.st-magazine.v-b .mg-front .mg-pg { color: var(--color-accent-ink); font-size: 24px; }
+.st-magazine.v-b .mg-front .mg-cover-foot { order: 6; padding-top: 22px; margin-top: 0; }
+.st-magazine.v-b .mg-front .mg-label { background: transparent; padding: 0; }
+.st-magazine.v-b .mg-front .mg-cue { color: var(--color-accent-ink); }
+
+/* ---------- Inside spreads ---------- */
+.st-magazine .mg-run { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; column-gap: 22px; padding-top: 22px; padding-bottom: 12px; border-bottom: 1.5px solid var(--color-rule); font-size: 22px; font-weight: 600; }
+.st-magazine .mg-run-title { font-family: "Bodoni Moda", serif; font-style: italic; font-weight: 600; font-size: 27px; }
+.st-magazine .mg-run-date { color: var(--color-ink-soft); }
+.st-magazine .mg-folio b { font-family: "Bodoni Moda", serif; font-weight: 700; font-size: 30px; }
+.st-magazine .mg-section { display: flex; align-items: center; gap: 16px; margin-top: 60px; font-size: 25px; font-weight: 720; color: var(--color-accent-ink); letter-spacing: 0.005em; }
+.st-magazine .mg-section::before { content: ''; flex: 0 0 44px; height: 5px; background: var(--color-accent); }
+.st-magazine .mg-fig-box { margin-top: 0; line-height: 0; }
+.st-magazine .mg-fig { font-family: "Bodoni Moda", serif; font-weight: 640; letter-spacing: -0.03em; line-height: normal; color: var(--color-accent-ink); display: inline-block; margin-top: -0.3em; margin-bottom: -0.22em; }
+.st-magazine .mg-stand { font-family: "Bodoni Moda", serif; font-weight: 500; font-size: 64px; line-height: 1.06; letter-spacing: -0.012em; margin-top: 40px; max-width: 17ch; }
+.st-magazine.has-fig .mg-stand { font-size: 64px; margin-top: 34px; max-width: 18ch; }
+.st-magazine .mg-stand.has-drop::first-letter { initial-letter: 2; color: var(--color-accent-ink); font-weight: 700; margin-right: 0.08em; }
+.st-magazine .mg-note { font-size: 31px; line-height: 1.28; font-weight: 450; color: var(--color-ink-soft); margin-top: 34px; max-width: 31ch; }
+.st-magazine .mg-foot { margin-top: auto; padding-top: 22px; padding-bottom: 6px; border-top: 1.5px solid var(--color-rule); }
+.st-magazine .mg-foot .compliance { font-size: 19px; font-weight: 520; }
+.st-magazine.v-a.has-fig .mg-point .mg-fig-box { order: 5; margin-top: auto; margin-bottom: 26px; }
+.st-magazine.v-a.has-fig .mg-point .mg-foot { order: 6; margin-top: 0; }
+.st-magazine.v-b.has-fig .mg-point .mg-stand { margin-top: auto; }
+.st-magazine.v-b.has-fig .mg-point .mg-note { margin-bottom: 30px; }
+.st-magazine.no-fig .mg-point .mg-stand { font-size: 74px; max-width: 15ch; margin-top: 48px; }
+.st-magazine.no-fig .mg-point .mg-note { margin-top: auto; margin-bottom: 30px; padding-top: 22px; border-top: 5px solid var(--color-accent); max-width: 26ch; font-size: 34px; color: var(--color-ink); }
+.st-magazine.v-b.no-fig .mg-point .mg-stand { margin-top: auto; margin-bottom: 0; }
+.st-magazine.v-b.no-fig .mg-point .mg-note { margin-top: 40px; margin-bottom: auto; }
+
+/* Number: editorial bars from zero, footnoted. */
+.st-magazine .mg-h2 { font-family: "Bodoni Moda", serif; font-weight: 600; font-size: 62px; line-height: 1.02; letter-spacing: -0.014em; margin-top: 22px; max-width: 18ch; }
+.st-magazine .mg-chart { position: relative; display: flex; flex-direction: column; gap: 30px; margin-top: 54px; padding-left: 0; border-left: 3px solid var(--color-ink); padding-bottom: 6px; }
+.st-magazine .mg-row { padding-left: 0; }
+.st-magazine .mg-row-k { font-size: 24px; font-weight: 640; padding-left: 20px; margin-bottom: 10px; }
+.st-magazine .mg-row-bar { display: flex; align-items: center; gap: 20px; }
+.st-magazine .mg-row-bar i { display: block; height: 62px; width: calc(70% * var(--w) / 100); background: var(--color-ink-soft); }
+.st-magazine .mg-row.is-hi .mg-row-bar i { background: var(--color-accent); }
+.st-magazine .mg-row-v { font-family: "Schibsted Grotesk", sans-serif; font-size: 40px; font-weight: 720; letter-spacing: -0.015em; white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; }
+.st-magazine .mg-row.is-hi .mg-row-v { color: var(--color-accent-ink); }
+.st-magazine .mg-chart.rows-3 .mg-row-bar i { height: 52px; }
+.st-magazine .mg-zero { position: absolute; left: -2px; bottom: -36px; font-size: 20px; font-weight: 560; color: var(--color-ink-soft); }
+.st-magazine .mg-pull { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 22px; margin-top: 70px; padding-top: 18px; border-top: 1.5px solid var(--color-rule); }
+.st-magazine .mg-pull-v { font-family: "Bodoni Moda", serif; font-weight: 640; font-size: 104px; line-height: 1.1; letter-spacing: -0.03em; color: var(--color-accent-ink); }
+.st-magazine .mg-pull-s { font-size: 30px; line-height: 1.2; font-weight: 520; max-width: 17ch; }
+.st-magazine .mg-fine { font-size: 19px; line-height: 1.35; color: var(--color-ink); margin-top: auto; padding-top: 26px; max-width: 70ch; }
+.st-magazine .mg-fine b { font-family: "Bodoni Moda", serif; font-weight: 700; color: var(--color-accent-ink); }
+.st-magazine .mg-number .mg-foot { margin-top: 18px; }
+.st-magazine.v-b .mg-number .mg-pull { order: 3; margin-top: 30px; border-top: 0; padding-top: 0; }
+.st-magazine.v-b .mg-number .mg-chart { order: 4; margin-top: 46px; }
+.st-magazine.v-b .mg-number .mg-fine { order: 5; }
+.st-magazine.v-b .mg-number .mg-foot { order: 6; }
+
+/* Compare: two columns with one column rule. */
+.st-magazine .mg-sides { display: grid; grid-template-columns: 1fr 1.5px 1fr; column-gap: 40px; margin-top: auto; padding-top: 30px; }
+.st-magazine .mg-side { min-width: 0; }
+.st-magazine .mg-side-vbox { min-width: 0; line-height: 0; margin-top: 0; }
+.st-magazine .mg-colrule { background: var(--color-rule); }
+.st-magazine .mg-side-k { font-size: 27px; font-weight: 720; line-height: 1.15; }
+.st-magazine .mg-side.is-r .mg-side-k { color: var(--color-accent-ink); }
+.st-magazine .mg-side-v { font-family: "Bodoni Moda", serif; font-weight: 620; line-height: normal; letter-spacing: -0.03em; margin-top: -0.18em; margin-bottom: -0.22em; }
+.st-magazine .mg-side.is-r .mg-side-v { color: var(--color-accent-ink); }
+.st-magazine .mg-side-n { font-size: 30px; line-height: 1.24; font-weight: 450; color: var(--color-ink-soft); margin-top: 18px; }
+.st-magazine .mg-caption { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 30px; line-height: 1.25; color: var(--color-ink-soft); margin-bottom: 30px; max-width: 34ch; }
+.st-magazine .mg-compare .mg-caption { margin-top: 48px; margin-bottom: 30px; padding-top: 18px; border-top: 1.5px solid var(--color-rule); max-width: none; }
+.st-magazine .mg-compare .mg-h2 { font-size: 78px; max-width: 14ch; }
+.st-magazine.fmt-story .mg-compare .mg-h2, .st-magazine.fmt-square .mg-compare .mg-h2 { font-size: 60px; }
+.st-magazine.v-b .mg-sides { grid-template-columns: 1fr; grid-template-rows: auto 1.5px auto; row-gap: 34px; }
+.st-magazine.v-b .mg-side { display: grid; grid-template-columns: 1fr 1fr; column-gap: 30px; align-items: end; }
+.st-magazine.v-b .mg-side-k { grid-column: 1 / -1; }
+
+.st-magazine.v-b .mg-side-n { margin-top: 0; padding-bottom: 8px; }
+
+/* Lists */
+.st-magazine .mg-items { list-style: none; margin-top: 60px; display: flex; flex-direction: column; gap: 46px; }
+.st-magazine .mg-list .mg-h2 { font-size: 72px; }
+.st-magazine .mg-item { display: grid; grid-template-columns: 96px 1fr; align-items: baseline; padding-top: 22px; border-top: 1.5px solid var(--color-rule); }
+.st-magazine .mg-item-n { font-family: "Bodoni Moda", serif; font-style: italic; font-weight: 600; font-size: 64px; line-height: 0.9; color: var(--color-accent-ink); }
+.st-magazine .mg-item-t { font-size: 46px; line-height: 1.14; font-weight: 520; letter-spacing: -0.01em; }
+.st-magazine .mg-tag { font-style: normal; font-size: 26px; color: var(--color-ink-soft); }
+.st-magazine .mg-list .mg-caption { margin-top: 44px; }
+
+/* Myth */
+.st-magazine .mg-myth-t { font-family: "Bodoni Moda", serif; font-style: italic; font-size: 52px; line-height: 1.1; color: var(--color-ink-soft); margin-top: 40px; max-width: 20ch; }
+.st-magazine .mg-struck { text-decoration: line-through; text-decoration-color: var(--color-accent); text-decoration-thickness: 0.09em; }
+.st-magazine .mg-myth .mg-stand { margin-top: auto; margin-bottom: 30px; }
+
+/* Quote */
+.st-magazine .mg-qmark { font-family: "Bodoni Moda", serif; font-weight: 600; font-size: 230px; line-height: 0.8; color: var(--color-accent-ink); margin-top: auto; height: 120px; font-variation-settings: "opsz" 28; }
+.st-magazine .mg-q { font-family: "Bodoni Moda", serif; font-style: italic; font-weight: 500; font-size: 78px; line-height: 1.04; letter-spacing: -0.012em; max-width: 16ch; }
+.st-magazine .mg-by { font-size: 26px; font-weight: 700; margin-top: 34px; margin-bottom: auto; }
+
+/* Stat (single static cover) */
+.st-magazine .mg-stat .mg-kicker { margin-top: 38px; border-bottom: 0; padding-bottom: 0; }
+.st-magazine .mg-stat .mg-h1 { margin-top: 18px; font-size: 88px; max-width: 18ch; }
+.st-magazine .mg-facts { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 34px; margin-top: 40px; }
+.st-magazine .mg-facts li { border-top: 1.5px solid currentColor; padding-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.st-magazine .mg-fact-v { font-family: "Bodoni Moda", serif; font-weight: 640; font-size: 58px; line-height: 1; letter-spacing: -0.02em; }
+.st-magazine .mg-facts li.is-hi .mg-fact-v { font-size: 74px; }
+.st-magazine .mg-fact-k { font-size: 24px; font-weight: 640; line-height: 1.2; }
+.st-magazine .mg-fact-k em { font-style: normal; font-weight: 450; }
+
+/* Back cover */
+.st-magazine .mg-back-mast { font-family: "Bodoni Moda", serif; font-style: italic; font-weight: 600; font-size: 32px; padding-top: 18px; padding-bottom: 14px; border-bottom: 1.5px solid currentColor; }
+.st-magazine .mg-back-mast span { font-family: "Schibsted Grotesk", sans-serif; font-style: normal; font-size: 24px; font-weight: 600; }
+.st-magazine .mg-back-h { margin-top: auto; margin-bottom: 0; font-family: "Bodoni Moda", serif; font-weight: 600; font-size: 108px; line-height: 0.98; letter-spacing: -0.022em; max-width: 14ch; }
+.st-magazine .mg-back .mg-dek { margin-top: 34px; font-size: 34px; font-weight: 640; max-width: 26ch; }
+.st-magazine .mg-back .mg-cover-foot { margin-top: 0; padding-top: 70px; }
+.st-magazine .mg-kw { font-style: italic; }
+
+/* ---------- Formats ---------- */
+.st-magazine.fmt-story .mg-h1, .st-magazine.fmt-square .mg-h1 { font-size: 78px; }
+.st-magazine.fmt-story .mg-line, .st-magazine.fmt-square .mg-line { font-size: 29px; }
+.st-magazine.fmt-story .mg-lines, .st-magazine.fmt-square .mg-lines { gap: 14px; }
+.st-magazine.fmt-story .mg-cover-mid, .st-magazine.fmt-square .mg-cover-mid { margin-top: 24px; }
+.st-magazine.fmt-story .mg-cover-story, .st-magazine.fmt-square .mg-cover-story { margin-top: 22px; }
+.st-magazine.fmt-story .mg-dek, .st-magazine.fmt-square .mg-dek { font-size: 28px; margin-top: 12px; }
+.st-magazine.fmt-story .mg-run, .st-magazine.fmt-square .mg-run { padding-top: 0; }
+.st-magazine.fmt-story .mg-section, .st-magazine.fmt-square .mg-section { margin-top: 36px; }
+.st-magazine.fmt-story .mg-stand, .st-magazine.fmt-square .mg-stand { font-size: 54px; }
+.st-magazine.fmt-story .mg-h2, .st-magazine.fmt-square .mg-h2 { font-size: 54px; }
+.st-magazine.fmt-story .mg-chart, .st-magazine.fmt-square .mg-chart { margin-top: 36px; gap: 20px; }
+.st-magazine.fmt-story .mg-pull, .st-magazine.fmt-square .mg-pull { margin-top: 50px; }
+.st-magazine.fmt-story .mg-pull-v, .st-magazine.fmt-square .mg-pull-v { font-size: 84px; }
+.st-magazine.fmt-story .mg-back-h, .st-magazine.fmt-square .mg-back-h { font-size: 92px; }
+.st-magazine.fmt-story .mg-items, .st-magazine.fmt-square .mg-items { margin-top: 34px; gap: 24px; }
+.st-magazine.fmt-story .mg-item-t, .st-magazine.fmt-square .mg-item-t { font-size: 36px; }
+
+/* Story cover with a bleeding photo: kicker and cover lines become a row; the photo sits in
+ * the background from just under the safe box to the bottom edge. */
+.st-magazine.photo-bleed .mg-photo-bleed { position: absolute; left: 0; right: 0; top: 1296px; bottom: 0; height: auto; border: 0; border-top: 12px solid var(--color-photo-frame); }
+.st-magazine.photo-bleed .mg-photo-bleed .photo-ph-in { top: 40px; bottom: auto; left: 64px; right: 64px; }
+.st-magazine.photo-bleed .mg-cover-mid { grid-template-columns: 1fr; flex: 0 0 auto; margin-top: 30px; }
+.st-magazine.photo-bleed .mg-cover-side { flex-direction: column; }
+.st-magazine.photo-bleed .mg-lines { flex-direction: row; gap: 26px; }
+.st-magazine.photo-bleed .mg-lines li { flex: 1 1 0; grid-template-columns: 1fr; border-top: 0; padding-top: 0; }
+.st-magazine.photo-bleed .mg-lines li + li { border-top: 0; padding-top: 0; }
+.st-magazine.photo-bleed .mg-cover-story { margin-top: 34px; }
+.st-magazine.photo-bleed .mg-h1 { font-size: 88px; max-width: none; }
+
+/* Square cover: two cover lines, tighter scale. */
+.st-magazine.fmt-square.is-cover .mg-lines li:nth-child(n+3) { display: none; }
+.st-magazine.fmt-square.is-cover .mg-dateline { margin-top: 10px; }
+.st-magazine.fmt-square.is-cover .mg-cover-mid { margin-top: 20px; }
+.st-magazine.fmt-square.is-cover .mg-kicker { font-size: 24px; padding-bottom: 10px; }
+.st-magazine.fmt-square.is-cover .mg-lines { gap: 16px; margin-top: 14px; }
+.st-magazine.fmt-square.is-cover .mg-lines li + li { padding-top: 14px; }
+.st-magazine.fmt-square.is-cover .mg-line { font-size: 30px; }
+.st-magazine.fmt-square.is-cover .mg-h1 { font-size: 70px; }
+.st-magazine.fmt-square.is-cover .mg-cover-story { margin-top: 20px; }
+.st-magazine.fmt-square.is-cover .mg-cover-foot { padding-top: 16px; }
+.st-magazine .mg-compare .mg-foot { margin-top: 0; }
+/* Variant b without a client photo: the figure takes the photo band, full measure. */
+.st-magazine.v-b .mg-front .mg-hero-fig { align-self: stretch; width: 100%; display: flex; align-items: center; line-height: 0.9; }
+.st-magazine.v-b .mg-front .mg-hero-n { color: var(--color-accent-ink); margin-bottom: 0; }
+.st-magazine.v-b .mg-front .mg-hero-fig { width: 74%; flex: 0 1 auto; margin-top: 40px; }

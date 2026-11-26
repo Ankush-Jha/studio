@@ -1,0 +1,40 @@
+/* Library base: resets and the few things every style shares (layers, compliance slot,
+ * photo placeholder). Everything visual beyond this belongs to the style's own style.css. */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: var(--W); height: var(--H); background: #fff; }
+body { -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; font-kerning: normal; font-variant-ligatures: common-ligatures; }
+
+.slide { position: relative; width: var(--W); height: var(--H); overflow: hidden; background: var(--color-paper); color: var(--color-ink); }
+.slide > .bg { position: absolute; inset: 0; z-index: 0; }
+.slide > svg.marks { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+.slide > svg.marks.under { z-index: 1; }
+.slide > .fg { position: absolute; inset: 0; z-index: 2; }
+.slide > svg.marks.over { z-index: 3; }
+
+/* The safe box for the current format. Styles may lay out inside .stage or place things themselves. */
+.stage { position: absolute; left: var(--safe-x0); top: var(--safe-y0); width: var(--safe-w); height: var(--safe-h); }
+
+/* Type defaults that stop the commonest rag problems. */
+h1, h2, h3, .balance { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; hyphens: manual; }
+.nb { white-space: nowrap; }
+.tnum { font-variant-numeric: tabular-nums lining-nums; }
+
+/* hand.js marks: spans keep their own box so marks can find them. */
+.mk { position: relative; }
+
+/* Compliance slot (lib/compliance.mjs). Styles set font, colour and position; these are fallbacks. */
+.compliance { font-size: 19px; line-height: 1.25; letter-spacing: 0.02em; display: flex; flex-wrap: wrap; gap: 0 0.6em; align-items: baseline; }
+.compliance .c-agent { font-weight: 600; }
+.compliance .ph-tag { display: inline-block; font-size: 18px; line-height: 1; padding: 3px 7px 4px; background: #B42318; color: #fff; letter-spacing: 0.04em; border-radius: 2px; }
+
+/* Client photo slot and its placeholder (never a stock or generated image). */
+.photo { display: block; width: 100%; height: 100%; object-fit: cover; }
+.photo-ph { position: relative; width: 100%; height: 100%; background: #D9D6CF;
+  background-image: repeating-linear-gradient(135deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 22px); }
+.photo-ph::before, .photo-ph::after { content: ''; position: absolute; width: 44px; height: 44px; border: 3px solid #2B2A27; }
+.photo-ph::before { left: 24px; top: 24px; border-right: 0; border-bottom: 0; }
+.photo-ph::after { right: 24px; bottom: 24px; border-left: 0; border-top: 0; }
+.photo-ph-in { position: absolute; left: 32px; bottom: 32px; right: 32px; display: flex; flex-direction: column; gap: 4px; color: #1E1D1B; font-size: 22px; line-height: 1.25; }
+.photo-ph-in b { font-size: 22px; letter-spacing: 0.06em; text-transform: uppercase; }
+.photo-ph-in em { font-style: normal; color: #3C3A36; }

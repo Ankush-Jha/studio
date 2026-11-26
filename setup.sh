@@ -33,13 +33,17 @@ echo "  ok: studio/lib"
 
 say "5/6 Engines"
 for e in stills motion; do
-  if [ -f "engines/$e/package-lock.json" ]; then (cd "engines/$e" && npm ci --no-audit --no-fund --silent) && echo "  ok: engines/$e"; fi
+  if [ -f "engines/$e/package-lock.json" ]; then (cd "engines/$e" && npm ci --no-audit --no-fund --silent && npm run -s setup >/dev/null 2>&1 || true) && echo "  ok: engines/$e"; fi
 done
+if [ -f engines/stills/requirements.txt ]; then
+  [ -x engines/stills/.venv/bin/python ] || uv venv -q --python "$(cat .python-version)" engines/stills/.venv
+  uv pip install -q --python engines/stills/.venv/bin/python -r engines/stills/requirements.txt && echo "  ok: engines/stills/.venv"
+fi
 if [ $ENGINES = 1 ]; then
   [ -f engines/films/setup.sh ] && sh engines/films/setup.sh deps voice music
-  [ -f engines/face-reels/setup.sh ] && sh engines/face-reels/setup.sh || true
+  [ -f engines/face-reels/setup.sh ] && bash engines/face-reels/setup.sh || echo "  note: face-reels setup did not finish; see engines/face-reels/tools/SETUP.md"
 else
-  echo "  skipped films voice/music packs and face-reels vendor (--no-engines)"
+  echo "  skipped films voice/music packs and face-reels engines and models (--no-engines)"
 fi
 [ -f studio/.env ] || { cp studio/.env.example studio/.env; chmod 600 studio/.env; echo "  created studio/.env (add your YouTube / Meta keys for /radar; everything else works without them)"; }
 

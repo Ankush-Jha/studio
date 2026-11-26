@@ -1,0 +1,251 @@
+/* Paper Trail. Desk (client accent near black) + one rendered document + red pencil.
+ * Words of the post: Plex Sans Condensed on the desk. Words of the document: Courier Prime
+ * (typed) or Plex Sans Condensed (printed tables). Nothing glossy, nothing blurred. */
+.st-paper-trail { font-family: "IBM Plex Sans Condensed", sans-serif; color: var(--color-desk-ink); background: #24272A; }
+
+/* Desk and furniture */
+.st-paper-trail .pt-desk { position: absolute; inset: 0; background: var(--desk); }
+.st-paper-trail .pt-desk-grain { position: absolute; inset: 0; background-image: var(--grain-img); background-size: 420px; mix-blend-mode: soft-light; opacity: 0.55; }
+.st-paper-trail .pt-pencil { position: absolute; transform-origin: 0 50%; }
+.st-paper-trail .pt-decor-sheet { position: absolute; width: 900px; height: 900px; background: var(--color-manila); border-radius: 0 6px 0 0; transform: rotate(var(--r)); box-shadow: 0 1px 1px rgba(0,0,0,.34), 0 24px 44px -14px rgba(0,0,0,.42); }
+.st-paper-trail .pt-decor-sheet::after { content: ''; position: absolute; inset: 0; background-image: var(--grain-img); background-size: 360px; mix-blend-mode: multiply; opacity: 0.12; }
+.st-paper-trail .pt-decor-sheet i { position: absolute; left: 0; top: -50px; width: 300px; height: 52px; background: var(--color-manila); border-radius: 6px 6px 0 0; }
+
+/* Stage */
+.st-paper-trail .pt-stage { display: flex; flex-direction: column; color: var(--color-desk-ink); }
+.st-paper-trail .pt-head { display: flex; justify-content: space-between; align-items: center; padding-top: 18px; min-height: 52px; }
+.st-paper-trail .pt-label { font-family: "Courier Prime", monospace; font-weight: 700; font-size: 23px; line-height: 1.15; color: var(--color-ink); background: var(--color-paper); padding: 8px 14px 7px; transform: rotate(-1.2deg); box-shadow: 0 1px 1px rgba(0,0,0,.35), 0 4px 10px -2px rgba(0,0,0,.35); max-width: 72%; }
+.st-paper-trail .pt-folio { font-family: "Courier Prime", monospace; font-size: 22px; color: var(--color-desk-soft); letter-spacing: 0.02em; white-space: nowrap; }
+.st-paper-trail .pt-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding-bottom: 6px; position: relative; z-index: 5; }
+.st-paper-trail .compliance { font-family: "IBM Plex Sans Condensed", sans-serif; font-size: 20px; color: var(--color-desk-ink); letter-spacing: 0.02em; }
+.st-paper-trail .pt-cue { display: inline-flex; align-items: center; gap: 14px; font-family: "Courier Prime", monospace; font-weight: 700; font-size: 23px; color: var(--color-desk-ink); white-space: nowrap; }
+.st-paper-trail .pt-cue b { position: relative; display: block; width: 64px; height: 3px; background: var(--color-desk-ink); }
+.st-paper-trail .pt-cue b::after { content: ''; position: absolute; right: -1px; top: -6px; width: 12px; height: 12px; border-top: 3px solid var(--color-desk-ink); border-right: 3px solid var(--color-desk-ink); transform: rotate(45deg); }
+
+/* The post's words, on the desk */
+.st-paper-trail .pt-h1 { font-weight: 600; font-size: 98px; line-height: 0.98; letter-spacing: -0.012em; margin-top: 34px; max-width: 100%; }
+.st-paper-trail .pt-h2 { font-weight: 600; font-size: 70px; line-height: 1.0; letter-spacing: -0.01em; margin-top: 30px; max-width: 18ch; }
+.st-paper-trail .pt-fig { font-weight: 600; font-size: 150px; line-height: 0.94; letter-spacing: -0.03em; margin-top: 34px; font-variant-numeric: lining-nums; }
+.st-paper-trail .pt-text { font-weight: 600; font-size: 62px; line-height: 1.04; letter-spacing: -0.006em; margin-top: 30px; max-width: 19ch; }
+.st-paper-trail .has-fig .pt-text { font-size: 54px; margin-top: 30px; }
+.st-paper-trail .pt-desk-note { font-size: 29px; line-height: 1.25; color: var(--color-desk-soft); margin-bottom: 22px; max-width: 34ch; }
+.st-paper-trail em { font-style: italic; }
+.st-paper-trail .pt-h1 { line-height: 1.02; }
+
+/* Art area: documents live here, between the words and the footer */
+.st-paper-trail .pt-art { position: relative; flex: 1 1 auto; min-height: 0; margin: 40px 0 30px; }
+
+/* Documents */
+.st-paper-trail .pt-doc { position: absolute; font-size: 24px; background: var(--color-paper); color: var(--color-ink); transform: rotate(var(--rot, 0deg)); border-radius: 1px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.34), 0 5px 12px -3px rgba(0,0,0,.36), 0 24px 44px -14px rgba(0,0,0,.42); }
+.st-paper-trail .pt-doc::after { content: ''; position: absolute; inset: 0; background-image: var(--grain-img); background-size: 360px; mix-blend-mode: multiply; opacity: 0.07; pointer-events: none; }
+.st-paper-trail .pt-crease { position: absolute; left: 0; right: 0; top: 38%; height: 1px; background: rgba(0,0,0,.10); box-shadow: 0 1px 0 rgba(255,255,255,.7); }
+/* Full-page documents fill the art area; their bottom band holds the stamp and page line. */
+.st-paper-trail .pt-art > .pt-statement, .st-paper-trail .pt-art > .pt-letter, .st-paper-trail .pt-art > .pt-slip-doc, .st-paper-trail .pt-art > .pt-sale,
+.st-paper-trail .pt-art > .pt-worksheet, .st-paper-trail .pt-art > .pt-summary, .st-paper-trail .pt-stack > .pt-statement {
+  top: 0; min-height: calc(100% - 64px); padding-bottom: 104px; }
+.st-paper-trail .pt-stamp { position: absolute; right: 38px; bottom: 30px; transform: rotate(-7deg); font-family: "Courier Prime", monospace; font-weight: 700; font-size: 24px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-stamp); border: 3px solid var(--color-stamp); outline: 1.5px solid var(--color-stamp); outline-offset: 3px; padding: 11px 18px 10px 21px; opacity: 0.9; mix-blend-mode: multiply; white-space: nowrap; z-index: 2; }
+.st-paper-trail .pt-stamp.is-small { font-size: 20px; padding: 10px 14px 9px 17px; right: 26px; bottom: 22px; }
+.st-paper-trail .pt-st-page { position: absolute; left: 42px; bottom: 36px; font-size: 21px; color: var(--color-ink-soft); }
+
+/* Statement */
+.st-paper-trail .pt-statement { left: 1%; right: 0; padding: 36px 42px 0; }
+.st-paper-trail .pt-st-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding-bottom: 18px; border-bottom: 3px solid var(--color-ink); }
+.st-paper-trail .pt-st-org { font-weight: 600; font-size: 34px; line-height: 1.05; letter-spacing: -0.005em; }
+.st-paper-trail .pt-st-kind { font-size: 23px; color: var(--color-ink-soft); margin-top: 4px; }
+.st-paper-trail .pt-st-meta { text-align: right; font-size: 22px; line-height: 1.3; color: var(--color-ink-soft); font-variant-numeric: tabular-nums; }
+.st-paper-trail .pt-st-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 24px; font-variant-numeric: tabular-nums; }
+.st-paper-trail .pt-st-table th { font-weight: 600; font-size: 20px; color: var(--color-ink-soft); text-align: left; padding: 10px 0 8px; border-bottom: 1px solid var(--color-rule); }
+.st-paper-trail .pt-st-table td { padding: 13px 0 12px; border-bottom: 1px solid var(--color-rule); white-space: nowrap; }
+.st-paper-trail .pt-st-table td:first-child { width: 96px; color: var(--color-ink-soft); }
+.st-paper-trail .num { text-align: right; padding-left: 14px !important; }
+.st-paper-trail .pt-st-table tr.is-hit td { font-weight: 600; }
+.st-paper-trail .pt-st-close { display: flex; justify-content: space-between; font-weight: 600; font-size: 24px; padding-top: 12px; border-top: 2px solid var(--color-ink); margin-top: -1px; font-variant-numeric: tabular-nums; }
+
+/* Three-month stack: blank sheets behind, latest statement on top */
+.st-paper-trail .pt-stack { position: absolute; inset: 0; }
+.st-paper-trail .pt-sheet { left: calc(3% + var(--k) * 2%); right: calc(1% - var(--k) * 1%); top: calc(var(--k) * 12px); bottom: calc(60px - var(--k) * 8px); }
+.st-paper-trail .pt-stack > .pt-statement { top: 34px; }
+
+/* Typed letter */
+.st-paper-trail .pt-letter { left: 4%; right: 2%; padding: 46px 52px 0; font-family: "Courier Prime", monospace; font-size: 27px; line-height: 1.46; display: flex; flex-direction: column; }
+.st-paper-trail .pt-l-date, .st-paper-trail .pt-l-to { color: var(--color-ink-soft); }
+.st-paper-trail .pt-l-re { font-weight: 700; margin-top: 18px; padding-bottom: 14px; border-bottom: 2px solid var(--color-ink); }
+.st-paper-trail .pt-l-body { margin-top: 22px; }
+.st-paper-trail .pt-l-sig { display: flex; align-items: baseline; gap: 12px; margin-top: auto; padding-top: 28px; white-space: nowrap; }
+.st-paper-trail .blank { display: inline-block; height: 1px; border-bottom: 2px solid var(--color-ink); vertical-align: baseline; }
+.st-paper-trail .blank.w3 { width: 3.5em; } .st-paper-trail .blank.w4 { width: 4.5em; } .st-paper-trail .blank.w5 { width: 6em; } .st-paper-trail .blank.w6 { width: 7.5em; }
+
+/* Withdrawal slip and bill of sale */
+.st-paper-trail .pt-slip-doc, .st-paper-trail .pt-sale { left: 4%; right: 3%; padding: 46px 46px 0; }
+.st-paper-trail .pt-perf { position: absolute; left: 0; right: 0; top: 20px; border-top: 2px dashed var(--color-rule); }
+.st-paper-trail .pt-sd-org { font-weight: 600; font-size: 23px; color: var(--color-ink-soft); margin-top: 8px; }
+.st-paper-trail .pt-sd-kind, .st-paper-trail .pt-sale-h { font-weight: 600; font-size: 38px; line-height: 1.05; margin-top: 4px; padding-bottom: 18px; border-bottom: 3px solid var(--color-ink); }
+.st-paper-trail .pt-dl { margin-top: 6px; }
+.st-paper-trail .pt-dl > div { display: grid; grid-template-columns: 7em 1fr; align-items: baseline; padding: 15px 0 13px; border-bottom: 1px solid var(--color-rule); font-size: 25px; }
+.st-paper-trail .pt-dl dt { color: var(--color-ink-soft); }
+.st-paper-trail .pt-dl dd { font-family: "Courier Prime", monospace; font-size: 27px; }
+.st-paper-trail .pt-dl .is-hit dd { font-weight: 700; font-size: 32px; }
+.st-paper-trail .pt-dl small { font-family: "IBM Plex Sans Condensed", sans-serif; font-size: 21px; color: var(--color-ink-soft); }
+.st-paper-trail .pt-sd-foot { font-size: 22px; color: var(--color-ink-soft); margin-top: 18px; }
+.st-paper-trail .pt-sale .pt-l-sig { font-size: 24px; }
+
+/* Note to file */
+.st-paper-trail .pt-memo { left: 8%; right: 6%; top: 0; min-height: 60%; padding: 40px 46px 110px; font-family: "Courier Prime", monospace; }
+.st-paper-trail .pt-memo-fig { font-weight: 700; font-size: 110px; line-height: 1; letter-spacing: -0.04em; margin-top: 26px; }
+.st-paper-trail .pt-memo-h { font-weight: 700; font-size: 25px; padding-bottom: 12px; border-bottom: 2px solid var(--color-ink); }
+.st-paper-trail .pt-memo-b { font-size: 32px; line-height: 1.4; margin-top: 20px; }
+
+/* Typed slip, held on with a paper clip */
+.st-paper-trail .pt-note-slip { position: absolute; font-family: "Courier Prime", monospace; font-size: 29px; line-height: 1.32; color: var(--color-ink); background: #FBF9F3; padding: 30px 28px 24px; max-width: 64%; transform: rotate(1.4deg); z-index: 3;
+  box-shadow: 0 1px 1px rgba(0,0,0,.30), 0 6px 14px -4px rgba(0,0,0,.40); }
+.st-paper-trail .pt-cover .pt-note-slip { left: -6px; bottom: -14px; }
+.st-paper-trail .pt-note-wrap { position: absolute; left: -4px; bottom: -12px; width: 64%; height: 0; z-index: 3; }
+.st-paper-trail .pt-note-wrap .pt-note-slip { left: 0; bottom: 0; max-width: 100%; }
+.st-paper-trail .pt-clip { position: absolute; right: 30px; top: -92px; transform: rotate(5deg); z-index: 4; }
+
+/* Evidence pair */
+.st-paper-trail .pt-pair { position: absolute; inset: 0; }
+.st-paper-trail .pt-back { position: absolute; left: 0; top: 0; width: 76%; height: calc(100% - 40px); }
+.st-paper-trail .pt-back > .pt-doc { left: 0; right: 0; top: 0; font-size: 21px; }
+.st-paper-trail .pt-back .pt-statement { min-height: 100%; padding-bottom: 60px; }
+.st-paper-trail .pt-back .pt-stamp, .st-paper-trail .pt-back .pt-st-page { display: none; }
+.st-paper-trail .pt-pair > .pt-front { left: auto; right: 0; top: 13%; width: 72%; min-height: 0; padding-bottom: 100px; }
+.st-paper-trail .pt-pair > .pt-letter { width: 76%; }
+.st-paper-trail .pt-pair.is-flip .pt-back { left: auto; right: 0; }
+.st-paper-trail .pt-pair.is-flip > .pt-front { right: auto; left: 0; top: 18%; width: 64%; }
+.st-paper-trail .pt-pair.is-flip ~ .pt-note-wrap, .st-paper-trail.v-b .pt-pair.is-flip ~ .pt-note-wrap { left: auto; right: -6px; }
+.st-paper-trail.v-b .pt-pair.is-flip .pt-back { left: auto; right: 0; }
+.st-paper-trail.v-b .pt-pair.is-flip > .pt-front { right: auto; left: 0; }
+.st-paper-trail.v-b .pt-pair.is-flip > .pt-front .pt-stamp { right: auto; left: 40px; }
+.st-paper-trail .pt-dl .is-hit .mk, .st-paper-trail .pt-st-table .mk { padding: 0 10px; }
+.st-paper-trail .pt-receipt { left: 4%; width: 62%; padding: 34px 32px 40px; font-size: 21px; background: #FAF8F2; }
+.st-paper-trail .pt-rc-h { font-weight: 600; font-size: 28px; padding-bottom: 12px; border-bottom: 2px dashed var(--color-ink); }
+.st-paper-trail .pt-receipt .pt-dl > div { font-size: 21px; grid-template-columns: 5em 1fr; padding: 11px 0 9px; }
+.st-paper-trail .pt-receipt .pt-dl dd { font-size: 22px; }
+
+/* Point: the document sits right of centre */
+.st-paper-trail .pt-point .pt-art > .pt-doc, .st-paper-trail .pt-point .pt-art > .pt-stack { left: auto; right: 0; width: 84%; }
+
+/* Worksheet (number slides) */
+.st-paper-trail .pt-worksheet { left: 1%; right: 1%; padding: 34px 42px 0; }
+.st-paper-trail .pt-ws-top { padding-bottom: 14px; border-bottom: 3px solid var(--color-ink); }
+.st-paper-trail .pt-ws-rows { position: relative; padding: 22px 0 48px; border-left: 3px solid var(--color-ink); margin-top: 24px; }
+.st-paper-trail .pt-ws-row { margin-bottom: 20px; }
+.st-paper-trail .pt-ws-k { font-size: 23px; color: var(--color-ink-soft); margin-bottom: 8px; padding-left: 16px; }
+.st-paper-trail .pt-ws-track { position: relative; height: 60px; display: flex; align-items: center; margin-right: 170px; }
+.st-paper-trail .pt-ws-track i { display: block; height: 100%; background: var(--color-ink); }
+.st-paper-trail .pt-ws-row.is-hi .pt-ws-track i { background: var(--color-accent); }
+.st-paper-trail .pt-ws-v { margin-left: 16px; font-family: "Courier Prime", monospace; font-weight: 700; font-size: 28px; white-space: nowrap; }
+.st-paper-trail .pt-ws-axis { position: absolute; left: -3px; bottom: 8px; font-size: 20px; color: var(--color-ink-soft); }
+.st-paper-trail .pt-ws-axis span { padding-left: 14px; }
+.st-paper-trail .pt-ws-total { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-top: 18px; border-top: 2px solid var(--color-ink); }
+.st-paper-trail .pt-ws-tk { font-size: 25px; line-height: 1.25; color: var(--color-ink); max-width: 14em; }
+.st-paper-trail .pt-ws-tv { font-family: "Courier Prime", monospace; font-weight: 700; font-size: 54px; line-height: 1; white-space: nowrap; padding-right: 24px; }
+.st-paper-trail .pt-ws-fine { font-size: 19px; line-height: 1.36; color: var(--color-ink); margin-top: 30px; max-width: 64ch; }
+.st-paper-trail .pt-worksheet .pt-stamp { right: 42px; }
+
+/* Compare: two notice cards */
+.st-paper-trail .pt-cards { display: flex; gap: 30px; align-items: flex-start; padding: 30px 0 0; height: 100%; }
+.st-paper-trail .pt-card { position: relative; flex: 1 1 0; padding: 32px 32px 40px; min-height: 64%; }
+.st-paper-trail .pt-card.is-r { margin-top: 80px; padding-bottom: 100px; }
+.st-paper-trail .pt-card-v .mk { padding: 0 12px; margin-left: -12px; }
+.st-paper-trail .pt-card-k { font-weight: 600; font-size: 29px; line-height: 1.15; color: var(--color-ink-soft); padding-bottom: 16px; border-bottom: 2px solid var(--color-ink); }
+.st-paper-trail .pt-card-v { font-weight: 600; font-size: 90px; line-height: 1; letter-spacing: -0.02em; margin-top: 30px; font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.st-paper-trail .pt-card-n { font-family: "Courier Prime", monospace; font-size: 28px; line-height: 1.34; margin-top: 26px; }
+.st-paper-trail .pt-compare .pt-desk-note { margin-bottom: 18px; }
+
+/* Index card (steps / recap): typed on the card's own blue rules */
+.st-paper-trail .pt-index { left: 1%; right: 1%; top: 0; bottom: 20px; padding: 110px 44px 40px; background-color: #FCFBF7;
+  background-image: repeating-linear-gradient(to bottom, transparent 0 69px, #A9C6DA 69px 71px); background-position: 0 110px; background-repeat: no-repeat; background-size: 100% calc(100% - 150px); }
+.st-paper-trail .pt-index::before { content: ''; position: absolute; left: 0; right: 0; top: 76px; height: 2px; background: #D3544B; }
+.st-paper-trail .pt-ol { list-style: none; }
+.st-paper-trail .pt-ol li { display: grid; grid-template-columns: 78px 1fr; align-items: start; font-family: "Courier Prime", monospace; font-size: 36px; line-height: 71px; }
+.st-paper-trail .pt-box { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; border: 3px solid var(--color-ink); margin-top: 11px; font-weight: 700; font-size: 28px; line-height: 1; }
+.st-paper-trail .pt-box .mk { display: inline-block; width: 36px; height: 36px; font-size: 36px; }
+.st-paper-trail .pt-li em { font-style: normal; color: var(--color-ink-soft); font-size: 28px; }
+.st-paper-trail .pt-index .pt-stamp { top: 18px; bottom: auto; right: 40px; transform: rotate(-3deg); }
+
+/* Myth: sticky note */
+.st-paper-trail .pt-sticky { left: 4%; width: 74%; top: 0; padding: 46px 44px 90px; background: #F2E28A; }
+.st-paper-trail .pt-sticky-t { font-family: "Courier Prime", monospace; font-size: 44px; line-height: 1.3; }
+.st-paper-trail .pt-myth .pt-art { flex: 0 0 auto; height: 46%; }
+.st-paper-trail .pt-myth .pt-text { margin-top: 10px; }
+
+/* Quote */
+.st-paper-trail .pt-qdoc { left: 3%; right: 3%; top: 0; bottom: 30px; padding: 56px 58px 90px; }
+.st-paper-trail .pt-q { font-size: 40px; line-height: 1.34; text-indent: -0.6em; padding-left: 0.6em; }
+.st-paper-trail .pt-q-by { font-family: "IBM Plex Sans Condensed", sans-serif; font-weight: 600; font-size: 26px; margin-top: 28px; }
+
+/* Stat */
+.st-paper-trail .pt-summary { left: 3%; right: 3%; padding: 34px 42px 0; }
+.st-paper-trail .pt-sum-fig { font-family: "Courier Prime", monospace; font-weight: 700; font-size: 60px; margin-top: 12px; }
+.st-paper-trail .pt-sum-fig small { font-family: "IBM Plex Sans Condensed", sans-serif; font-weight: 400; font-size: 24px; }
+.st-paper-trail .pt-stat .compliance.c-block { flex-direction: column; align-items: flex-start; gap: 2px; }
+
+/* CTA: the closed file, licence label on the folder */
+.st-paper-trail .pt-cta-h { margin-top: 90px; font-size: 112px; }
+.st-paper-trail .pt-cta-sub { margin-top: 26px; margin-bottom: 0; }
+.st-paper-trail .pt-folder { position: absolute; left: 2%; right: 2%; top: max(70px, calc(100% - 420px)); bottom: -300px; transform: rotate(var(--rot)); }
+.st-paper-trail .pt-cta .pt-art { margin-bottom: 0; }
+.st-paper-trail .pt-folder-back { position: absolute; inset: 0; background: #C9AC70; border-radius: 0 6px 4px 4px; box-shadow: 0 1px 1px rgba(0,0,0,.34), 0 26px 46px -16px rgba(0,0,0,.42); }
+.st-paper-trail .pt-folder-tab { position: absolute; left: 0; top: -54px; height: 56px; padding: 13px 28px 0; background: #C9AC70; border-radius: 6px 6px 0 0; font-family: "Courier Prime", monospace; font-weight: 700; font-size: 24px; color: var(--color-ink); }
+.st-paper-trail .pt-folder-sheet { position: absolute; left: 5%; right: 4%; top: 22px; height: 60%; background: var(--color-paper); transform: rotate(var(--r)); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.st-paper-trail .pt-folder-front { position: absolute; left: 0; right: 0; top: 64px; bottom: 0; background: var(--color-manila); border-radius: 2px 2px 4px 4px; box-shadow: 0 -1px 0 rgba(0,0,0,.12), 0 1px 1px rgba(0,0,0,.30), 0 6px 14px -4px rgba(0,0,0,.36); }
+.st-paper-trail .pt-folder-front::before, .st-paper-trail .pt-folder-front::after { content: ''; position: absolute; left: 0; right: 0; height: 1px; background: rgba(0,0,0,.12); box-shadow: 0 1px 0 rgba(255,255,255,.35); }
+.st-paper-trail .pt-folder-front::before { bottom: 26px; }
+.st-paper-trail .pt-folder-front::after { bottom: 40px; }
+.st-paper-trail .pt-folder-grain { position: absolute; inset: 0; background-image: var(--grain-img); background-size: 360px; mix-blend-mode: multiply; opacity: 0.12; }
+.st-paper-trail .pt-folder-label { position: absolute; left: 7%; top: 44px; max-width: 72%; background: #FBFAF6; padding: 18px 24px; transform: rotate(0.8deg); box-shadow: 0 1px 1px rgba(0,0,0,.25); z-index: 2; }
+.st-paper-trail .pt-folder-label .compliance { color: var(--color-ink); flex-direction: column; align-items: flex-start; gap: 4px; font-size: 21px; }
+.st-paper-trail .pt-stamp.is-folder { bottom: auto; top: 70px; right: 8%; font-size: 26px; transform: rotate(-9deg); }
+.st-paper-trail .pt-kw { color: var(--color-grease); }
+
+/* Variant b: re-composed, not mirrored */
+.st-paper-trail.v-b .pt-cover .pt-art { order: 1; margin-top: 30px; }
+.st-paper-trail.v-b .pt-cover .pt-h1 { order: 2; margin-top: 10px; margin-bottom: 26px; font-size: 92px; }
+.st-paper-trail.v-b .pt-cover .pt-foot { order: 3; margin-top: 0; }
+.st-paper-trail.v-b .pt-cover .pt-head { order: 0; }
+.st-paper-trail.v-b .pt-cover .pt-art > .pt-doc { left: 7%; right: -2%; --rot: 2deg; }
+.st-paper-trail.v-b .pt-cover .pt-note-slip { left: auto; right: -4px; bottom: -18px; transform: rotate(-1.6deg); max-width: 56%; }
+.st-paper-trail.v-b .pt-cover .pt-stamp { right: auto; left: 40px; }
+.st-paper-trail.v-b .pt-point .pt-art { order: 1; margin-top: 24px; }
+.st-paper-trail.v-b .pt-point .pt-fig { order: 2; margin-top: 0; }
+.st-paper-trail.v-b .pt-point .pt-text { order: 3; margin-top: 30px; margin-bottom: 30px; }
+.st-paper-trail.v-b .pt-point:not(.has-fig) .pt-text { margin-top: 6px; }
+.st-paper-trail.v-b .pt-st-page { left: auto; right: 42px; }
+.st-paper-trail.v-b .pt-point .pt-foot { order: 4; margin-top: 0; }
+.st-paper-trail.v-b .pt-point .pt-art > .pt-doc, .st-paper-trail.v-b .pt-point .pt-art > .pt-stack { right: auto; left: 0; }
+.st-paper-trail.v-b .pt-back { left: auto; right: 0; }
+.st-paper-trail.v-b .pt-pair > .pt-front { right: auto; left: 0; top: 9%; }
+.st-paper-trail.v-b .pt-point .pt-note-wrap { left: auto; right: -6px; }
+.st-paper-trail.v-b .pt-point .pt-art .pt-stamp { right: auto; left: 40px; }
+.st-paper-trail.v-b .pt-list .pt-index { left: 5%; right: -1%; --rot: 1.2deg; }
+.st-paper-trail.v-b .pt-list .pt-art { order: 1; margin-top: 30px; }
+.st-paper-trail.v-b .pt-list .pt-h2 { order: 2; margin-top: 0; margin-bottom: 30px; }
+.st-paper-trail.v-b .pt-list .pt-desk-note { order: 3; }
+.st-paper-trail.v-b .pt-list .pt-foot { order: 4; margin-top: 0; }
+.st-paper-trail.v-b .pt-cta .pt-art { order: 1; margin: 20px 0 40px; }
+.st-paper-trail.v-b .pt-cta .pt-cta-h { order: 2; margin-top: 0; font-size: 100px; }
+.st-paper-trail.v-b .pt-cta .pt-cta-sub { order: 3; margin-bottom: 10px; }
+.st-paper-trail.v-b .pt-cta .pt-folder { top: 70px; bottom: 0; }
+.st-paper-trail.v-b .pt-cta .pt-stamp.is-folder { top: auto; bottom: 60px; }
+.st-paper-trail.v-b .pt-cards { flex-direction: column; gap: 26px; padding-bottom: 0; }
+.st-paper-trail.v-b .pt-card { flex: 1 1 0; width: 86%; padding-bottom: 30px; margin: 0; }
+.st-paper-trail.v-b .pt-card.is-r { margin: 0 0 0 14%; }
+.st-paper-trail.v-b .pt-card-v { margin-top: 18px; font-size: 80px; }
+.st-paper-trail.v-b .pt-cta .pt-folder { left: 6%; right: -3%; --rot: 2deg; }
+
+/* Story and square: the text box is nearly square, so documents and type tighten */
+.st-paper-trail.fmt-story .pt-h1, .st-paper-trail.fmt-square .pt-h1 { font-size: 78px; margin-top: 20px; }
+.st-paper-trail.fmt-story .pt-h2, .st-paper-trail.fmt-square .pt-h2 { font-size: 56px; margin-top: 18px; }
+.st-paper-trail.fmt-story .pt-text, .st-paper-trail.fmt-square .pt-text { font-size: 50px; }
+.st-paper-trail.fmt-story .pt-fig, .st-paper-trail.fmt-square .pt-fig { font-size: 116px; margin-top: 18px; }
+.st-paper-trail.fmt-story .pt-art, .st-paper-trail.fmt-square .pt-art { margin: 26px 0 22px; }
+.st-paper-trail.fmt-story .pt-note-slip, .st-paper-trail.fmt-square .pt-note-slip { font-size: 28px; padding: 24px 22px 18px; }
+.st-paper-trail.fmt-story .pt-head, .st-paper-trail.fmt-square .pt-head { padding-top: 0; }
+.st-paper-trail.fmt-story .pt-statement, .st-paper-trail.fmt-square .pt-statement { padding: 26px 34px 0; }
+.st-paper-trail.fmt-story .pt-st-table td, .st-paper-trail.fmt-square .pt-st-table td { padding: 9px 0 8px; }
+.st-paper-trail.fmt-story .pt-art > .pt-doc, .st-paper-trail.fmt-square .pt-art > .pt-doc { padding-bottom: 86px; min-height: calc(100% - 50px); }
+.st-paper-trail.fmt-story .pt-cta-h, .st-paper-trail.fmt-square .pt-cta-h { font-size: 80px; margin-top: 30px; }
+.st-paper-trail .pt-pair.is-flip > .pt-front .pt-stamp { right: auto; left: 40px; }

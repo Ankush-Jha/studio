@@ -1,0 +1,136 @@
+{
+  "$description": "Group 4 family: DOSSIER. A fact-checker's marked-up memo: engineering-grid paper, typed memo fields in a monospace, a calm text serif for headlines, a plain sans for facts. Annotations are red-pencil double strikes, boxes, circles and margin brackets.",
+  "meta": {
+    "group": 4,
+    "family": "dossier",
+    "name": "Dossier",
+    "grid": "memo: 36px engineering grid, red margin rule at x=150, typed header block, file tab on the right edge"
+  },
+  "color": {
+    "paper": {
+      "$type": "color",
+      "$value": "#EDEFEA",
+      "$description": "cool ledger paper"
+    },
+    "ink": {
+      "$type": "color",
+      "$value": "#18202E",
+      "$description": "graphite navy"
+    },
+    "ink-soft": {
+      "$type": "color",
+      "$value": "#4A5366"
+    },
+    "rule": {
+      "$type": "color",
+      "$value": "#C6D0DA",
+      "$description": "grid lines"
+    },
+    "margin": {
+      "$type": "color",
+      "$value": "#DDA9A3",
+      "$description": "red margin rule"
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "#2E6B5C",
+      "$description": "FACT ink; client accent replaces it"
+    },
+    "mark": {
+      "$type": "color",
+      "$value": "#B5322A",
+      "$description": "red pencil, fixed across clients"
+    }
+  },
+  "font": {
+    "display": {
+      "$type": "fontFamily",
+      "$value": [
+        "Newsreader",
+        "Georgia",
+        "serif"
+      ]
+    },
+    "body": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Sans",
+        "Helvetica",
+        "sans-serif"
+      ]
+    },
+    "label": {
+      "$type": "fontFamily",
+      "$value": [
+        "IBM Plex Mono",
+        "Courier New",
+        "monospace"
+      ]
+    }
+  },
+  "size": {
+    "display-xl": {
+      "$type": "dimension",
+      "$value": "108px"
+    },
+    "display-l": {
+      "$type": "dimension",
+      "$value": "74px"
+    },
+    "display-m": {
+      "$type": "dimension",
+      "$value": "60px"
+    },
+    "body-l": {
+      "$type": "dimension",
+      "$value": "42px"
+    },
+    "body": {
+      "$type": "dimension",
+      "$value": "33px"
+    },
+    "label": {
+      "$type": "dimension",
+      "$value": "21px"
+    },
+    "fine": {
+      "$type": "dimension",
+      "$value": "19px"
+    }
+  },
+  "space": {
+    "margin-x": {
+      "$type": "dimension",
+      "$value": "78px"
+    },
+    "margin-top": {
+      "$type": "dimension",
+      "$value": "66px"
+    },
+    "margin-bottom": {
+      "$type": "dimension",
+      "$value": "58px"
+    },
+    "gutter": {
+      "$type": "dimension",
+      "$value": "24px"
+    }
+  },
+  "fontVariation": {
+    "display": "normal"
+  },
+  "annotation": {
+    "pen": "pencil",
+    "emphasis": "underline",
+    "strike": "double",
+    "weight": 5.6,
+    "wobble": 1.0,
+    "underlineDouble": true,
+    "highlightMix": 0.6
+  },
+  "texture": {
+    "grain": 0.08,
+    "grainFreq": 0.95,
+    "paper": "grid"
+  }
+}

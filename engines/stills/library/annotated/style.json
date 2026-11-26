@@ -1,0 +1,28 @@
+{
+  "slug": "annotated",
+  "name": "Marker Markup",
+  "group": 2,
+  "family": "Kitchen Table",
+  "summary": "The broker's own photo (or document) marked up in felt-tip: circles, arrows, a hand-drawn timeline and short handwritten notes on tape, over confident flush-left grotesk type.",
+  "formats": ["feed", "story", "square"],
+  "types": ["cover", "point", "number", "compare", "steps", "recap", "myth", "quote", "stat", "cta"],
+  "variants": ["a", "b"],
+  "fonts": [
+    { "family": "Familjen Grotesk", "file": "FamiljenGrotesk[wght].ttf", "style": "normal", "weight": "400 700" },
+    { "family": "Nanum Pen Script", "file": "NanumPenScript-Regular.ttf", "style": "normal", "weight": "400" }
+  ],
+  "palette": {
+    "paper": "#F8F8F6",
+    "ink": "#121417",
+    "ink-soft": "#4B4E54",
+    "accent": "#1D4E89",
+    "tape": "#FFFDF5",
+    "tape-edge": "#E6E0CC"
+  },
+  "accentGround": "paper",
+  "emphasis": "underline",
+  "hand": { "pen": "marker", "weight": 7.5, "wobble": 1.1, "strike": "single" },
+  "illustrative": false,
+  "allow": {},
+  "maxWords": 40
+}
