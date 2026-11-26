@@ -26,6 +26,8 @@ How it all fits together, and how it learns: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 **Film Directory:** every film style with its demo film, at https://ankush-jha.github.io/studio/ (built from `site/`, see [site/README.md](site/README.md)).
 
+**New to Studio and not technical?** Read the plain-language guide: https://ankush-jha.github.io/studio/guide.html
+
 ## Setup (macOS)
 
 You need [Homebrew](https://brew.sh) and [Claude Code](https://claude.com/claude-code) (a Claude subscription or API access).

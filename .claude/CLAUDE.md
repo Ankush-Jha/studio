@@ -7,6 +7,15 @@ This repository is Studio: the agency's bot that turns a one-line brief into fin
 - Setup on a new machine: `README.md` and `sh setup.sh`.
 - Client truth: `kits/<slug>/` (built from `clients.json`, the client sheet, client websites and `assets/` by `studio/tools/import/build_kits.py`, a one-time importer). Past work: `library/`. Jobs: `jobs/<id>/` (state only via `node studio/tools/job.mjs`).
 
+Plain phrases (people using Studio may not know git or the terminal; the guide at https://ankush-jha.github.io/studio/guide.html tells them to say these). Explain what happened in one or two plain sentences, no command output:
+- "get the latest" / "update Studio" → `git pull` in the repo and `git -C private pull`; if setup files changed (package-lock, requirements, setup.sh), run `sh setup.sh`.
+- "save today's work" / "sync" → commit and push `private/` (jobs, lessons, client changes) with a dated message. Only commit the public repo if they changed the process and say so.
+- "check my setup" / "something's wrong" → run `sh studio/tools/doctor.sh` and fix what it reports (run `sh setup.sh` for missing installs).
+- "show me the styles" → point to the Film Directory, https://ankush-jha.github.io/studio/.
+- "where are my files?" → the job's `out/` folder; open it in Finder (`open jobs/<id>/out`).
+- "set up footage reels" → `bash engines/face-reels/setup.sh` (about 1 GB), then `sh studio/tools/doctor.sh`.
+- "continue the <client> reel" → find that client's newest unfinished job (`node studio/tools/job.mjs list`) and `/create resume <id>`.
+
 Rules:
 - `engines/films|stills|motion`, `playbook/`, `assets/`, `clients.json|csv|jsonl` and `assets_manifest.csv` are read-only (a guard hook enforces it). One exception: `assets/<slug>/profile.md`, a hand-written standing brief per client that every agent reads first.
 - This repo holds real client data (contact details, licence numbers, photos). Keep it private; never paste client data into outside services.

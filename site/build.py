@@ -69,6 +69,8 @@ for k, v in {'{{DATA}}': json.dumps(styles, ensure_ascii=False, separators=(',',
              '{{MIN}}': str(round(sum(s['dur'] for s in styles) / 60))}.items():
     html = html.replace(k, v)
 open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(html)
+guide = open(os.path.join(HERE, 'guide.html'), encoding='utf-8').read().replace('{{LOGO}}', MARK)
+open(os.path.join(OUT, 'guide.html'), 'w', encoding='utf-8').write(guide)
 open(os.path.join(OUT, 'favicon.svg'), 'w', encoding='utf-8').write(MARK.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" '))
 open(os.path.join(OUT, '.nojekyll'), 'w').close()
 print(f'{len(styles)} styles in {len(cats)} categories -> docs/ (films from {FILMS_BASE})')

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How to use Studio · SuperKreatives</title>
+<meta name="description" content="A plain-language guide to SuperKreatives Studio: how to ask for a reel, carousel or post, approve it, and find your files.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#ECE6E8; --card:#fff; --ink:#0B0B0F; --dim:#5F5A66; --faint:#8C8794; --line:#DCD4D8;
+  --indigo:#3843D0; --indigo-soft:#E6E7FA; --shadow:0 8px 24px rgba(57,40,123,.13);
+  --font:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif; color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:16px/1.65 var(--font);-webkit-font-smoothing:antialiased}
+a{color:var(--indigo);font-weight:600}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:24px}
+@media (max-width:600px){.wrap{padding-inline:16px}}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand svg{width:34px;height:34px;flex:none}
+.brand .word{font-weight:700;font-size:21px;letter-spacing:-.01em}
+.brand .tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border-left:1px solid var(--line);padding-left:10px;margin-left:2px}
+.top nav{display:flex;gap:8px;flex-wrap:wrap}
+.top nav a{color:var(--ink);font-weight:600;font-size:14px;text-decoration:none;padding:9px 14px;border-radius:999px;background:var(--card);box-shadow:var(--shadow)}
+.top nav a[aria-current]{background:var(--ink);color:#fff}
+@media (max-width:600px){.brand .word{font-size:18px}.brand .tag{display:none}.top nav a{padding:8px 12px;font-size:13px}}
+
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;align-items:start;padding-block:20px 60px}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:grid;gap:2px;font-size:14px}
+.toc b{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint);margin-bottom:6px}
+.toc a{color:var(--dim);text-decoration:none;padding:5px 10px;border-radius:8px;font-weight:600}
+.toc a:hover{background:var(--card);color:var(--ink)}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}.toc{display:none}}
+
+main{max-width:760px}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-.035em;margin:0 0 14px;font-weight:800}
+h1 em{font-style:normal;color:var(--indigo)}
+.lead{font-size:19px;color:var(--dim);margin:0 0 28px}
+section{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:28px 32px;margin-bottom:20px}
+@media (max-width:600px){section{padding:22px 20px}}
+section h2{margin:0 0 12px;font-size:24px;letter-spacing:-.02em;font-weight:800;display:flex;gap:12px;align-items:center}
+section h2 .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--indigo);color:#fff;font-size:16px;display:grid;place-items:center}
+section h3{font-size:17px;margin:22px 0 6px;font-weight:800}
+section p{margin:0 0 12px}
+section ul,section ol{margin:0 0 12px;padding-left:22px}
+section li{margin-bottom:6px}
+.say{display:block;background:var(--indigo-soft);color:#1E2590;border-radius:12px;padding:12px 16px;margin:8px 0;font-weight:700;font-size:15.5px}
+.say small{display:block;font-weight:500;color:var(--dim);font-size:14px;margin-top:2px}
+.paste{position:relative;background:#14131A;color:#EDEBF5;border-radius:12px;padding:14px 84px 14px 16px;margin:10px 0 6px;font:500 13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-x:auto;white-space:pre}
+.copy{position:absolute;top:8px;right:8px;border:0;background:#fff;color:var(--ink);font:700 12px var(--font);padding:5px 10px;border-radius:999px;cursor:pointer}
+.note{font-size:14px;color:var(--dim)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{background:var(--ground);border-radius:14px;padding:14px 16px}
+.tile b{display:block;font-size:15px}
+.tile span{font-size:14px;color:var(--dim)}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding-left:40px;margin-bottom:14px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:800;display:grid;place-items:center}
+.callout{border-left:4px solid var(--indigo);background:var(--ground);border-radius:0 12px 12px 0;padding:12px 16px;margin:12px 0;font-size:15px}
+dl{margin:0}
+dt{font-weight:800;margin-top:12px}
+dd{margin:2px 0 0;color:var(--dim)}
+footer{border-top:1px solid var(--line);color:var(--dim);font-size:13px;padding-block:24px 40px}
+footer a{font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="https://superkreatives.ca" rel="noopener" aria-label="SuperKreatives">{{LOGO}}<span class="word">SuperKreatives</span><span class="tag">Studio</span></a>
+    <nav><a href="./">Film Directory</a><a href="guide.html" aria-current="page">How to use</a></nav>
+  </header>
+
+  <div class="layout">
+    <aside class="toc" aria-label="On this page">
+      <b>On this page</b>
+      <a href="#what">What Studio does</a>
+      <a href="#setup">Get set up (once)</a>
+      <a href="#open">Open Studio</a>
+      <a href="#ask">Ask for a piece</a>
+      <a href="#checkins">The two check-ins</a>
+      <a href="#files">Find your files</a>
+      <a href="#desk">The Desk</a>
+      <a href="#teach">Teach it your taste</a>
+      <a href="#end">End of the day</a>
+      <a href="#rules">What it will never do</a>
+      <a href="#help">If something's off</a>
+      <a href="#words">Words you'll see</a>
+    </aside>
+
+    <main>
+      <h1>How to use <em>Studio</em></h1>
+      <p class="lead">Studio is our in-house creative assistant. You tell it what you need in one sentence, it brings back finished Instagram content for the client, on brand, ready for you to review. No design or coding needed.</p>
+
+      <section id="what">
+        <h2><span class="n">1</span>What Studio does</h2>
+        <p>It makes Instagram content for our clients:</p>
+        <div class="grid2">
+          <div class="tile"><b>Graphic reels</b><span>Animated films in any of the styles in the <a href="./">Film Directory</a></span></div>
+          <div class="tile"><b>Carousels &amp; posts</b><span>Swipe-through slides and single posts</span></div>
+          <div class="tile"><b>Covers &amp; stories</b><span>Reel covers, story frames</span></div>
+          <div class="tile"><b>Short loops</b><span>GIFs and quick motion hooks</span></div>
+          <div class="tile"><b>Footage reels</b><span>Cut from a client's own video, with captions</span></div>
+        </div>
+        <p>It already knows every client: their logo, colours, photos, licence details and how they like to sound. It checks its own facts and numbers, and it never posts anything. You stay in charge of what goes out.</p>
+      </section>
+
+      <section id="setup">
+        <h2><span class="n">2</span>Get set up (once)</h2>
+        <p>This takes about 30 minutes, most of it waiting. If someone on the team can do it for you, even easier.</p>
+        <ol class="steps">
+          <li><b>Install Claude Code.</b> It's the app Studio runs in. Get it from <a href="https://claude.com/claude-code" rel="noopener">claude.com/claude-code</a> and sign in with your Claude account.</li>
+          <li><b>Install Homebrew.</b> It's a free helper that installs the tools Studio needs. Follow the one step on <a href="https://brew.sh" rel="noopener">brew.sh</a>.</li>
+          <li><b>Install Studio.</b> Open the <b>Terminal</b> app (press <b>⌘ Space</b>, type Terminal, press Enter), paste this line and press Enter. You don't need to understand it:
+            <div class="paste" id="p1">git clone https://github.com/Ankush-Jha/studio.git ~/studio && git clone https://github.com/Ankush-Jha/studio-clients.git ~/studio/private && cd ~/studio && brew bundle --file=Brewfile && sh setup.sh<button class="copy" type="button" data-copy="p1">Copy</button></div>
+            <span class="note">It downloads everything (about 3 GB) and finishes with a check. If every line ends in "ok", you're ready.</span>
+          </li>
+        </ol>
+        <div class="callout">Planning to make reels from client video footage? After setup, open Studio and say <b>"set up footage reels"</b>. That adds about 1 GB more.</div>
+      </section>
+
+      <section id="open">
+        <h2><span class="n">3</span>Open Studio</h2>
+        <p>Every time you want to work: open <b>Terminal</b>, paste this, press Enter.</p>
+        <div class="paste" id="p2">cd ~/studio && claude<button class="copy" type="button" data-copy="p2">Copy</button></div>
+        <p class="note">Using the Claude desktop app instead? Open Claude Code there and choose the <b>studio</b> folder in your home folder.</p>
+        <p>Studio is now listening. From here on you just type normal sentences. A good first one:</p>
+        <span class="say">get the latest<small>Studio pulls in anything new your teammates added: new clients, lessons, finished work.</small></span>
+      </section>
+
+      <section id="ask">
+        <h2><span class="n">4</span>Ask for a piece</h2>
+        <p>Start with <b>/create</b>, then say <b>who it's for</b>, <b>what it is</b> and <b>what it's about</b>. That's all it needs. (Sam Rivera is our example client; use any real client's name.)</p>
+        <span class="say">/create graphic reel for Sam Rivera about private mortgages</span>
+        <span class="say">/create carousel for Sam Rivera about renewing in 2027</span>
+        <span class="say">/create static for Sam Rivera about first-time buyer myths</span>
+        <span class="say">/create story for Sam Rivera about the Bank of Canada rate decision</span>
+        <span class="say">/create footage reel for Sam Rivera from my Downloads folder, clip.mp4</span>
+        <h3>Want more control? Add any of these</h3>
+        <ul>
+          <li><b>A style:</b> "…in Art Deco style". Browse them all in the <a href="./">Film Directory</a>, every style has a demo.</li>
+          <li><b>A length:</b> "…40 seconds".</li>
+          <li><b>A mood or angle:</b> "…keep it calm and reassuring", "…lead with the savings number".</li>
+          <li><b>Several clients at once:</b> "/create carousel for group 2 on the rate decision". Each client gets their own, different version.</li>
+        </ul>
+        <p class="note">Not sure what to make? Just type "/create carousel for Sam Rivera" and Studio suggests topics from this week's news and what's working for similar accounts.</p>
+      </section>
+
+      <section id="checkins">
+        <h2><span class="n">5</span>The two check-ins</h2>
+        <p>Studio stops twice to ask you. Nothing moves forward without your answer.</p>
+        <h3>Check-in 1: pick an idea</h3>
+        <p>You get three different ideas, A, B and C, each with its hook and look. Reply with:</p>
+        <span class="say">B<small>or "B but with A's opening line", or "none of these, make it more playful"</small></span>
+        <h3>Check-in 2: approve the finished piece</h3>
+        <p>You see the finished reel or slides, the caption and Studio's own quality report. Reply with:</p>
+        <span class="say">approve<small>or your notes, in plain words: "make the logo bigger", "slide 3 has too much text"</small></span>
+        <p class="note">Making a piece takes from about 10 minutes (posts and carousels) to an hour (animated reels). You can do other things meanwhile.</p>
+      </section>
+
+      <section id="files">
+        <h2><span class="n">6</span>Find your files</h2>
+        <p>When it's done, Studio tells you where everything is: the video or the numbered slides, the cover, the caption ready to paste, and subtitles for reels.</p>
+        <span class="say">where are my files?<small>Studio opens the folder for you.</small></span>
+        <p>You upload to Instagram yourself. Studio reminds you of anything to tick, such as the AI label when a synthetic voice was used.</p>
+      </section>
+
+      <section id="desk">
+        <h2><span class="n">7</span>The Desk, if you prefer clicking</h2>
+        <p>The Desk is a visual control room in your web browser. It shows every piece in progress, lets you approve ideas and finished work with a click, previews reels in a phone frame, and lists every client.</p>
+        <span class="say">/desk</span>
+      </section>
+
+      <section id="teach">
+        <h2><span class="n">8</span>Teach it your taste</h2>
+        <p>Studio learns from you, so it gets better every week:</p>
+        <ul>
+          <li><b>Your notes</b> at the check-ins are remembered for that client.</li>
+          <li><b>Your edits</b>: if you fix a caption or a slide yourself, Studio notices the change.</li>
+          <li>Once in a while, say <b>"/create learn"</b>. Studio suggests lessons from your notes and edits ("Sam prefers fewer words per slide"). Say which to keep, and it follows them from then on.</li>
+        </ul>
+        <p>Every client can also have a standing brief, for example "always minimalist, sales-focused, private mortgages". Ask Studio to show or change a client's brief any time.</p>
+      </section>
+
+      <section id="end">
+        <h2><span class="n">9</span>End of the day</h2>
+        <p>Before you close up, say:</p>
+        <span class="say">save today's work<small>Studio saves the finished pieces, notes and lessons to the shared space, so the whole team has them.</small></span>
+        <p>And at the start of the next session, "get the latest" brings in everyone else's work.</p>
+      </section>
+
+      <section id="rules">
+        <h2><span class="n">10</span>What it will never do</h2>
+        <ul>
+          <li><b>Post or upload anything.</b> Publishing is always you.</li>
+          <li><b>Make up facts.</b> If a detail is missing (a licence number, a rate), it leaves a visible note instead of guessing.</li>
+          <li><b>Copy other accounts.</b> It studies what works in the market through official sources, then makes its own.</li>
+          <li><b>Use an unconfirmed photo or logo.</b> If an image is marked "check", you confirm it in the Desk first.</li>
+        </ul>
+        <div class="callout"><b>PROOF</b> on a piece means a required detail is missing. In Ontario that's the brokerage name and licence number. The piece is fine to review and show the client, but don't post it until the detail is added.</div>
+      </section>
+
+      <section id="help">
+        <h2><span class="n">11</span>If something's off</h2>
+        <span class="say">check my setup<small>Studio runs its health check and fixes what it can.</small></span>
+        <span class="say">/create status<small>Shows every piece and where it's up to.</small></span>
+        <span class="say">continue the Sam Rivera reel<small>Picks a stopped piece back up where it left off.</small></span>
+        <p>Or just describe the problem in your own words ("the reel has no sound", "it used the wrong logo"). Studio will look into it.</p>
+      </section>
+
+      <section id="words">
+        <h2><span class="n">12</span>Words you'll see</h2>
+        <dl>
+          <dt>Style</dt><dd>The look of a piece. All film styles are in the <a href="./">Film Directory</a>.</dd>
+          <dt>Check-in (gate)</dt><dd>A point where Studio waits for your decision: one for the idea, one for the finished piece.</dd>
+          <dt>Kit</dt><dd>Everything Studio knows about a client: brand, photos, licence, voice, past work.</dd>
+          <dt>Brief</dt><dd>Your one-sentence request, or a client's standing instructions.</dd>
+          <dt>PROOF</dt><dd>A piece that's missing a required detail and shouldn't be posted yet.</dd>
+          <dt>The Desk</dt><dd>The visual control room in your browser.</dd>
+          <dt>Radar</dt><dd>Studio's view of what's trending for similar accounts, used to suggest topics.</dd>
+        </dl>
+      </section>
+    </main>
+  </div>
+
+  <footer>SuperKreatives Studio · <a href="./">Film Directory</a> · <a href="https://superkreatives.ca" rel="noopener">superkreatives.ca</a></footer>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+  const t = document.getElementById(b.dataset.copy).firstChild.textContent.trim();
+  try { await navigator.clipboard.writeText(t); b.textContent = 'Copied'; } catch (e) { b.textContent = 'Select & copy'; }
+  setTimeout(() => (b.textContent = 'Copy'), 1800);
+}));
+</script>
+</body>
+</html>
