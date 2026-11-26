@@ -1,0 +1,60 @@
+{
+ "meta": {
+  "source": "fictional example client for a fresh clone",
+  "generated": "2026-11-26"
+ },
+ "clients": [
+  {
+   "id": "client-001",
+   "sheet_row": 2,
+   "name": "Sam Rivera",
+   "people": [],
+   "emails": [
+    "sam@northline.example"
+   ],
+   "phones": [
+    "416-555-0142"
+   ],
+   "website": "northline.example",
+   "location": "Toronto, Ontario",
+   "brokerage_name": "[BROKERAGE NAME]",
+   "brokerage_license_no": "[BROKERAGE LICENCE #]",
+   "agent_license_no": "[AGENT LICENCE #]",
+   "designation": "Mortgage Agent Level 2",
+   "other_ids": [],
+   "time_zone": null,
+   "posting_time": null,
+   "posting_mode": null,
+   "services": [
+    "Mortgage renewal",
+    "Refinancing",
+    "First-time home buyers",
+    "Self-employed mortgages"
+   ],
+   "special_requests": [],
+   "photo_notes": null,
+   "figma_file": null,
+   "notes": [],
+   "raw_client_details": null,
+   "assets": {
+    "photo": null,
+    "footer": {
+     "file": "assets/northline-mortgages/footer.png",
+     "width": 1080,
+     "height": 148
+    },
+    "logos": [
+     {
+      "file": "assets/northline-mortgages/logo.png",
+      "width": 600,
+      "height": 600
+     }
+    ]
+   },
+   "asset_folder": null,
+   "has_photo": true,
+   "has_footer": true,
+   "has_logo": true
+  }
+ ]
+}

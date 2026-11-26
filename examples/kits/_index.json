@@ -1,0 +1,13 @@
+[
+ {
+  "slug": "northline-mortgages",
+  "name": "Sam Rivera",
+  "city": "Toronto",
+  "province": "ON",
+  "group": 1,
+  "completeness": 1.0,
+  "flags": [
+   "Fictional example client: every fact is made up. Pieces are PROOF only."
+  ]
+ }
+]

@@ -1,0 +1,1429 @@
+{
+ "version": 1,
+ "doc": "Studio quality scorecard catalogue. Source of truth for studio/evals/scorecard.py and the Desk Scorecard view. Edit here; then run scorecard.py --write-catalogue to refresh the table in TESTS.md.",
+ "status": {
+  "pass": "meets target",
+  "warn": "between target and fail line",
+  "fail": "past the fail line",
+  "info": "no threshold, shown for context",
+  "nodata": "source file or data not there yet",
+  "pending": "spot-check or monthly result not recorded yet"
+ },
+ "points": {
+  "pass": 100,
+  "warn": 50,
+  "fail": 0
+ },
+ "suites": [
+  {
+   "id": "radar",
+   "name": "Radar",
+   "weight": 1.0,
+   "question": "Is the competitor and client-account feed complete, fresh and correct?"
+  },
+  {
+   "id": "intel",
+   "name": "Patterns & intel",
+   "weight": 1.0,
+   "question": "Does the Radar turn posts into patterns, visual tags and questions we can trust?"
+  },
+  {
+   "id": "kits",
+   "name": "Kits",
+   "weight": 1.5,
+   "question": "Do the client kits hold complete, sourced, conflict-free facts?"
+  },
+  {
+   "id": "creative",
+   "name": "Creative output",
+   "weight": 3.0,
+   "question": "Are the finished pieces good, true, compliant and original?"
+  },
+  {
+   "id": "library",
+   "name": "Library & learning",
+   "weight": 1.0,
+   "question": "Is every decision filed so the next piece learns from it?"
+  },
+  {
+   "id": "pipeline",
+   "name": "Pipeline",
+   "weight": 1.0,
+   "question": "How long, how many runs, how many failures, how much usage?"
+  },
+  {
+   "id": "intake",
+   "name": "Intake",
+   "weight": 0.5,
+   "question": "Can the 20 test briefs be produced as asked from the kits on disk?"
+  },
+  {
+   "id": "golden",
+   "name": "Golden creative set",
+   "weight": 2.0,
+   "question": "Monthly: how good are concepts for 5 fixed briefs, judged with the critic rubric?"
+  }
+ ],
+ "tests": [
+  {
+   "id": "radar.coverage.instagram",
+   "suite": "radar",
+   "name": "Coverage: instagram",
+   "measures": "Share of active instagram accounts in radar/accounts.json that have at least one post in posts.jsonl dated in the last 30 days",
+   "method": "auto",
+   "computed": "accounts.json active (and discoverable != false) on instagram; posts.jsonl grouped by account; count accounts with a post whose `date` is within 30 days. Business Discovery (official API).",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 70,
+   "weight": 1.0,
+   "why": "Patterns are only as good as the accounts they see; a silent platform hides what competitors are doing there.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "70% to < 90%",
+    "fail": "< 70%"
+   },
+   "warn": "70% to < 90%"
+  },
+  {
+   "id": "radar.coverage.youtube",
+   "suite": "radar",
+   "name": "Coverage: youtube",
+   "measures": "Share of active youtube accounts in radar/accounts.json that have at least one post in posts.jsonl dated in the last 30 days",
+   "method": "auto",
+   "computed": "accounts.json active (and discoverable != false) on youtube; posts.jsonl grouped by account; count accounts with a post whose `date` is within 30 days. YouTube Data API.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 70,
+   "weight": 1.0,
+   "why": "Patterns are only as good as the accounts they see; a silent platform hides what competitors are doing there.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "70% to < 90%",
+    "fail": "< 70%"
+   },
+   "warn": "70% to < 90%"
+  },
+  {
+   "id": "radar.coverage.web",
+   "suite": "radar",
+   "name": "Coverage: web",
+   "measures": "Share of active web accounts in radar/accounts.json that have at least one post in posts.jsonl dated in the last 30 days",
+   "method": "auto",
+   "computed": "accounts.json active (and discoverable != false) on web; posts.jsonl grouped by account; count accounts with a post whose `date` is within 30 days. RSS/Atom feeds and robots-allowed pages.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 80,
+   "fail": 60,
+   "weight": 1.0,
+   "why": "Patterns are only as good as the accounts they see; a silent platform hides what competitors are doing there.",
+   "thresholds": {
+    "pass": ">= 80%",
+    "warn": "60% to < 80%",
+    "fail": "< 60%"
+   },
+   "warn": "60% to < 80%"
+  },
+  {
+   "id": "radar.coverage.facebook",
+   "suite": "radar",
+   "name": "Coverage: facebook",
+   "measures": "Share of active facebook accounts in radar/accounts.json that have at least one post in posts.jsonl",
+   "method": "auto",
+   "computed": "accounts.json active (and discoverable != false) on facebook; posts.jsonl grouped by account; count accounts with any post. Manual entries only (no scraping), so the bar is low.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 20,
+   "fail": 5,
+   "weight": 0.5,
+   "why": "Patterns are only as good as the accounts they see; a silent platform hides what competitors are doing there.",
+   "thresholds": {
+    "pass": ">= 20%",
+    "warn": "5% to < 20%",
+    "fail": "< 5%"
+   },
+   "warn": "5% to < 20%"
+  },
+  {
+   "id": "radar.coverage.linkedin",
+   "suite": "radar",
+   "name": "Coverage: linkedin",
+   "measures": "Share of active linkedin accounts in radar/accounts.json that have at least one post in posts.jsonl",
+   "method": "auto",
+   "computed": "accounts.json active (and discoverable != false) on linkedin; posts.jsonl grouped by account; count accounts with any post. Manual entries only (no scraping), so the bar is low.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 20,
+   "fail": 5,
+   "weight": 0.5,
+   "why": "Patterns are only as good as the accounts they see; a silent platform hides what competitors are doing there.",
+   "thresholds": {
+    "pass": ">= 20%",
+    "warn": "5% to < 20%",
+    "fail": "< 5%"
+   },
+   "warn": "5% to < 20%"
+  },
+  {
+   "id": "radar.coverage.tiktok",
+   "suite": "radar",
+   "name": "Coverage: tiktok",
+   "measures": "Share of active tiktok accounts in radar/accounts.json that have at least one post in posts.jsonl",
+   "method": "auto",
+   "computed": "accounts.json active (and discoverable != false) on tiktok; posts.jsonl grouped by account; count accounts with any post. Manual entries and landscape notes only (no scraping).",
+   "unit": "%",
+   "direction": "higher",
+   "target": 20,
+   "fail": 5,
+   "weight": 0.5,
+   "why": "Patterns are only as good as the accounts they see; a silent platform hides what competitors are doing there.",
+   "thresholds": {
+    "pass": ">= 20%",
+    "warn": "5% to < 20%",
+    "fail": "< 5%"
+   },
+   "warn": "5% to < 20%"
+  },
+  {
+   "id": "radar.freshness",
+   "suite": "radar",
+   "name": "Freshness < 48 h",
+   "measures": "Share of active, fetchable accounts (Instagram, YouTube, web; discoverable) whose newest post was collected (`seen`) in the last 48 hours",
+   "method": "auto",
+   "computed": "max(`seen`) per account in posts.jsonl vs now.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 60,
+   "weight": 2.0,
+   "why": "Stale data means the nightly ideas react to last week. An expired token shows up here first.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "60% to < 90%",
+    "fail": "< 60%"
+   },
+   "warn": "60% to < 90%"
+  },
+  {
+   "id": "radar.source_health",
+   "suite": "radar",
+   "name": "Source health",
+   "measures": "Share of Radar sources (instagram, youtube, rss, manual) reporting ok in radar/status.json",
+   "method": "auto",
+   "computed": "status.json sources[*].ok; error text goes into detail.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 75,
+   "weight": 1.5,
+   "why": "A dead source silently shrinks coverage; this names it the same night.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "75% to < 100%",
+    "fail": "< 75%"
+   },
+   "warn": "75% to < 100%"
+  },
+  {
+   "id": "radar.metric_accuracy",
+   "suite": "radar",
+   "name": "Metric accuracy (YouTube re-fetch)",
+   "measures": "Share of 10 random YouTube API posts whose stored views are within 5% of a fresh YouTube Data API read",
+   "method": "auto",
+   "computed": "Seeded random sample (seed = date) of posts with source youtube-api, preferring ones seen in the last 48 h; videos.list?part=statistics with YOUTUBE_API_KEY from studio/.env (never printed); |stored - fresh| / fresh <= 5%. 1 quota unit. Skipped with --offline.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 70,
+   "weight": 1.5,
+   "why": "Outlier multiples drive what we copy; wrong view counts mean we chase the wrong posts.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "70% to < 90%",
+    "fail": "< 70%"
+   },
+   "warn": "70% to < 90%"
+  },
+  {
+   "id": "radar.duplicates",
+   "suite": "radar",
+   "name": "Duplicate rate",
+   "measures": "Share of posts that duplicate another (same id, same normalised URL or video/shortcode, or same account + caption + day)",
+   "method": "auto",
+   "computed": "posts.jsonl; URLs normalised (YouTube watch/shorts/youtu.be -> video id, Instagram /p/ /reel/ -> shortcode, else host+path).",
+   "unit": "%",
+   "direction": "lower",
+   "target": 0.5,
+   "fail": 2.0,
+   "weight": 1.0,
+   "why": "Duplicates inflate counts and pattern hits.",
+   "thresholds": {
+    "pass": "<= 0.5%",
+    "warn": "> 0.5% to 2%",
+    "fail": "> 2%"
+   },
+   "warn": "> 0.5% to 2%"
+  },
+  {
+   "id": "radar.date_sanity",
+   "suite": "radar",
+   "name": "Date sanity (no fetch-time dates)",
+   "measures": "Posts whose `date` looks like the collection time or is impossible",
+   "method": "auto",
+   "computed": "Count posts with a timestamped date within 2 minutes of `seen`, a date-only date equal to the `seen` day on non-API sources, a date more than 1 day after `seen`, a date before 2005, or 5+ posts of one account sharing one exact timestamp.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 0,
+   "fail": 5,
+   "weight": 1.0,
+   "why": "A fetch-time date makes an old post look new and breaks the 30-day windows and outliers.",
+   "thresholds": {
+    "pass": "<= 0",
+    "warn": "> 0 to 5",
+    "fail": "> 5"
+   },
+   "warn": "> 0 to 5"
+  },
+  {
+   "id": "radar.dated_share",
+   "suite": "radar",
+   "name": "Posts with a real date",
+   "measures": "Share of posts that carry their own date",
+   "method": "auto",
+   "computed": "posts.jsonl `date` not null.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 97,
+   "fail": 90,
+   "weight": 0.5,
+   "why": "Undated posts can't enter windows, outliers or patterns.",
+   "thresholds": {
+    "pass": ">= 97%",
+    "warn": "90% to < 97%",
+    "fail": "< 90%"
+   },
+   "warn": "90% to < 97%"
+  },
+  {
+   "id": "radar.run_recency",
+   "suite": "radar",
+   "name": "Hours since last Radar run",
+   "measures": "Age of radar/summary.json lastRun",
+   "method": "auto",
+   "computed": "now - summary.lastRun.",
+   "unit": "h",
+   "direction": "lower",
+   "target": 26,
+   "fail": 50,
+   "weight": 1.0,
+   "why": "The nightly job must actually run.",
+   "thresholds": {
+    "pass": "<= 26 h",
+    "warn": "> 26 h to 50 h",
+    "fail": "> 50 h"
+   },
+   "warn": "> 26 h to 50 h"
+  },
+  {
+   "id": "intel.patterns_valid",
+   "suite": "intel",
+   "name": "Patterns with real support",
+   "measures": "Number of patterns in radar/patterns.json with 3+ example posts from 2+ different accounts",
+   "method": "auto",
+   "computed": "patterns[*].examples looked up in posts.jsonl for their account.",
+   "unit": "count",
+   "direction": "higher",
+   "target": 8,
+   "fail": 4,
+   "weight": 1.0,
+   "why": "Fewer than 3 examples from one account is an anecdote, not a pattern.",
+   "thresholds": {
+    "pass": ">= 8",
+    "warn": "4 to < 8",
+    "fail": "< 4"
+   },
+   "warn": "4 to < 8"
+  },
+  {
+   "id": "intel.patterns_valid_share",
+   "suite": "intel",
+   "name": "Share of patterns that are supported",
+   "measures": "Share of listed patterns meeting the 3-examples / 2-accounts bar",
+   "method": "auto",
+   "computed": "as above / len(patterns).",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 80,
+   "weight": 1.0,
+   "why": "Unsupported patterns should never reach the strategist.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "80% to < 100%",
+    "fail": "< 80%"
+   },
+   "warn": "80% to < 100%"
+  },
+  {
+   "id": "intel.pattern_precision",
+   "suite": "intel",
+   "name": "Pattern precision (spot-check)",
+   "measures": "Share of sampled pattern examples that truly show the pattern's mechanism",
+   "method": "spot",
+   "computed": "Orchestrator opens 2 examples from each of 5 random patterns (10 posts), looks at the thumbnail/caption and marks match / no match. Written to reviews/<date>.json as {test:'intel.pattern_precision', value:%, sample:[post ids], verdict, notes}.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 85,
+   "fail": 70,
+   "weight": 1.5,
+   "why": "Keyword rules mislabel posts; this is the only check that a pattern means what it says.",
+   "thresholds": {
+    "pass": ">= 85%",
+    "warn": "70% to < 85%",
+    "fail": "< 70%"
+   },
+   "warn": "70% to < 85%"
+  },
+  {
+   "id": "intel.client_fit_specificity",
+   "suite": "intel",
+   "name": "Client-fit specificity",
+   "measures": "Average share of all kits that a pattern's clientFit lists",
+   "method": "auto",
+   "computed": "mean(len(clientFit) / number of kits) over patterns.",
+   "unit": "%",
+   "direction": "lower",
+   "target": 40,
+   "fail": 70,
+   "weight": 0.5,
+   "why": "A pattern that 'fits' every client tells the strategist nothing.",
+   "thresholds": {
+    "pass": "<= 40%",
+    "warn": "> 40% to 70%",
+    "fail": "> 70%"
+   },
+   "warn": "> 40% to 70%"
+  },
+  {
+   "id": "intel.visual_coverage",
+   "suite": "intel",
+   "name": "Visual tags on top posts",
+   "measures": "Share of the 50 highest-outlier competitor posts of the last 30 days that have visual tags in radar/visual.json",
+   "method": "auto",
+   "computed": "Top 50 by outlierRaw (competitor accounts only, dated in 30 days); ids found in visual.json (any of: {posts:{id:..}}, {id:..}, [{id|post|postId}], {items:[..]}).",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 60,
+   "weight": 1.0,
+   "why": "Formats and hooks are half the story; the look is what the director needs.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "60% to < 90%",
+    "fail": "< 60%"
+   },
+   "warn": "60% to < 90%"
+  },
+  {
+   "id": "intel.questions_yield",
+   "suite": "intel",
+   "name": "Question-mining yield",
+   "measures": "Number of audience questions in radar/questions.json",
+   "method": "auto",
+   "computed": "len(questions) (list, {questions:[..]} or {items:[..]}).",
+   "unit": "count",
+   "direction": "higher",
+   "target": 30,
+   "fail": 10,
+   "weight": 1.0,
+   "why": "Real questions are the cheapest source of hooks that land.",
+   "thresholds": {
+    "pass": ">= 30",
+    "warn": "10 to < 30",
+    "fail": "< 10"
+   },
+   "warn": "10 to < 30"
+  },
+  {
+   "id": "intel.questions_dedup",
+   "suite": "intel",
+   "name": "Question de-dup",
+   "measures": "Share of mined questions that are unique after normalisation",
+   "method": "auto",
+   "computed": "Lowercase, strip punctuation; duplicates = exact normalised match or token Jaccard >= 0.8.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 95,
+   "fail": 85,
+   "weight": 0.5,
+   "why": "Duplicate questions crowd out new ones and fake a trend.",
+   "thresholds": {
+    "pass": ">= 95%",
+    "warn": "85% to < 95%",
+    "fail": "< 85%"
+   },
+   "warn": "85% to < 95%"
+  },
+  {
+   "id": "intel.candidates_pending",
+   "suite": "intel",
+   "name": "Candidate accounts awaiting a decision",
+   "measures": "Accounts proposed in radar/candidates.json that nobody has accepted or rejected yet",
+   "method": "auto",
+   "computed": "Items without status accepted/rejected/added/approved/dismissed.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 10,
+   "fail": 30,
+   "weight": 0.5,
+   "why": "Unreviewed candidates mean coverage gaps stay open.",
+   "thresholds": {
+    "pass": "<= 10",
+    "warn": "> 10 to 30",
+    "fail": "> 30"
+   },
+   "warn": "> 10 to 30"
+  },
+  {
+   "id": "intel.client_mirror",
+   "suite": "intel",
+   "name": "Client accounts mirrored",
+   "measures": "Share of kits whose own Instagram posts are in radar/clients.json (so new pieces avoid repeating them)",
+   "method": "auto",
+   "computed": "clients.json clients[*].posts > 0 / number of kits.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 80,
+   "fail": 50,
+   "weight": 0.5,
+   "why": "The strategist can only avoid repeats it can see.",
+   "thresholds": {
+    "pass": ">= 80%",
+    "warn": "50% to < 80%",
+    "fail": "< 50%"
+   },
+   "warn": "50% to < 80%"
+  },
+  {
+   "id": "kits.completeness",
+   "suite": "kits",
+   "name": "Average completeness",
+   "measures": "Mean kit completeness (12 key fields) across kits/_index.json",
+   "method": "auto",
+   "computed": "mean(completeness) x 100.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 75,
+   "weight": 1.5,
+   "why": "Every empty field is a TODO in a piece or a proof-only post.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "75% to < 90%",
+    "fail": "< 75%"
+   },
+   "warn": "75% to < 90%"
+  },
+  {
+   "id": "kits.provenance",
+   "suite": "kits",
+   "name": "Provenance coverage",
+   "measures": "Share of filled key fields that name a source in kit.json provenance",
+   "method": "auto",
+   "computed": "Key fields: name, city, province, group, brokerage.name, brokerage.licence, agent.licence, photo, footer, logos, colors.accent (not 'default'), complianceLine.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 95,
+   "weight": 1.5,
+   "why": "An unsourced fact is an invented fact until proven otherwise.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "95% to < 100%",
+    "fail": "< 95%"
+   },
+   "warn": "95% to < 100%"
+  },
+  {
+   "id": "kits.conflicts",
+   "suite": "kits",
+   "name": "Unresolved data conflicts",
+   "measures": "Kit flags that record two sources disagreeing (differs, website says, conflict, inconsistent, spells, both Group ...)",
+   "method": "auto",
+   "computed": "Regex over kit.json flags; minus conflicts the user resolved in confirm.json notes.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 10,
+   "fail": 40,
+   "weight": 1.0,
+   "why": "Conflicting phone numbers, licences or names end up on a post.",
+   "thresholds": {
+    "pass": "<= 10",
+    "warn": "> 10 to 40",
+    "fail": "> 40"
+   },
+   "warn": "> 10 to 40"
+  },
+  {
+   "id": "kits.ontario_compliance",
+   "suite": "kits",
+   "name": "Ontario kits with a compliance line",
+   "measures": "Share of Ontario (and unknown-province, treated as Ontario) kits that have a complianceLine",
+   "method": "auto",
+   "computed": "kit.json province in (ON, null) and complianceLine non-empty.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 85,
+   "weight": 2.0,
+   "why": "No line = proof-only = the piece can't be posted (O. Reg. 188/08).",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "85% to < 100%",
+    "fail": "< 85%"
+   },
+   "warn": "85% to < 100%"
+  },
+  {
+   "id": "kits.assets_awaiting",
+   "suite": "kits",
+   "name": "Assets awaiting confirmation",
+   "measures": "Assets marked 'check' that the user hasn't confirmed or rejected in the Desk",
+   "method": "auto",
+   "computed": "kit.json assets.check minus confirm.json assets decided true/false.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 0,
+   "fail": 5,
+   "weight": 0.5,
+   "why": "Unconfirmed assets can't be used, so pieces fall back to weaker branding.",
+   "thresholds": {
+    "pass": "<= 0",
+    "warn": "> 0 to 5",
+    "fail": "> 5"
+   },
+   "warn": "> 0 to 5"
+  },
+  {
+   "id": "kits.colours_confirmed",
+   "suite": "kits",
+   "name": "Brand colours confirmed",
+   "measures": "Share of kits whose accent colour is confirmed (not provisional)",
+   "method": "auto",
+   "computed": "tokens.json color.accent $extensions.studio.provisional == false, or confirm.json colors.accent == true/#hex.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 80,
+   "fail": 50,
+   "weight": 1.0,
+   "why": "Provisional colours are guesses from a website; wrong colours read as 'not our brand'.",
+   "thresholds": {
+    "pass": ">= 80%",
+    "warn": "50% to < 80%",
+    "fail": "< 50%"
+   },
+   "warn": "50% to < 80%"
+  },
+  {
+   "id": "kits.accent_contrast",
+   "suite": "kits",
+   "name": "Accent colour usable on paper",
+   "measures": "Share of kits whose accent reaches 3:1 contrast against the paper colour",
+   "method": "auto",
+   "computed": "tokens.json color.accent $extensions.studio.contrastVsPaper >= 3.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 70,
+   "weight": 0.5,
+   "why": "A low-contrast accent forces the director to improvise colours.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "70% to < 90%",
+    "fail": "< 70%"
+   },
+   "warn": "70% to < 90%"
+  },
+  {
+   "id": "kits.group_assigned",
+   "suite": "kits",
+   "name": "Kits with a posting group",
+   "measures": "Share of kits with a group (drives batch and calendar)",
+   "method": "auto",
+   "computed": "kit.json group not null.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 85,
+   "weight": 0.5,
+   "why": "No group = left out of weekly batches.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "85% to < 100%",
+    "fail": "< 85%"
+   },
+   "warn": "85% to < 100%"
+  },
+  {
+   "id": "kits.fact_accuracy",
+   "suite": "kits",
+   "name": "Kit fact accuracy (spot-check)",
+   "measures": "Share of 5 sampled kit facts that match their cited source",
+   "method": "spot",
+   "computed": "Orchestrator picks 5 random (kit, filled key field) pairs, opens the provenance source (clients.json, footer image, website) and marks match / mismatch.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 95,
+   "weight": 1.5,
+   "why": "Provenance says where a fact came from; this checks it was copied right.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "95% to < 100%",
+    "fail": "< 95%"
+   },
+   "warn": "95% to < 100%"
+  },
+  {
+   "id": "creative.qa_first_pass",
+   "suite": "creative",
+   "name": "QA first-pass rate",
+   "measures": "Share of jobs whose first critic round passed",
+   "method": "auto",
+   "computed": "job.json log: first critic 'done: pass|...' vs 'done: fail|...'.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 60,
+   "fail": 30,
+   "weight": 1.5,
+   "why": "Every extra round costs 10-100 minutes of director time and usage.",
+   "thresholds": {
+    "pass": ">= 60%",
+    "warn": "30% to < 60%",
+    "fail": "< 30%"
+   },
+   "warn": "30% to < 60%"
+  },
+  {
+   "id": "creative.rounds_to_pass",
+   "suite": "creative",
+   "name": "Mean critic rounds to pass",
+   "measures": "Average number of critic rounds per job until pass",
+   "method": "auto",
+   "computed": "Count critic 'done:' lines per job (or qa/critique.json round).",
+   "unit": "rounds",
+   "direction": "lower",
+   "target": 1.5,
+   "fail": 2.5,
+   "weight": 1.0,
+   "why": "The trend line of how good first renders are.",
+   "thresholds": {
+    "pass": "<= 1.5",
+    "warn": "> 1.5 to 2.5",
+    "fail": "> 2.5"
+   },
+   "warn": "> 1.5 to 2.5"
+  },
+  {
+   "id": "creative.critic_mean",
+   "suite": "creative",
+   "name": "Critic rubric average",
+   "measures": "Mean of all scored rubric lines (1-5) in the final qa/critique.json of every job",
+   "method": "auto",
+   "computed": "critique.json scores; n/a and null skipped; per-line averages in detail.",
+   "unit": "score",
+   "direction": "higher",
+   "target": 4.3,
+   "fail": 3.8,
+   "weight": 2.0,
+   "why": "The single best summary of craft quality as judged by the critic.",
+   "thresholds": {
+    "pass": ">= 4.3",
+    "warn": "3.8 to < 4.3",
+    "fail": "< 3.8"
+   },
+   "warn": "3.8 to < 4.3"
+  },
+  {
+   "id": "creative.critic_min_line",
+   "suite": "creative",
+   "name": "Weakest rubric line",
+   "measures": "The lowest per-line average across jobs (which line is dragging)",
+   "method": "auto",
+   "computed": "min over the 12 lines of mean(score).",
+   "unit": "score",
+   "direction": "higher",
+   "target": 4.0,
+   "fail": 3.5,
+   "weight": 1.5,
+   "why": "Shows the one skill to improve next (originality is usually it).",
+   "thresholds": {
+    "pass": ">= 4",
+    "warn": "3.5 to < 4",
+    "fail": "< 3.5"
+   },
+   "warn": "3.5 to < 4"
+  },
+  {
+   "id": "creative.hard_stops",
+   "suite": "creative",
+   "name": "Hard stops at Gate 2",
+   "measures": "Hard stops and coded QA fails still present when a piece reached Gate 2",
+   "method": "auto",
+   "computed": "critique.json hardStops (if present) + critique pass == false + qa/report.json pass == false, for jobs past the critic.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 0,
+   "fail": 0,
+   "weight": 2.0,
+   "why": "A hard stop that reaches the owner is a process failure, not a taste issue.",
+   "thresholds": {
+    "pass": "<= 0",
+    "warn": "none (pass or fail)",
+    "fail": "> 0"
+   },
+   "warn": "none (pass or fail)"
+  },
+  {
+   "id": "creative.neardup_clients",
+   "suite": "creative",
+   "name": "Near-dup distance to other clients",
+   "measures": "Smallest perceptual distance between a job's deliverables and any piece of a different client (library + other jobs)",
+   "method": "auto",
+   "computed": "pHash+dHash (64-bit), distance = mean Hamming; library/hashes.json (thumb + frames, client from cards) and other jobs' out/ (videos at 25/50/75%). QA fails at <= 6.",
+   "unit": "bits",
+   "direction": "higher",
+   "target": 11,
+   "fail": 7,
+   "weight": 1.5,
+   "why": "Sibling clients must never get the same-looking post.",
+   "thresholds": {
+    "pass": ">= 11",
+    "warn": "7 to < 11",
+    "fail": "< 7"
+   },
+   "warn": "7 to < 11"
+  },
+  {
+   "id": "creative.neardup_competitors",
+   "suite": "creative",
+   "name": "Near-dup distance to competitors",
+   "measures": "Smallest perceptual distance between a job's deliverables and any Radar thumbnail",
+   "method": "auto",
+   "computed": "Same hashing against radar/thumbs/*.jpg (cached).",
+   "unit": "bits",
+   "direction": "higher",
+   "target": 11,
+   "fail": 7,
+   "weight": 1.0,
+   "why": "We borrow mechanisms from competitors, never their look.",
+   "thresholds": {
+    "pass": ">= 11",
+    "warn": "7 to < 11",
+    "fail": "< 7"
+   },
+   "warn": "7 to < 11"
+  },
+  {
+   "id": "creative.variety",
+   "suite": "creative",
+   "name": "Variety score",
+   "measures": "Mean variety.py novelty score of the chosen concepts",
+   "method": "auto",
+   "computed": "concepts.json chosen concept `novelty.score` (or the score parsed from the novelty text).",
+   "unit": "score",
+   "direction": "higher",
+   "target": 0.9,
+   "fail": 0.7,
+   "weight": 1.0,
+   "why": "Same style or device as last time = the feed looks templated.",
+   "thresholds": {
+    "pass": ">= 0.9",
+    "warn": "0.7 to < 0.9",
+    "fail": "< 0.7"
+   },
+   "warn": "0.7 to < 0.9"
+  },
+  {
+   "id": "creative.compliance_correct",
+   "suite": "creative",
+   "name": "Compliance correctness",
+   "measures": "Share of Ontario (or unknown-province) pieces that carry the compliance line or are explicitly labelled PROOF",
+   "method": "auto",
+   "computed": "qa/report.json copy.compliance_line == pass, or check.json proofOnly, or 'PROOF' in the director/gate summary.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 100,
+   "weight": 2.0,
+   "why": "A missing line on a postable Ontario piece is a regulatory breach.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "none (pass or fail)",
+    "fail": "< 100%"
+   },
+   "warn": "none (pass or fail)"
+  },
+  {
+   "id": "creative.maths_verified",
+   "suite": "creative",
+   "name": "Maths verified",
+   "measures": "Share of numbers in check.json math that the checker recomputed as ok (jobs without check.json count as unverified)",
+   "method": "auto",
+   "computed": "check.json math[*].ok.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 100,
+   "weight": 2.0,
+   "why": "One wrong payment figure costs a client's credibility.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "none (pass or fail)",
+    "fail": "< 100%"
+   },
+   "warn": "none (pass or fail)"
+  },
+  {
+   "id": "creative.postable",
+   "suite": "creative",
+   "name": "Postable without TODOs",
+   "measures": "Share of approved pieces that are not proof-only (could be posted today)",
+   "method": "auto",
+   "computed": "check.json proofOnly false and no 'PROOF' in the director summary.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 80,
+   "fail": 40,
+   "weight": 2.0,
+   "why": "Approved-but-proof-only pieces are work the client never sees.",
+   "thresholds": {
+    "pass": ">= 80%",
+    "warn": "40% to < 80%",
+    "fail": "< 40%"
+   },
+   "warn": "40% to < 80%"
+  },
+  {
+   "id": "creative.waivers",
+   "suite": "creative",
+   "name": "QA waivers per piece",
+   "measures": "Mean number of coded-check waivers per job (qa/waivers.json)",
+   "method": "auto",
+   "computed": "len(waivers.json) per job.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 0.5,
+   "fail": 1.5,
+   "weight": 0.5,
+   "why": "Waivers are fine once; a rising count means the gate or the engine needs fixing.",
+   "thresholds": {
+    "pass": "<= 0.5",
+    "warn": "> 0.5 to 1.5",
+    "fail": "> 1.5"
+   },
+   "warn": "> 0.5 to 1.5"
+  },
+  {
+   "id": "creative.gate1_clean",
+   "suite": "creative",
+   "name": "Gate 1: picked without revision",
+   "measures": "Share of jobs whose first Gate 1 decision by the owner was a pick (not revise/reject)",
+   "method": "user",
+   "computed": "library/feedback.jsonl g1 rows, first per job, excluding by == producer-test.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 70,
+   "fail": 40,
+   "weight": 1.5,
+   "why": "The owner's own verdict on whether the concepts were good enough.",
+   "thresholds": {
+    "pass": ">= 70%",
+    "warn": "40% to < 70%",
+    "fail": "< 40%"
+   },
+   "warn": "40% to < 70%"
+  },
+  {
+   "id": "creative.gate2_clean",
+   "suite": "creative",
+   "name": "Gate 2: approved without revision",
+   "measures": "Share of jobs whose first Gate 2 decision was approve with no fix request in the notes",
+   "method": "user",
+   "computed": "library/feedback.jsonl g2 rows, first per job; notes asking for a fix (fix, wrong, not proper, change, redo, look into...) count as revision.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 80,
+   "fail": 50,
+   "weight": 2.0,
+   "why": "The owner's verdict on the finished piece.",
+   "thresholds": {
+    "pass": ">= 80%",
+    "warn": "50% to < 80%",
+    "fail": "< 50%"
+   },
+   "warn": "50% to < 80%"
+  },
+  {
+   "id": "creative.note_themes",
+   "suite": "creative",
+   "name": "Owner note themes",
+   "measures": "What the owner's gate notes are about (visual craft, copy, numbers, compliance, brand, pacing/sound)",
+   "method": "user",
+   "computed": "Keyword themes over notes written at the Desk or in chat (producer test notes excluded). Informational.",
+   "unit": "theme",
+   "direction": "none",
+   "target": null,
+   "fail": null,
+   "weight": 0,
+   "why": "Tells you which agent to improve first.",
+   "thresholds": {
+    "pass": "info",
+    "warn": "info",
+    "fail": "info"
+   },
+   "warn": "info"
+  },
+  {
+   "id": "creative.critic_agreement",
+   "suite": "creative",
+   "name": "Critic agreement (spot-check)",
+   "measures": "Share of sampled critic line scores the orchestrator agrees with within 1 point",
+   "method": "spot",
+   "computed": "Orchestrator re-scores 6 random rubric lines on one recent job from full-size frames; agreement = |own - critic| <= 1.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 75,
+   "weight": 1.5,
+   "why": "If the critic is lenient, every other creative number is inflated.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "75% to < 90%",
+    "fail": "< 75%"
+   },
+   "warn": "75% to < 90%"
+  },
+  {
+   "id": "creative.concept_distinct",
+   "suite": "creative",
+   "name": "Concepts genuinely different (spot-check)",
+   "measures": "Share of recent Gate 1 sets whose three concepts differ in device, structure and style",
+   "method": "spot",
+   "computed": "Orchestrator reads the last 3 concepts.json files and marks each set distinct / not distinct.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 80,
+   "weight": 1.0,
+   "why": "Three versions of one idea is a fake choice.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "80% to < 100%",
+    "fail": "< 80%"
+   },
+   "warn": "80% to < 100%"
+  },
+  {
+   "id": "library.filing_rate",
+   "suite": "library",
+   "name": "Approved pieces filed",
+   "measures": "Share of approved jobs that the librarian filed (library card exists or librarian node done)",
+   "method": "auto",
+   "computed": "library/cards/<job id>.json or index.jsonl card with source job + the job id, or job.json librarian done.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 80,
+   "weight": 2.0,
+   "why": "Unfiled work is invisible to variety, near-dup and lessons, so the bot repeats itself.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "80% to < 100%",
+    "fail": "< 80%"
+   },
+   "warn": "80% to < 100%"
+  },
+  {
+   "id": "library.history_updated",
+   "suite": "library",
+   "name": "Client history updated",
+   "measures": "Share of approved jobs that appear in the client's kits/<slug>/history.json",
+   "method": "auto",
+   "computed": "history.json pieces[*].id/card matches the job id.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 80,
+   "weight": 1.0,
+   "why": "variety.py reads history.json; a missing entry means the next piece can repeat the style.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "80% to < 100%",
+    "fail": "< 80%"
+   },
+   "warn": "80% to < 100%"
+  },
+  {
+   "id": "library.feedback_logged",
+   "suite": "library",
+   "name": "Gate decisions logged",
+   "measures": "Share of gate decisions in job.json that also appear in library/feedback.jsonl",
+   "method": "auto",
+   "computed": "(job, gate) pairs in job.json gates with a decision vs feedback.jsonl.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 100,
+   "fail": 100,
+   "weight": 1.0,
+   "why": "Feedback is the only memory the strategist has of the owner's taste.",
+   "thresholds": {
+    "pass": ">= 100%",
+    "warn": "none (pass or fail)",
+    "fail": "< 100%"
+   },
+   "warn": "none (pass or fail)"
+  },
+  {
+   "id": "pipeline.time_strategist",
+   "suite": "pipeline",
+   "name": "Time: strategist",
+   "measures": "Median minutes the strategist worked per job (all its runs added up)",
+   "method": "auto",
+   "computed": "job.json log: 'strategist running' -> next 'strategist done|fail' segments, summed per job, median over jobs.",
+   "unit": "min",
+   "direction": "lower",
+   "target": 12,
+   "fail": 25,
+   "weight": 0.5,
+   "why": "Where the hours go; a slow stage is the first optimisation target.",
+   "thresholds": {
+    "pass": "<= 12 min",
+    "warn": "> 12 min to 25 min",
+    "fail": "> 25 min"
+   },
+   "warn": "> 12 min to 25 min"
+  },
+  {
+   "id": "pipeline.time_checker",
+   "suite": "pipeline",
+   "name": "Time: checker",
+   "measures": "Median minutes the checker worked per job (all its runs added up)",
+   "method": "auto",
+   "computed": "job.json log: 'checker running' -> next 'checker done|fail' segments, summed per job, median over jobs.",
+   "unit": "min",
+   "direction": "lower",
+   "target": 3,
+   "fail": 10,
+   "weight": 0.5,
+   "why": "Where the hours go; a slow stage is the first optimisation target.",
+   "thresholds": {
+    "pass": "<= 3 min",
+    "warn": "> 3 min to 10 min",
+    "fail": "> 10 min"
+   },
+   "warn": "> 3 min to 10 min"
+  },
+  {
+   "id": "pipeline.time_director",
+   "suite": "pipeline",
+   "name": "Time: director",
+   "measures": "Median minutes the director worked per job (all its runs added up)",
+   "method": "auto",
+   "computed": "job.json log: 'director running' -> next 'director done|fail' segments, summed per job, median over jobs.",
+   "unit": "min",
+   "direction": "lower",
+   "target": 30,
+   "fail": 90,
+   "weight": 0.5,
+   "why": "Where the hours go; a slow stage is the first optimisation target.",
+   "thresholds": {
+    "pass": "<= 30 min",
+    "warn": "> 30 min to 90 min",
+    "fail": "> 90 min"
+   },
+   "warn": "> 30 min to 90 min"
+  },
+  {
+   "id": "pipeline.time_critic",
+   "suite": "pipeline",
+   "name": "Time: critic",
+   "measures": "Median minutes the critic worked per job (all its runs added up)",
+   "method": "auto",
+   "computed": "job.json log: 'critic running' -> next 'critic done|fail' segments, summed per job, median over jobs.",
+   "unit": "min",
+   "direction": "lower",
+   "target": 3,
+   "fail": 8,
+   "weight": 0.5,
+   "why": "Where the hours go; a slow stage is the first optimisation target.",
+   "thresholds": {
+    "pass": "<= 3 min",
+    "warn": "> 3 min to 8 min",
+    "fail": "> 8 min"
+   },
+   "warn": "> 3 min to 8 min"
+  },
+  {
+   "id": "pipeline.time_active",
+   "suite": "pipeline",
+   "name": "Machine time per job",
+   "measures": "Median minutes of agent work per job, gate waits excluded",
+   "method": "auto",
+   "computed": "Sum of all node segments except gate waits.",
+   "unit": "min",
+   "direction": "lower",
+   "target": 40,
+   "fail": 120,
+   "weight": 1.0,
+   "why": "Total turnaround the owner waits on the bot.",
+   "thresholds": {
+    "pass": "<= 40 min",
+    "warn": "> 40 min to 120 min",
+    "fail": "> 120 min"
+   },
+   "warn": "> 40 min to 120 min"
+  },
+  {
+   "id": "pipeline.gate_wait",
+   "suite": "pipeline",
+   "name": "Owner time at gates",
+   "measures": "Median minutes jobs waited at Gate 1 + Gate 2",
+   "method": "auto",
+   "computed": "'gate waiting' -> decision segments. Informational (owner time).",
+   "unit": "min",
+   "direction": "none",
+   "target": null,
+   "fail": null,
+   "weight": 0,
+   "why": "Shows whether gates or agents are the bottleneck.",
+   "thresholds": {
+    "pass": "info",
+    "warn": "info",
+    "fail": "info"
+   },
+   "warn": "info"
+  },
+  {
+   "id": "pipeline.runs_per_job",
+   "suite": "pipeline",
+   "name": "Agent runs per job",
+   "measures": "Mean number of agent runs (strategist, checker, director, critic, librarian) per job",
+   "method": "auto",
+   "computed": "Count of 'running' log lines per job. The floor is 5 (concepts, script, check, render, critique).",
+   "unit": "runs",
+   "direction": "lower",
+   "target": 6,
+   "fail": 9,
+   "weight": 1.0,
+   "why": "Each run costs usage; reruns mean something upstream was wrong.",
+   "thresholds": {
+    "pass": "<= 6",
+    "warn": "> 6 to 9",
+    "fail": "> 9"
+   },
+   "warn": "> 6 to 9"
+  },
+  {
+   "id": "pipeline.failures",
+   "suite": "pipeline",
+   "name": "Failures in the last 30 days",
+   "measures": "Failed nodes, failed runner runs and error log lines",
+   "method": "auto",
+   "computed": "job.json nodes status failed + log lines starting fail/error (critic QA rounds excluded) + runner queue items failed/error.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 0,
+   "fail": 2,
+   "weight": 1.0,
+   "why": "Failures that need a human to restart kill the 'one-line brief' promise.",
+   "thresholds": {
+    "pass": "<= 0",
+    "warn": "> 0 to 2",
+    "fail": "> 2"
+   },
+   "warn": "> 0 to 2"
+  },
+  {
+   "id": "pipeline.restarts",
+   "suite": "pipeline",
+   "name": "Restarts and usage waits",
+   "measures": "Runner retries (attempts > 1), runs that waited for a usage reset, and resumed runs",
+   "method": "auto",
+   "computed": "studio/runner/queue.json items.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 1,
+   "fail": 4,
+   "weight": 0.5,
+   "why": "Restarts are the cost of running out of usage mid-job.",
+   "thresholds": {
+    "pass": "<= 1",
+    "warn": "> 1 to 4",
+    "fail": "> 4"
+   },
+   "warn": "> 1 to 4"
+  },
+  {
+   "id": "pipeline.usage",
+   "suite": "pipeline",
+   "name": "Usage estimate (list price)",
+   "measures": "Sum of total_cost_usd and tokens reported by headless runs in the last 30 days",
+   "method": "auto",
+   "computed": "Result events in studio/runner/logs/*.jsonl and jobs/*/runs/*.jsonl. Chat-run jobs are not metered. Informational.",
+   "unit": "$",
+   "direction": "none",
+   "target": null,
+   "fail": null,
+   "weight": 0,
+   "why": "Lets you see cost per job once production runs go through the runner.",
+   "thresholds": {
+    "pass": "info",
+    "warn": "info",
+    "fail": "info"
+   },
+   "warn": "info"
+  },
+  {
+   "id": "intake.ready",
+   "suite": "intake",
+   "name": "Briefs ready",
+   "measures": "Share of the 20 eval briefs whose readiness is 'ready' (fresh run_evals.py into a temp folder)",
+   "method": "auto",
+   "computed": "run_evals.py --out <tmp>; summary.ready / briefs.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 70,
+   "weight": 1.0,
+   "why": "A brief that is proof-only or blocked at intake can't become a postable piece.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "70% to < 90%",
+    "fail": "< 70%"
+   },
+   "warn": "70% to < 90%"
+  },
+  {
+   "id": "intake.verdict_pass",
+   "suite": "intake",
+   "name": "Briefs with nothing to flag",
+   "measures": "Share of eval briefs with verdict pass (not warn/blocked)",
+   "method": "auto",
+   "computed": "summary.pass / briefs.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 80,
+   "fail": 50,
+   "weight": 0.5,
+   "why": "Warnings are kit gaps the user can close.",
+   "thresholds": {
+    "pass": ">= 80%",
+    "warn": "50% to < 80%",
+    "fail": "< 50%"
+   },
+   "warn": "50% to < 80%"
+  },
+  {
+   "id": "intake.blocked",
+   "suite": "intake",
+   "name": "Briefs blocked",
+   "measures": "Eval briefs that cannot be produced as asked",
+   "method": "auto",
+   "computed": "summary.blocked.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 0,
+   "fail": 1,
+   "weight": 1.0,
+   "why": "Blocked = the bot says no to a normal request.",
+   "thresholds": {
+    "pass": "<= 0",
+    "warn": "> 0 to 1",
+    "fail": "> 1"
+   },
+   "warn": "> 0 to 1"
+  },
+  {
+   "id": "golden.mean",
+   "suite": "golden",
+   "name": "Golden concepts: rubric average",
+   "measures": "Mean critic-rubric score (concept-stage lines) of the best concept per golden brief",
+   "method": "monthly",
+   "computed": "Latest studio/evals/golden/results/<YYYY-MM>.json, scored with golden_judge.md.",
+   "unit": "score",
+   "direction": "higher",
+   "target": 4.2,
+   "fail": 3.6,
+   "weight": 2.0,
+   "why": "Same 5 briefs every month = a clean trend line for the strategist's quality.",
+   "thresholds": {
+    "pass": ">= 4.2",
+    "warn": "3.6 to < 4.2",
+    "fail": "< 3.6"
+   },
+   "warn": "3.6 to < 4.2"
+  },
+  {
+   "id": "golden.must_contain",
+   "suite": "golden",
+   "name": "Golden concepts: must-contain hits",
+   "measures": "Share of the golden briefs' must-contain items present in the chosen concept",
+   "method": "monthly",
+   "computed": "Same results file, mustContain booleans.",
+   "unit": "%",
+   "direction": "higher",
+   "target": 90,
+   "fail": 70,
+   "weight": 1.5,
+   "why": "Checks the strategist follows the house rules and kit facts without being reminded.",
+   "thresholds": {
+    "pass": ">= 90%",
+    "warn": "70% to < 90%",
+    "fail": "< 70%"
+   },
+   "warn": "70% to < 90%"
+  },
+  {
+   "id": "golden.hard_stops",
+   "suite": "golden",
+   "name": "Golden concepts: hard stops",
+   "measures": "Hard stops found by the judge across the 5 golden briefs",
+   "method": "monthly",
+   "computed": "Same results file, hardStops lists.",
+   "unit": "count",
+   "direction": "lower",
+   "target": 0,
+   "fail": 0,
+   "weight": 1.5,
+   "why": "A hard stop at concept stage would reach production.",
+   "thresholds": {
+    "pass": "<= 0",
+    "warn": "none (pass or fail)",
+    "fail": "> 0"
+   },
+   "warn": "none (pass or fail)"
+  },
+  {
+   "id": "golden.recency",
+   "suite": "golden",
+   "name": "Days since the last golden run",
+   "measures": "Age of the latest golden results file",
+   "method": "auto",
+   "computed": "Today - results month/date.",
+   "unit": "days",
+   "direction": "lower",
+   "target": 35,
+   "fail": 62,
+   "weight": 0.5,
+   "why": "A monthly trend needs monthly runs.",
+   "thresholds": {
+    "pass": "<= 35 days",
+    "warn": "> 35 days to 62 days",
+    "fail": "> 62 days"
+   },
+   "warn": "> 35 days to 62 days"
+  }
+ ]
+}

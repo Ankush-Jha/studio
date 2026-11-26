@@ -1,0 +1,51 @@
+# secrets
+.env
+studio/.env
+# machine-local runtimes and caches
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.state/
+.cache/
+studio/desk/.desk.pid
+studio/desk/.desk.log
+studio/desk/shots/
+studio/runner/logs/
+studio/runner/queue.json
+studio/tools/qa/.cache/
+# work in progress and regenerable data
+radar/
+# big engine assets fetched by setup.sh
+engines/films/core/audio/samples/
+engines/films/core/tts/*.onnx
+engines/films/core/tts/*.bin
+engines/face-reels/vendor/
+engines/face-reels/tools/models/
+# client data: lives in the private studio-clients repo, cloned into private/ and linked in by studio/tools/link_data.sh
+/private/
+/clients.json
+/clients.csv
+/clients.jsonl
+/assets_manifest.csv
+/assets
+/kits
+/library
+/jobs
+/studio/evals/briefs.jsonl
+/studio/evals/golden.jsonl
+/studio/evals/golden_judge.md
+/studio/evals/reviews
+/studio/evals/history
+/studio/evals/report.md
+/studio/evals/report.json
+/studio/desk/fixtures
+/.claude/skills/*
+!/.claude/skills/create/
+!/.claude/skills/desk/
+!/.claude/skills/radar/
+!/.claude/skills/films/
+!/.claude/skills/stills/
+!/.claude/skills/face-reels/
+!/.claude/skills/motion/

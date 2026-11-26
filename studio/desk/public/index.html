@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Studio Desk</title>
+<meta name="color-scheme" content="dark light">
+<link rel="preload" href="/fonts/Archivo-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/MartianMono-VF.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/desk.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2313232B'/%3E%3Crect x='6' y='9' width='20' height='3' fill='%233FD08F'/%3E%3Crect x='6' y='15' width='14' height='3' fill='%23F5B83D'/%3E%3Crect x='6' y='21' width='9' height='3' fill='%23E7EBEE'/%3E%3C/svg%3E">
+<script>
+  try { const t = localStorage.getItem('desk-theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
+</script>
+</head>
+<body>
+<div class="shell" id="shell">
+  <nav class="rail" id="rail" aria-label="Desk"></nav>
+  <header class="top" id="top"></header>
+  <main class="stage" id="stage" tabindex="-1"></main>
+  <footer class="ticker" id="ticker" aria-label="Activity"></footer>
+</div>
+<aside class="drawer" id="drawer" aria-hidden="true" tabindex="-1"></aside>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+<div class="keys" id="keys" hidden></div>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

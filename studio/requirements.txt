@@ -1,0 +1,6 @@
+# Studio QA gate, evals and tools (pinned: the versions this was built and tested with)
+numpy==2.5.5
+pillow==13.0.0
+imagehash==4.3.2
+scikit-learn==1.9.1
+scipy==1.18.1

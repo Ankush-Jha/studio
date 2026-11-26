@@ -1,0 +1,76 @@
+{
+  "id": "northline-mortgages",
+  "aliases": [
+    "northline",
+    "sam"
+  ],
+  "sheetId": "client-001",
+  "name": "Sam Rivera",
+  "people": [],
+  "city": "Toronto",
+  "province": "ON",
+  "region": "",
+  "group": 1,
+  "video": true,
+  "languages": [
+    "en"
+  ],
+  "brokerage": {
+    "name": "[BROKERAGE NAME]",
+    "licence": "[BROKERAGE LICENCE #]"
+  },
+  "agent": {
+    "name": "Sam Rivera",
+    "title": "Mortgage Agent Level 2",
+    "licence": "[AGENT LICENCE #]"
+  },
+  "contact": {
+    "phones": [
+      "416-555-0142"
+    ],
+    "emails": [
+      "sam@northline.example"
+    ],
+    "website": "northline.example"
+  },
+  "services": [
+    "Mortgage renewal",
+    "Refinancing",
+    "First-time home buyers",
+    "Self-employed mortgages"
+  ],
+  "audience": "Toronto first-time buyers and renewing homeowners (fictional example).",
+  "postingMode": "",
+  "postingTime": "",
+  "timeZone": "",
+  "figma": null,
+  "complianceLine": "Sam Rivera, Mortgage Agent Level 2 \u00b7 [BROKERAGE NAME] \u00b7 Lic. #[BROKERAGE LICENCE #] (EXAMPLE: replace before any real use)",
+  "rules": [],
+  "assets": {
+    "photo": null,
+    "footer": "assets/northline-mortgages/footer.png",
+    "footerAlt": null,
+    "logos": [
+      "assets/northline-mortgages/logo.png"
+    ],
+    "check": []
+  },
+  "stills": {
+    "primary": "swiss",
+    "secondary": "bento",
+    "variant": "a"
+  },
+  "missing": [],
+  "flags": [
+    "Fictional example client: every fact is made up. Pieces are PROOF only."
+  ],
+  "provenance": {
+    "all": "examples/ (fictional)"
+  },
+  "completeness": 1.0,
+  "updated": "2026-11-26T00:00:00Z",
+  "socials": {},
+  "bio": "Sam Rivera is a fictional Toronto mortgage agent used to demo Studio.",
+  "web": {},
+  "colorsProvisional": true
+}

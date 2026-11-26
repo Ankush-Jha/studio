@@ -1,0 +1,13 @@
+{
+  "name": "studio-films",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Studio Films: film styles for coding agents, each with a prompt and a demo made entirely in code, on a shared toolkit (adapted from Lemo-Opuscar; see NOTICE.md).",
+  "engines": { "node": ">=20" },
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "playwright-core": "^1.63.0",
+    "three": "^0.170.0"
+  }
+}
