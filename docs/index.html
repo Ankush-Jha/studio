@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Film Directory · SuperKreatives Studio</title>
+<meta name="description" content="Every film style SuperKreatives Studio can make a reel in: 98 styles in 15 categories, each with a demo film made entirely in code.">
+<meta property="og:title" content="Film Directory · SuperKreatives Studio">
+<meta property="og:description" content="98 film styles in 15 categories, each with a demo film made entirely in code.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#ECE6E8; --card:#fff; --ink:#0B0B0F; --dim:#5F5A66; --faint:#8C8794; --line:#DCD4D8;
+  --indigo:#3843D0; --indigo-soft:#E6E7FA; --shadow:0 8px 24px rgba(57,40,123,.13); --shadow-hi:0 14px 34px rgba(57,40,123,.24);
+  --r:20px; --font:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:15px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:24px}
+@media (max-width:600px){.wrap{padding-inline:16px}}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand svg{width:34px;height:34px;flex:none}
+.brand .word{font-weight:700;font-size:21px;letter-spacing:-.01em}
+.brand .tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border-left:1px solid var(--line);padding-left:10px;margin-left:2px}
+.top nav a{font-weight:600;font-size:14px;text-decoration:none;padding:9px 14px;border-radius:999px;background:var(--card);box-shadow:var(--shadow)}
+.top nav a:hover{color:var(--indigo)}
+
+/* intro */
+.intro{padding-block:28px 22px;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:end}
+.intro h1{font-size:clamp(34px,5.4vw,60px);line-height:1.02;letter-spacing:-.035em;margin:0 0 14px;font-weight:800}
+.intro h1 em{font-style:normal;color:var(--indigo)}
+.intro p{margin:0;color:var(--dim);font-size:17px;max-width:56ch}
+.stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.stat{background:var(--card);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);min-width:120px}
+.stat b{display:block;font-size:28px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:860px){.intro{grid-template-columns:1fr;gap:18px}.stats{justify-content:flex-start}}
+@media (max-width:600px){
+  .brand .word{font-size:18px}.brand .tag{display:none}.top nav a{padding:8px 12px;font-size:13px}
+  .intro{padding-block:12px 8px}.intro p{font-size:15px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+  .stat{min-width:0;padding:10px 12px;border-radius:14px}.stat b{font-size:22px}.stat span{font-size:10.5px}
+  .wrap .controls{position:static}
+  .controls .chips{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .seg{height:42px}.search{height:42px}
+}
+
+/* controls */
+.controls{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:linear-gradient(var(--ground) 82%,rgba(236,230,232,0));padding-block:12px 16px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:8px;background:var(--card);border-radius:999px;padding:0 16px;box-shadow:var(--shadow);height:46px}
+.search input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:15px;color:var(--ink);min-width:0}
+.search svg{width:18px;height:18px;color:var(--faint);flex:none}
+.seg{position:relative;display:inline-flex;background:var(--card);border-radius:999px;padding:4px;box-shadow:var(--shadow);height:46px}
+.seg button{position:relative;z-index:1;border:0;background:none;font:inherit;font-weight:700;font-size:14px;padding:0 18px;border-radius:999px;cursor:pointer;color:var(--ink);transition:color .2s}
+.seg button[aria-pressed=true]{color:#fff}
+.seg .thumb{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--ink);transition:transform .25s ease,width .25s ease}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1px solid var(--line);background:transparent;font:inherit;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;color:var(--ink);white-space:nowrap}
+.chip small{color:var(--faint);font-weight:600;margin-left:4px;font-variant-numeric:tabular-nums}
+.chip:hover{border-color:var(--indigo)}
+.chip[aria-pressed=true]{background:var(--indigo);border-color:var(--indigo);color:#fff}
+.chip[aria-pressed=true] small{color:rgba(255,255,255,.75)}
+.count{font-size:13px;color:var(--dim);font-weight:600;margin-top:10px}
+
+/* grid */
+.cat{margin:26px 0 8px;display:flex;align-items:baseline;gap:12px}
+.cat h2{margin:0;font-size:22px;letter-spacing:-.02em;font-weight:800}
+.cat span{color:var(--faint);font-size:13px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border-radius:var(--r);padding:6px;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease;text-align:left;border:0;font:inherit;color:inherit;display:flex;flex-direction:column}
+.card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow-hi);outline:0}
+.card:focus-visible{box-shadow:0 0 0 3px var(--indigo),var(--shadow-hi)}
+.pic{position:relative;aspect-ratio:16/9;border-radius:15px;overflow:hidden;background:#d9d2d6}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pic .len{position:absolute;right:8px;bottom:8px;background:rgba(11,11,15,.78);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;font-variant-numeric:tabular-nums}
+.pic .play{position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;background:var(--indigo);display:grid;place-items:center;opacity:0;transform:scale(.85);transition:.18s}
+.pic .play svg{width:20px;height:20px;margin-left:3px;fill:#fff}
+.card:hover .play,.card:focus-visible .play{opacity:1;transform:none}
+.body{padding:12px 10px 10px;display:flex;flex-direction:column;gap:4px;flex:1}
+.meta{font-size:12px;font-weight:700;color:var(--faint);letter-spacing:.04em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.name{font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.film{font-size:13px;color:var(--dim)}
+.uses{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.uses span{font-size:11.5px;font-weight:600;background:var(--indigo-soft);color:var(--indigo);padding:3px 8px;border-radius:999px}
+
+/* sheet */
+.sheet-wrap{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow-x:auto;margin-top:8px}
+table{width:100%;border-collapse:collapse;min-width:900px}
+th{position:sticky;top:0;background:var(--card);text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);font-weight:700;padding:14px 12px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
+th[data-sort]:hover{color:var(--indigo)}
+th .dir{color:var(--indigo)}
+td{padding:10px 12px;border-bottom:1px solid #F0EBED;vertical-align:middle;font-size:14px}
+tr:last-child td{border-bottom:0}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:#F7F4F5}
+td.n{color:var(--faint);font-weight:700;font-variant-numeric:tabular-nums;width:44px}
+td.t{width:136px}td.t img{width:112px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block}
+td.s b{font-weight:800}
+td.f{color:var(--dim)}
+td.l{font-variant-numeric:tabular-nums;color:var(--dim);white-space:nowrap}
+td.u{color:var(--dim);font-size:13px}
+td.p button{border:0;background:var(--indigo);color:#fff;font:inherit;font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer}
+
+.empty{padding:60px 0;text-align:center;color:var(--dim)}
+
+/* player */
+dialog{border:0;padding:0;border-radius:24px;width:min(1040px,calc(100vw - 32px));max-height:calc(100vh - 32px);background:var(--card);box-shadow:0 30px 80px rgba(20,10,60,.4);color:var(--ink)}
+dialog::backdrop{background:rgba(11,11,15,.62);backdrop-filter:blur(3px)}
+.dlg{display:flex;flex-direction:column;max-height:calc(100vh - 32px);overflow:auto}
+.dlg video{width:100%;aspect-ratio:16/9;background:#000;display:block}
+.dlg .info{padding:20px 24px 24px;display:grid;grid-template-columns:1fr auto;gap:8px 24px}
+.dlg h3{margin:0;font-size:26px;letter-spacing:-.02em;font-weight:800}
+.dlg .line{margin:6px 0 0;color:var(--dim);max-width:62ch}
+.dlg .ask{grid-column:1/-1;margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--ground);border-radius:14px;padding:10px 12px}
+.dlg .ask code{font:600 13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;flex:1;min-width:220px}
+.btn{border:0;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;border-radius:999px;cursor:pointer;background:var(--ink);color:#fff;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(11,11,15,.7);color:#fff;font-size:22px;line-height:1;cursor:pointer;z-index:2}
+.links{display:flex;gap:8px;align-items:start;flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:640px){.dlg .info{grid-template-columns:1fr}.links{justify-content:flex-start}}
+
+footer{margin-top:56px;padding-block:28px 40px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;display:grid;gap:8px}
+footer a{color:var(--indigo);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="https://superkreatives.ca" rel="noopener" aria-label="SuperKreatives">
+      <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M9.18848 41.7606C16.3457 41.7606 23.2221 41.831 30.0987 41.7606C34.5192 41.6902 38.0979 38.9543 39.431 35.0244C40.7642 31.0251 39.431 26.6044 36.0629 24.0082C34.0281 22.3943 31.6424 21.9031 29.1865 21.833C25.8183 21.7628 22.3801 21.9031 19.0121 21.7628C15.5037 21.6225 13.1881 19.5877 12.9775 16.6406C12.767 13.5531 14.5914 11.1674 18.2402 10.8166C26.1692 9.97456 34.0983 10.4657 42.0273 10.606C43.15 10.606 43.9218 11.3779 44.4832 12.3603C49.2546 20.2191 49.1844 33.8314 38.9399 42.4627C30.7302 49.1989 17.1877 49.549 9.46911 42.7433C9.399 42.6729 9.399 42.5331 9.18848 41.7606Z" fill="#3D49E2"/><path d="M37.887 6.1859C30.8702 6.1859 24.3446 6.04558 17.819 6.25601C13.1878 6.32622 9.81976 9.06276 8.62681 13.0624C7.43396 17.062 8.76723 21.4826 11.9949 24.1489C13.9597 25.7628 16.2752 26.4645 18.8013 26.4645C22.3097 26.4645 25.818 26.3943 29.3265 26.5347C32.6946 26.675 35.1505 28.9909 35.1505 31.7973C35.1505 34.6036 32.6244 36.9895 29.2564 37.0599C21.8184 37.1303 14.3105 37.0599 6.80249 37.1304C5.18858 37.1304 3.99574 36.6385 3.01342 35.1649C-2.17903 26.8154 0.136458 13.8342 8.27597 6.46653C16.2051 -0.690658 29.1862 -1.39224 37.045 4.99305C37.3257 4.99305 37.3959 5.27369 37.887 6.1859Z" fill="#0B0B0F"/></svg><span class="word">SuperKreatives</span><span class="tag">Studio</span>
+    </a>
+    <nav><a href="https://github.com/Ankush-Jha/studio" rel="noopener">GitHub</a></nav>
+  </header>
+
+  <section class="intro">
+    <div>
+      <h1>Film <em>Directory</em></h1>
+      <p>Every film style SuperKreatives Studio can make a reel in. Each one has a demo film, made entirely in code. Pick a style, then brief it for any client.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>98</b><span>Styles</span></div>
+      <div class="stat"><b>15</b><span>Categories</span></div>
+      <div class="stat"><b>80</b><span>Min of demos</span></div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="row">
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search styles, films, uses (e.g. luxury, data, retro)" autocomplete="off" aria-label="Search styles"></label>
+      <div class="seg" role="group" aria-label="View"><span class="thumb"></span>
+        <button type="button" data-view="grid" aria-pressed="true">Grid</button><button type="button" data-view="sheet" aria-pressed="false">Sheet</button></div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="count" id="count"></div>
+  </div>
+
+  <main id="out"></main>
+
+  <footer>
+    <div>Film Directory · SuperKreatives Studio · <a href="https://superkreatives.ca" rel="noopener">superkreatives.ca</a> · <a href="https://github.com/Ankush-Jha/studio" rel="noopener">Source on GitHub</a></div>
+    <div>The film styles are adapted from <a href="https://github.com/lemomo-ai/lemo-opuscar" rel="noopener">Lemo-Opuscar</a> by Lemomo (LemoLab). Code MIT; demo films, posters and stills CC BY 4.0. Some styles include third-party material, credited in each style's CREDITS file. Changes: styles renamed; the original project's on-screen credits removed (end cards trimmed, the Spy Titles opening card cut, the News Package channel name erased).</div>
+  </footer>
+</div>
+
+<dialog id="dlg" aria-label="Film">
+  <button class="close" type="button" aria-label="Close">×</button>
+  <div class="dlg">
+    <video id="vid" controls playsinline preload="none"></video>
+    <div class="info">
+      <div><div class="meta" id="d-meta"></div><h3 id="d-name"></h3><p class="line" id="d-line"></p><div class="uses" id="d-uses"></div></div>
+      <div class="links"><a class="btn ghost" id="d-style" target="_blank" rel="noopener">Style guide</a></div>
+      <div class="ask"><code id="d-ask"></code><button class="btn" type="button" id="d-copy">Copy brief</button></div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+const DATA = [{"slug":"caption-news","num":"01","name":"Caption News","cat":"Edit & Documentary","film":"The Bee Ledger","line":"America lost 1.3 million bee colonies, yet the count rose 6 %: a news short that works with the sound off.","uses":["Social news","Report explainers","Data shorts"],"dur":54.3},{"slug":"newsreel","num":"02","name":"1920s Newsreel","cat":"Edit & Documentary","film":"Knock-Knee Alert","line":"1926: the papers say the Charleston will ruin America's knees; at Ford's own picnic the kids dance it anyway.","uses":["History stories","Fads & eras","Anniversaries"],"dur":50.1},{"slug":"countdown","num":"03","name":"Live Countdown Split-screen","cat":"Edit & Documentary","film":"Counting Itself Down","line":"The last minute of the Artemis II launch, uncut: one cell opens to nine, and they merge into one at ignition.","uses":["Launches","Countdowns","Live events"],"dur":54.0},{"slug":"city-symphony","num":"04","name":"City Symphony","cat":"Edit & Documentary","film":"One Day in New York","line":"One day in New York in time-lapse: rivers of light, a grid on the sixteenths, 1899 beside today.","uses":["City films","Music montages","Openers"],"dur":47.0},{"slug":"visual-investigation","num":"05","name":"Visual Investigation","cat":"Edit & Documentary","film":"The Hindenburg: Four Minutes, 32 Seconds","line":"Newsreel, photos, testimony and the 1937 inquiry on one clock: five sources point to the same spot.","uses":["Reconstructions","Fact-checks","Incident reports"],"dur":55.3},{"slug":"kino-montage","num":"06","name":"Constructivist Montage","cat":"Edit & Documentary","film":"410 Days","line":"The Empire State's 1931 brochure credits its builders; the site film and Hine's photos answer: 2,500 a day.","uses":["Industry histories","Milestones","Collective effort"],"dur":55.5},{"slug":"telestrator","num":"07","name":"Sports Telestrator","cat":"Edit & Documentary","film":"Freeze Frame","line":"Down 3–0 at half-time, Fenerbahçe scored three in 12 minutes: freeze, draw, split screen, shot map.","uses":["Sports analysis","Match recaps","Coaching"],"dur":49.4},{"slug":"news-package","num":"08","name":"Broadcast News Package","cat":"Edit & Documentary","film":"The Week in AI","line":"Four AI stories from one week in a full on-air package: rundown, headline strap, price board, spec card.","uses":["News round-ups","Bulletins","Market updates"],"dur":47.5},{"slug":"crayon-book","num":"09","name":"Crayon Picture Book","cat":"Painting & Illustration","film":"The Moon Can't Sleep","line":"The moon can't sleep, so a little girl climbs onto the roof to sing it a lullaby.","uses":["Picture books","Bedtime stories","Kids' learning"],"dur":47.8},{"slug":"watercolor","num":"10","name":"Watercolor Brush","cat":"Painting & Illustration","film":"Follow the Rain","line":"Follow the rain from Australia's red desert heart to its green coast in one unbroken painted walk.","uses":["Nature documentary","Travel","Science explainers"],"dur":105.1},{"slug":"impasto","num":"11","name":"Impasto Oil Painting","cat":"Painting & Illustration","film":"The Colour of Rain","line":"In a grey, rainy square one red umbrella opens, and a waltz paints the whole plaza in colour.","uses":["Music videos","Art & culture","Emotional ads"],"dur":36.5},{"slug":"urban-sketch","num":"12","name":"Urban Sketch · Pen & Wash","cat":"Painting & Illustration","film":"Where the Wind Went","line":"A park that is only a pen sketch; wherever the wind carries her straw hat, colour follows.","uses":["City & travel","Architecture","Lifestyle brands"],"dur":29.7},{"slug":"colored-pencil","num":"13","name":"Colored-Pencil Science Illustration","cat":"Painting & Illustration","film":"The Other Half","line":"Do trees feed each other? A pencil drawing sinks below the grass, follows one grain of sugar along a fungal thread to the next tree, and pulls back over a whole wood joined underground.","uses":["Natural-science cutaways","Picture-book explainers","Hidden structures and processes"],"dur":46.8},{"slug":"one-line","num":"14","name":"One-line Drawing","cat":"Sketch & Board","film":"The Line That Never Lifted","line":"One unbroken line draws a whole life, then the pen passes to a child.","uses":["Brand stories","Life milestones","Minimal ads"],"dur":45.0},{"slug":"whiteboard","num":"15","name":"Whiteboard Explainer","cat":"Sketch & Board","film":"Einstein in Your Pocket","line":"How your phone knows where you are: GPS, atomic clocks, and the 38 microseconds relativity adds every day.","uses":["Explainers","Online courses","Science"],"dur":104.0},{"slug":"chalkboard","num":"16","name":"Chalkboard","cat":"Sketch & Board","film":"The Story of Chinese Characters","line":"Chalk writes a popular claim about two characters, wipes it, and traces 射 back three thousand years.","uses":["Word origins","Myth-busting","Lessons"],"dur":44.8},{"slug":"sketchnote","num":"17","name":"Sketchnote","cat":"Sketch & Board","film":"How Bees Make Honey","line":"One bee makes 1/12 of a teaspoon of honey in her life; the pen follows one yellow drop from flower to jar until the whole page is a poster.","uses":["Lecture notes","Science explainers","One-page summaries"],"dur":47.5},{"slug":"stick-explainer","num":"18","name":"Stick-figure Explainer","cat":"Sketch & Board","film":"Six Hands Away","line":"A chain of hands from you to a stranger: tested with letters in 1967, explained by rings that outgrow the Earth, closed around the globe.","uses":["Science explainers","Networks & social ideas","Data comparisons"],"dur":48.5},{"slug":"ipad-sketch","num":"19","name":"Tablet Sketch Explainer","cat":"Sketch & Board","film":"From Cherry to Cup","line":"The coffee in your cup turns into a red cherry, then walks back to the cup: ripening, drying, roasting and grinding, one colour change at a time on a single pencil page.","uses":["Food & drink explainers","Craft and how-to","Lifestyle science"],"dur":46.8},{"slug":"marker-paper","num":"20","name":"Marker on Paper","cat":"Sketch & Board","film":"How Far Can You See?","line":"A felt-tip marker works out how far the horizon is from a beach, then shows that climbing a hundred times higher only lets you see ten times farther.","uses":["Worked problems","Science explainers","Lessons"],"dur":47.8},{"slug":"ink-wash","num":"21","name":"Chinese Ink Wash","cat":"Traditional Crafts","film":"The Swordsman and the River","line":"A swordsman crosses the river on the water and splits the current with a single stroke.","uses":["Wuxia","Cultural brands","Poetry"],"dur":45.5},{"slug":"shadow-puppet","num":"22","name":"Shadow Puppetry","cat":"Traditional Crafts","film":"Hou Yi Shoots the Suns","line":"Ten suns scorch the earth until the archer Hou Yi draws his bow, told with leather puppets on a lit screen.","uses":["Myths & folklore","Heritage","Festivals"],"dur":50.7},{"slug":"ukiyoe","num":"23","name":"Ukiyo-e","cat":"Traditional Crafts","film":"Toward the Mountain","line":"A traveller walks toward a distant mountain; every shot is a woodblock print, a great wave at the climax, the mountain and the whole scroll at the end.","uses":["Travel","Japanese culture","Poetry"],"dur":40.3},{"slug":"papercut-red","num":"24","name":"Red Paper-cut","cat":"Traditional Crafts","film":"Nian Comes to Town","line":"On New Year's Eve the beast Nian comes to town, and one girl's giant paper-cut lights up the village to scare it off.","uses":["Lunar New Year","Festive greetings","Folk tales"],"dur":46.0},{"slug":"paper-lantern","num":"25","name":"Paper-cut Lightbox","cat":"Traditional Crafts","film":"The Last Night Train","line":"An old night train makes its last run, from a snowy mountain halt through a long tunnel to the sea, its lit windows going out one by one at the end of the line.","uses":["Journeys and travel","Farewells and anniversaries","Places and their stories"],"dur":47.3},{"slug":"stained-glass","num":"26","name":"Stained Glass","cat":"Traditional Crafts","film":"The Dragon of the East Window","line":"Sunlight crosses a cathedral window from dawn to dusk, waking each pane of a knight-and-dragon tale.","uses":["Legends","Heritage","Holiday stories"],"dur":53.0},{"slug":"gilded-illumination","num":"27","name":"Gilded Illumination","cat":"Traditional Crafts","film":"Borrowed Light","line":"In a painted world where only gold shines, the sun goes out; a girl carries the last lamp up the mountain and gives it its light back.","uses":["Fables and picture-book stories","Holiday and festival shorts","Brand and origin stories"],"dur":41.8},{"slug":"risograph","num":"28","name":"Risograph Print","cat":"Print & Printmaking","film":"Sunday Ride","line":"A Sunday-morning bike ride through the city — bakery, park, riverside — each stop adding an ink until three misregistered plates overprint.","uses":["Indie brands","Zines","Lifestyle"],"dur":35.5},{"slug":"halftone-dossier","num":"29","name":"Halftone Dossier","cat":"Print & Printmaking","film":"Case File: Chubby","line":"A chubby orange cat stands trial for testing gravity and 4 a.m. parkour, and walks free.","uses":["Humour","Pet content","Social shorts"],"dur":27.3},{"slug":"woodcut","num":"30","name":"Woodcut Print","cat":"Print & Printmaking","film":"The Bell Founder","line":"A village spends a whole winter casting one bell; the first time it rings, the snow stops.","uses":["Folk tales","Craft brands","Book trailers"],"dur":55.3},{"slug":"engraving","num":"31","name":"Copperplate Engraving","cat":"Print & Printmaking","film":"The Honeybee, Plate VII","line":"A natural-history plate engraves itself: the burin cuts the copper, the bee builds up line by line, and a watercolour wash brings it to life.","uses":["Museum labels","Science explainers","Brand heritage"],"dur":32.0},{"slug":"silkscreen-poster","num":"32","name":"Silkscreen Travel Poster","cat":"Print & Printmaking","film":"The Long Way Home","line":"A traveller crosses the world one full-bleed screen print at a time, a ticket stub counting the distance from home, until the far side turns into the way back.","uses":["Destination guides","Tourism","Event posters"],"dur":46.3},{"slug":"printed-long-take","num":"33","name":"Scratchboard Long Take","cat":"Print & Printmaking","film":"Thirty-Three Cranes","line":"Red-crowned cranes in a Hokkaido valley, one scratchboard take, counted back from 33 to 1,927.","uses":["Journeys","Wildlife","Landscapes"],"dur":56.5},{"slug":"pop-art","num":"34","name":"Pop Art","cat":"Print & Printmaking","film":"The Same Banana","line":"Almost every banana in the shops is one plant, copied: a wall of identical prints, an old banana eaten black by dots, and a wave of colour that turns into many bananas.","uses":["Everyday-object explainers","Brand and product posters","Small data stories"],"dur":46.5},{"slug":"vintage-collage","num":"35","name":"Vintage Engraving Collage","cat":"Print & Printmaking","film":"The Inverted Jenny","line":"A 1918 airmail sheet printed with its plane upside down: bought for $24, cut up and scattered, and number 66 is still missing.","uses":["The history of an object","Magazine-style explainers on ideas and society","Archive and collecting stories"],"dur":49.3},{"slug":"swiss-motion","num":"36","name":"Swiss Motion Graphics","cat":"Graphic & Type","film":"Five Rules for a Poster","line":"A concert poster lays itself out by five Swiss design rules; the fifth is to break just one.","uses":["Brand identity","Events","Design education"],"dur":39.8},{"slug":"spy-titles","num":"37","name":"60s Spy Title Sequence","cat":"Graphic & Type","film":"The Velvet Cipher","line":"Opening titles for an imaginary 1964 spy film: a chase for a stolen key until the shapes lock into the title.","uses":["Title sequences","Event openers","Trailers"],"dur":34.6},{"slug":"art-deco","num":"38","name":"Art Deco","cat":"Graphic & Type","film":"Midnight at the Starlight Hotel","line":"A grand hotel, 1930: a bellboy races lifts and revolving doors to deliver one letter before midnight.","uses":["Luxury & hospitality","Galas","Invitations"],"dur":54.1},{"slug":"pictogram-motion","num":"39","name":"Pictogram Motion","cat":"Graphic & Type","film":"Left Behind","line":"A yellow umbrella left on a bus waits out a sunny day on the lost-property shelf, then opens with 312 others when the storm comes back: objects, vehicles, weather and signs as beat-locked geometric pictograms.","uses":["Public services and city stories","Brand and event identity films","Explainers told through signs and objects"],"dur":46.5},{"slug":"bauhaus-shapes","num":"40","name":"Bauhaus Shapes","cat":"Graphic & Type","film":"COMPOUND","line":"One dot doubles every ten years: 128 after seventy, 6.02 without compounding, and the last ten years are worth all the rest.","uses":["Finance and economics explainers","Mechanisms and principles","Titles and chapter cards"],"dur":48.0},{"slug":"flat-space-explainer","num":"41","name":"Scale Zoom Explainer","cat":"Graphic & Type","film":"The Long Way Down","line":"A little probe whose eye is a zoom lens fires a dotted sight line at each next stop and takes us from the Milky Way down to a virus.","uses":["Science explainers","Scale and size","Classroom"],"dur":49.0},{"slug":"text-flash-cuts","num":"42","name":"Text Flash Cuts","cat":"Graphic & Type","film":"Behind You","line":"A letter, a phone call, a wall of windows, thirteen steps: the girl who told him not to look back is always one step closer, until she turns her head.","uses":["Suspense & drama trailers","Title sequences","Manifesto films"],"dur":41.5},{"slug":"silhouette-rhythm","num":"43","name":"Silhouette Rhythm","cat":"Graphic & Type","film":"Half a Beat","line":"A flock of flamingos moves on every beat, and one young bird is always half a beat late; the ripples the others left on the water teach it the beat.","uses":["Music videos","Sports and team films","Nature and festival openers"],"dur":44.5},{"slug":"blueprint","num":"44","name":"Blueprint","cat":"Line Diagrams","film":"Patent Pending: The Cloud Catcher","line":"An inventor's blueprint draws, explodes and assembles a cloud-catching machine, and its revision cloud starts to rain.","uses":["Engineering","Hardware launches","Tech explainers"],"dur":44.5},{"slug":"iso-infographic","num":"45","name":"Isometric Infographic","cat":"Line Diagrams","film":"From Bean to Cup","line":"A coffee's journey from the plantation to your hands, across one isometric world.","uses":["Process explainers","Supply chains","Annual reports"],"dur":54.5},{"slug":"teardown","num":"46","name":"Exploded Teardown","cat":"Line Diagrams","film":"21 Keys, Opened","line":"Half an open-source keyboard comes apart in one orbit, down to the chip, then closes with its real dimensions.","uses":["Hardware launches","Product pages","Spec explainers"],"dur":34.2},{"slug":"hardcore-info","num":"47","name":"Line-Art Cutaway","cat":"Line Diagrams","film":"Where Is Your Phone's Antenna?","line":"A phone loses signal when held by the corner; taken apart, its metal frame turns out to be the antenna, cut into pieces your hand can bridge.","uses":["Hardware explainers","Product engineering","Science education"],"dur":48.5},{"slug":"precise-mechanism","num":"48","name":"Color-Coded Mechanism","cat":"Line Diagrams","film":"Three Systems Keep the Time","line":"A watch with no battery is cut open: its three systems are dyed one by one, the train races when the escapement is pulled out, and one slowed tick lets it all out again.","uses":["How machines work","Product and engineering explainers","Science teaching"],"dur":47.8},{"slug":"instruction-manual","num":"49","name":"Instruction Manual Art","cat":"Line Diagrams","film":"Step Ten","line":"Two first-timers build a crib from a flat-pack manual, ten steps on one 45° page; step ten was never in the manual.","uses":["Assembly and set-up guides","Safety instructions","Product onboarding"],"dur":46.9},{"slug":"pen-plotter","num":"50","name":"Pen Plotter","cat":"Line Diagrams","film":"8848.86","line":"At night under a desk lamp, a pen plotter draws Mount Qomolangma from real elevation data with four pens, and writes its height last.","uses":["Maps and terrain","Measurements and records","Generative and data drawings"],"dur":46.2},{"slug":"assembly-line-diagram","num":"51","name":"Assembly-Line Diagram","cat":"Line Diagrams","film":"The Disassembly Line","line":"A body cut open as a factory that runs backwards: a 12:30 sandwich is taken apart station by station, and six hours later it runs for the bus.","uses":["How a process works","Biology and medicine","Supply chains and pipelines"],"dur":51.4},{"slug":"rubber-hose","num":"52","name":"1930s Rubber Hose Cartoon","cat":"Cartoons","film":"Coffee Cup Chase","line":"A coffee cup chases a runaway sugar cube around the kitchen, 1930s-cartoon style.","uses":["Food & drink","Retro ads","Kids"],"dur":46.3},{"slug":"cel-anime-80s","num":"53","name":"80s Cel Anime","cat":"Cartoons","film":"City Lights, 1987","line":"A courier girl rides through a rain-soaked neon city to deliver a tape before the dawn launch.","uses":["Music videos","Game trailers","Nostalgia"],"dur":53.5},{"slug":"scifi-toon","num":"54","name":"Sci-Fi Sitcom Toon","cat":"Cartoons","film":"Coffee Run","line":"A jaded genius opens a portal just to buy coffee and tumbles through ever-stranger universes.","uses":["Comedy","Tech brands","Social shorts"],"dur":53.3},{"slug":"midcentury-toon","num":"55","name":"Mid-century Cartoon","cat":"Cartoons","film":"Meet Pip","line":"A robot vacuum set up in three steps, told like a 1950s classroom film.","uses":["Set-up guides","Help centres","How-to"],"dur":37.0},{"slug":"comic-history","num":"56","name":"Comic History Cartoon","cat":"Cartoons","film":"One Piece of Paper","line":"Alsace-Lorraine changed hands four times between 1871 and 1945: each time someone tore off the paper and pasted a new piece, and the woman living on it never moved.","uses":["Territorial changes in history","Light explainers on geopolitics","Market share and turf-war stories"],"dur":46.5},{"slug":"manga-panels","num":"57","name":"Manga Panels","cat":"Cartoons","film":"KOMA ONE: Thirty Frames a Second","line":"A street photographer chases a running light to the moment the pigeons rise; her pocket camera splits that second into thirty panels.","uses":["Music videos","Product launches","Anime openings"],"dur":43.3},{"slug":"pixel-rpg","num":"58","name":"16-bit Pixel RPG","cat":"Games","film":"The Last Save Point","line":"At the final boss door a hero saves the game, and the save screen replays the whole journey.","uses":["Game trailers","Recaps","Nostalgia"],"dur":49.8},{"slug":"hd-2d","num":"59","name":"2.5D Pixel Art","cat":"Games","film":"The Lampbearer","line":"The lighthouse goes dark; a girl carries the last flame through a night forest and up the storm cliffs.","uses":["Game trailers","Fantasy","Story films"],"dur":70.5},{"slug":"microgame","num":"60","name":"Microgame Frenzy","cat":"Games","film":"Five-Second Astronaut","line":"A clumsy cadet survives a five-second boot camp, faster and faster, until the boss: landing home.","uses":["Game trailers","Onboarding","Social shorts"],"dur":57.3},{"slug":"game-show","num":"61","name":"Rhythm Game Show","cat":"Games","film":"Rhythm of AI, 1997 → 2026","line":"The history of AI as a rhythm game: models take the stage on the beat, and a report card closes the show.","uses":["Tech timelines","Year in review","Variety shows"],"dur":143.6},{"slug":"ascii-crt","num":"62","name":"CRT ASCII Terminal","cat":"Film & Tape","film":"Tranquility.log","line":"A moon-base AI wakes after forty years to a signal from Earth, and replies by drawing “home” in characters.","uses":["Developer tools","Sci-fi","Tech brands"],"dur":55.5},{"slug":"silent-film","num":"63","name":"1920s Silent Film","cat":"Film & Tape","film":"The Runaway Loaf","line":"A baker's boy chases a runaway loaf downhill, then breaks it in half for a hungry girl.","uses":["Comedy","Retro brands","Silent storytelling"],"dur":48.8},{"slug":"backrooms","num":"64","name":"Liminal Found Footage","cat":"Film & Tape","film":"Night Shift Orientation","line":"A new night-shift hire films their first night in an endless yellow office, following the rules on the wall.","uses":["Horror","Mystery & ARG","Game teasers"],"dur":56.5},{"slug":"scratch-film","num":"65","name":"Scratch Film","cat":"Film & Tape","film":"The Night Climb","line":"A finger-long lanternfish climbs half a kilometre in the dark, hides its shadow with its own lights, and turns out to be one of countless animals rising every night.","uses":["Things that happen in the dark","One mark to a whole system","Small adventures told in light and shadow"],"dur":48.3},{"slug":"double-exposure","num":"66","name":"Double Exposure","cat":"Film & Tape","film":"Mountains and Seas","line":"From the mountains to the sea as night falls: a stag, a wolf, an eagle, a salmon and a whale, each carrying its own place inside its silhouette, until the whale's harbour lands on the real shore.","uses":["Brand and city films","Documentary and series openings","Music video intros"],"dur":45.8},{"slug":"dark-keynote","num":"67","name":"Dark Tech Keynote","cat":"Screens & Interfaces","film":"Room to Think","line":"Launch film for Tidy, a fictional app: one buried cursor snaps hundreds of windows back into place.","uses":["Product launches","SaaS","Keynotes"],"dur":37.0},{"slug":"hologram-hud","num":"69","name":"Sci-fi Hologram HUD","cat":"Screens & Interfaces","film":"Volt · Spec Scan","line":"An e-bike is scanned into a hologram; target boxes lock onto the battery, motor and brakes.","uses":["Spec walkthroughs","Launch videos","Trade shows"],"dur":35.5},{"slug":"desktop-flythrough","num":"70","name":"Tabletop App Flythrough","cat":"Screens & Interfaces","film":"Before the Ding","line":"A cat photo hops across app cards on a sunlit desk, from one phone to a friend's.","uses":["App explainers","Workflows","Products"],"dur":56.5},{"slug":"spreadsheet","num":"71","name":"Spreadsheet Film","cat":"Screens & Interfaces","film":"The Hidden Column","line":"The total says treatment B; unhide the stone-size columns and A wins every group. Simpson's paradox told in one sheet, 1 cell = 1 patient.","uses":["Data literacy","Finance & costs","Analytics explainers"],"dur":48.3},{"slug":"one-bit-dither","num":"72","name":"1-bit Dither","cat":"Screens & Interfaces","film":"The Moon's Fax","line":"February 1966: the first close-up of the Moon arrives at an English radio telescope as a newspaper fax, printed one line at a time in two inks, a day early and stretched too tall.","uses":["History told through a chain of media","Printing, scanning and signals","Night scenes and space"],"dur":46.4},{"slug":"circuit-board","num":"73","name":"Circuit Board","cat":"Light & Lines","film":"Seven Milliseconds","line":"Rivers become copper traces as current runs 2,080 km from a dam to a phone charger.","uses":["Energy","Supply chains","Devices"],"dur":55.8},{"slug":"firefly-pointillism","num":"74","name":"Firefly Pointillism","cat":"Light & Lines","film":"Shine Back","line":"A firefly's blink is a question: a girl gets her answer as a deer, loses every light in a storm, and asks the whole dark with the last one.","uses":["Picture-book stories","Many becoming one","Night and nature lyric"],"dur":46.9},{"slug":"flow-field","num":"75","name":"Flow-field Wind Lines","cat":"Light & Lines","film":"Typhoon Yagi over Qiongzhou","line":"Thousands of ink wind lines, computed from the best track, draw Super Typhoon Yagi: the eye opening over the South China Sea, the landfall on Hainan, the spiral coming apart in Vietnam, and a whole week folded into one last line.","uses":["Storms, monsoons and other weather","Ocean currents and river floods","Any flow measured against a threshold"],"dur":47.8},{"slug":"oscilloscope-math","num":"76","name":"Oscilloscope Math","cat":"Light & Lines","film":"The Gibbs Phenomenon","line":"How do you roll a square out of circles? Spinning circles stack into a square wave, until a dive into one corner finds the 9% spike that never goes away.","uses":["Maths and physics lessons","Signals and electronics","Science explainers"],"dur":46.6},{"slug":"neon-tubes","num":"77","name":"Neon Tubes","cat":"Light & Lines","film":"Midnight Snack","line":"A neon cat goes out for the goldfish on the sign at the end of the street, cracks its bowl, and runs the fading fish home through the rain to the goblet on its own sign.","uses":["Shop openings and mascot stories","Nightlife and city-pop music videos","City and festival night idents"],"dur":43.5},{"slug":"brick-toy","num":"78","name":"Brick Toy","cat":"3D & Miniature","film":"Rocket from Spare Parts","line":"A brick astronaut builds a rocket from spare parts and flies to a brick moon.","uses":["Toys & kids","Product builds","Space"],"dur":51.5},{"slug":"paper-popup","num":"79","name":"Paper Pop-up Book","cat":"3D & Miniature","film":"Pip's Paper Adventure","line":"A pop-up book opens on a desk; a sprite named Pip adventures through paper worlds and jumps out into ours.","uses":["Children's books","Game trailers","Story films"],"dur":127.5},{"slug":"tilt-shift","num":"80","name":"Tilt-Shift Miniature","cat":"3D & Miniature","film":"Toy Town Rush Hour","line":"Morning rush hour in a town that looks like a model: traffic, trains and tiny people.","uses":["City promos","Real estate","Transport"],"dur":34.0},{"slug":"lowpoly-island","num":"81","name":"Low-poly Isometric Island","cat":"3D & Miniature","film":"The Island That Grew","line":"An island and its village grow tile by tile from an empty sea, each tile a note, into a starry night.","uses":["Game trailers","World building","Calm content"],"dur":49.0},{"slug":"glass-product","num":"82","name":"Glass Product Render","cat":"3D & Miniature","film":"Aura — Hear the Light","line":"Unboxing and close-ups of Aura, fictional glass earbuds, in strip-light sweeps and caustics.","uses":["Product launches","Consumer tech","Beauty"],"dur":28.2},{"slug":"memphis-diorama","num":"83","name":"Memphis Diorama","cat":"3D & Miniature","film":"Four Seasons in Pomelo Town","line":"One river bend, four seasons, one take; each turns when the big tree squats and springs back.","uses":["Web heroes","Ambient loops","Seasons"],"dur":39.0},{"slug":"isometric-picture-book","num":"84","name":"Isometric People Scene","cat":"3D & Miniature","film":"Seventy-Two Seats","line":"Travellers board an isometric plane, and the order shows why one way is nearly twice as fast.","uses":["Everyday rules","Queues","Comparisons"],"dur":56.5},{"slug":"crayon-world","num":"85","name":"Crayon World 3D","cat":"3D & Miniature","film":"The Butterfly","line":"A first-person flight over a crayon village to one flower in an old man's garden; then his eyes, and what he says.","uses":["Short stories","Tributes","Journeys"],"dur":60.0},{"slug":"satellite-briefing","num":"86","name":"Satellite Briefing","cat":"Instruments & Evidence","film":"The Map Still Says Sea","line":"A satellite follows the map to the Aral Sea and finds a desert; only the part someone dammed came back.","uses":["Climate","News explainers","Geography"],"dur":34.0},{"slug":"briefing-board","num":"87","name":"Engineering Briefing Board","cat":"Instruments & Evidence","film":"The Ship Decides","line":"Four bridge types are tested on one briefing wall, and the ship that must pass under picks the winner.","uses":["Engineering","Option comparisons","Briefings"],"dur":36.8},{"slug":"lidar-survey","num":"88","name":"LiDAR Survey","cat":"Instruments & Evidence","film":"The Fields Under the Forest","line":"A laser survey strips the canopy off a Connecticut forest and finds 3.4 km of old farm walls.","uses":["Heritage","Environment","Site surveys"],"dur":36.0},{"slug":"microscope","num":"89","name":"Under the Microscope","cat":"Instruments & Evidence","film":"Measured Blue","line":"One continuous move from a liver slide to a single nucleus; two circles, counted pixel by pixel, differ 2.4 times in blue.","uses":["Biomedicine","Materials science","Skincare science"],"dur":35.5},{"slug":"archive-lighttable","num":"90","name":"Archive Light Table","cat":"Instruments & Evidence","film":"Two Seconds Short","line":"The telegram said 57 seconds; under a loupe, the Wrights' glass negatives and the archive say 59.","uses":["Brand history","Archive stories","Museums"],"dur":36.0},{"slug":"security-xray","num":"91","name":"Security X-ray","cat":"Instruments & Evidence","film":"Night Shift at Lane 3","line":"One night at an airport screening console: a power bank, a bottle of water, and six live crabs that move in the CT.","uses":["Airport and customs screening","Parcel and cargo inspection","Product internals"],"dur":48.4},{"slug":"dark-documentary","num":"92","name":"Radar Sweep Documentary","cat":"Instruments & Evidence","film":"Catching the Moon","line":"A storm at Parkes, 21 July 1969: a 64-metre dish tipped to its limit holds on and catches the moonwalk for the world.","uses":["History of science and engineering","Archaeology, sites and reconstructions","Astronomy, deep space and survey"],"dur":48.0},{"slug":"thermal-camera","num":"93","name":"Thermal Camera","cat":"Instruments & Evidence","film":"A Building on a Winter Night","line":"A thermal camera circles an old apartment block on a snowy night: a leaking window, pipes inside the walls, a cat asleep on a warm bonnet, and the same block a year after its retrofit.","uses":["Building and energy inspection","Wildlife at night","Machines and electrics"],"dur":45.0},{"slug":"dataviz","num":"94","name":"Data Storytelling","cat":"Data & Maps","film":"A Hundred Summers","line":"A hundred years of summer temperatures, where the chart itself tells the story.","uses":["Data journalism","Reports","Climate & science"],"dur":46.3},{"slug":"white-model","num":"95","name":"Projection-Mapped Model","cat":"Data & Maps","film":"How a Flattened City Grew Back","line":"A projector paints Rotterdam's white model layer by layer, from the 1940 gap to today's towers.","uses":["Urban planning","Exhibitions","City data"],"dur":35.2},{"slug":"data-physical","num":"96","name":"Data Physicalization","cat":"Data & Maps","film":"Two Spirals","line":"Twelve years of wind and solar stacked as real plates, spiralling round a walnut dial until solar overtakes.","uses":["Annual reports","Investor decks","Energy data"],"dur":34.9},{"slug":"transit-map","num":"97","name":"Transit Map","cat":"Data & Maps","film":"6 Kilometres","line":"A printed metro map grows from one 6 km line in 1993 to 21 lines and 906 km.","uses":["Transport","Growth over time","Networks"],"dur":43.5},{"slug":"map-explainer","num":"98","name":"3D Map Explainer","cat":"Data & Maps","film":"Strait of Hormuz","line":"From the globe down into the strait a fifth of the world's oil squeezes through: two lanes, a cut through the sea floor, and pipelines that can carry only a fraction of it around.","uses":["News and geopolitics","Energy, trade and shipping","Rivers, borders and terrain"],"dur":48.2},{"slug":"pip-simulation","num":"99","name":"Blob Simulation","cat":"Data & Maps","film":"Is Faster Better?","line":"160 flocked Pips race for beans: the fast ones eat first and run dry first, and after 20 generations the board turns blue.","uses":["Evolution and natural selection","Game theory and agent-based models","Epidemics, queues and markets"],"dur":48.8}];
+const FILMS = "https://ankush-jha.github.io/studio-films/";
+const REPO = 'https://github.com/Ankush-Jha/studio/blob/main/engines/films/styles/';
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const len = s => { s = Math.round(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const cats = [...new Set(DATA.map(d => d.cat))];
+const state = { q: '', cat: 'All', view: 'grid', sort: ['num', 1] };
+try { const v = localStorage.getItem('sk-films-view'); if (v === 'grid' || v === 'sheet') state.view = v; } catch (e) {}
+const PLAY = '<svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>';
+
+function chips() {
+  const all = [['All', DATA.length], ...cats.map(c => [c, DATA.filter(d => d.cat === c).length])];
+  $('#chips').innerHTML = all.map(([c, n]) => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${state.cat === c}">${esc(c)}<small>${n}</small></button>`).join('');
+}
+function match(d) {
+  if (state.cat !== 'All' && d.cat !== state.cat) return false;
+  if (!state.q) return true;
+  const hay = [d.name, d.cat, d.film, d.line, ...d.uses].join(' ').toLowerCase();
+  return state.q.toLowerCase().split(/\s+/).every(w => hay.includes(w));
+}
+function card(d) {
+  return `<button class="card" type="button" data-slug="${d.slug}">
+    <div class="pic"><img src="thumbs/${d.slug}.jpg" alt="" loading="lazy" width="640" height="360"><span class="len">${len(d.dur)}</span><span class="play">${PLAY}</span></div>
+    <div class="body"><div class="meta">No. ${d.num} · ${esc(d.cat)}</div><div class="name">${esc(d.name)}</div><div class="film">Demo: ${esc(d.film)}</div>
+    <div class="uses">${d.uses.map(u => `<span>${esc(u)}</span>`).join('')}</div></div></button>`;
+}
+function render() {
+  const list = DATA.filter(match);
+  $('#count').textContent = list.length === DATA.length ? `Showing all ${list.length} styles` : `Showing ${list.length} of ${DATA.length} styles`;
+  const out = $('#out');
+  if (!list.length) { out.innerHTML = '<p class="empty">No style matches that. Try another word or category.</p>'; return; }
+  if (state.view === 'grid') {
+    const groups = state.cat === 'All' && !state.q ? cats.map(c => [c, list.filter(d => d.cat === c)]) : [[state.cat === 'All' ? 'Results' : state.cat, list]];
+    out.innerHTML = groups.filter(g => g[1].length).map(([c, g]) => `<div class="cat"><h2>${esc(c)}</h2><span>${g.length} style${g.length > 1 ? 's' : ''}</span></div><div class="grid">${g.map(card).join('')}</div>`).join('');
+  } else {
+    const [k, dir] = state.sort;
+    const val = d => k === 'num' ? cats.indexOf(d.cat) * 1000 + +d.num : k === 'dur' ? d.dur : String(d[k]).toLowerCase();
+    list.sort((a, b) => (val(a) > val(b) ? 1 : val(a) < val(b) ? -1 : 0) * dir);
+    const th = (key, label) => `<th${key ? ` data-sort="${key}"` : ''}>${label}${key && k === key ? ` <span class="dir">${dir > 0 ? '↑' : '↓'}</span>` : ''}</th>`;
+    out.innerHTML = `<div class="sheet-wrap"><table><thead><tr>${th('num', 'No.')}${th('', '')}${th('name', 'Style')}${th('cat', 'Category')}${th('film', 'Demo film')}${th('', 'Good for')}${th('dur', 'Length')}${th('', '')}</tr></thead><tbody>` +
+      list.map(d => `<tr data-slug="${d.slug}"><td class="n">${d.num}</td><td class="t"><img src="thumbs/${d.slug}.jpg" alt="" loading="lazy" width="640" height="360"></td><td class="s"><b>${esc(d.name)}</b></td><td>${esc(d.cat)}</td><td class="f">${esc(d.film)}</td><td class="u">${d.uses.map(esc).join(', ')}</td><td class="l">${len(d.dur)}</td><td class="p"><button type="button" tabindex="-1">Play</button></td></tr>`).join('') +
+      '</tbody></table></div>';
+  }
+}
+function seg() {
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === state.view));
+  const b = document.querySelector(`.seg button[data-view="${state.view}"]`), t = document.querySelector('.seg .thumb');
+  t.style.width = b.offsetWidth + 'px'; t.style.transform = `translateX(${b.offsetLeft - 4}px)`;
+}
+function open(slug, push = true) {
+  const d = DATA.find(x => x.slug === slug); if (!d) return;
+  const v = $('#vid'); v.poster = `thumbs/${d.slug}.jpg`; v.src = FILMS + d.slug + '.mp4';
+  $('#d-meta').textContent = `No. ${d.num} · ${d.cat} · ${len(d.dur)}`;
+  $('#d-name').textContent = d.name;
+  $('#d-line').textContent = `${d.film}: ${d.line}`;
+  $('#d-uses').innerHTML = d.uses.map(u => `<span>${esc(u)}</span>`).join('');
+  $('#d-style').href = REPO + d.slug + '/STYLE.md';
+  $('#d-ask').textContent = `/create graphic reel for <client> about <topic> in ${d.name} style`;
+  $('#d-copy').textContent = 'Copy brief';
+  $('#dlg').showModal(); v.play().catch(() => {});
+  if (push) history.replaceState(null, '', '#' + d.slug);
+}
+$('#dlg').addEventListener('close', () => { const v = $('#vid'); v.pause(); v.removeAttribute('src'); v.load(); history.replaceState(null, '', location.pathname + location.search); });
+$('#dlg').addEventListener('click', e => { if (e.target === e.currentTarget || e.target.closest('.close')) $('#dlg').close(); });
+$('#d-copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('#d-ask').textContent); $('#d-copy').textContent = 'Copied'; } catch (e) { $('#d-copy').textContent = 'Select and copy'; } });
+$('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; state.cat = state.cat === b.dataset.cat && b.dataset.cat !== 'All' ? 'All' : b.dataset.cat; chips(); render(); });
+$('#q').addEventListener('input', e => { state.q = e.target.value.trim(); render(); });
+document.querySelector('.seg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; state.view = b.dataset.view; try { localStorage.setItem('sk-films-view', state.view); } catch (err) {} seg(); render(); });
+$('#out').addEventListener('click', e => {
+  const th = e.target.closest('th[data-sort]');
+  if (th) { const k = th.dataset.sort; state.sort = [k, state.sort[0] === k ? -state.sort[1] : 1]; render(); return; }
+  const el = e.target.closest('[data-slug]'); if (el) open(el.dataset.slug);
+});
+window.addEventListener('resize', seg);
+chips(); render(); seg();
+if (location.hash.length > 1) open(decodeURIComponent(location.hash.slice(1)), false);
+</script>
+</body>
+</html>

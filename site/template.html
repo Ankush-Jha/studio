@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Film Directory · SuperKreatives Studio</title>
+<meta name="description" content="Every film style SuperKreatives Studio can make a reel in: {{N}} styles in {{C}} categories, each with a demo film made entirely in code.">
+<meta property="og:title" content="Film Directory · SuperKreatives Studio">
+<meta property="og:description" content="{{N}} film styles in {{C}} categories, each with a demo film made entirely in code.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#ECE6E8; --card:#fff; --ink:#0B0B0F; --dim:#5F5A66; --faint:#8C8794; --line:#DCD4D8;
+  --indigo:#3843D0; --indigo-soft:#E6E7FA; --shadow:0 8px 24px rgba(57,40,123,.13); --shadow-hi:0 14px 34px rgba(57,40,123,.24);
+  --r:20px; --font:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:15px/1.5 var(--font);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:24px}
+@media (max-width:600px){.wrap{padding-inline:16px}}
+
+/* header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand svg{width:34px;height:34px;flex:none}
+.brand .word{font-weight:700;font-size:21px;letter-spacing:-.01em}
+.brand .tag{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border-left:1px solid var(--line);padding-left:10px;margin-left:2px}
+.top nav a{font-weight:600;font-size:14px;text-decoration:none;padding:9px 14px;border-radius:999px;background:var(--card);box-shadow:var(--shadow)}
+.top nav a:hover{color:var(--indigo)}
+
+/* intro */
+.intro{padding-block:28px 22px;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:end}
+.intro h1{font-size:clamp(34px,5.4vw,60px);line-height:1.02;letter-spacing:-.035em;margin:0 0 14px;font-weight:800}
+.intro h1 em{font-style:normal;color:var(--indigo)}
+.intro p{margin:0;color:var(--dim);font-size:17px;max-width:56ch}
+.stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.stat{background:var(--card);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);min-width:120px}
+.stat b{display:block;font-size:28px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+@media (max-width:860px){.intro{grid-template-columns:1fr;gap:18px}.stats{justify-content:flex-start}}
+@media (max-width:600px){
+  .brand .word{font-size:18px}.brand .tag{display:none}.top nav a{padding:8px 12px;font-size:13px}
+  .intro{padding-block:12px 8px}.intro p{font-size:15px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+  .stat{min-width:0;padding:10px 12px;border-radius:14px}.stat b{font-size:22px}.stat span{font-size:10.5px}
+  .wrap .controls{position:static}
+  .controls .chips{flex-wrap:nowrap;overflow-x:auto;margin-inline:-16px;padding-inline:16px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .seg{height:42px}.search{height:42px}
+}
+
+/* controls */
+.controls{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:linear-gradient(var(--ground) 82%,rgba(236,230,232,0));padding-block:12px 16px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:8px;background:var(--card);border-radius:999px;padding:0 16px;box-shadow:var(--shadow);height:46px}
+.search input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:15px;color:var(--ink);min-width:0}
+.search svg{width:18px;height:18px;color:var(--faint);flex:none}
+.seg{position:relative;display:inline-flex;background:var(--card);border-radius:999px;padding:4px;box-shadow:var(--shadow);height:46px}
+.seg button{position:relative;z-index:1;border:0;background:none;font:inherit;font-weight:700;font-size:14px;padding:0 18px;border-radius:999px;cursor:pointer;color:var(--ink);transition:color .2s}
+.seg button[aria-pressed=true]{color:#fff}
+.seg .thumb{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--ink);transition:transform .25s ease,width .25s ease}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1px solid var(--line);background:transparent;font:inherit;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;cursor:pointer;color:var(--ink);white-space:nowrap}
+.chip small{color:var(--faint);font-weight:600;margin-left:4px;font-variant-numeric:tabular-nums}
+.chip:hover{border-color:var(--indigo)}
+.chip[aria-pressed=true]{background:var(--indigo);border-color:var(--indigo);color:#fff}
+.chip[aria-pressed=true] small{color:rgba(255,255,255,.75)}
+.count{font-size:13px;color:var(--dim);font-weight:600;margin-top:10px}
+
+/* grid */
+.cat{margin:26px 0 8px;display:flex;align-items:baseline;gap:12px}
+.cat h2{margin:0;font-size:22px;letter-spacing:-.02em;font-weight:800}
+.cat span{color:var(--faint);font-size:13px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border-radius:var(--r);padding:6px;box-shadow:var(--shadow);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease;text-align:left;border:0;font:inherit;color:inherit;display:flex;flex-direction:column}
+.card:hover,.card:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow-hi);outline:0}
+.card:focus-visible{box-shadow:0 0 0 3px var(--indigo),var(--shadow-hi)}
+.pic{position:relative;aspect-ratio:16/9;border-radius:15px;overflow:hidden;background:#d9d2d6}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pic .len{position:absolute;right:8px;bottom:8px;background:rgba(11,11,15,.78);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;font-variant-numeric:tabular-nums}
+.pic .play{position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;background:var(--indigo);display:grid;place-items:center;opacity:0;transform:scale(.85);transition:.18s}
+.pic .play svg{width:20px;height:20px;margin-left:3px;fill:#fff}
+.card:hover .play,.card:focus-visible .play{opacity:1;transform:none}
+.body{padding:12px 10px 10px;display:flex;flex-direction:column;gap:4px;flex:1}
+.meta{font-size:12px;font-weight:700;color:var(--faint);letter-spacing:.04em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.name{font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.film{font-size:13px;color:var(--dim)}
+.uses{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.uses span{font-size:11.5px;font-weight:600;background:var(--indigo-soft);color:var(--indigo);padding:3px 8px;border-radius:999px}
+
+/* sheet */
+.sheet-wrap{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);overflow-x:auto;margin-top:8px}
+table{width:100%;border-collapse:collapse;min-width:900px}
+th{position:sticky;top:0;background:var(--card);text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);font-weight:700;padding:14px 12px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none;white-space:nowrap}
+th[data-sort]:hover{color:var(--indigo)}
+th .dir{color:var(--indigo)}
+td{padding:10px 12px;border-bottom:1px solid #F0EBED;vertical-align:middle;font-size:14px}
+tr:last-child td{border-bottom:0}
+tbody tr{cursor:pointer}
+tbody tr:hover td{background:#F7F4F5}
+td.n{color:var(--faint);font-weight:700;font-variant-numeric:tabular-nums;width:44px}
+td.t{width:136px}td.t img{width:112px;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:8px;display:block}
+td.s b{font-weight:800}
+td.f{color:var(--dim)}
+td.l{font-variant-numeric:tabular-nums;color:var(--dim);white-space:nowrap}
+td.u{color:var(--dim);font-size:13px}
+td.p button{border:0;background:var(--indigo);color:#fff;font:inherit;font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer}
+
+.empty{padding:60px 0;text-align:center;color:var(--dim)}
+
+/* player */
+dialog{border:0;padding:0;border-radius:24px;width:min(1040px,calc(100vw - 32px));max-height:calc(100vh - 32px);background:var(--card);box-shadow:0 30px 80px rgba(20,10,60,.4);color:var(--ink)}
+dialog::backdrop{background:rgba(11,11,15,.62);backdrop-filter:blur(3px)}
+.dlg{display:flex;flex-direction:column;max-height:calc(100vh - 32px);overflow:auto}
+.dlg video{width:100%;aspect-ratio:16/9;background:#000;display:block}
+.dlg .info{padding:20px 24px 24px;display:grid;grid-template-columns:1fr auto;gap:8px 24px}
+.dlg h3{margin:0;font-size:26px;letter-spacing:-.02em;font-weight:800}
+.dlg .line{margin:6px 0 0;color:var(--dim);max-width:62ch}
+.dlg .ask{grid-column:1/-1;margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--ground);border-radius:14px;padding:10px 12px}
+.dlg .ask code{font:600 13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;flex:1;min-width:220px}
+.btn{border:0;font:inherit;font-weight:700;font-size:13px;padding:8px 14px;border-radius:999px;cursor:pointer;background:var(--ink);color:#fff;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:rgba(11,11,15,.7);color:#fff;font-size:22px;line-height:1;cursor:pointer;z-index:2}
+.links{display:flex;gap:8px;align-items:start;flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:640px){.dlg .info{grid-template-columns:1fr}.links{justify-content:flex-start}}
+
+footer{margin-top:56px;padding-block:28px 40px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;display:grid;gap:8px}
+footer a{color:var(--indigo);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="https://superkreatives.ca" rel="noopener" aria-label="SuperKreatives">
+      {{LOGO}}<span class="word">SuperKreatives</span><span class="tag">Studio</span>
+    </a>
+    <nav><a href="https://github.com/Ankush-Jha/studio" rel="noopener">GitHub</a></nav>
+  </header>
+
+  <section class="intro">
+    <div>
+      <h1>Film <em>Directory</em></h1>
+      <p>Every film style SuperKreatives Studio can make a reel in. Each one has a demo film, made entirely in code. Pick a style, then brief it for any client.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>{{N}}</b><span>Styles</span></div>
+      <div class="stat"><b>{{C}}</b><span>Categories</span></div>
+      <div class="stat"><b>{{MIN}}</b><span>Min of demos</span></div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="row">
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search styles, films, uses (e.g. luxury, data, retro)" autocomplete="off" aria-label="Search styles"></label>
+      <div class="seg" role="group" aria-label="View"><span class="thumb"></span>
+        <button type="button" data-view="grid" aria-pressed="true">Grid</button><button type="button" data-view="sheet" aria-pressed="false">Sheet</button></div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="count" id="count"></div>
+  </div>
+
+  <main id="out"></main>
+
+  <footer>
+    <div>Film Directory · SuperKreatives Studio · <a href="https://superkreatives.ca" rel="noopener">superkreatives.ca</a> · <a href="https://github.com/Ankush-Jha/studio" rel="noopener">Source on GitHub</a></div>
+    <div>The film styles are adapted from <a href="https://github.com/lemomo-ai/lemo-opuscar" rel="noopener">Lemo-Opuscar</a> by Lemomo (LemoLab). Code MIT; demo films, posters and stills CC BY 4.0. Some styles include third-party material, credited in each style's CREDITS file. Changes: styles renamed; the original project's on-screen credits removed (end cards trimmed, the Spy Titles opening card cut, the News Package channel name erased).</div>
+  </footer>
+</div>
+
+<dialog id="dlg" aria-label="Film">
+  <button class="close" type="button" aria-label="Close">×</button>
+  <div class="dlg">
+    <video id="vid" controls playsinline preload="none"></video>
+    <div class="info">
+      <div><div class="meta" id="d-meta"></div><h3 id="d-name"></h3><p class="line" id="d-line"></p><div class="uses" id="d-uses"></div></div>
+      <div class="links"><a class="btn ghost" id="d-style" target="_blank" rel="noopener">Style guide</a></div>
+      <div class="ask"><code id="d-ask"></code><button class="btn" type="button" id="d-copy">Copy brief</button></div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+const DATA = {{DATA}};
+const FILMS = {{FILMS_BASE}};
+const REPO = 'https://github.com/Ankush-Jha/studio/blob/main/engines/films/styles/';
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const len = s => { s = Math.round(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const cats = [...new Set(DATA.map(d => d.cat))];
+const state = { q: '', cat: 'All', view: 'grid', sort: ['num', 1] };
+try { const v = localStorage.getItem('sk-films-view'); if (v === 'grid' || v === 'sheet') state.view = v; } catch (e) {}
+const PLAY = '<svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>';
+
+function chips() {
+  const all = [['All', DATA.length], ...cats.map(c => [c, DATA.filter(d => d.cat === c).length])];
+  $('#chips').innerHTML = all.map(([c, n]) => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${state.cat === c}">${esc(c)}<small>${n}</small></button>`).join('');
+}
+function match(d) {
+  if (state.cat !== 'All' && d.cat !== state.cat) return false;
+  if (!state.q) return true;
+  const hay = [d.name, d.cat, d.film, d.line, ...d.uses].join(' ').toLowerCase();
+  return state.q.toLowerCase().split(/\s+/).every(w => hay.includes(w));
+}
+function card(d) {
+  return `<button class="card" type="button" data-slug="${d.slug}">
+    <div class="pic"><img src="thumbs/${d.slug}.jpg" alt="" loading="lazy" width="640" height="360"><span class="len">${len(d.dur)}</span><span class="play">${PLAY}</span></div>
+    <div class="body"><div class="meta">No. ${d.num} · ${esc(d.cat)}</div><div class="name">${esc(d.name)}</div><div class="film">Demo: ${esc(d.film)}</div>
+    <div class="uses">${d.uses.map(u => `<span>${esc(u)}</span>`).join('')}</div></div></button>`;
+}
+function render() {
+  const list = DATA.filter(match);
+  $('#count').textContent = list.length === DATA.length ? `Showing all ${list.length} styles` : `Showing ${list.length} of ${DATA.length} styles`;
+  const out = $('#out');
+  if (!list.length) { out.innerHTML = '<p class="empty">No style matches that. Try another word or category.</p>'; return; }
+  if (state.view === 'grid') {
+    const groups = state.cat === 'All' && !state.q ? cats.map(c => [c, list.filter(d => d.cat === c)]) : [[state.cat === 'All' ? 'Results' : state.cat, list]];
+    out.innerHTML = groups.filter(g => g[1].length).map(([c, g]) => `<div class="cat"><h2>${esc(c)}</h2><span>${g.length} style${g.length > 1 ? 's' : ''}</span></div><div class="grid">${g.map(card).join('')}</div>`).join('');
+  } else {
+    const [k, dir] = state.sort;
+    const val = d => k === 'num' ? cats.indexOf(d.cat) * 1000 + +d.num : k === 'dur' ? d.dur : String(d[k]).toLowerCase();
+    list.sort((a, b) => (val(a) > val(b) ? 1 : val(a) < val(b) ? -1 : 0) * dir);
+    const th = (key, label) => `<th${key ? ` data-sort="${key}"` : ''}>${label}${key && k === key ? ` <span class="dir">${dir > 0 ? '↑' : '↓'}</span>` : ''}</th>`;
+    out.innerHTML = `<div class="sheet-wrap"><table><thead><tr>${th('num', 'No.')}${th('', '')}${th('name', 'Style')}${th('cat', 'Category')}${th('film', 'Demo film')}${th('', 'Good for')}${th('dur', 'Length')}${th('', '')}</tr></thead><tbody>` +
+      list.map(d => `<tr data-slug="${d.slug}"><td class="n">${d.num}</td><td class="t"><img src="thumbs/${d.slug}.jpg" alt="" loading="lazy" width="640" height="360"></td><td class="s"><b>${esc(d.name)}</b></td><td>${esc(d.cat)}</td><td class="f">${esc(d.film)}</td><td class="u">${d.uses.map(esc).join(', ')}</td><td class="l">${len(d.dur)}</td><td class="p"><button type="button" tabindex="-1">Play</button></td></tr>`).join('') +
+      '</tbody></table></div>';
+  }
+}
+function seg() {
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === state.view));
+  const b = document.querySelector(`.seg button[data-view="${state.view}"]`), t = document.querySelector('.seg .thumb');
+  t.style.width = b.offsetWidth + 'px'; t.style.transform = `translateX(${b.offsetLeft - 4}px)`;
+}
+function open(slug, push = true) {
+  const d = DATA.find(x => x.slug === slug); if (!d) return;
+  const v = $('#vid'); v.poster = `thumbs/${d.slug}.jpg`; v.src = FILMS + d.slug + '.mp4';
+  $('#d-meta').textContent = `No. ${d.num} · ${d.cat} · ${len(d.dur)}`;
+  $('#d-name').textContent = d.name;
+  $('#d-line').textContent = `${d.film}: ${d.line}`;
+  $('#d-uses').innerHTML = d.uses.map(u => `<span>${esc(u)}</span>`).join('');
+  $('#d-style').href = REPO + d.slug + '/STYLE.md';
+  $('#d-ask').textContent = `/create graphic reel for <client> about <topic> in ${d.name} style`;
+  $('#d-copy').textContent = 'Copy brief';
+  $('#dlg').showModal(); v.play().catch(() => {});
+  if (push) history.replaceState(null, '', '#' + d.slug);
+}
+$('#dlg').addEventListener('close', () => { const v = $('#vid'); v.pause(); v.removeAttribute('src'); v.load(); history.replaceState(null, '', location.pathname + location.search); });
+$('#dlg').addEventListener('click', e => { if (e.target === e.currentTarget || e.target.closest('.close')) $('#dlg').close(); });
+$('#d-copy').addEventListener('click', async () => { try { await navigator.clipboard.writeText($('#d-ask').textContent); $('#d-copy').textContent = 'Copied'; } catch (e) { $('#d-copy').textContent = 'Select and copy'; } });
+$('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; state.cat = state.cat === b.dataset.cat && b.dataset.cat !== 'All' ? 'All' : b.dataset.cat; chips(); render(); });
+$('#q').addEventListener('input', e => { state.q = e.target.value.trim(); render(); });
+document.querySelector('.seg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; state.view = b.dataset.view; try { localStorage.setItem('sk-films-view', state.view); } catch (err) {} seg(); render(); });
+$('#out').addEventListener('click', e => {
+  const th = e.target.closest('th[data-sort]');
+  if (th) { const k = th.dataset.sort; state.sort = [k, state.sort[0] === k ? -state.sort[1] : 1]; render(); return; }
+  const el = e.target.closest('[data-slug]'); if (el) open(el.dataset.slug);
+});
+window.addEventListener('resize', seg);
+chips(); render(); seg();
+if (location.hash.length > 1) open(decodeURIComponent(location.hash.slice(1)), false);
+</script>
+</body>
+</html>
