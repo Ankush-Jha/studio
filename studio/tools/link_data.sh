@@ -22,6 +22,9 @@ for x in briefs.jsonl golden.jsonl golden_judge.md reviews history report.md rep
   [ -e "private/evals/$x" ] && link "studio/evals/$x" "../../private/evals/$x"
 done
 link studio/desk/fixtures ../../private/desk/fixtures
+mkdir -p private/face-reels/clients private/face-reels/inbox
+link engines/face-reels/clients ../../private/face-reels/clients
+link engines/face-reels/inbox ../../private/face-reels/inbox
 echo "Client data linked from private/ ($(ls private/kits 2>/dev/null | grep -vc '^_' ) kits)."
 # Extra copywriting/strategy skills kept in the private repo (third-party, licences vary): link each into .claude/skills.
 if [ -d private/skills ]; then

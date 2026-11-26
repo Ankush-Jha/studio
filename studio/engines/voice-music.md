@@ -36,7 +36,7 @@ from kokoro_onnx import Kokoro; k=Kokoro('core/tts/kokoro-v1.0.onnx','core/tts/v
 import faster_whisper; print('asr ok')" && which whisper-cli && ls ~/.cache/whisper-cpp/ggml-large-v3-turbo.bin
 ```
 
-Verified 19 Nov 2026: Kokoro voices installed = `af_bella af_heart am_adam am_liam am_michael am_onyx bm_george bm_lewis` (American `af_`/`am_`, British `bm_`); faster-whisper OK; whisper.cpp with `ggml-large-v3-turbo.bin`.
+Verified 19 Nov 2026 and again 26 Nov 2026 on the new layout: Kokoro voices installed = `af_bella af_heart am_adam am_liam am_michael am_onyx bm_george bm_lewis` (American `af_`/`am_`, British `bm_`); faster-whisper OK; whisper.cpp with `ggml-large-v3-turbo.bin`. Fresh clone: the Kokoro model and the voice packages come from `sh $LIB/setup.sh deps voice` (Studio Films, `engines/films`); whisper.cpp from `brew install whisper-cpp`; the large model is a separate download (`curl -L -o ~/.cache/whisper-cpp/ggml-large-v3-turbo.bin https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin`; ask first, about 1.6 GB).
 
 ElevenLabs connector: `mcp__claude_ai_ElevenLabs__creative_list_voices` answered on 19 Nov 2026 (French, Hindi and Punjabi library voices listed). The connector has needed re-authorising before: if a call is refused, the user re-connects it in claude.ai → Settings → Connectors; until then use Kokoro for English and stop for other languages. Account on 19 Nov 2026 (`account_get_usage`): **free tier, 10,000 characters/month, 0 used**. UNVERIFIED: whether the free tier's licence allows commercial client use (ElevenLabs' free plan has historically required attribution and excluded commercial use); confirm a paid plan with the user before any client delivery uses ElevenLabs audio.
 
@@ -67,15 +67,15 @@ Spell numbers and acronyms for the ear in `text`; write what Whisper hears in `a
 
 ### The client's own recording
 
-Keep every spoken word. Only shorten pauses (cut silences over 0.3 s, keep ~0.2 s breath between sentences) and clean the audio (denoise, de-hum, enhance, level). Never re-order, drop or re-synthesize words. Tools (from FACE_REELS ghost-editor, see `face-reels.md`): `autocut.py` ("cut the pauses, keep every word"), `denoise.sh` (DeepFilterNet3, ≤ 20 dB), `voice_enhance.py --mode enhance|superres`. After editing, re-transcribe and diff against the original transcript: any missing word is a fail.
+Keep every spoken word. Only shorten pauses (cut silences over 0.3 s, keep ~0.2 s breath between sentences) and clean the audio (denoise, de-hum, enhance, level). Never re-order, drop or re-synthesize words. Tools (from the face-reels engine's ghost-editor, `$R/engines/face-reels/vendor/ghost-editor/scripts/`, present after `bash $R/engines/face-reels/setup.sh`; see `face-reels.md`): `autocut.py` ("cut the pauses, keep every word"), `denoise.sh` (DeepFilterNet3, ≤ 20 dB), `voice_enhance.py --mode enhance|superres`. After editing, re-transcribe and diff against the original transcript: any missing word is a fail.
 
 ### Music (policy)
 
-1. **Default: an original synthesized score**, composed for the piece: numpy synthesis (model `graphic reels/heloc-five-years/music.py`) and/or `$LIB/core/audio/sampler.py` instruments from free CC0/CC BY sample libraries (credited in `CREDITS` via `sampler.py credits(names)`).
+1. **Default: an original synthesized score**, composed for the piece: numpy synthesis (model `$LIB/styles/swiss-motion/demo/music/score.py`, an original motorik score) and/or `$LIB/core/audio/sampler.py` instruments from free CC0/CC BY sample libraries (credited in `CREDITS` via `sampler.py credits(names)`).
 2. A licensed music library or **ElevenLabs Music**: only with a paid plan **and** the user's yes for that piece.
 3. **Never Suno or Udio.**
 4. **Meta Sound Collection**: added by whoever posts, in the Instagram app at posting time; put a line in the caption notes ("optional: add a Sound Collection track in-app; keep it under the voice"). Never trending licensed songs (business accounts can't use them and can't boost).
-5. Mixkit music beds (in FACE_REELS' library): ask first. Mixkit SFX and procedural foley (`$LIB/core/audio/sfx.py`) are fine.
+5. Mixkit music beds (in the face-reels engine's ghost-editor library, `setup.sh --heavy`): ask first. Mixkit SFX and procedural foley (`$LIB/core/audio/sfx.py`) are fine.
 
 ### Mix and loudness targets
 
@@ -93,7 +93,7 @@ LEMO_COLOR=bt709 sh "$LIB/core/render/mux.sh" "$P/out/video.mp4" "$P/out/mix.wav
 sh $R/studio/engines/bin/deliver.sh "$P/out/master.mp4" "$O/<name>.mp4"
 ```
 
-`deliver.sh` (two-pass loudnorm + 4× oversampled limiter, AAC 128k 48 kHz) exits 1 unless the file lands at −15…−13 LUFS with true peak under −1 dBTP; verified 19 Nov 2026 on a lemo master (−14.1 / −1.7) and on a motion render whose own audio peaked at +2.1 dBTP (fixed to −14.0 / −1.5).
+`deliver.sh` (two-pass loudnorm + 4× oversampled limiter, AAC 128k 48 kHz) exits 1 unless the file lands at −15…−13 LUFS with true peak under −1 dBTP; verified 19 Nov 2026 on a Studio Films master (−14.1 / −1.7) and on a motion render whose own audio peaked at +2.1 dBTP (fixed to −14.0 / −1.5).
 
 ## Branding
 

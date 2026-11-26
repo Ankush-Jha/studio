@@ -1,6 +1,6 @@
 # Studio engines
 
-One adapter per render engine. The director picks the engine from the table below (or the one the chosen concept names), reads that adapter top to bottom, and follows it literally: every command is absolute-pathed and writes only into `$R/jobs/<id>/project` (work) and `$R/jobs/<id>/out` (deliverables). `graphic reels/` and `engines/face-reels/vendor/` are never edited; engines that write into their own folder are run from a per-job shadow copy (`bin/shadow.sh`).
+One adapter per render engine. The director picks the engine from the table below (or the one the chosen concept names), reads that adapter top to bottom, and follows it literally: every command is absolute-pathed and writes only into `$R/jobs/<id>/project` (work) and `$R/jobs/<id>/out` (deliverables). `$R/engines/` (stills, motion, films, face-reels, including the fetched `engines/face-reels/vendor/`) and `$R/playbook/` are never edited (a guard hook enforces it); engines that write into their own folder are run from a per-job shadow copy (`bin/shadow.sh` → `$P/engines/{stills,motion}`). The only engine paths a job writes into are the face-reels reel folders `engines/face-reels/clients/<slug>/reels/` and `engines/face-reels/inbox/` (gitignored client data; see `face-reels.md`). Install everything on a fresh clone with `sh $R/setup.sh` (`--no-engines` skips the films voice/music packs and the face-reels engines and models); `sh $R/studio/tools/doctor.sh` checks the result.
 
 **Add a new engine = install it + write one adapter in this folder with the SPEC sections** (Best for · Formats and sizes · Inputs it needs · Setup check · Run · Branding · Outputs to collect · Time and usage · Built-in QA vs what Studio's gate adds · Pitfalls · Picking a style against the client's history).
 
@@ -8,7 +8,7 @@ One adapter per render engine. The director picks the engine from the table belo
 
 | Format | Default engine | Alternatives | Notes |
 |---|---|---|---|
-| Graphic reel (30–60 s, narrated) | `films.md` | `hyperframes.md` (fast kinetic type) · `motion.md` (≤ 15 s loop) | house look; 99 styles; original score |
+| Graphic reel (30–60 s, narrated) | `films.md` | `hyperframes.md` (fast kinetic type) · `motion.md` (≤ 15 s loop) | house look; 98 styles; original score |
 | Short reel / trial reel (6–15 s, one number) | `motion.md` | `hyperframes.md` · `films.md` | `byClient` variants per account |
 | Carousel (8–10 slides) | `stills.md` | `custom-html.md` (hero / no style fits) · `hyperframes.md` (animated slides) | footer band under every slide |
 | Static (single post) | `stills.md` | `custom-html.md` | |
@@ -37,11 +37,11 @@ One adapter per render engine. The director picks the engine from the table belo
 
 | Script | Does |
 |---|---|
-| `bin/shadow.sh <project>` | private writable copy of `engines/stills` + `motion` (seed and motion `node_modules` symlinked read-only) in the job |
-| `bin/kit_tokens.py <kit dir> <shadow statics>` | writes the client's compliance, accent and photo from `kit.json` into the shadow tokens; prints the `--client` id |
+| `bin/shadow.sh <project>` | private writable copy of `$R/engines/stills` + `motion` at `<project>/engines/{stills,motion}` (each `node_modules` symlinked read-only to the engine's own; no `out/` or `.venv`) |
+| `bin/kit_tokens.py <kit dir> <shadow stills>` | writes the client's compliance, accent and photo from `kit.json` into the shadow tokens; prints the `--client` id |
 | `bin/footer_compose.py <square renders> <footer.png> <out>` | 1:1 slides + the kit footer → 1080×1350 feed posts |
 | `bin/deliver.sh <master.mp4> <out.mp4>` | PLAYBOOK delivery: H.264 yuv420p BT.709 30 fps, AAC 128k **CBR** 48 kHz (AudioToolbox `aac_at`; ffmpeg's native `aac` is ABR and measured 131-132 kbps), −14 LUFS, TP < −1 dBTP, faststart; exit 1 if it misses |
-| `bin/custom_html_skeleton.mjs` | starting `build.mjs` for `custom-html` (footer + compliance + safe-box check) |
+| `bin/custom_html_skeleton.mjs` | starting `build.mjs` for `custom-html` (footer + compliance + safe-box check; playwright-core and sharp from `$R/studio/lib`) |
 
 ## House rules every adapter applies
 

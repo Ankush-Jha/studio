@@ -4,6 +4,7 @@
 Usage:
   variety.py --client <slug> --format <f> --style <s> --device "<text>" --hook-pattern <p> --topic "<t>"
              [--engine <e>] [--today YYYY-MM-DD] [--include-drafts] [--list-styles]
+  variety.py --list-styles          (no client: just the films and stills style folders)
 
 Prints JSON {score, conflicts, recentForClient, recentGlobal, suggestions}.
 Rules:
@@ -18,14 +19,14 @@ from pathlib import Path
 
 R = Path(os.environ.get("STUDIO_ROOT") or Path(__file__).resolve().parents[2])
 FILMS = R / 'engines/films/styles'
-STILLS = R / 'engines/stills/styles'
+STILLS = R / 'engines/stills/library'   # one folder per still style: library/<slug>/STYLE.md (+ roster.json, base.css)
 STOP = set('the a an of and or to in on for with your you is are not no it its this that from by as at be how what why when'.split())
 STILL_FORMATS = {'static', 'carousel', 'cover', 'story'}
 
 
 def list_styles():
     op = sorted(p.name for p in FILMS.iterdir() if p.is_dir() and p.name not in ('_template',)) if FILMS.exists() else []
-    st = sorted(p.name for p in STILLS.iterdir() if p.is_dir() and p.name not in ('_template',)) if STILLS.exists() else []
+    st = sorted(p.name for p in STILLS.iterdir() if p.is_dir() and (p / 'STYLE.md').exists()) if STILLS.exists() else []
     return op, st
 
 
@@ -86,7 +87,7 @@ def brief(p):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--client', required=True)
+    ap.add_argument('--client', default='')
     ap.add_argument('--format', default='')
     ap.add_argument('--style', default='')
     ap.add_argument('--device', default='')
@@ -98,6 +99,11 @@ def main():
     ap.add_argument('--list-styles', action='store_true')
     a = ap.parse_args()
     op, st = list_styles()
+    if not a.client:
+        if not a.list_styles:
+            ap.error('--client is required (or pass --list-styles alone)')
+        print(json.dumps({'availableStyles': {'films': op, 'stills': st}}, indent=1, ensure_ascii=False))
+        return
     today = d(a.today) if a.today else datetime.date.today()
     pieces = sorted(load_pieces(a.client, a.include_drafts), key=lambda p: (d(p['date']), p['id']))
     mine = [p for p in pieces if a.client in p['clients']]

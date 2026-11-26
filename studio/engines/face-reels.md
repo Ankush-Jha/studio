@@ -1,14 +1,15 @@
 # Engine: face-reels (talking-head footage reels)
 
-Footage reels are made by the existing agent at `$R/engines/face-reels` (its `CLAUDE.md` five rules and pipeline, the `face-reel` skill, the vendored ghost-editor engine). Studio's director follows that pipeline with absolute paths, keeps the reel folder **inside engines/face-reels**, then copies deliverables to the job. Read `$A/CLAUDE.md`, `$A/.claude/skills/face-reel/SKILL.md`, `$A/references/design-quality.md`, `$A/references/element-families.md` and `$S/SKILL.md` (ghost-editor, 513 lines; sections 1–8) before planning.
+Footage reels are made by the face-reels engine at `$R/engines/face-reels` (its `CLAUDE.md` five rules and pipeline, the `face-reels` skill, the ghost-editor engine that `setup.sh` clones into `vendor/`). Studio's director follows that pipeline with absolute paths, keeps the reel folder **inside `$A/clients/<slug>/reels/`** (gitignored client data; with `$A/inbox/` the only paths under engines/ the guard hook lets Studio's file tools write. The client files one level up, `$A/clients/<slug>/*.json`, are outside that exception: if step 0 is refused, stop and ask the user), then copies deliverables to the job. Read `$A/CLAUDE.md`, `$A/README.md`, `$R/.claude/skills/face-reels/SKILL.md`, `$A/references/design-quality.md`, `$A/references/element-families.md` and `$S/SKILL.md` (ghost-editor; sections 1–8) before planning.
 
 ```sh
 R=$(git rev-parse --show-toplevel)
 A=$R/engines/face-reels
 S=$A/vendor/ghost-editor
-MPY=$HOME/.venvs/media/bin/python                 # numpy, OpenCV, MediaPipe, Pillow
+MPY=$A/.venv-media/bin/python                     # numpy, OpenCV, MediaPipe, Pillow, Playwright, openai-whisper (made by setup.sh)
+export MEDIA_PY=$MPY                              # ghost-editor's doctor.sh and scripts read it
 J=$R/jobs/<id>; O=$J/out
-SLUG=<client slug>                                # FACE_REELS client folder uses the same slug
+SLUG=<client slug>                                # the face-reels client folder uses the same slug
 RP=$A/clients/$SLUG/reels/<YYYY-MM-DD>_<short-name>   # the reel folder ($P in ghost-editor's docs)
 ```
 
@@ -16,7 +17,7 @@ RP=$A/clients/$SLUG/reels/<YYYY-MM-DD>_<short-name>   # the reel folder ($P in g
 
 - The client's own phone footage (talking head, interview, podcast clip) cut into a 1080×1920 reel: pauses removed, captions off the face, designed cards/props in one built world, soft foley, the voice dominant.
 - Re-cuts of a client's long video into reels.
-- Not for: graphic reels without footage (`films.md`), plain captions only with no design (`hyperframes.md` `/embedded-captions` is lighter).
+- Not for: graphic-reel pieces without footage (`films.md`), plain captions only with no design (`hyperframes.md` `/embedded-captions` is lighter).
 
 ## Formats and sizes
 
@@ -31,10 +32,10 @@ RP=$A/clients/$SLUG/reels/<YYYY-MM-DD>_<short-name>   # the reel folder ($P in g
 ## Setup check (exact command)
 
 ```sh
-bash $R/engines/face-reels/vendor/ghost-editor/scripts/doctor.sh
+test -d "$S" && test -d "$A/tools/models" && test -x "$MPY" && bash "$S/scripts/doctor.sh"
 ```
 
-Its last state (`$A/tools/SETUP.md`, 12 Nov 2026): 20 ok, 2 missing (ffmpeg drawtext/libass and the `whisper` CLI), neither used by this pipeline. UNVERIFIED: not re-run by this adapter, and SETUP.md says the pipeline has "not yet been tested end to end on a real sample". Report anything doctor flags; don't improvise around it.
+On a fresh clone `vendor/`, `tools/models/` and `.venv-media/` do not exist (gitignored, fetched by setup): the first `test` fails. Then stop and ask the user to run `bash $R/engines/face-reels/setup.sh` (about 1 GB: reviewed third-party engines at pinned commits, model weights, the media venv; `--heavy` adds ghost-editor's matte, audio-QA, Mixkit library and pinned HyperFrames, about 4.5 GB more; details in `$A/tools/SETUP.md`). `sh $R/setup.sh` runs it too. Don't run it yourself mid-job. Report anything doctor flags; don't improvise around it. UNVERIFIED: the engine has not been run end to end on a real sample (`$A/tools/SETUP.md`).
 
 ## Run (exact commands)
 
@@ -44,9 +45,9 @@ Its last state (`$A/tools/SETUP.md`, 12 Nov 2026): 20 ok, 2 missing (ffmpeg draw
 test -d "$A/clients/$SLUG" || python3 "$A/tools/new_client.py" "$SLUG" "<kit.json name>"
 ```
 
-Then fill the new client's files **only with facts from `kit.json`** (never from memory, never invented):
+`new_client.py` copies `$A/client-template/` to `$A/clients/$SLUG/` and refuses to overwrite an existing folder. To dry-run without a real client: `cp -R "$A/examples/clients/northline-mortgages" "$A/clients/"` (fictional; its compliance placeholders fail the check on purpose). Then fill the new client's files **only with facts from `kit.json`** (never from memory, never invented):
 
-| FACE_REELS file / field | from kit.json |
+| face-reels client file / field | from kit.json |
 |---|---|
 | `client.json` `display_name`, `people[].name`, `people[].role` (= `agent.title`), `people[].licence_no` (= `agent.licence`), `company.legal_name` (= `brokerage.name`), `company.brokerage_licence_no` (= `brokerage.licence`), `company.jurisdiction` (= `province`), `website`/`phone`/`email` (= `contact`), `languages` | the same fields |
 | `compliance.json` `require_all_strings` | the brokerage name, the brokerage licence and the agent licence strings exactly as in `complianceLine` |
@@ -56,7 +57,7 @@ Then fill the new client's files **only with facts from `kit.json`** (never from
 | `assets/people/<name>.jpg` | `assets.photo` (copy) |
 | `needs_confirmation` | every kit `missing` and `flags` entry |
 
-Missing values stay as the template text, which makes `compliance_check.py` fail: that is correct (FACE_REELS rule 2: no final render until compliance is real). Existing clients: read their files and do not overwrite them; report differences from the kit as `needs_confirmation`.
+Missing values stay as the template text, which makes `compliance_check.py` fail: that is correct (face-reels rule 2: no final render until compliance is real). Existing clients: read their files and do not overwrite them; report differences from the kit as `needs_confirmation`.
 
 ### 1. Reel folder and ingest
 
@@ -71,8 +72,8 @@ Look at the sheet; confirm the person against `$A/clients/$SLUG/assets/people/` 
 ### 2. Transcribe, face, takes
 
 ```sh
-python3 "$S/scripts/transcribe.py" "$RP/assets/talk.mp4" --out "$RP/build/words.whisper.json" --backend mlx --lang en   # fallback: whisper-cli
-python3 "$S/scripts/face_track.py" "$RP/assets/talk.mp4" --out "$RP/build/face.json"
+python3 "$S/scripts/transcribe.py" "$RP/assets/talk.mp4" --out "$RP/build/words.whisper.json" --backend whisper --lang en   # openai-whisper in .venv-media; --backend mlx if mlx-whisper is installed
+"$MPY" "$S/scripts/face_track.py" "$RP/assets/talk.mp4" --out "$RP/build/face.json"
 python3 "$S/scripts/autocut.py" "$RP/assets/talk.mp4" --noise -30        # single clean take: cuts pauses, keeps every word
 ```
 
@@ -91,7 +92,7 @@ node "$S/scripts/build.mjs" "$RP"                                        # -> $R
 python3 "$S/scripts/approval_sheet.py" "$RP"                            # build/approval.html: lint, frames at every cut/beat
 ```
 
-Fix every warning. B-roll: made in code, the client's own footage, or (per `$S/SKILL.md`) Pexels/Wikimedia stock, people-checked; the Studio rule "no stock of people" and the PLAYBOOK "real or licensed photos for any person" apply. **No paid generation:** never call Higgsfield/Magnific (or any paid generator) without the user's explicit yes to that specific spend after a `simulate_cost` check (FACE_REELS rule 4). Gemini steps (B-roll vision checks, `gem_audit.py`, `reference_study.py`) send frames to Google: only with the user's OK.
+Fix every warning. B-roll: made in code, the client's own footage, or (per `$S/SKILL.md`) Pexels/Wikimedia stock, people-checked; the Studio rule "no stock of people" and the PLAYBOOK "real or licensed photos for any person" apply. **No paid generation:** never call Higgsfield/Magnific (or any paid generator) without the user's explicit yes to that specific spend after a `simulate_cost` check (face-reels rule 4). Gemini steps (B-roll vision checks, `gem_audit.py`, `reference_study.py`) send frames to Google: only with the user's OK.
 
 ### 5. Preview, final, QA
 
@@ -100,7 +101,7 @@ F="python3 $S/scripts/finals.py"; RR="--out $RP/finals --code <code> --style '<s
 eval $F preview "$RP" $RR       # 720x1280 preview -> Studio Gate 2 (WAIT for the user's OK)
 eval $F render  "$RP" $RR       # delivery master
 eval $F qa      "$RP" $RR       # render_report.py + broll_qa.py
-python3 "$A/tools/compliance_check.py" "$SLUG" "$RP/build"
+python3 "$A/tools/compliance_check.py" "$SLUG" "$RP/build"            # reels built with the engine's own overlay tools: run tools/onscreen_text.py first and pass build/onscreen_text.txt
 python3 "$S/scripts/qa.py" "$RP" "$RP/build/reel.mp4"
 ```
 
@@ -114,13 +115,13 @@ ffmpeg -nostdin -v error -y -i "$O/<name>.mp4" -frames:v 1 -q:v 2 "$O/poster.jpg
 cp "$RP/build/contact.jpg" "$J/qa/contact.jpg" 2>/dev/null; cp "$RP/finals/"*.qa.json "$J/qa/" 2>/dev/null
 ```
 
-Do not use `finals.py deliver` (it moves files into a content library with trackers); Studio collects into `$O`. Close out in FACE_REELS: append to `$A/clients/$SLUG/learnings.md`, list open confirmations in `client.json`.
+Do not use `finals.py deliver` (it moves files into a content library with trackers); Studio collects into `$O`. Close out in face-reels: append to `$A/clients/$SLUG/learnings.md`, list open confirmations in `client.json`.
 
 ## Branding
 
-- FACE_REELS' compliance gate wants the `require_disclaimer` text on screen with `min_end_card_seconds` (3 s). Studio default: no end card unless the kit says so, so put the compliance line inside the safe zone on the **payoff/closing beat**, held ≥ 3 s, ≥ 24 px (`min_disclaimer_px_at_1080w`), and in caption lines 1–2. That satisfies `compliance_check.py` (it checks the source text) without an outro card.
-- Footer/outro image: only where a kit rule asks (e.g. "Always use Jim's Outro for Reels"): then it is the end card.
-- Logo, colours, fonts: from `brand/brand.json` (filled from the kit); never another client's assets (FACE_REELS rule 1).
+- The face-reels compliance gate wants the `require_disclaimer` text on screen with `min_end_card_seconds` (3 s). Studio default: no end card unless the kit says so, so put the compliance line inside the safe zone on the **payoff/closing beat**, held ≥ 3 s, ≥ 24 px (`min_disclaimer_px_at_1080w`), and in caption lines 1–2. That satisfies `compliance_check.py` (it checks the source text) without an outro card.
+- Footer/outro image: only where a kit rule asks (e.g. "always use the outro for reels"): then it is the end card.
+- Logo, colours, fonts: from `brand/brand.json` (filled from the kit); never another client's assets (face-reels rule 1).
 - Nothing on screen the speaker did not say; charts without client data say ILLUSTRATION.
 
 ## Outputs to collect
@@ -152,35 +153,35 @@ Studio adds: `deliver.sh` (AAC 128k, −14 LUFS, TP < −1 dBTP; ghost-editor ta
 - `finals.py render` output carries AAC 256k: always run `deliver.sh`.
 - Mixkit music beds are in the library; Studio's music policy is an original score (`voice-music.md`), so use Mixkit SFX only and ask before using a Mixkit music bed.
 - Noncommercial vendored repos (onetake, SeeCut, Agent Motion): ideas only, never code in client work.
-- Don't `git pull` vendored engines; don't run installers not listed in `$A/tools/SETUP.md`.
+- Don't `git pull` vendored engines (`setup.sh` pins reviewed commits, `$A/docs/VENDOR.md`); don't run installers not listed in `$A/tools/SETUP.md`.
 
 ## Picking a style against the client's history
 
-ghost-editor styles live in `$S/styles/` and `$S/references/styles.md` (plus saved styles via `save_style.py`). Check `$R/kits/$SLUG/history.json`, the client's `learnings.md` and `$R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine face-reels` (UNVERIFIED: tool being built). Don't repeat the last reel's style or element families back to back; keep the caption position constant across the client's series.
+ghost-editor styles live in `$S/styles/` and `$S/references/styles.md` (plus saved styles via `save_style.py`). Check `$R/kits/$SLUG/history.json`, the client's `learnings.md` and `$R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine face-reels` (its style suggestions are films styles; use only its conflicts and the client's recent pieces here). Don't repeat the last reel's style or element families back to back; keep the caption position constant across the client's series.
 
-## Status (19 Nov 2026)
+## Status (26 Nov 2026, new repository layout)
 
-Dry run, read-only: `bash $R/engines/face-reels/vendor/ghost-editor/scripts/doctor.sh` (exit 0, nothing installed or written). Result: **20 ok, 2 missing**, same two as the 12 Nov SETUP.md run. Neither is on this adapter's path (Studio's gate and `hyperframes.md` captions use whisper.cpp, not ghost-editor's `whisper`), but both would block ghost-editor features that use them.
+In the repo (`$A`): `CLAUDE.md`, `README.md`, `setup.sh`, `client-template/`, `examples/clients/northline-mortgages/` (fictional), `templates/overlay-starter.html`, `tools/` (`new_client.py`, `compliance_check.py`, `onscreen_text.py`, `plan_cut.py`, `build_base.py`, `face_data.py`, `render_overlay.py`, `mix_sound.py`, `compose.py`, `SETUP.md`…), `references/`, `library/`, `docs/VENDOR.md`. Not in git, created by `bash $A/setup.sh`: `vendor/` (ghost-editor and the other reviewed engines), `tools/models/` (`ggml-small.en-q5_1.bin`, `face_landmarker.task`, selfie segmenters), `.venv-media/` (numpy, OpenCV, MediaPipe, SciPy, Pillow, Playwright + Chromium, openai-whisper), `.claude/skills/` links, and `clients/`. On this checkout setup has not been run yet, so every `$S/...` command above is UNVERIFIED on the new layout.
 
-Installed and working: ffmpeg 9.0.2 (libvpx yes) · node v25.5.0 · HyperFrames 0.8.159 (pinned) · yt-dlp 2026.10.26 · python numpy/opencv/google-genai/pillow (via `~/.venvs/media`) · `GEMINI_API_KEY` (one live test call passed) · Paper Shaders · 48 animated emoji · BiRefNet matte · audio-QA venv (`~/.venvs/ghost-audioqa`, `ghost-matte`) · Seoul list fonts/emoji/send sound · 78 SFX files · music beds. Models in `tools/models`: `ggml-small.en-q5_1.bin`, `face_landmarker.task`, selfie segmenter. `whisper-cli` (whisper.cpp) is at `/opt/homebrew/bin/whisper-cli`. Clients folder has only `_template` and `example-group` (no `jordan-lee` folder yet; `new_client.py` makes one from kit facts).
-
-Missing:
-- **ffmpeg libass** (also no `drawtext` filter): burned-in ASS/subtitle and `drawtext` paths fail. Use HyperFrames captions instead until fixed.
-- **`whisper` CLI** (openai-whisper): ghost-editor scripts that call `whisper` fail. whisper.cpp is a different binary and does not satisfy the check.
+Last doctor run on the old machine (19 Nov 2026): **20 ok, 2 missing**, neither on this adapter's path (Studio's gate and `hyperframes.md` captions use whisper.cpp, not ghost-editor's `whisper`):
+- **ffmpeg libass** (also no `drawtext` filter): burned-in ASS/subtitle and `drawtext` paths fail. Use HyperFrames captions instead until fixed (`$A/tools/SETUP.md`: text is rendered in Chromium, so this does not matter for the engine's own tools).
+- **`whisper` CLI** (openai-whisper): `setup.sh` now installs openai-whisper into `.venv-media`, which should clear it; re-check with doctor.
 
 Warnings and optional (not blocking):
 - x264 threads not pinned in 4 spots in the vendored `recipes/seoul-list/seoul.py` (lines 87, 241) and `scripts/open_pause.py` (163, 182): renders there give different bytes per Mac; harmless for delivery. Vendor code is never edited.
-- Not set up: `ELEVENLABS_API_KEY` (only `tts_elevenlabs.py`), DeepFilterNet (`denoise.sh` installs on first use, needs python3.11 + uv), film-look LUTs, caption-metrics venv, memes pack, no second machine recorded.
+- Not set up by default: `ELEVENLABS_API_KEY` (only `tts_elevenlabs.py`), DeepFilterNet (`denoise.sh` installs on first use, needs python3.11 + uv), film-look LUTs, caption-metrics venv, memes pack, the `--heavy` extras (BiRefNet matte, audio-QA venv, Mixkit library, pinned HyperFrames).
+- `GEMINI_API_KEY`: only with the user's OK (frames leave the machine).
 
-Still UNVERIFIED: the pipeline has not been run end to end on a real clip (no sample footage is on disk), so "doctor ok" means the toolchain is present, not that a reel renders.
+Still UNVERIFIED: the pipeline has not been run end to end on a real clip, so "doctor ok" means the tools are installed, not that a reel renders.
 
-Commands the user would run (nothing was run; each changes the machine, so say yes first):
+Commands the user would run (each changes the machine, so say yes first):
 ```sh
-brew reinstall ffmpeg                      # restores libass; Homebrew's default build has it. If the tap build lacks it: brew install ffmpeg-full
-~/.venvs/media/bin/pip install openai-whisper   # or: export WHISPER=/path/to/whisper (doctor accepts an override)
+bash $R/engines/face-reels/setup.sh                                         # core install (about 1 GB)
+bash $R/engines/face-reels/setup.sh --heavy                                 # optional extras (about 4.5 GB more)
+brew reinstall ffmpeg                      # only if ffmpeg will not start; for libass, if the tap build lacks it: brew install ffmpeg-full
 bash $R/engines/face-reels/vendor/ghost-editor/scripts/setup_looks.sh      # only for look.film
 bash $R/engines/face-reels/vendor/ghost-editor/scripts/setup_captions.sh   # only to add caption fonts
 echo 'ELEVENLABS_API_KEY=...' >> $R/engines/face-reels/vendor/ghost-editor/.env   # only if explainer VO is wanted
-bash $R/engines/face-reels/vendor/ghost-editor/scripts/doctor.sh           # re-run: expect 22 ok
+MEDIA_PY=$R/engines/face-reels/.venv-media/bin/python bash $R/engines/face-reels/vendor/ghost-editor/scripts/doctor.sh   # re-run
 ```
 Caution: `brew reinstall ffmpeg` replaces the ffmpeg Studio's `deliver.sh` relies on (`aac_at`, loudnorm, alimiter); re-run `deliver.sh` on one reel afterwards and check the audio is still 128 kbps CBR.

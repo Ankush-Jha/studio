@@ -58,3 +58,5 @@ engines/motion/tokens/clients/
 engines/face-reels/clients/
 engines/face-reels/.venv-media/
 engines/face-reels/.claude/skills/
+/engines/face-reels/clients
+/engines/face-reels/inbox

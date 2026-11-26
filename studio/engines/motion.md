@@ -1,15 +1,16 @@
 # Engine: motion (data-driven short loops)
 
-Template reels in `engines/motion/`: a data file (one idea, checked maths, per-client copy) + a template + a client produce an Instagram-ready MP4, poster, frame strip and manifest. GSAP timeline in headless Chromium, ffmpeg encode, synthesized SFX. It was paused on 16 Nov 2026 ("reels strictly with Studio Films"); the user has since allowed every installed engine, so it is back in use for short loops and GIFs. Don't extend the original folder.
+Template reels in `$R/engines/motion/` (docs: `$R/engines/motion/README.md`, `DECISION.md`; skill: `$R/.claude/skills/motion/SKILL.md`): a data file (one idea, checked maths, per-client copy) + a template + a client produce an Instagram-ready MP4, poster, frame strip and manifest. GSAP timeline in headless Chromium, ffmpeg encode, synthesized SFX. It was paused on 16 Nov 2026 ("reels strictly with Studio Films"); the user has since allowed every installed engine, so it is back in use for short loops and GIFs. Don't extend the original folder.
 
-The renderer writes `.work/`, `.cache/` and (by default) `out/` inside its own folder and reads client tokens from `../statics/tokens/clients/`, so Studio always runs it from the job's **shadow copy** (`bin/shadow.sh`), never from `graphic reels/`.
+The renderer writes `.work/`, `.cache/` and (by default) `out/` inside its own folder and reads client tokens, fonts and maths from the sibling stills engine (`../stills/`, or `$STUDIO_STILLS`), so Studio always runs it from the job's **shadow copy** (`bin/shadow.sh` makes `$P/engines/motion` next to `$P/engines/stills`), never from `$R/engines/motion` (read-only).
 
 ```sh
 R=$(git rev-parse --show-toplevel)
 J=$R/jobs/<id>; P=$J/project; O=$J/out
 SLUG=<client slug>
 M=$P/engines/motion          # shadow motion (renderer)
-ST=$P/engines/stills        # shadow statics (tokens, fonts, maths it imports)
+ST=$P/engines/stills         # shadow stills (tokens, fonts, maths it imports)
+export STUDIO_FILMS=$R/engines/films   # only for --engine films: the shadow has no films sibling
 ```
 
 ## Best for
@@ -27,7 +28,7 @@ ST=$P/engines/stills        # shadow statics (tokens, fonts, maths it imports)
 | `phone-pov` | 1080×1920 | 12–15 s loop | generic bank app on a CSS-3D phone (generic only, never a real bank) |
 | `object-3d` | 1080×1920 | 12–15 s loop | three.js; ~5 min per final render |
 | `kinetic-hook` | 1080×1920 | 6–12 s loop | quiet accounts, uses the `kinetic` block |
-| `oc-game-show`, `oc-pop-art`, `oc-thermal` | 1080×1920 | – | UNVERIFIED: present in `templates/` but not in the README table; `oc-thermal` has no `timeline.js` |
+| `film-game-show`, `film-pop-art`, `film-thermal` | 1080×1920 | – | Studio Films styles (Rhythm Game Show, Pop Art, Thermal Camera) as data-driven templates (README "Renderer CLI"); UNVERIFIED: not test-rendered by Studio; `film-thermal` has no `timeline.js` |
 
 All at 30 fps; safe zone x 65–1015, y 270–1248; poster headline in the 3:4 band. GIF: 540 px wide, 15 fps by default (`--gif-width`, `--gif-fps`).
 
@@ -42,8 +43,10 @@ All at 30 fps; safe zone x 65–1015, y 270–1248; poster headline in the 3:4 b
 ```sh
 cd "$R/engines/motion" && node --version && test -d node_modules/playwright-core \
  && test -d node_modules/gsap && test -f vendor/three.iife.js && ls ~/Library/Caches/ms-playwright | grep -q chromium_headless_shell-1243 \
- && ffmpeg -version | head -1 && echo "motion ready"
+ && test -f ../stills/lib/mortgage.mjs && ffmpeg -version | head -1 && echo "motion ready"
 ```
+
+If it fails on a fresh clone: `sh $R/setup.sh --no-engines` (runs `npm ci` + `npm run setup` in `engines/motion` and `engines/stills`), or `cd $R/engines/motion && npm ci && npm run setup`. playwright-core 1.63 uses `chromium_headless_shell-1243`.
 
 ## Run (exact commands)
 
@@ -87,19 +90,19 @@ Flags (from `render.mjs`):
 | `--silent` | no SFX |
 | `--alpha` | also `<out>.alpha.mov` (ProRes 4444, transparent) to overlay on client footage |
 | `--guides` | draw the safe zone (review renders only) |
-| `--workers N`, `--scale N`, `--group N`, `--keep`, `--no-strip`, `--engine films` | capture workers, supersample, family override, keep `.work`, skip strip, capture with Studio Films tools |
+| `--workers N`, `--scale N`, `--group N`, `--keep`, `--no-strip`, `--engine films` | capture workers, supersample, family override, keep `.work`, skip strip, capture with Studio Films tools (`$R/engines/films/core/render`; needs `STUDIO_FILMS` from the shadow) |
 
 `deliver.sh` is required: verified 19 Nov 2026, the motion MP4 measured −14.4 LUFS but a true peak of **+2.1 dBTP** (its SFX bus), which fails the PLAYBOOK; `deliver.sh` brought it to −14.0 LUFS / −1.5 dBTP with AAC 128k, video copied.
 
 ### Test render (19 Nov 2026)
 
-`pop-hook` + `heloc-paul.json` for `northline-mortgages` (test kit), draft + `--gif`, from the shadow copy: 448 frames, 5 workers, **27.9 s** total; H.264 High yuv420p BT.709 tv 30/1, 14.93 s, 0 QA issues, seam check done; outputs `.mp4`, `.gif` (2.3 MB), `.poster.jpg`, `.strip.jpg`, `_frames/`, `.manifest.json`. The compliance line came from the shadow token (`SAM RIVERA, LICENSED MORTGAGE BROKER · [BROKERAGE NAME] · LIC. #[LICENCE]`). Warnings it printed: "stack scene: paid row is close to the foot", "read: fix: chip 0.33 s/word". Nothing was written inside `graphic reels/`.
+`pop-hook` + `heloc-paul.json` for `northline-mortgages` (test kit), draft + `--gif`, from the shadow copy: 448 frames, 5 workers, **27.9 s** total; H.264 High yuv420p BT.709 tv 30/1, 14.93 s, 0 QA issues, seam check done; outputs `.mp4`, `.gif` (2.3 MB), `.poster.jpg`, `.strip.jpg`, `_frames/`, `.manifest.json`. The compliance line came from the shadow token (`SAM RIVERA, LICENSED MORTGAGE BROKER · [BROKERAGE NAME] · LIC. #[LICENCE]`). Warnings it printed: "stack scene: paid row is close to the foot", "read: fix: chip 0.33 s/word". Nothing was written inside the engine folder. Re-verified 26 Nov 2026 on the new layout: `kinetic-hook` draft from `$P/engines/motion` with the example token, 370 frames in 21.4 s, 0 QA issues, seam identical.
 
 ## Branding
 
 - Every template draws a label row, the compliance line (from the shadow token: agent name, title, brokerage, licence) and the assumptions line inside the safe zone on every frame. The full `kit.complianceLine` (with the agent licence) goes into caption lines 1–2.
 - Footer/outro image: only where a kit rule asks; append it after the loop with ffmpeg (it breaks the loop, so say so at Gate 2).
-- Colours: client accent from the shadow token; group family type from `statics/tokens/group-N.json`.
+- Colours: client accent from the shadow token; group family type from `$ST/tokens/group-N.json`.
 - AI label when `--voice` is TTS.
 
 ## Outputs to collect
@@ -130,7 +133,8 @@ Studio adds: true-peak/loudness fix (`deliver.sh`), originality across clients (
 
 ## Pitfalls
 
-- Running `render.mjs` in the original folder writes `.work/`, `.cache/` and `out/` into `graphic reels/` (forbidden). Always `cd "$M"` (shadow).
+- Running `render.mjs` in the original folder writes `.work/`, `.cache/` and `out/` into `$R/engines/motion` (read-only for Studio). Always `cd "$M"` (shadow).
+- `--engine films` from the shadow fails with "Studio Films not found" unless `STUDIO_FILMS=$R/engines/films` is exported (variables block above).
 - The data file's `series`, `tag` and stamp text are on screen: rewrite them per client (the model file says Toronto).
 - `--strict` exits 2 while `apr` is `null` on an Ontario rate post: get the APR wording from the brokerage or drop the rate.
 - `--alpha` and `--gif` are not available with `--engine films`.
@@ -139,4 +143,4 @@ Studio adds: true-peak/loudness fix (`deliver.sh`), originality across clients (
 
 ## Picking a style against the client's history
 
-Templates are the "styles". Check `history.json` and run `$R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine motion` (UNVERIFIED: tool being built). Rotate templates per account (never the same template twice in a row); within one template, change the hook, numbers and stamp per client; `kinetic-hook` for quieter accounts and series, `pop-hook` for thumb-stop trial reels, `phone-pov` for "look at this notification/letter" ideas, `object-3d` when the idea is a physical stack.
+Templates are the "styles". Check `history.json` and run `$R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine motion` (prints JSON conflicts and suggestions; it suggests films and stills styles only, so pick the template by hand from the rules below). Rotate templates per account (never the same template twice in a row); within one template, change the hook, numbers and stamp per client; `kinetic-hook` for quieter accounts and series, `pop-hook` for thumb-stop trial reels, `phone-pov` for "look at this notification/letter" ideas, `object-3d` when the idea is a physical stack.

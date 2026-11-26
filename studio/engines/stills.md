@@ -1,20 +1,20 @@
 # Engine: stills (code-rendered statics, carousels, covers)
 
-The agency's eleven-style still library in `engines/stills/` (skill: `engines/stills/`). Every word, number and licence line is live type; every chart is computed by `lib/calc.mjs`; rendered in headless Chromium at 2× and finished to sRGB JPEG.
+The agency's eleven-style still library in `$R/engines/stills/` (skill: `$R/.claude/skills/stills/SKILL.md`). Every word, number and licence line is live type; every chart is computed by `lib/calc.mjs`; rendered in headless Chromium at 2× and finished to sRGB JPEG.
 
-`graphic reels/` is read-only for Studio. The renderer reads client tokens, the roster and client photos **only from its own folder** (`tokens/clients/<id>.json`, `library/roster.json`, `assets/clients/<id>/`; there is no CLI flag or environment variable to point it elsewhere). So every job renders from a **private shadow copy** of the statics code inside the job, with the client's tokens written there from the kit. No statics code is modified.
+`$R/engines/` is read-only for Studio (the guard hook blocks writes). The renderer reads client tokens, the roster and client photos **only from its own folder** (`tokens/clients/<id>.json`, `library/roster.json`, `assets/clients/<id>/`; there is no CLI flag or environment variable to point it elsewhere). So every job renders from a **private shadow copy** of the stills code inside the job (`$P/engines/stills`), with the client's tokens written there from the kit. No stills code is modified.
 
 ```sh
 R=$(git rev-parse --show-toplevel)
 J=$R/jobs/<id>; P=$J/project; O=$J/out
 SLUG=<client slug>
 ST=$P/engines/stills            # the shadow copy (made in Run step 1)
-SRC="$R/engines/stills"   # read-only original
-export SHARP_DIR="$R/graphic reels/content-desk/toolchain/node_modules"   # sharp for JPEG finish + pixel contrast
-export STATICS_PYTHON=$R/engines/films/.venv/bin/python     # has Pillow, numpy, fontTools (gate)
+SRC=$R/engines/stills           # read-only original
+export STATICS_PYTHON=$R/engines/stills/.venv/bin/python    # Pillow, numpy, fontTools (JPEG fallback, gate)
+# sharp + playwright-core: the shadow's node_modules is a symlink to $R/engines/stills/node_modules (no env var needed)
 ```
 
-Read before writing copy: `engines/stills/SKILL.md`, `STYLES.md`, `QA.md`, `AUTHORING.md` (slide vocabulary, calc kinds, markup), the chosen `styles/<slug>/STYLE.md`, and `engines/stills/research/visual_brief_for_stills.md`.
+Read before writing copy: `$R/.claude/skills/stills/SKILL.md`, `$SRC/STYLES.md`, `$SRC/QA.md`, `$SRC/AUTHORING.md` (slide vocabulary, calc kinds, markup), the chosen `$SRC/library/<slug>/STYLE.md`, and `$SRC/docs/research/visual_brief_for_stills.md`.
 
 ## Best for
 
@@ -43,12 +43,12 @@ Output JPEGs: sRGB, q92, 4:4:4, from 2× PNG masters.
 
 ```sh
 cd "$R/engines/stills" && node --version \
- && test -f $R/engines/films/node_modules/playwright-core/index.js \
- && test -d "$R/graphic reels/content-desk/toolchain/node_modules/sharp" \
- && $R/engines/films/.venv/bin/python -c "import PIL, numpy, fontTools; print('stills ready')"
+ && test -f node_modules/playwright-core/index.js && test -d node_modules/sharp \
+ && ls ~/Library/Caches/ms-playwright | grep -q chromium_headless_shell \
+ && .venv/bin/python -c "import PIL, numpy, fontTools; print('stills ready')"
 ```
 
-(The renderer finds Playwright in `$R/engines/films/node_modules`; verified 19 Nov 2026.)
+The renderer finds playwright-core and sharp in its own `node_modules` (in the shadow: the symlink `shadow.sh` makes). If the check fails, install (fresh clone): `sh $R/setup.sh --no-engines` (runs `npm ci` + `npm run setup` in `engines/stills` and builds `engines/stills/.venv` from `requirements.txt`), or by hand: `cd $R/engines/stills && npm ci && npm run setup && uv venv .venv && uv pip install --python .venv/bin/python -r requirements.txt`.
 
 ## Run (exact commands)
 
@@ -59,13 +59,13 @@ sh $R/studio/engines/bin/shadow.sh "$P"
 CID=$($R/studio/.venv/bin/python $R/studio/engines/bin/kit_tokens.py $R/kits/$SLUG "$ST"); echo "client id: $CID"
 ```
 
-- `shadow.sh` copies statics (≈ 14 MB, no `out/`, no `node_modules`) and motion into `$P/content-desk/` (motion's `node_modules` and `seed/` are read-only symlinks). Re-running refreshes code and keeps the tokens you wrote.
-- `kit_tokens.py` writes `$ST/tokens/clients/<CID>.json`: compliance `agentName`, `title`, `brokerage`, `licence` (leading `#` stripped, the renderer prints `LIC. #…`) **only from kit.json**, accent from `kits/<slug>/tokens.json`, and the kit photo as slot `portrait` only if its short side is ≥ 600 px. `CID` is the existing token id among the slug and its aliases (e.g. `harbour-lending` → `harbour`), so the roster's primary/secondary style still resolves. Empty kit fields stay empty: renders show the red placeholder and `--strict` refuses.
-- Verified 19 Nov 2026 with a test kit for `northline-mortgages`: the shadow render printed `[BROKERAGE NAME] · LIC. #[LICENCE]` and passed `--strict`. Sam Rivera's kit photo is 176×195 px, so it was correctly not registered.
+- `shadow.sh` copies stills (≈ 14 MB, no `out/`, `node_modules` or `.venv`) and motion into `$P/engines/{stills,motion}`; each copy's `node_modules` is a symlink to the engine's own (read-only). Re-running refreshes code and keeps the tokens you wrote.
+- `kit_tokens.py` writes `$ST/tokens/clients/<CID>.json`: compliance `agentName`, `title`, `brokerage`, `licence` (leading `#` stripped, the renderer prints `LIC. #…`) **only from kit.json**, accent from `kits/<slug>/tokens.json`, and the kit photo as slot `portrait` only if its short side is ≥ 600 px. `CID` is the existing token id among the slug and its aliases (e.g. a kit `northline-mortgages` with alias `northline` resolves to whichever of `northline-mortgages.json` / `northline.json` exists in `$ST/tokens/clients/`), so the roster's primary/secondary style still resolves. Empty kit fields stay empty: renders show the red placeholder and `--strict` refuses.
+- Verified 19 Nov 2026 with a test kit for `northline-mortgages`: the shadow render printed `[BROKERAGE NAME] · LIC. #[LICENCE]` and passed `--strict`. Sam Rivera's kit photo is 176×195 px, so it was correctly not registered. Re-verified 26 Nov 2026 on the new layout with the example kit `$R/examples/kits/northline-mortgages` (`CID` = `northline-mortgages`).
 
 ### 2. Write the spec
 
-`$P/spec.json` (any location works: fonts and assets resolve from the renderer's own folder, verified by rendering `heloc-paul.json` from a job folder). Required: `engine: "library"`, `id` (`[a-z0-9-]`), `title`, `group` (kit group), `series`, `date`, `reviewBy` for rate premises, `sources` (one per fact), `slides`, `caption`. Per-client copy in `byClient.<CID>` (≥ 2 profile facts per client). A client photo goes in with `"photo": "portrait"` on the slide (only styles `magazine`, `annotated` and `cover` slots use photos).
+`$P/spec.json` (any location works: fonts and assets resolve from the renderer's own folder, verified by rendering `heloc-paul.json` and `dec9-variable.json` from a job folder; models in `$SRC/specs/library/`). Required: `engine: "library"`, `id` (`[a-z0-9-]`), `title`, `group` (kit group), `series`, `date`, `reviewBy` for rate premises, `sources` (one per fact), `slides`, `caption`. Per-client copy in `byClient.<CID>` (≥ 2 profile facts per client). A client photo goes in with `"photo": "portrait"` on the slide (only styles `magazine`, `annotated` and `cover` slots use photos).
 
 ### 3. Render
 
@@ -82,18 +82,18 @@ cd "$ST" && node render.mjs "$P/spec.json" --client $CID --style <slug> --format
 ### 4. Gate (QA + near-duplicates against the agency's history)
 
 ```sh
-rsync -a --include '*/' --include '[0-9][0-9].jpg' --exclude '*' "$SRC/out/" "$ST/out/_agency/"    # ≈ 56 MB, past posts for the near-dup check
+[ -d "$SRC/out" ] && rsync -a --include '*/' --include '[0-9][0-9].jpg' --exclude '*' "$SRC/out/" "$ST/out/_agency/"    # past renders for the near-dup check (empty on a fresh clone)
 cd "$ST" && node tools/qa-gate.mjs --strict --json "$J/qa/stills-gate.json" > "$J/qa/stills-gate.txt"; echo "gate exit $?"
 cd "$ST" && "$STATICS_PYTHON" tools/neardup.py "$ST/out" --json "$J/qa/neardup.json"
 $R/studio/.venv/bin/python -c "import json; d=json.load(open('$J/qa/neardup.json')); bad=[f for f in d['fails'] if not (f['a'].startswith('_agency/') and f['b'].startswith('_agency/'))]; print(len(bad),'near-dup fails involving this job'); [print(' ',f['a'],'~',f['b'],f['dhash'],f['phash']) for f in bad]"
 ```
 
-- The gate exits 1 today because the agency's existing renders already contain 40 near-duplicate pairs among themselves (verified 19 Nov 2026). Judge only pairs that involve this job's folders (the third command). Glyph coverage and maths re-check need `STATICS_PYTHON` set (otherwise they are skipped with a warning).
+- The gate can exit 1 because the renders already in `$SRC/out` contain near-duplicate pairs among themselves (40 pairs on 19 Nov 2026; on a fresh clone `$SRC/out` is empty or holds only example proofs, so Studio's own near-dup check against `$R/library/` in the QA gate covers the agency's history). Judge only pairs that involve this job's folders (the fourth command). Glyph coverage and maths re-check need `STATICS_PYTHON` set (otherwise they are skipped with a warning).
 - Then the human pass from `QA.md`: Read `contact.jpg` and every `NN.jpg` at full size; slide 1 at 260 px wide and as the 3:4 grid crop.
 
 ### 5. Footer band (statics carry the client's 1080-px footer at the bottom)
 
-**Default (since 19 Nov 2026, proven on the Sam Rivera renewal carousel): render the feed at full height with a footer reserve.** `shadow.sh` applies `studio/engines/patches/stills-reserve.patch` to the job-local copy, which adds `--reserve <px>` (and `--css <file>`) to render.mjs. The style then lays out in the whole height above the footer, so there is no dead band.
+**Default (since 19 Nov 2026, proven on the Sam Rivera renewal carousel): render the feed at full height with a footer reserve.** `render.mjs` has `--reserve <px>` (and `--css <file>`) built in (`$SRC/README.md`, "Footer bands"), so no patch is needed. The style then lays out in the whole height above the footer, so there is no dead band.
 
 ```sh
 FOOT="$R/$(python3 -c "import json;print(json.load(open('$R/kits/$SLUG/kit.json'))['assets']['footer'])")"
@@ -110,15 +110,17 @@ $R/studio/.venv/bin/python $R/studio/engines/bin/footer_overlay.py "$ST/out/<id>
 $R/studio/.venv/bin/python $R/studio/engines/bin/footer_compose.py "$ST/out/<id>--<slug>--square/$CID" "$R/$(python3 -c "import json;print(json.load(open('$R/kits/$SLUG/kit.json'))['assets']['footer'])")" "$O/carousel"
 ```
 
-Each 1080×1080 slide goes on top, the footer (scaled to 1080 wide, alpha kept) flush to the bottom of a 1080×1350 canvas, the gap filled with the slide's bottom-edge colour. It refuses footers taller than 270 px at 1080 wide. Verified 19 Nov 2026: 7 slides of `heloc-paul` in `broadsheet` for Sam Rivera → 1080×1350 with his 1080×195 footer, no overlap. Kept reference example: `$R/jobs/_adapter-test/out/stills-final/01.jpg`.
+Each 1080×1080 slide goes on top, the footer (scaled to 1080 wide, alpha kept) flush to the bottom of a 1080×1350 canvas, the gap filled with the slide's bottom-edge colour. It refuses footers taller than 270 px at 1080 wide. Verified 19 Nov 2026: 7 slides of `heloc-paul` in `broadsheet` for Sam Rivera → 1080×1350 with his 1080×195 footer, no overlap. Re-verified 26 Nov 2026 (reserve and fallback) from a job shadow with the example kit's 1080×148 footer.
 
 Covers (`story`) get **no** footer (the grid crops to 3:4 and the bottom is under the UI).
 
 ### 6. Collect
 
 ```sh
-mkdir -p "$O/carousel" && cp "$ST/out/<id>--<slug>--story/$CID/01.jpg" "$O/cover.jpg" && cp "$ST/out/<id>--<slug>--square/$CID/contact.jpg" "$J/qa/contact.jpg"
+mkdir -p "$O/carousel" && cp "$ST/out/<id>--<slug>--story/$CID/01.jpg" "$O/cover.jpg" && cp "$ST/out/<id>--<slug>--r$H/$CID/contact.jpg" "$J/qa/contact.jpg"
 ```
+
+(With the fallback footer method, the contact sheet is `"$ST/out/<id>--<slug>--square/$CID/contact.jpg"`.)
 
 Without the footer step, copy `"$ST/out/<id>--<slug>/$CID/"[0-9][0-9].jpg` to `$O/carousel/`.
 
@@ -157,7 +159,7 @@ Studio adds: the footer band present and unobstructed, the caption (line 1 searc
 
 ## Pitfalls
 
-- Running `render.mjs` in `engines/stills` without `--out` writes into `graphic reels/` (forbidden). Always `cd "$ST"` (the shadow).
+- Running `render.mjs` in `$R/engines/stills` without `--out` writes into `$R/engines/stills/out` (engines are read-only for Studio). Always `cd "$ST"` (the shadow).
 - Square layouts are tighter: the `broadsheet` number slide failed `overlap` in square on the first try (verified). Shorten copy; if a slide cannot pass in square, render that slide in `feed` without the footer and list it for Gate 2.
 - `--format` or `--style` forces library mode; legacy specs (no `engine: "library"`) go through the old families, don't use them.
 - French: check glyph coverage (Nanum Pen Script has no accents); the gate catches it only with `STATICS_PYTHON` set.
@@ -168,6 +170,6 @@ Studio adds: the footer band present and unobstructed, the caption (line 1 searc
 ## Picking a style against the client's history
 
 1. Start from `kit.json.stills` (`primary`, `secondary`, `variant`; mirrors `library/roster.json`). Use the primary unless the primary ran on this account last time: then the secondary ("never the same style twice in a row on one account").
-2. Check `history.json` and run `$R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine stills` (UNVERIFIED: tool being built; flags not final).
+2. Check `history.json` and run `$R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine stills` (prints JSON: conflicts with the client's history and up to 15 unused style suggestions; `--list-styles` lists the style folders in `$SRC/library/`).
 3. Check fit in `STYLES.md` "Best for" (e.g. Swiss = payment maths; Paper Trail = documents; Poster Type = hooks/myths; Front Page = news pegs). If the idea fights both of the client's styles, borrow within the group only with `--anyGroup` and check same-city clients, or move the job to `custom-html.md`.
 4. Same idea for several clients in one style: different `variant` (a/b) and different `byClient` copy; the near-dup gate fails twins.

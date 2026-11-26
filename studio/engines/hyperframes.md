@@ -10,9 +10,9 @@ HF="env -u GEMINI_API_KEY npx -y hyperframes@0.8.61"   # pinned version; GEMINI 
 export HYPERFRAMES_NO_TELEMETRY=1 DO_NOT_TRACK=1 HYPERFRAMES_SKIP_SKILLS=1
 ```
 
-**Version pin:** always `hyperframes@0.8.61` (the plugin's skills are 0.8.61; npm's latest was 0.9.70 on 19 Nov 2026). Do not run `upgrade` or `@latest` inside a job; a version bump is a separate, tested change to this adapter. (FACE_REELS' ghost-editor pins its own HyperFrames, 0.8.159, in `vendor/ghost-editor/scripts/HF_VERSION`; leave that alone.)
+**Version pin:** always `hyperframes@0.8.61` (the plugin's skills are 0.8.61; npm's latest was 0.9.70 on 19 Nov 2026). Do not run `upgrade` or `@latest` inside a job; a version bump is a separate, tested change to this adapter. (The face-reels engine's ghost-editor pins its own HyperFrames, 0.8.159, in `$R/engines/face-reels/vendor/ghost-editor/scripts/HF_VERSION` once `setup.sh` has cloned it; leave that alone.)
 
-**Privacy:** telemetry off (env above). `snapshot` sends every captured frame to Google Gemini by default whenever `GEMINI_API_KEY` is set (it is set in this user's shell for FACE_REELS): the `env -u GEMINI_API_KEY` in `$HF` plus `--describe false` stop that (verified 19 Nov 2026). Never run `hyperframes feedback`, `--file-issue`, `publish`, `cloud`, `lambda` or `cloudrun` (they send data or files off the machine) unless the user says yes. Don't use `media-use resolve` for music, images or SFX (HeyGen catalog/stock; needs a HeyGen login; conflicts with the music and no-stock policies).
+**Privacy:** telemetry off (env above). `snapshot` sends every captured frame to Google Gemini by default whenever `GEMINI_API_KEY` is set (it may be set in the user's shell for face-reels): the `env -u GEMINI_API_KEY` in `$HF` plus `--describe false` stop that (verified 19 Nov 2026). Never run `hyperframes feedback`, `--file-issue`, `publish`, `cloud`, `lambda` or `cloudrun` (they send data or files off the machine) unless the user says yes. Don't use `media-use resolve` for music, images or SFX (HeyGen catalog/stock; needs a HeyGen login; conflicts with the music and no-stock policies).
 
 ## Best for
 
@@ -39,13 +39,14 @@ Reel text safe zone: x 65–1015, y 270–1248.
 - Concept + copy (`script.json`), maths with working.
 - Kit: `kit.json` (`complianceLine`, `assets.logos`, `assets.footer`, `rules`), `tokens.json` (colours, `font.display`, `font.body`).
 - Font files (OFL) to copy into the project: from `$R/engines/stills/fonts/` (read-only source).
-- GSAP copied locally: `$R/graphic reels/content-desk/toolchain/node_modules/gsap/dist/gsap.min.js` (the scaffold links GSAP from jsDelivr; local is deterministic and offline).
+- GSAP copied locally: `$R/engines/motion/node_modules/gsap/dist/gsap.min.js` (GSAP 3.15, installed with Studio Motion by `sh $R/setup.sh`; the scaffold links GSAP from jsDelivr; local is deterministic and offline).
 - Audio: a voice WAV and/or original score WAV (`voice-music.md`), or client footage (absolute path).
 
 ## Setup check (exact command)
 
 ```sh
-cd /tmp && HYPERFRAMES_NO_TELEMETRY=1 DO_NOT_TRACK=1 npx -y hyperframes@0.8.61 --version && node --version && ffmpeg -version | head -1
+cd /tmp && HYPERFRAMES_NO_TELEMETRY=1 DO_NOT_TRACK=1 npx -y hyperframes@0.8.61 --version && node --version && ffmpeg -version | head -1 \
+ && test -f "$R/engines/motion/node_modules/gsap/dist/gsap.min.js" && test -d "$R/engines/stills/fonts" && echo "hyperframes ready"
 ```
 
 Verified 19 Nov 2026: `0.8.61`, Node v25.5.0 (HyperFrames needs ≥ 22; 25 is newer than its tested range), ffmpeg 9.0.2. `doctor --json` reports `ok: false` on this machine only because of optional parts (Version: not the latest release; Kokoro TTS; MusicGen BGM; Docker): not a blocker for local renders (verified 19 Nov 2026).
@@ -57,7 +58,7 @@ Verified 19 Nov 2026: `0.8.61`, Node v25.5.0 (HyperFrames needs ≥ 22; 25 is ne
 ```sh
 mkdir -p "$P" "$O" && cd "$P" && $HF init hf --resolution portrait --non-interactive
 mkdir -p "$H/assets/fonts" "$H/assets/brand" "$H/vendor"
-cp "$R/graphic reels/content-desk/toolchain/node_modules/gsap/dist/gsap.min.js" "$H/vendor/gsap.min.js"
+cp "$R/engines/motion/node_modules/gsap/dist/gsap.min.js" "$H/vendor/gsap.min.js"
 cp "$R/engines/stills/fonts/<Family>[wght].ttf" "$H/assets/fonts/<Family>.ttf"   # each family used
 cp "$R/<kit.assets.logos[0]>" "$H/assets/brand/logo.png"                                        # only if a logo is used
 ```
@@ -144,4 +145,4 @@ Studio adds: PLAYBOOK safe zone (HyperFrames checks overflow, not Instagram's UI
 
 ## Picking a style against the client's history
 
-HyperFrames has no fixed style list: the look is the composition plus catalog primitives and the 35 caption identities (`/embedded-captions`). Record the primitive/identity names as the card's `style`. Check `history.json` and run `$R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine hyperframes` (UNVERIFIED: tool being built); don't repeat the caption identity or motion primitive this client used last; keep one caption position and one number-reveal method per client series (PLAYBOOK brand consistency).
+HyperFrames has no fixed style list: the look is the composition plus catalog primitives and the 35 caption identities (`/embedded-captions`). Record the primitive/identity names as the card's `style`. Check `history.json` and run `$R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine hyperframes` (its style suggestions are films styles; use only its conflicts and the client's recent pieces here); don't repeat the caption identity or motion primitive this client used last; keep one caption position and one number-reveal method per client series (PLAYBOOK brand consistency).

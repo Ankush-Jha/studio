@@ -6,7 +6,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const R = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+// Repo root: $STUDIO_ROOT, else the first folder above this file that holds studio/lib (jobs/ may be a symlink into
+// private/, so a fixed '../../..' would land in private/ instead of the repo root).
+const findRoot = (d) => fs.existsSync(path.join(d, 'studio', 'lib', 'package.json')) ? d : (path.dirname(d) === d ? null : findRoot(path.dirname(d)));
+const R = process.env.STUDIO_ROOT || findRoot(path.dirname(fileURLToPath(import.meta.url)));
+if (!R) throw new Error('Studio repo root not found above this file: set STUDIO_ROOT=<repo root>');
 const LIB = path.join(R, 'studio', 'lib');
 const { chromium } = createRequire(`${LIB}/package.json`)('playwright-core');
 const sharp = createRequire(`${LIB}/package.json`)('sharp');

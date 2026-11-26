@@ -1,6 +1,6 @@
 # Engine: films (Studio Films film styles)
 
-Graphic reels made entirely in code in one of the 99 Studio Films styles: a page with `render(t)`, Kokoro voice, an original synthesized score, procedural foley, rendered frame by frame in headless Chrome and mastered with ffmpeg. This is the house engine for graphic reels (`heloc-five-years`, `keep-your-rate`, `heloc-rules`, `mortgage-insurance`, `heloc-piggy-bank` and `portfolio-failing` were all made with it).
+Graphic reels made entirely in code in one of the 98 Studio Films styles (`$R/engines/films`, renamed from its upstream library; its code is unchanged and still reads `LEMO_*` environment variables such as `LEMO_COLOR` and `LEMO_ANGLE`): a page with `render(t)`, Kokoro voice, an original synthesized score, procedural foley, rendered frame by frame in headless Chrome and mastered with ffmpeg. This is the house engine for the graphic-reel format (`heloc-five-years`, `keep-your-rate`, `heloc-rules`, `mortgage-insurance`, `heloc-piggy-bank` and `portfolio-failing` were all made with it).
 
 Variables used below (set them first in every shell):
 
@@ -15,7 +15,7 @@ SLUG=<client slug>        # kits/<slug>/
 NAME=<short-film-name>    # lowercase letters, digits, hyphens
 ```
 
-The library's own guides are the authority for directing and building. Read them in this order before the treatment: `$LIB/AGENTS.md` (workflow), `$LIB/DIRECTOR.md` (story, sound, rhythm, camera, delivery list), `$LIB/TECHNIQUE.md` (page contract, voice, music, mix), `$LIB/core/README.md` (every tool flag), then the chosen `$LIB/styles/<slug>/STYLE.md`. This adapter adds the Studio rules on top: vertical 30 fps, the PLAYBOOK, client branding, job folders.
+The library (Studio Films, `engines/films`; skill: `$R/.claude/skills/films/SKILL.md`) has its own guides, and they are the authority for directing and building. Read them in this order before the treatment: `$LIB/AGENTS.md` (workflow), `$LIB/DIRECTOR.md` (story, sound, rhythm, camera, delivery list), `$LIB/TECHNIQUE.md` (page contract, voice, music, mix), `$LIB/core/README.md` (every tool flag), then the chosen `$LIB/styles/<slug>/STYLE.md`. This adapter adds the Studio rules on top: vertical 30 fps, the PLAYBOOK, client branding, job folders.
 
 ## Best for
 
@@ -50,7 +50,7 @@ The library's own guides are the authority for directing and building. Read them
 
 ## Setup check (exact command)
 
-Read-only check (does not update the library; `setup.sh` with no arguments does `git fetch` + `reset --hard`, so do not run it in the middle of a job):
+Read-only check (`sh $LIB/setup.sh` with no arguments is also read-only: it reports missing system tools and which package tiers are installed, and prints `LIB=<path>`; `sh $LIB/setup.sh deps [voice] [music]` installs and must not run in the middle of a render):
 
 ```sh
 cd $R/engines/films && node --version && ffmpeg -version | head -1 \
@@ -59,7 +59,7 @@ cd $R/engines/films && node --version && ffmpeg -version | head -1 \
  && test -f core/tts/kokoro-v1.0.onnx && test -f core/tts/voices-v1.0.bin && echo "films ready"
 ```
 
-Verified 19 Nov 2026: Node v25.5.0, ffmpeg 9.0.2, core + voice tiers installed. Installed Kokoro voices on this machine (only these 8): `af_bella af_heart am_adam am_liam am_michael am_onyx bm_george bm_lewis`. The music tier (`numba`, for `pluck.py`) is only needed for plucked strings: check with `.venv/bin/python -c "import numba"` before writing a pluck score.
+Verified 26 Nov 2026 on the new layout: Node v25.5.0, ffmpeg 9.0.2, core + voice tiers installed (`setup.sh` status: core ✓ · voice ✓ · music ✗ · samples ✓). Installed Kokoro voices (only these 8, in `core/tts/voices-v1.0.bin`): `af_bella af_heart am_adam am_liam am_michael am_onyx bm_george bm_lewis`. Fresh clone: `sh $LIB/setup.sh deps voice` (Node packages, Chromium headless shell, `.venv`, sample libraries, HDRIs, Kokoro model; `sh $R/setup.sh` runs `deps voice music`). The music tier (`numba`, for `pluck.py`) is only needed for plucked strings: check with `.venv/bin/python -c "import numba"` before writing a pluck score; install with `sh $LIB/setup.sh deps music`.
 
 ## Run (exact commands)
 
@@ -73,7 +73,7 @@ Never build inside `$LIB/styles/` or edit `$LIB/core/`. Copy what you need into 
 
 ### 1. Pick the style (section "Picking a style against the client's history" below), then write `$P/TREATMENT.md`
 
-DIRECTOR.md §4: three candidate structures and the choice, logline/arc, benchmark (learn / don't take), shot list, second-by-second beat sheet, cue map, sound design table, subtitle/title design. Add a Studio section: **layout table for 1080×1920** (zone, y range, content; all text in y 270–1248, like `graphic reels/heloc-five-years/TREATMENT.md` §4) and **branding** (where the compliance line and any outro go, from the kit). Open the style's demo (`DEMO.md`, `setup.sh demo <slug>`) only after the treatment exists.
+DIRECTOR.md §4: three candidate structures and the choice, logline/arc, benchmark (learn / don't take), shot list, second-by-second beat sheet, cue map, sound design table, subtitle/title design. Add a Studio section: **layout table for 1080×1920** (zone, y range, content; all text in y 270–1248, as in the heloc-five-years treatment §4) and **branding** (where the compliance line and any outro go, from the kit). Open the style's demo (`DEMO.md`, `setup.sh demo <slug>`) only after the treatment exists.
 
 ### 2. Gate 1 previews (cheap key frames with `still.mjs`)
 
@@ -84,7 +84,7 @@ cd "$LIB" && node core/render/still.mjs "$P/previews/A" 0 6 --size 1080x1920 --p
 cd "$P/previews" && "$PY" "$LIB/core/render/sheet.py" "$P/previews/A.jpg" A_*.jpg --cols 2 --w 540
 ```
 
-Verified 19 Nov 2026 on `graphic reels/heloc-five-years`: two 1080×1920 stills in under 1 s total. Put `project/previews/A.jpg` into the concept's `preview` field. A still-frame preview takes about 10–20 min of authoring per concept; skip it (`preview: null`) when the brief is a rush.
+Verified 19 Nov 2026 on the heloc-five-years reel: two 1080×1920 stills in under 1 s total. Put `project/previews/A.jpg` into the concept's `preview` field. A still-frame preview takes about 10–20 min of authoring per concept; skip it (`preview: null`) when the brief is a rush.
 
 ### 3. Voice: lines, Kokoro, ASR check
 
@@ -112,8 +112,8 @@ Look at `contact.jpg` and 0.2 s strips of key actions (TECHNIQUE.md §8) before 
 
 ### 5. Score and mix
 
-- `$P/music.py`: original score in numpy (and/or `core/audio/sampler.py` instruments), from the cue map, written to `$P/out/score.wav` (48 kHz stereo). Model: `graphic reels/heloc-five-years/music.py` (synthesized motorik marimba, no downloads). Sampled instruments: put `"$PY" "$LIB/core/audio/sampler.py" --need "$P/mix.py"` at the top of `build.sh` so libraries download before the long render.
-- `$P/mix.py`: voice WAVs placed at the VO times + foley from `events.json` via `core/audio/sfx.py` + score, music ducked fast to sit 18–25 dB under the voice, voice compressed first; writes `$P/out/mix.wav`. Model: `graphic reels/heloc-five-years/mix.py` (imports `sfx` from `$LIB/core/audio`).
+- `$P/music.py`: original score in numpy (and/or `core/audio/sampler.py` instruments), from the cue map, written to `$P/out/score.wav` (48 kHz stereo). Model: `$LIB/styles/swiss-motion/demo/music/score.py` (original motorik score from `score.json`, no downloads; other demos ship a `demo/music.py`, e.g. `$LIB/styles/whiteboard/demo/music.py`). Sampled instruments: put `"$PY" "$LIB/core/audio/sampler.py" --need "$P/mix.py"` at the top of `build.sh` so libraries download before the long render.
+- `$P/mix.py`: voice WAVs placed at the VO times + foley from `events.json` via `core/audio/sfx.py` + score, music ducked fast to sit 18–25 dB under the voice, voice compressed first; writes `$P/out/mix.wav`. Model: `$LIB/styles/swiss-motion/demo/mix.py` (foley + voice-over ducking + score; `sfx` comes from `$LIB/core/audio`).
 
 ```sh
 "$PY" "$P/music.py" && "$PY" "$P/mix.py"
@@ -130,19 +130,19 @@ cp "$P/out/poster_<cover-t>.jpg" "$O/poster.jpg"
 ```
 
 - `mux.sh` (with `LEMO_COLOR=bt709`, grain `0` for vector/flat styles, `1` for print/paper styles) writes limited-range BT.709 H.264 at CRF 19 with AAC **256k**, two-pass loudnorm to −14 LUFS, true peak ≤ −1 dBTP.
-- `deliver.sh` applies the PLAYBOOK delivery spec on top: copies the video when it is already h264/yuv420p/tv/bt709/30 fps (else re-encodes CRF 17), re-encodes audio to **AAC-LC 128 kbps 48 kHz** through a two-pass loudnorm + 4× oversampled limiter, `+faststart`, `-shortest`; prints the stream check and exits 1 unless the file measures −15 to −13 LUFS with true peak under −1 dBTP. Verified 19 Nov 2026 on `heloc-five-years/out/master.mp4`: −14.1 LUFS, −1.7 dBTP, H.264 High yuv420p tv/bt709, 30/1, AAC 128k.
+- `deliver.sh` applies the PLAYBOOK delivery spec on top: copies the video when it is already h264/yuv420p/tv/bt709/30 fps (else re-encodes CRF 17), re-encodes audio to **AAC-LC 128 kbps 48 kHz** through a two-pass loudnorm + 4× oversampled limiter, `+faststart`, `-shortest`; prints the stream check and exits 1 unless the file measures −15 to −13 LUFS with true peak under −1 dBTP. Verified 19 Nov 2026 on the heloc-five-years master: −14.1 LUFS, −1.7 dBTP, H.264 High yuv420p tv/bt709, 30/1, AAC 128k.
 - Cover: your page should support `?nocap=1` (hide burned captions), as heloc-five-years and keep-your-rate do. Pick `<cover-t>` where the hook headline is fully settled and sits inside y 240–1680; frame 1 (`0`) is the default since frame 1 is the hook.
 - Subtitles: `"$PY" "$LIB/core/render/srt.py" "$P/out/srt.json" "$O/subtitles_en.srt"` (captions are burned in, so name it `subtitles_<lang>.srt`, DIRECTOR.md §11).
 
 ### 7. One-command rebuild
 
-Write `$P/build.sh` with `LIB=$R/engines/films` at the top and the steps 3–6 in order, as in `graphic reels/heloc-five-years/build.sh` (with `STOP_BEFORE_VIDEO=1` to stop after sound). Deliver it with the film.
+Write `$P/build.sh` with `LIB=$R/engines/films` at the top and the steps 3–6 in order, shaped like a style demo's `build.sh` (e.g. `$LIB/styles/swiss-motion/demo/build.sh`, but with `$LIB/…` paths, `--size 1080x1920`, `--fps 30`, `LEMO_COLOR=bt709` and `deliver.sh`), with `STOP_BEFORE_VIDEO=1` to stop after sound. Deliver it with the film.
 
 ## Branding
 
 - **Compliance line** (`kit.json.complianceLine`, verbatim, never retyped from a footer image): on screen inside the safe zone (y ≤ 1248, ≥ 24 px at 1080 wide, contrast ≥ 4.5:1) on the **payoff beat**, held at least as long as readcheck requires for its letter count (DIRECTOR.md §7 formula: letters ÷ 15 + 1.5 s); and in caption lines 1–2. Report it in `window.TEXTS` so readcheck times it. If `complianceLine` is empty or the kit lists missing licence fields, render a visible `[compliance line: TODO]` placeholder and mark the job output as a proof (never invent).
 - **Logo**: none by default (PLAYBOOK: no logo bumper, frame 1 is the hook). Only where a kit rule asks for it.
-- **Footer / outro image** (`kit.json.assets.footer` or an outro asset): only where a kit rule asks (e.g. `kind: "outro"`, "Always use Jim's Outro for Reels"). Then it is the one allowed end card: append it after the payoff (≤ 3 s), scaled to 1080 wide, and keep the loop on the last frame before it. Without such a rule: no end card.
+- **Footer / outro image** (`kit.json.assets.footer` or an outro asset): only where a kit rule asks (e.g. `kind: "outro"`, "always use the outro for reels"). Then it is the one allowed end card: append it after the payoff (≤ 3 s), scaled to 1080 wide, and keep the loop on the last frame before it. Without such a rule: no end card.
 - **Colours and type**: one typeface in two weights, 3–4 colours (PLAYBOOK). Use the kit accent (`tokens.json color.accent`) as the style's signal colour only when the style's colour logic allows a free signal colour (Swiss, Bauhaus, Pop Art…); otherwise keep the style palette and put the accent in captions/keyword highlights. Fonts must be OFL: copy the file into `$P/fonts/` and load it with `@font-face` (TECHNIQUE.md §11).
 - AI voice: every delivery note says "apply Instagram's AI label" when Kokoro or ElevenLabs is used.
 
@@ -195,7 +195,7 @@ Studio's gate adds: PLAYBOOK safe zone on rendered frames (text inside x 65–10
    $R/studio/.venv/bin/python $R/studio/tools/variety.py --client $SLUG --engine films
    ```
 
-   UNVERIFIED: `variety.py` is being built; its flags and output are not final. Until it exists, apply its intent by hand: exclude every style this client used in its last 5 pieces and the style of its most recent piece in any engine family that looks alike (e.g. after `swiss-motion` avoid `bauhaus-shapes`); also avoid the style another client in the same city used in the last 30 days.
+   It prints JSON (`conflicts`, `recentForClient`, `recentGlobal`, up to 15 unused films styles in `suggestions`). Also apply by hand what it does not check: exclude every style this client used in its last 5 pieces and the style of its most recent piece in any engine family that looks alike (e.g. after `swiss-motion` avoid `bauhaus-shapes`); also avoid the style another client in the same city used in the last 30 days.
 2. **Read "best for".** Each style's gallery tags are `uses` in `$LIB/styles/<slug>/style.json`; the binding definition is `STYLE.md` §1 "Essence, and what it is not" plus its pitfalls. Quick list of all tags:
 
    ```sh
@@ -203,7 +203,7 @@ Studio's gate adds: PLAYBOOK safe zone on rendered frames (text inside x 65–10
    ```
 3. **Match the story, not the topic.** Pick the style whose native move *is* the beat (heloc-five-years chose Swiss because "a number that refuses to move inside a grid that keeps changing" is the Swiss signature). Write two rejected styles and why into TREATMENT.md §0 and into the library card's `rejectedStyles`.
 4. **Phone legibility check.** Reject styles whose information lives in small chrome (spreadsheet cells, UI labels) unless you enlarge it beyond the style's defaults.
-5. Never a ✦ style (image generator). Prefer the user's own styles in `~/lemo-my-styles/` when one exists (none exist as of 19 Nov 2026).
+5. Never a ✦ style (image generator). Prefer the user's own styles in `~/studio-films-my-styles/` (listed in its `README.md`, see `$LIB/MY-STYLES.md`) when one exists (none exist as of 19 Nov 2026).
 
 ### Styles that suit finance and mortgage explainers in 9:16
 
@@ -231,7 +231,7 @@ Verified against each `style.json` `uses` and `STYLE.md` essence (19 Nov 2026). 
 | Pop Art (`pop-art`) | One-number punches and small data stories as screen-print posters | 24 |
 | Halftone Dossier (`halftone-dossier`) | A "case file" read one exhibit at a time: a costly mistake, a renewal letter | 30 fps |
 | Caption News (`caption-news`) | Sound-off news shorts: huge captions over footage/documents for BoC days and policy changes | 30; vertical layout given in STYLE.md |
-| Broadcast News Package (`news-package`) | Rate-day round-ups, market bulletins with split-flap boards; works around client footage | used: portfolio-failing (Jordan Lee) |
+| Broadcast News Package (`news-package`) | Rate-day round-ups, market bulletins with split-flap boards; works around client footage | used: portfolio-failing |
 | Transit Map (`transit-map`) | A journey drawn as a metro line: pre-approval → offer → keys, the renewal route | 30 fps |
 | Tilt-Shift Miniature (`tilt-shift`) | A real-looking town as a model: local market and neighbourhood angles | 3D |
 | Brick Toy (`brick-toy`) | Physical stakes you can see: a mortgage "built brick by brick", a wrecking-ball refinance | 24, 3D, slow; used: keep-your-rate |

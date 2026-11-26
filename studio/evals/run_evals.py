@@ -50,7 +50,7 @@ REEL_FORMATS = {"graphic-reel", "short-reel", "footage-reel", "gif"}
 ENGINE_OFF = {"remotion"}
 ENGINE_HOME = {  # a cheap existence check of where the engine lives (no execution)
     "films": str(R / "engines/films/styles"),
-    "stills": str(R / "engines/stills"),
+    "stills": str(R / "engines/stills/library/roster.json"),
     "custom-html": str(ENG / "bin/custom_html_skeleton.mjs"),
     "motion": str(R / "engines/motion"),
     "hyperframes": str(ENG / "hyperframes.md"),

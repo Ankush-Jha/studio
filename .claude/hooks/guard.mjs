@@ -51,12 +51,12 @@ function check(tool, input, cwd) {
 function checkPath(abs) {
   if (!(abs === R || abs.startsWith(R + path.sep))) return null; // outside the repo: not our business
   // private/ holds the client data that kits/, assets/, library/, jobs/ … link to: judge it as the linked path.
-  const rel = path.relative(R, abs).split(path.sep).join('/').replace(/^private\/(evals\/|desk\/fixtures)/, 'studio/$1').replace(/^private\//, '');
+  const rel = path.relative(R, abs).split(path.sep).join('/').replace(/^private\/(evals\/|desk\/fixtures)/, 'studio/$1').replace(/^private\/face-reels\//, 'engines/face-reels/').replace(/^private\//, '');
   const top = rel.split('/')[0];
   // Exception: a hand-written standing brief per client.
   if (/^assets\/[a-z0-9_-]+\/profile\.md$/.test(rel)) return null;
-  // Footage reels write their renders and intake inside the face-reels engine.
-  if (/^engines\/face-reels\/(inbox|clients\/[^/]+\/reels)(\/|$)/.test(rel)) return null;
+  // Footage reels: client folders and intake (linked from private/face-reels) are writable.
+  if (/^engines\/face-reels\/(inbox|clients)(\/|$)/.test(rel)) return null;
   if (WRITABLE_IN_ROOT.includes(top)) return null;
   if (top === 'engines') return 'engines/ is read-only (Studio Films, Stills, Motion, Face Reels). Copy what you need into jobs/<id>/project/ (studio/engines/bin/shadow.sh does it for stills/motion).';
   if (top === 'playbook') return 'playbook/ holds the house rules and is changed by a person, not the bot. Propose the edit in library/lessons-pending.md.';
